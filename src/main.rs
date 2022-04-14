@@ -181,6 +181,7 @@
 //     }
 // }
 
+use http::Request;
 // fn main() {
 //   wasm_logger::init(wasm_logger::Config::default());
   
@@ -210,6 +211,12 @@ impl Component for CounterComponent {
         match msg {
             Msg::AddOne => {
               log::info!("Update:");
+              let request = Request::get("localhost:8081/health_check")//https://www.rust-lang.org/ - ok
+.body(());
+    match request {
+        Ok(_) => log::info!("ok"),
+        Err(e) => log::info!("not ok {:#?}", e),
+    }
                 self.count += 1;
                 true // re-render component
             }
