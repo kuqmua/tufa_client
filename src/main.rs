@@ -40,7 +40,7 @@
 //     }
 
 //     // fn check() {
-      
+
 //     // }
 //     //https://codepen.io/shawnc8160/pen/xxRYOWg
 //     fn view(&self, ctx: &Context<Self>) -> Html {
@@ -186,7 +186,7 @@
 // // use gloo_net::http::Request;
 // // fn main() {
 // //   wasm_logger::init(wasm_logger::Config::default());
-  
+
 // //     yew::start_app::<Model>();
 // // }
 // use yew::prelude::*;
@@ -256,7 +256,6 @@
 //     yew::start_app::<CounterComponent>();
 // }
 
-
 use reqwasm::http::Request;
 use serde::Deserialize;
 use yew::prelude::*;
@@ -287,120 +286,132 @@ struct Video {
 #[derive(Clone, Properties, PartialEq)]
 struct VideosListProps {
     videos: Vec<Video>,
-    on_click: Callback<Video>
+    on_click: Callback<Video>,
 }
 
 #[function_component(VideosList)]
 fn videos_list(VideosListProps { videos, on_click }: &VideosListProps) -> Html {
     let on_click = on_click.clone();
-    videos.iter().map(|video| {
-        let on_video_select = {
-            let on_click = on_click.clone();
-            let video = video.clone();
-            Callback::from(move |_| {
-                on_click.emit(video.clone())
-            })
-        };
+    videos
+        .iter()
+        .map(|video| {
+            let on_video_select = {
+                let on_click = on_click.clone();
+                let video = video.clone();
+                Callback::from(move |_| on_click.emit(video.clone()))
+            };
 
-        html! {
+            html! {
 
-            <p onclick={on_video_select}>{format!("{}: {}", video.speaker, video.title)}</p>
-        }
-    }).collect()
+                <p onclick={on_video_select}>{format!("{}: {}", video.speaker, video.title)}</p>
+            }
+        })
+        .collect()
 }
 
 #[function_component(App)]
 fn app() -> Html {
-//   let videos = vec![
-//     Video {
-//         id: 1,
-//         title: "Building and breaking things".to_string(),
-//         speaker: "John Doe".to_string(),
-//         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
-//     },
-//     Video {
-//         id: 2,
-//         title: "The development process".to_string(),
-//         speaker: "Jane Smith".to_string(),
-//         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
-//     },
-//     Video {
-//         id: 3,
-//         title: "The Web 7.0".to_string(),
-//         speaker: "Matt Miller".to_string(),
-//         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
-//     },
-//     Video {
-//         id: 4,
-//         title: "Mouseless development".to_string(),
-//         speaker: "Tom Jerry".to_string(),
-//         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
-//     },
-// ];
-// let videos = videos.iter().map(|video| html! {
-//   <p>{format!("{}: {}", video.speaker, video.title)}</p>
-// }).collect::<Html>();
+    //   let videos = vec![
+    //     Video {
+    //         id: 1,
+    //         title: "Building and breaking things".to_string(),
+    //         speaker: "John Doe".to_string(),
+    //         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
+    //     },
+    //     Video {
+    //         id: 2,
+    //         title: "The development process".to_string(),
+    //         speaker: "Jane Smith".to_string(),
+    //         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
+    //     },
+    //     Video {
+    //         id: 3,
+    //         title: "The Web 7.0".to_string(),
+    //         speaker: "Matt Miller".to_string(),
+    //         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
+    //     },
+    //     Video {
+    //         id: 4,
+    //         title: "Mouseless development".to_string(),
+    //         speaker: "Tom Jerry".to_string(),
+    //         url: "https://youtu.be/PsaFVLr8t4E".to_string(),
+    //     },
+    // ];
+    // let videos = videos.iter().map(|video| html! {
+    //   <p>{format!("{}: {}", video.speaker, video.title)}</p>
+    // }).collect::<Html>();
+
     let videos = use_state(|| vec![]);
     {
         let videos = videos.clone();
-        use_effect_with_deps(move |_| {
-            let videos = videos.clone();
-            wasm_bindgen_futures::spawn_local(async move {
-              // let fetched_videos: Vec<Video> = 
-              //Request::get()
-              //: Vec<Video>
-              // "127.0.0.1:8081/health_check"
-                let fetched_videos = Request::get("https://yew.rs/tutorial/data.json/")//"/tutorial/data.json"
-                .header("Access-Control-Allow-Origin", "https://yew.rs/tutorial/data.json/")//'': 'http://localhost:3000/'
-                .header("Access-Control-Allow-Origin", "http://127.0.0.1:8080/")    
-                .send()
-                    .await
-                    .unwrap()
-                    // ;
+        use_effect_with_deps(
+            move |_| {
+                let videos = videos.clone();
+                wasm_bindgen_futures::spawn_local(async move {
+                    // let fetched_videos: Vec<Video> =
+                    //Request::get()
+                    //: Vec<Video>
+                    // "127.0.0.1:8081/health_check"
+                    log::info!("Update1");
+                    let fetched_videos = Request::get("http://127.0.0.1:8081/health_check") //"/tutorial/data.json"
+                        // .header("Access-Control-Allow-Origin", "https://yew.rs/tutorial/data.json/")//'': 'http://localhost:3000/'
+                        .header(
+                            "Access-Control-Allow-Origin",
+                            "http://127.0.0.1:8081/health_check",
+                        )
+                        .send()
+                        .await;
+                    match fetched_videos {
+                        Ok(k) => log::info!("ok {:#?}", k),
+                        Err(_) => log::info!("err"),
+                    }
+                    log::info!("Update2:");
                     // println!("EEE {:#?}", fetched_videos);
-                    .json()
-                    .await
-                    .unwrap();
-                videos.set(fetched_videos);
-              //   videos.set([Video {
-              //     id: 1,
-              //     title: "2".to_string(),
-              //     speaker:"2".to_string(),
-              //     url:"2".to_string(),
-              // }; 1]);
-            });
-            || ()
-        }, ());
+                    // .json()
+                    // .await
+                    // .unwrap();
+                    // videos.set(fetched_videos);
+                    //   videos.set([Video {
+                    //     id: 1,
+                    //     title: "2".to_string(),
+                    //     speaker:"2".to_string(),
+                    //     url:"2".to_string(),
+                    // }; 1]);
+                });
+                || ()
+            },
+            (),
+        );
     }
     let selected_video = use_state(|| None);
 
     let on_video_select = {
         let selected_video = selected_video.clone();
-        Callback::from(move |video: Video| {
-            selected_video.set(Some(video))
-        })
+        Callback::from(move |video: Video| selected_video.set(Some(video)))
     };
 
-    let details = selected_video.as_ref().map(|video| html! {
-        <VideoDetails video={video.clone()} />
+    let details = selected_video.as_ref().map(|video| {
+        html! {
+            <VideoDetails video={video.clone()} />
+        }
     });
-  html! {
-    <>
-        <h1>{ "RustConf Explorer" }</h1>
-        <div>
-            <h3>{"Videos to watch"}</h3>
-            <p>{ "John Doe: Building and breaking things" }</p>
-            <p>{ "Jane Smith: The development process" }</p>
-            <p>{ "Matt Miller: The Web 7.0" }</p>
-            <p>{ "Tom Jerry: Mouseless development" }</p>
-            <VideosList videos={(*videos).clone()} on_click={on_video_select.clone()} />
-        </div>
-        { for details }
-    </>
-}
+    html! {
+        <>
+            <h1>{ "RustConf Explorer" }</h1>
+            <div>
+                <h3>{"Videos to watch"}</h3>
+                <p>{ "John Doe: Building and breaking things" }</p>
+                <p>{ "Jane Smith: The development process" }</p>
+                <p>{ "Matt Miller: The Web 7.0" }</p>
+                <p>{ "Tom Jerry: Mouseless development" }</p>
+                <VideosList videos={(*videos).clone()} on_click={on_video_select.clone()} />
+            </div>
+            { for details }
+        </>
+    }
 }
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     yew::Renderer::<App>::new().render();
 }
-
