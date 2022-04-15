@@ -355,14 +355,16 @@ fn app() -> Html {
                     log::info!("Update1");
                     let fetched_videos = Request::get("http://127.0.0.1:8081/health_check") //"/tutorial/data.json"
                         // .header("Access-Control-Allow-Origin", "https://yew.rs/tutorial/data.json/")//'': 'http://localhost:3000/'
-                        .header(
-                            "Access-Control-Allow-Origin",
-                            "http://127.0.0.1:8081/health_check",
-                        )
+                        // .header(
+                        //     "Access-Control-Allow-Origin",
+                        //     "http://127.0.0.1:8081/health_check",
+                        // )
                         .send()
                         .await;
                     match fetched_videos {
-                        Ok(k) => log::info!("ok {:#?}", k),
+                        Ok(k) => {
+                            log::info!("ok {:#?}", k.body());
+                        }
                         Err(_) => log::info!("err"),
                     }
                     log::info!("Update2:");
