@@ -1,5 +1,13 @@
 use reqwasm::http::Request;
+use serde::{Deserialize, Serialize};
+use serde_json::from_str;
 use yew::prelude::*;
+
+#[derive(Debug, Deserialize)]
+struct JsonExample {
+    first: String,
+    second: String,
+}
 
 pub enum Msg {
     AddOne,
@@ -27,9 +35,20 @@ impl Component for InputButton {
                         .await;
                     match f {
                         Ok(k) => {
+                            match k.text().await {
+                                Ok(n) => {
+                                    log::info!("ok {:#?}", n);
+                                    let json: Result<JsonExample, serde_json::Error> = from_str(&n);
+                                    match json {
+                                        Ok(l) => log::info!("ok {:#?}", l),
+                                        Err(e) => log::info!("2err {:#?}", e),
+                                    }
+                                }
+                                Err(e) => log::info!("1err {:#?}", e),
+                            }
                             log::info!("ok {:#?}", k.body());
                         }
-                        Err(_) => log::info!("err"),
+                        Err(_) => log::info!("0err"),
                     }
                     log::info!("Update2:");
                 });
