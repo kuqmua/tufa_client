@@ -22,7 +22,7 @@ impl Component for InputButton {
                 self.value += 1;
                 wasm_bindgen_futures::spawn_local(async move {
                     log::info!("Update1");
-                    let f = Request::get("http://127.0.0.1:8081/health_check")
+                    let f = Request::get("http://127.0.0.1:8081/json_example")
                         .send()
                         .await;
                     match f {
@@ -43,8 +43,9 @@ impl Component for InputButton {
     fn view(&self, ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         let link = ctx.link();
+        //for some reason page re renders if it would be button
         html! {
-          <button
+          <span
             onclick={link.callback(|_| Msg::AddOne)}
             class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth"
             tabindex="0"
@@ -131,7 +132,7 @@ impl Component for InputButton {
               "
             >
             </span>
-          </button>
+          </span>
         }
     }
 }
