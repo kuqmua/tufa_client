@@ -24,19 +24,6 @@ impl Component for Model {
         log::info!("Update: ");
         match msg {
             Msg::AddOne => {
-                wasm_bindgen_futures::spawn_local(async move {
-                    log::info!("Update1");
-                    let fetched_videos = Request::get("http://127.0.0.1:8081/health_check")
-                        .send()
-                        .await;
-                    match fetched_videos {
-                        Ok(k) => {
-                            log::info!("ok {:#?}", k.body());
-                        }
-                        Err(_) => log::info!("err"),
-                    }
-                    log::info!("Update2:");
-                });
                 self.value += 1;
                 // the value has changed so we need to
                 // re-render for it to appear on the page
