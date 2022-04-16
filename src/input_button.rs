@@ -1,3 +1,4 @@
+use reqwasm::http::Request;
 use yew::prelude::*;
 
 pub enum Msg {
@@ -19,6 +20,19 @@ impl Component for InputButton {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
+                wasm_bindgen_futures::spawn_local(async move {
+                    log::info!("Update1");
+                    let fetched_videos = Request::get("http://127.0.0.1:8081/health_check")
+                        .send()
+                        .await;
+                    match fetched_videos {
+                        Ok(k) => {
+                            log::info!("ok {:#?}", k.body());
+                        }
+                        Err(_) => log::info!("err"),
+                    }
+                    log::info!("Update2:");
+                });
                 // the value has changed so we need to
                 // re-render for it to appear on the page
                 true
@@ -31,6 +45,7 @@ impl Component for InputButton {
         let link = ctx.link();
         html! {
           <button
+            onclick={link.callback(|_| Msg::AddOne)}
             class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth"
             tabindex="0"
             type="submit"
