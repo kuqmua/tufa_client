@@ -22,10 +22,10 @@ impl Component for InputButton {
                 self.value += 1;
                 wasm_bindgen_futures::spawn_local(async move {
                     log::info!("Update1");
-                    let fetched_videos = Request::get("http://127.0.0.1:8081/health_check")
+                    let f = Request::get("http://127.0.0.1:8081/health_check")
                         .send()
                         .await;
-                    match fetched_videos {
+                    match f {
                         Ok(k) => {
                             log::info!("ok {:#?}", k.body());
                         }
