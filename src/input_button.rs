@@ -1,5 +1,5 @@
 use reqwasm::http::Request;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use serde_json::from_str;
 use yew::prelude::*;
 
@@ -19,11 +19,9 @@ pub struct InputButton {
 impl Component for InputButton {
     type Message = Msg;
     type Properties = ();
-
     fn create(_ctx: &Context<Self>) -> Self {
         Self { value: 0 }
     }
-
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::AddOne => {

@@ -4,35 +4,23 @@ pub mod svg_icon_wrapper;
 use crate::form::Form;
 use crate::input_button::InputButton;
 use crate::svg_icon_wrapper::SvgIconWrapper;
-use reqwasm::http::Request;
 use yew::prelude::*;
 
-enum Msg {
-    AddOne,
+enum ModalMessage {
+    ActionOne,
 }
-struct Model {
-    value: i64,
-}
+struct Model {}
 
 impl Component for Model {
-    type Message = Msg;
+    type Message = ModalMessage;
     type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { value: 0 }
+        Self {}
     }
-    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
-        log::info!("Update: ");
-        match msg {
-            Msg::AddOne => {
-                self.value += 1;
-                // the value has changed so we need to
-                // re-render for it to appear on the page
-                true
-            }
-        }
+    fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+        true
     }
-    //https://codepen.io/shawnc8160/pen/xxRYOWg
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
           <div
             id="root"
@@ -50,7 +38,7 @@ impl Component for Model {
               box-sizing: inherit;
           "
           >
-            <main
+            <div
               class="MuiContainer-root MuiContainer-maxWidthXs"
               style="
                 max-width: 444px;
@@ -142,7 +130,7 @@ impl Component for Model {
                     >
                       <a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorPrimary"
-                        href="#"
+                        href=""
                         style="
                           text-decoration: none;
                           color: #556cd6;
@@ -162,7 +150,7 @@ impl Component for Model {
                   </div>
                 </form>
               </div>
-            </main>
+            </div>
           </div>
         }
     }
@@ -170,5 +158,5 @@ impl Component for Model {
 
 fn main() {
     wasm_logger::init(wasm_logger::Config::default());
-    yew::Renderer::<Model>::new().render();
+    yew::start_app::<Model>();
 }
