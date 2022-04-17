@@ -1,14 +1,7 @@
 use reqwasm::http::Request;
-use serde::Deserialize;
 use serde_json::from_str;
+use tufa_common::json_example::JsonExample;
 use yew::prelude::*;
-
-#[derive(Debug, Deserialize)]
-struct JsonExample {
-    first: String,
-    second: String,
-}
-
 pub enum Msg {
     AddOne,
 }
