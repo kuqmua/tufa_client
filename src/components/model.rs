@@ -1,6 +1,6 @@
-use crate::form::Form;
-use crate::input_button::InputButton;
-use crate::svg_icon_wrapper::SvgIconWrapper;
+use crate::components::form::Form;
+use crate::components::input_button::InputButton;
+use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use yew::prelude::*;
 
 pub enum ModalMessage {

@@ -1,4 +1,4 @@
-use crate::model::Model;
+use crate::components::model::Model;
 
 pub fn entry() {
     wasm_logger::init(wasm_logger::Config::default());
