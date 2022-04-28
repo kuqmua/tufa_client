@@ -1,6 +1,6 @@
-use crate::components::model::Model;
+use crate::components::model::App;
 
 pub fn entry() {
     wasm_logger::init(wasm_logger::Config::default());
-    yew::start_app::<Model>();
+    yew::start_app::<App>();
 }

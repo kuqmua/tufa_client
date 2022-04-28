@@ -149,24 +149,13 @@ pub fn modalfunction() -> Html {
  }
 }
 
-
-
-#[function_component(Main)]
-fn app() -> Html {
-    html! {
-        <BrowserRouter>
-            <Switch<Routes> render={Switch::render(switch)} />
-        </BrowserRouter>
-    }
-}
-//
-pub enum ModalMessage {
+pub enum AppMessage {
     ActionOne,
 }
-pub struct Model {}
+pub struct App {}
 
-impl Component for Model {
-    type Message = ModalMessage;
+impl Component for App {
+    type Message = AppMessage;
     type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
         Self {}
