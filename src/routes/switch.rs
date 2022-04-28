@@ -1,5 +1,5 @@
 use yew::{Html, html};
-use crate::components::model::ModalFunction;
+use crate::components::model::AuthModal;
 use crate::routes::routes::Routes;
 use crate::components::secure::Secure;
 
@@ -7,7 +7,7 @@ pub fn switch(routes: &Routes) -> Html {
     match routes {
         Routes::Home => html!
         {
-         <ModalFunction/> 
+         <AuthModal/> 
         },
         Routes::Secure => html! {
             <Secure />

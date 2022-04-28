@@ -6,8 +6,8 @@ use crate::routes::switch::switch;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-#[function_component(ModalFunction)]
-pub fn modalfunction() -> Html {
+#[function_component(AuthModal)]
+pub fn auth_modal() -> Html {
   let history_option = use_history();
   let onclick: Callback<MouseEvent>;
   match history_option {
