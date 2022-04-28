@@ -5,7 +5,7 @@ use yew::prelude::*;
 use yew_router::prelude::*;
 
 #[derive(Clone, Routable, PartialEq)]
-enum Route {
+enum Routes {
     #[at("/")]
     Home,
     #[at("/secure")]
@@ -19,7 +19,7 @@ enum Route {
 fn secure() -> Html {
     let history = use_history().unwrap();
 
-    let onclick = Callback::once(move |_| history.push(Route::Home));
+    let onclick = Callback::once(move |_| history.push(Routes::Home));
     html! {
         <div>
             <h1>{ "Secure" }</h1>
@@ -33,7 +33,7 @@ fn modalfunction() -> Html {
   let history_option = use_history();
   let onclick: Callback<MouseEvent>;
   match history_option {
-    Some(history) => onclick = Callback::once(move |_| history.push(Route::Secure)),
+    Some(history) => onclick = Callback::once(move |_| history.push(Routes::Secure)),
     None => onclick = Callback::once(move |_| log::info!("Update1")),
 }
   html! { 
@@ -171,16 +171,16 @@ fn modalfunction() -> Html {
  }
 }
 
-fn switch(routes: &Route) -> Html {
+fn switch(routes: &Routes) -> Html {
     match routes {
-        Route::Home => html!
+        Routes::Home => html!
         {
          <ModalFunction/> 
         },
-        Route::Secure => html! {
+        Routes::Secure => html! {
             <Secure />
         },
-        Route::NotFound => html! { <h1>{ "404" }</h1> },
+        Routes::NotFound => html! { <h1>{ "404" }</h1> },
     }
 }
 
@@ -188,7 +188,7 @@ fn switch(routes: &Route) -> Html {
 fn app() -> Html {
     html! {
         <BrowserRouter>
-            <Switch<Route> render={Switch::render(switch)} />
+            <Switch<Routes> render={Switch::render(switch)} />
         </BrowserRouter>
     }
 }
@@ -212,7 +212,7 @@ impl Component for Model {
           <div style="width: 100%; display: flex; justify-content: center; flex-direction: column; align-items: center;">
           <div style="height: 50px; width: 100%; background-color: yellow; display: flex; justify-content: center; align-items: center;"><h1>{ "Hi!" }</h1></div>
           <BrowserRouter>
-          <Switch<Route> render={Switch::render(switch)} />
+          <Switch<Routes> render={Switch::render(switch)} />
       </BrowserRouter>
           </div>
         }
