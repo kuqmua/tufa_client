@@ -1,7 +1,7 @@
 use yew::{Html, html};
 use crate::components::model::ModalFunction;
 use crate::routes::routes::Routes;
-use crate::components::model::Secure;
+use crate::components::secure::Secure;
 
 pub fn switch(routes: &Routes) -> Html {
     match routes {

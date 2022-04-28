@@ -6,19 +6,6 @@ use crate::routes::switch::switch;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-#[function_component(Secure)]
-pub fn secure() -> Html {
-    let history = use_history().unwrap();
-
-    let onclick = Callback::once(move |_| history.push(Routes::Home));
-    html! {
-        <div>
-            <h1>{ "Secure" }</h1>
-            <button {onclick}>{ "Go Home" }</button>
-        </div>
-    }
-}
-
 #[function_component(ModalFunction)]
 pub fn modalfunction() -> Html {
   let history_option = use_history();
