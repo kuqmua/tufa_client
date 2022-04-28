@@ -1,5 +1,5 @@
 use yew::{Html, html};
-use crate::components::model::AuthModal;
+use crate::components::auth_modal::AuthModal;
 use crate::routes::routes::Routes;
 use crate::components::secure::Secure;
 
