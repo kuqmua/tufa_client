@@ -2,11 +2,12 @@ use crate::components::form::Form;
 use crate::components::input_button::InputButton;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
+use crate::routes::switch::switch;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
 #[function_component(Secure)]
-fn secure() -> Html {
+pub fn secure() -> Html {
     let history = use_history().unwrap();
 
     let onclick = Callback::once(move |_| history.push(Routes::Home));
@@ -19,7 +20,7 @@ fn secure() -> Html {
 }
 
 #[function_component(ModalFunction)]
-fn modalfunction() -> Html {
+pub fn modalfunction() -> Html {
   let history_option = use_history();
   let onclick: Callback<MouseEvent>;
   match history_option {
@@ -161,18 +162,7 @@ fn modalfunction() -> Html {
  }
 }
 
-fn switch(routes: &Routes) -> Html {
-    match routes {
-        Routes::Home => html!
-        {
-         <ModalFunction/> 
-        },
-        Routes::Secure => html! {
-            <Secure />
-        },
-        Routes::NotFound => html! { <h1>{ "404" }</h1> },
-    }
-}
+
 
 #[function_component(Main)]
 fn app() -> Html {
