@@ -1,19 +1,9 @@
 use crate::components::form::Form;
 use crate::components::input_button::InputButton;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
+use crate::routes::routes::Routes;
 use yew::prelude::*;
 use yew_router::prelude::*;
-
-#[derive(Clone, Routable, PartialEq)]
-enum Routes {
-    #[at("/")]
-    Home,
-    #[at("/secure")]
-    Secure,
-    #[not_found]
-    #[at("/404")]
-    NotFound,
-}
 
 #[function_component(Secure)]
 fn secure() -> Html {
