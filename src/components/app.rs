@@ -2,6 +2,7 @@ use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
 use yew::prelude::*;
 use yew_router::prelude::*;
+use crate::components::header::Header;
 
 pub enum AppMessage {
     ActionOne,
@@ -35,9 +36,7 @@ impl Component for App {
                   align-items: center;
               "
           >
-              <div style="height: 50px; width: 100%; background-color: yellow; display: flex; justify-content: center; align-items: center;">
-                  <h1>{ "Hi!" }</h1>
-              </div>
+              <Header/>
               <BrowserRouter>
                   <Switch<Routes> render={Switch::render(switch)} />
               </BrowserRouter>

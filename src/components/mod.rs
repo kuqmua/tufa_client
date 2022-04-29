@@ -5,3 +5,4 @@ pub mod app;
 pub mod entry;
 pub mod secure;
 pub mod auth_modal;
+pub mod header;
