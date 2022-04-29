@@ -21,7 +21,7 @@ impl Component for InputButton {
                 self.value += 1;
                 wasm_bindgen_futures::spawn_local(async move {
                     log::info!("Update1");
-                    let f = Request::get("http://127.0.0.1:8081/json_example")
+                    let f = Request::get("http://127.0.0.1:8081/api/json/json_example")
                         .send()
                         .await;
                     match f {
