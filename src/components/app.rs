@@ -18,8 +18,23 @@ impl Component for App {
         true
     }
     fn view(&self, _ctx: &Context<Self>) -> Html {
+    //     <style>
+    //     body {
+    //         padding: 0px;
+    //         margin: 0px;
+    //     }
+    // </style>
         html! {
-          <div style="width: 100%; display: flex; justify-content: center; flex-direction: column; align-items: center;">
+
+          <div 
+              style="
+                  width: 100%; 
+                  display: flex; 
+                  justify-content: center; 
+                  flex-direction: column; 
+                  align-items: center;
+              "
+          >
               <div style="height: 50px; width: 100%; background-color: yellow; display: flex; justify-content: center; align-items: center;">
                   <h1>{ "Hi!" }</h1>
               </div>
