@@ -1,3 +1,3 @@
 fn main() {
-    tufa_client::components::entry::entry();
+    tufa_client::entry::entry();
 }
