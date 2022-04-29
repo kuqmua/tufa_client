@@ -20,10 +20,12 @@ impl Component for App {
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
           <div style="width: 100%; display: flex; justify-content: center; flex-direction: column; align-items: center;">
-          <div style="height: 50px; width: 100%; background-color: yellow; display: flex; justify-content: center; align-items: center;"><h1>{ "Hi!" }</h1></div>
-          <BrowserRouter>
-          <Switch<Routes> render={Switch::render(switch)} />
-      </BrowserRouter>
+              <div style="height: 50px; width: 100%; background-color: yellow; display: flex; justify-content: center; align-items: center;">
+                  <h1>{ "Hi!" }</h1>
+              </div>
+              <BrowserRouter>
+                  <Switch<Routes> render={Switch::render(switch)} />
+              </BrowserRouter>
           </div>
         }
     }
