@@ -7,13 +7,23 @@ pub enum Msg {
 }
 pub struct InputButton {
     value: i64,
+    some_string: String,
+}
+
+impl InputButton {
+  pub fn set_first(&mut self, first: i64) {
+      self.value = first;
+  }
+  pub fn set_second(&mut self, second: String) {
+      self.some_string = second;
+  }
 }
 
 impl Component for InputButton {
     type Message = Msg;
     type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { value: 0 }
+        Self { value: 0, some_string: String::from("init") }
     }
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
@@ -31,7 +41,13 @@ impl Component for InputButton {
                                     log::info!("ok {:#?}", n);
                                     let json: Result<JsonExample, serde_json::Error> = from_str(&n);
                                     match json {
-                                        Ok(l) => log::info!("ok {:#?}", l),
+                                        Ok(l) => {
+                                          
+                                          let mut bbb = l.second.clone();
+                                          // self.some_string = "ertrer".to_string();
+                                          // self.set_second(bbb);
+                                          // log::info!("ok {:#?}", l);
+                                        },
                                         Err(e) => log::info!("2err {:#?}", e),
                                     }
                                 }
@@ -53,6 +69,7 @@ impl Component for InputButton {
     fn view(&self, ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         let link = ctx.link();
+        let some_string = &self.some_string;
         //for some reason page re renders if it would be button
         html! {
           <span
@@ -115,6 +132,7 @@ impl Component for InputButton {
             >
               {"Sign Up"}
             </span>
+            <div>{some_string}</div>
             <span
               class="MuiTouchRipple-root"
               style="
