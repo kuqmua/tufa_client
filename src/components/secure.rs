@@ -9,7 +9,7 @@ pub fn secure() -> Html {
 
     let onclick = Callback::once(move |_| history.push(Routes::Home));
     let class = "my_title";
-    let option = Some("kekw");
+    let option: Option<&str> = Some("kekw");
     html! {
         <div>
             if class == "my_title" {
