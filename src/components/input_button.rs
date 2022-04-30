@@ -73,10 +73,11 @@ impl Component for InputButton {
         let link = ctx.link();
         let some_string = &self.some_string;
         //for some reason page re renders if it would be button
+        let class = "MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth";
         html! {
           <span
+            class={class}
             onclick={link.callback(|_| Msg::AddOne)}
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth"
             tabindex="0"
             type="submit"
             style="
