@@ -17,4 +17,4 @@ gloo = "0.7.0" # wasm-logger = "0.2.0" (al;ternative to gloo)
 yew = "0.19"
 yew-router = "0.16.0"
 lazy_static = "1.4"
-stylist = "0.10.0"
+stylist = { version = "0.10.0", features = ["yew"]}
