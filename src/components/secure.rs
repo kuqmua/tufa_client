@@ -8,9 +8,15 @@ pub fn secure() -> Html {
     let history = use_history().unwrap();
 
     let onclick = Callback::once(move |_| history.push(Routes::Home));
+    let class = "my_title";
     html! {
         <div>
-            <h1>{ "Secure" }</h1>
+            if class != "my_title" {
+                <h1 class={class}>{ "Secure" }</h1>
+            }
+            else {
+                <h1 class={class}>{ "kekw" }</h1>
+            }
             <button {onclick}>{ "Go Home" }</button>
         </div>
     }
