@@ -2,8 +2,9 @@ use yew::{html, Callback, function_component, Html};
 use yew_router::hooks::use_history;
 use crate::routes::routes::Routes;
 use yew_router::prelude::*;
+use stylist::yew::styled_component;
 
-#[function_component(Secure)]
+#[styled_component(Secure)]
 pub fn secure() -> Html {
     let history = use_history().unwrap();
 
