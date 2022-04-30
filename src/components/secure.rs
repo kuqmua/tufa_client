@@ -3,6 +3,7 @@ use yew_router::hooks::use_history;
 use crate::routes::routes::Routes;
 use yew_router::prelude::*;
 use stylist::yew::styled_component;
+use stylist::style;
 
 #[styled_component(Secure)]
 pub fn secure() -> Html {
@@ -15,8 +16,14 @@ pub fn secure() -> Html {
     let example_list_html = vec![html!{ <div>{"one"}</div>}, html!{ <div>{"two"}</div>}, html!{ <div>{"three"}</div>}];
     let example_list_for_ter = vec!["oneiter", "twoiter", "threeiter"];
     let example_list_for_function = vec!["one_function", "two_function", "three_function"];
+
+    let stylesheet = style!(
+        r#"
+            background-color: blue;
+        "#
+    ).unwrap();
     html! {
-        <div>
+        <div class={stylesheet}>
             if class == "my_title" {
                 <h1 class={class}>{ "my_title" }</h1>
             }
