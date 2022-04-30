@@ -19,8 +19,11 @@ pub fn secure() -> Html {
                 <h1 class={class}>{ "not my_title" }</h1>
             }
             if let Some(option) = option {
-                <h1 class={class}>{ "some kekw" }</h1>
+                <h1 class={class}>{option}</h1>
             } 
+            else  {
+                <h1 class={class}>{"None"}</h1>
+            }
             <button {onclick}>{ "Go Home" }</button>
         </div>
     }
