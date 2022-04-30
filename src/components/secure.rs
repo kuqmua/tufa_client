@@ -1,4 +1,4 @@
-use yew::{html, Callback, function_component};
+use yew::{html, Callback, function_component, Html};
 use yew_router::hooks::use_history;
 use crate::routes::routes::Routes;
 use yew_router::prelude::*;
@@ -12,6 +12,7 @@ pub fn secure() -> Html {
     let option: Option<&str> = Some("kekw");
     let example_list = vec!["one", "two", "three"];
     let example_list_html = vec![html!{ <div>{"one"}</div>}, html!{ <div>{"two"}</div>}, html!{ <div>{"three"}</div>}];
+    let example_list_for_ter = vec!["oneiter", "twoiter", "threeiter"];
     html! {
         <div>
             if class == "my_title" {
@@ -28,6 +29,7 @@ pub fn secure() -> Html {
             }
             {example_list}
             {example_list_html}
+            {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
             <button {onclick}>{ "Go Home" }</button>
         </div>
     }
