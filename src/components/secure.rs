@@ -10,6 +10,7 @@ pub fn secure() -> Html {
     let onclick = Callback::once(move |_| history.push(Routes::Home));
     let class = "my_title";
     let option: Option<&str> = Some("kekw");
+    let example_list = vec!["one", "two", "three"];
     html! {
         <div>
             if class == "my_title" {
@@ -24,6 +25,7 @@ pub fn secure() -> Html {
             else  {
                 <h1 class={class}>{"None"}</h1>
             }
+            {example_list}
             <button {onclick}>{ "Go Home" }</button>
         </div>
     }
