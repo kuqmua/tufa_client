@@ -4,6 +4,7 @@ use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
 use yew::prelude::*;
 use yew_router::prelude::*;
+use gloo::console::log;
 
 #[function_component(AuthModal)]
 pub fn auth_modal() -> Html {
@@ -11,7 +12,7 @@ pub fn auth_modal() -> Html {
   let onclick: Callback<MouseEvent>;
   match history_option {
     Some(history) => onclick = Callback::once(move |_| history.push(Routes::Secure)),
-    None => onclick = Callback::once(move |_| log::info!("Update1")),
+    None => onclick = Callback::once(move |_| log!("Update1")),
 }
   html! { 
   <div

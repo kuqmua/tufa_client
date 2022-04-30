@@ -2,6 +2,8 @@ use reqwasm::http::Request;
 use serde_json::from_str;
 use tufa_common::json_example::JsonExample;
 use yew::prelude::*;
+use gloo::console::log;
+
 pub enum Msg {
     AddOne,
 }
@@ -30,7 +32,7 @@ impl Component for InputButton {
             Msg::AddOne => {
                 self.value += 1;
                 wasm_bindgen_futures::spawn_local(async move {
-                    log::info!("Update1");
+                    log!("Update1");
                     let f = Request::get("http://127.0.0.1:8081/api/json/json_example")
                         .send()
                         .await;
@@ -38,7 +40,7 @@ impl Component for InputButton {
                         Ok(k) => {
                             match k.text().await {
                                 Ok(n) => {
-                                    log::info!("ok {:#?}", n);
+                                    log!(format!("ok {:#?}", n));
                                     let json: Result<JsonExample, serde_json::Error> = from_str(&n);
                                     match json {
                                         Ok(l) => {
@@ -46,18 +48,18 @@ impl Component for InputButton {
                                           let mut bbb = l.second.clone();
                                           // self.some_string = "ertrer".to_string();
                                           // self.set_second(bbb);
-                                          // log::info!("ok {:#?}", l);
+                                          // log!("ok {:#?}", l);
                                         },
-                                        Err(e) => log::info!("2err {:#?}", e),
+                                        Err(e) => log!(format!("2err {:#?}", e)),
                                     }
                                 }
-                                Err(e) => log::info!("1err {:#?}", e),
+                                Err(e) => log!(format!("1err {:#?}", e)),
                             }
-                            log::info!("ok {:#?}", k.body());
+                            log!("ok {:#?}", k.body());
                         }
-                        Err(_) => log::info!("0err"),
+                        Err(_) => log!("0err"),
                     }
-                    log::info!("Update2:");
+                    log!("Update2:");
                 });
                 // the value has changed so we need to
                 // re-render for it to appear on the page
