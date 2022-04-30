@@ -13,6 +13,7 @@ pub fn secure() -> Html {
     let example_list = vec!["one", "two", "three"];
     let example_list_html = vec![html!{ <div>{"one"}</div>}, html!{ <div>{"two"}</div>}, html!{ <div>{"three"}</div>}];
     let example_list_for_ter = vec!["oneiter", "twoiter", "threeiter"];
+    let example_list_for_function = vec!["one_function", "two_function", "three_function"];
     html! {
         <div>
             if class == "my_title" {
@@ -30,7 +31,12 @@ pub fn secure() -> Html {
             {example_list}
             {example_list_html}
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
+            {list_to_html(example_list_for_function)}
             <button {onclick}>{ "Go Home" }</button>
         </div>
     }
+}
+
+pub fn list_to_html(vec: Vec<&str>) -> Vec<Html> {
+    vec.iter().map(|x| html!{<li>{x}</li>}).collect()
 }
