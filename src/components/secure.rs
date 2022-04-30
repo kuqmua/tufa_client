@@ -11,6 +11,7 @@ pub fn secure() -> Html {
     let class = "my_title";
     let option: Option<&str> = Some("kekw");
     let example_list = vec!["one", "two", "three"];
+    let example_list_html = vec![html!{ <div>{"one"}</div>}, html!{ <div>{"two"}</div>}, html!{ <div>{"three"}</div>}];
     html! {
         <div>
             if class == "my_title" {
@@ -26,6 +27,7 @@ pub fn secure() -> Html {
                 <h1 class={class}>{"None"}</h1>
             }
             {example_list}
+            {example_list_html}
             <button {onclick}>{ "Go Home" }</button>
         </div>
     }
