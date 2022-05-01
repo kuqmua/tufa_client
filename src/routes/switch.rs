@@ -10,7 +10,7 @@ pub fn switch(routes: &Routes) -> Html {
          <AuthModal/> 
         },
         Routes::Secure => html! {
-            <Secure first="kekw"/>
+            <Secure first="my_first_prop"/>
         },
         Routes::NotFound => html! { <h1>{ "404" }</h1> },
     }
