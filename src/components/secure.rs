@@ -36,6 +36,7 @@ pub fn secure() -> Html {
             else  {
                 <h1 class={class}>{"None"}</h1>
             }
+            <h1 class={css!("color: red; background-color: green;")}>{"css! macro"}</h1>
             {example_list}
             {example_list_html}
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
