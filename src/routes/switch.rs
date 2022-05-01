@@ -1,7 +1,7 @@
 use yew::{Html, html};
 use crate::components::auth_modal::AuthModal;
 use crate::routes::routes::Routes;
-use crate::components::secure::Secure;
+use crate::components::secure::{Secure};
 
 pub fn switch(routes: &Routes) -> Html {
     match routes {
@@ -10,7 +10,7 @@ pub fn switch(routes: &Routes) -> Html {
          <AuthModal/> 
         },
         Routes::Secure => html! {
-            <Secure />
+            <Secure first="kekw"/>
         },
         Routes::NotFound => html! { <h1>{ "404" }</h1> },
     }

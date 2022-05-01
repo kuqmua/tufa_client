@@ -1,14 +1,20 @@
-use yew::{html, Callback, function_component, Html};
+use yew::{html, Callback, function_component, Html, Properties};
 use yew_router::hooks::use_history;
 use crate::routes::routes::Routes;
 use yew_router::prelude::*;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
+use yew_router::prelude::*;
+
+#[derive(Properties, PartialEq)]
+pub struct SecureProps {
+    pub first: String
+}
 
 const STYLE_FILE: &'static str = include_str!("example.css");
 
 #[styled_component(Secure)]
-pub fn secure() -> Html {
+pub fn secure(props: & SecureProps) -> Html {
     let history = use_history().unwrap();
 
     let onclick = Callback::once(move |_| history.push(Routes::Home));
