@@ -3,7 +3,9 @@ use yew_router::hooks::use_history;
 use crate::routes::routes::Routes;
 use yew_router::prelude::*;
 use stylist::yew::styled_component;
-use stylist::style;
+use stylist::{style, Style};
+
+const STYLE_FILE: &'static str = include_str!("example.css");
 
 #[styled_component(Secure)]
 pub fn secure() -> Html {
@@ -22,8 +24,12 @@ pub fn secure() -> Html {
             background-color: blue;
         "#
     ).unwrap();
+    let file_stylesheet = Style::new(STYLE_FILE).unwrap();
+    //<h1 class={file_stylesheet}>{"file_stylesheet"}</h1>
     html! {
-        <div class={stylesheet}>
+        <div class={file_stylesheet}>
+        {"file_stylesheet"}
+            <div class={stylesheet}>{"stylesheet"}</div>
             if class == "my_title" {
                 <h1 class={class}>{ "my_title" }</h1>
             }
@@ -37,6 +43,7 @@ pub fn secure() -> Html {
                 <h1 class={class}>{"None"}</h1>
             }
             <h1 class={css!("color: red; background-color: green;")}>{"css! macro"}</h1>
+            
             {example_list}
             {example_list_html}
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
