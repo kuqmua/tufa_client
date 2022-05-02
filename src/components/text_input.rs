@@ -6,16 +6,22 @@ use yew::prelude::*;
 #[derive(Properties, PartialEq)]
 pub struct TextInputProps {
     pub name: String,
+    pub handle_onchange: Callback<String>,
 }
 
 #[function_component(TextInput)]
 pub fn text_input(props: &TextInputProps) -> Html {
-    let onchange = Callback::from(|event: Event| {
-        let target = event.target().unwrap();
-        let input = target.unchecked_into::<HtmlInputElement>();
+    let handle_onchange = props.handle_onchange.clone();
+    let onchange = Callback::from(move |event: Event| {
+        let value = event
+            .target()
+            .unwrap()
+            .unchecked_into::<HtmlInputElement>()
+            .value();
         // log!(target.clone());
         // log!(target.value_of());
-        log!(input.value())
+        // log!(input.value());
+        handle_onchange.emit(value);
     });
     html! {
         <input type="text" name={props.name.clone()} onchange={onchange}/>
