@@ -1,3 +1,5 @@
+use crate::components::text_input::TextInput;
+use crate::components::text_input::TextInputProps;
 use crate::routes::routes::Routes;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
@@ -56,6 +58,9 @@ pub fn secure(props: &SecureProps) -> Html {
     let file_stylesheet = Style::new(STYLE_FILE).unwrap();
     //<h1 class={file_stylesheet}>{"file_stylesheet"}</h1>
     props.on_load.emit("i loaded".to_string());
+    // let text_input_props = TextInputProps {
+    //     name: String::from("text_input"),
+    // };
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
@@ -80,6 +85,7 @@ pub fn secure(props: &SecureProps) -> Html {
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
             {list_to_html(example_list_for_function)}
             <button {onclick}>{ "Go Home" }</button>
+            <TextInput name={"text_input".to_string()}/>
         </div>
     }
 }
