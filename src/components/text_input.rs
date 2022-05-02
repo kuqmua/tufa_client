@@ -10,7 +10,8 @@ pub struct TextInputProps {
 pub fn text_input(props: &TextInputProps) -> Html {
     let onchange = Callback::from(|event: Event| {
         let target = event.target().unwrap();
-        log!(target);
+        log!(target.clone());
+        log!(target.value_of());
     });
     html! {
         <input type="text" name={props.name.clone()} onchange={onchange}/>
