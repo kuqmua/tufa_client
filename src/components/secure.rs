@@ -9,6 +9,7 @@ use yew_router::prelude::*;
 pub struct SecureProps {
     pub first: String,
     pub color: Color,
+    pub on_load: Callback<String>,
 }
 
 const STYLE_FILE: &str = include_str!("example.css");
@@ -54,6 +55,7 @@ pub fn secure(props: &SecureProps) -> Html {
     .unwrap();
     let file_stylesheet = Style::new(STYLE_FILE).unwrap();
     //<h1 class={file_stylesheet}>{"file_stylesheet"}</h1>
+    props.on_load.emit("i loaded".to_string());
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
