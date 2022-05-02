@@ -4,6 +4,7 @@ use crate::routes::routes::Routes;
 use gloo::console::log;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
+use yew::use_state;
 use yew::{html, Callback, Html, Properties};
 use yew_router::hooks::use_history;
 use yew_router::prelude::*;
@@ -65,6 +66,7 @@ pub fn secure(props: &SecureProps) -> Html {
     let username_changed = Callback::from(|username| {
         log!("username changed", username);
     });
+    let username_state = use_state(|| "no username set".to_string());
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
@@ -88,6 +90,7 @@ pub fn secure(props: &SecureProps) -> Html {
             {example_list_html}
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
             {list_to_html(example_list_for_function)}
+            <p>{"username: "}{&*username_state}</p>
             <button {onclick}>{ "Go Home" }</button>
             <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
         </div>
