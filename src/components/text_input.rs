@@ -1,4 +1,6 @@
 use gloo::console::log;
+use wasm_bindgen::JsCast;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -10,8 +12,10 @@ pub struct TextInputProps {
 pub fn text_input(props: &TextInputProps) -> Html {
     let onchange = Callback::from(|event: Event| {
         let target = event.target().unwrap();
-        log!(target.clone());
-        log!(target.value_of());
+        let input = target.unchecked_into::<HtmlInputElement>();
+        // log!(target.clone());
+        // log!(target.value_of());
+        log!(input.value())
     });
     html! {
         <input type="text" name={props.name.clone()} onchange={onchange}/>
