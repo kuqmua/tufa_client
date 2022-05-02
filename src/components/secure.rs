@@ -63,10 +63,13 @@ pub fn secure(props: &SecureProps) -> Html {
     // let text_input_props = TextInputProps {
     //     name: String::from("text_input"),
     // };
-    let username_changed = Callback::from(|username| {
-        log!("username changed", username);
-    });
     let username_state = use_state(|| "no username set".to_string());
+    let cloned_username_state = username_state.clone();
+    let username_changed = Callback::from(move |username: String| {
+        log!("username changed", username.clone());
+        cloned_username_state.set(username);
+    });
+
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
