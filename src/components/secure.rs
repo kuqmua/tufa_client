@@ -6,6 +6,7 @@ use lazy_static::__Deref;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
 use web_sys::FocusEvent;
+use yew::use_context;
 use yew::use_state;
 use yew::ContextProvider;
 use yew::{html, Callback, Html, Properties};
@@ -44,7 +45,7 @@ impl Color {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Default)]
 pub struct ContextProviderStruct {
     pub data: String,
 }
@@ -96,6 +97,7 @@ pub fn secure(props: &SecureProps) -> Html {
     let context = ContextProviderStruct {
         data: String::from("fff"),
     };
+    let secure_context = use_context::<ContextProviderStruct>();
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
@@ -124,6 +126,7 @@ pub fn secure(props: &SecureProps) -> Html {
             <form onsubmit={onsubmit}>
                 <ContextProvider<ContextProviderStruct> context={context}>
                     <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
+                    <p>{"use context: "}{secure_context.unwrap_or_default().data}</p>
                 </ContextProvider<ContextProviderStruct>>
             </form>
 
