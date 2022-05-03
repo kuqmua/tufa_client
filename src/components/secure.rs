@@ -94,10 +94,10 @@ pub fn secure(props: &SecureProps) -> Html {
         let data = cloned_state_two.deref().clone();
         log!("onsubmit")
     });
+
     let context = ContextProviderStruct {
         data: String::from("fff"),
     };
-    let secure_context = use_context::<ContextProviderStruct>();
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
@@ -126,7 +126,6 @@ pub fn secure(props: &SecureProps) -> Html {
             <form onsubmit={onsubmit}>
                 <ContextProvider<ContextProviderStruct> context={context}>
                     <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
-                    <p>{"use context: "}{secure_context.unwrap_or_default().data}</p>
                 </ContextProvider<ContextProviderStruct>>
             </form>
 

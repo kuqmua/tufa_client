@@ -4,6 +4,8 @@ use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
+use super::secure::ContextProviderStruct;
+
 #[derive(Properties, PartialEq)]
 pub struct TextInputProps {
     pub name: String,
@@ -24,9 +26,11 @@ pub fn text_input(props: &TextInputProps) -> Html {
         // log!(input.value());
         handle_onchange.emit(value);
     });
+    let secure_context = use_context::<ContextProviderStruct>();
     html! {
         <div>
             <input type="text" name={props.name.clone()} onchange={onchange}/>
+            <p>{"use context: "}{secure_context.unwrap_or_default().data}</p>
            <Header/>
         </div>
 
