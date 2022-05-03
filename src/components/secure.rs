@@ -2,6 +2,7 @@ use crate::components::text_input::TextInput;
 use crate::components::text_input::TextInputProps;
 use crate::routes::routes::Routes;
 use gloo::console::log;
+use lazy_static::__Deref;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
 use yew::use_state;
@@ -14,6 +15,12 @@ pub struct SecureProps {
     pub first: String,
     pub color: Color,
     pub on_load: Callback<String>,
+}
+
+#[derive(Default, Clone, Debug)]
+pub struct SecureState {
+    username: String,
+    age: u8,
 }
 
 const STYLE_FILE: &str = include_str!("example.css");
@@ -63,11 +70,13 @@ pub fn secure(props: &SecureProps) -> Html {
     // let text_input_props = TextInputProps {
     //     name: String::from("text_input"),
     // };
-    let username_state = use_state(|| "no username set".to_string());
-    let cloned_username_state = username_state.clone();
-    let username_changed = Callback::from(move |username: String| {
-        log!("username changed", username.clone());
-        cloned_username_state.set(username);
+    let state = use_state(|| SecureState::default());
+    let cloned_state = state.clone();
+    let username_changed = Callback::from(move |new_username: String| {
+        let mut data = cloned_state.deref().clone();
+        data.username = new_username;
+        // log!("username changed", data);
+        cloned_state.set(data);
     });
 
     html! {
@@ -93,7 +102,7 @@ pub fn secure(props: &SecureProps) -> Html {
             {example_list_html}
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
             {list_to_html(example_list_for_function)}
-            <p>{"username: "}{&*username_state}</p>
+            <p>{"username: "}{&state.username}</p>
             <button {onclick}>{ "Go Home" }</button>
             <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
         </div>
