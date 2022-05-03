@@ -73,10 +73,13 @@ pub fn secure(props: &SecureProps) -> Html {
     let state = use_state(|| SecureState::default());
     let cloned_state = state.clone();
     let username_changed = Callback::from(move |new_username: String| {
-        let mut data = cloned_state.deref().clone();
-        data.username = new_username;
+        // let mut data = cloned_state.deref().clone();
+        // data.username = new_username;
         // log!("username changed", data);
-        cloned_state.set(data);
+        cloned_state.set(SecureState {
+            username: new_username,
+            ..cloned_state.deref().clone()
+        });
     });
 
     html! {
