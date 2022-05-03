@@ -7,6 +7,7 @@ use stylist::yew::styled_component;
 use stylist::{style, Style};
 use web_sys::FocusEvent;
 use yew::use_context;
+use yew::use_effect;
 use yew::use_state;
 use yew::ContextProvider;
 use yew::{html, Callback, Html, Properties};
@@ -98,6 +99,15 @@ pub fn secure(props: &SecureProps) -> Html {
     let context = ContextProviderStruct {
         data: String::from("fff"),
     };
+    let first_load = use_state(|| true);
+    use_effect(move || {
+        if *first_load {
+            log!("on first render");
+            first_load.set(false);
+        }
+        log!("just render");
+        || {}
+    });
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
