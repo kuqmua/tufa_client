@@ -1,3 +1,4 @@
+use crate::components::header::Header;
 use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
@@ -24,6 +25,10 @@ pub fn text_input(props: &TextInputProps) -> Html {
         handle_onchange.emit(value);
     });
     html! {
-        <input type="text" name={props.name.clone()} onchange={onchange}/>
+        <div>
+            <input type="text" name={props.name.clone()} onchange={onchange}/>
+           <Header/>
+        </div>
+
     }
 }

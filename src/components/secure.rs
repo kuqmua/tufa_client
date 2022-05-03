@@ -7,6 +7,7 @@ use stylist::yew::styled_component;
 use stylist::{style, Style};
 use web_sys::FocusEvent;
 use yew::use_state;
+use yew::ContextProvider;
 use yew::{html, Callback, Html, Properties};
 use yew_router::hooks::use_history;
 use yew_router::prelude::*;
@@ -43,6 +44,10 @@ impl Color {
     }
 }
 
+#[derive(Clone, Debug, PartialEq)]
+pub struct ContextProviderStruct {
+    pub data: String,
+}
 #[styled_component(Secure)]
 pub fn secure(props: &SecureProps) -> Html {
     let history = use_history().unwrap();
@@ -88,7 +93,9 @@ pub fn secure(props: &SecureProps) -> Html {
         let data = cloned_state_two.deref().clone();
         log!("onsubmit")
     });
-
+    let context = ContextProviderStruct {
+        data: String::from("fff"),
+    };
     html! {
         <div class={file_stylesheet}>
         {"file_stylesheet"}
@@ -115,8 +122,11 @@ pub fn secure(props: &SecureProps) -> Html {
             <p>{"username: "}{&state.username}</p>
             <button {onclick}>{ "Go Home" }</button>
             <form onsubmit={onsubmit}>
-                <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
+                <ContextProvider<ContextProviderStruct> context={context}>
+                    <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
+                </ContextProvider<ContextProviderStruct>>
             </form>
+
         </div>
     }
 }
