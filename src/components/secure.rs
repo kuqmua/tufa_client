@@ -5,6 +5,7 @@ use gloo::console::log;
 use lazy_static::__Deref;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
+use web_sys::FocusEvent;
 use yew::use_state;
 use yew::{html, Callback, Html, Properties};
 use yew_router::hooks::use_history;
@@ -15,12 +16,12 @@ pub struct SecureProps {
     pub first: String,
     pub color: Color,
     pub on_load: Callback<String>,
+    pub onsubmit: Callback<SecureProps>,
 }
 
 #[derive(Default, Clone, Debug)]
 pub struct SecureState {
     username: String,
-    age: u8,
 }
 
 const STYLE_FILE: &str = include_str!("example.css");
@@ -81,6 +82,12 @@ pub fn secure(props: &SecureProps) -> Html {
             ..cloned_state.deref().clone()
         });
     });
+    let cloned_state_two = state.clone();
+    let onsubmit = Callback::from(move |event: FocusEvent| {
+        event.prevent_default();
+        let data = cloned_state_two.deref().clone();
+        log!("onsubmit")
+    });
 
     html! {
         <div class={file_stylesheet}>
@@ -107,7 +114,9 @@ pub fn secure(props: &SecureProps) -> Html {
             {list_to_html(example_list_for_function)}
             <p>{"username: "}{&state.username}</p>
             <button {onclick}>{ "Go Home" }</button>
-            <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
+            <form onsubmit={onsubmit}>
+                <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
+            </form>
         </div>
     }
 }
