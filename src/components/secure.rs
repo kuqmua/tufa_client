@@ -132,7 +132,7 @@ pub fn secure(props: &SecureProps) -> Html {
             {example_list_for_ter.iter().map(|x| html!{<li>{"iter of"}{x}</li>}).collect::<Html>()}
             {list_to_html(example_list_for_function)}
             <p>{"username: "}{&state.username}</p>
-            <button {onclick}>{ "Go Home" }</button>
+            <button {onclick}>{ "Go Home with history" }</button>
             <form onsubmit={onsubmit}>
                 <ContextProvider<ContextProviderStruct> context={context}>
                     <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
