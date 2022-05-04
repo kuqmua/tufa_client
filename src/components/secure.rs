@@ -138,7 +138,7 @@ pub fn secure(props: &SecureProps) -> Html {
                     <TextInput name={"text_input".to_string()} handle_onchange={username_changed}/>
                 </ContextProvider<ContextProviderStruct>>
             </form>
-
+            <Link<Routes> to={Routes::NotFound}>{ "click here to go to not found" }</Link<Routes>>
         </div>
     }
 }
