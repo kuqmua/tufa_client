@@ -24,6 +24,7 @@ pub struct SvgIconWrapperProps {
 
 pub enum Msg {
     AddOne,
+    Other
 }
 pub struct SvgIconWrapper {
     value: i64,
@@ -72,6 +73,7 @@ impl Component for SvgIconWrapper {
                 // re-render for it to appear on the page
                 true
             }
+            Msg::Other => false
         }
     }
     //https://codepen.io/shawnc8160/pen/xxRYOWg
