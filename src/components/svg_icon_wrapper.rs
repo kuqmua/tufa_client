@@ -13,7 +13,22 @@ pub struct SvgIconWrapper {
 impl SvgIconWrapper {
   fn style() -> Style {
     style!("
-      color: green;
+    margin: 8px;
+    background-color: #19857b;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    font-size: 1.25rem;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    user-select: none;
+    border-radius: 50%;
+    justify-content: center;
     ").unwrap()
   }
 }
@@ -45,25 +60,7 @@ impl Component for SvgIconWrapper {
         // let link = ctx.link();
         html! {
           <div
-            class="MuiAvatar-root MuiAvatar-circular makeStyles-avatar-2 MuiAvatar-colorDefault"
-            style="
-              margin: 8px;
-              background-color: #19857b;
-              color: #fff;
-              width: 40px;
-              height: 40px;
-              display: flex;
-              overflow: hidden;
-              position: relative;
-              font-size: 1.25rem;
-              align-items: center;
-              flex-shrink: 0;
-              font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-              line-height: 1;
-              user-select: none;
-              border-radius: 50%;
-              justify-content: center;
-            "
+            class={self.stylesheet.clone()}
           >
             <svg
               style="
