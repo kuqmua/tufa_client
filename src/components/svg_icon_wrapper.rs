@@ -1,10 +1,21 @@
 use yew::prelude::*;
+use stylist::Style;
+use stylist::style;
 
 pub enum Msg {
     AddOne,
 }
 pub struct SvgIconWrapper {
     value: i64,
+    pub stylesheet: Style
+}
+
+impl SvgIconWrapper {
+  fn style() -> Style {
+    style!("
+      color: green;
+    ").unwrap()
+  }
 }
 
 impl Component for SvgIconWrapper {
@@ -12,7 +23,10 @@ impl Component for SvgIconWrapper {
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { value: 0 }
+        Self { 
+          value: 0,
+          stylesheet: Self::style(),
+         }
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
