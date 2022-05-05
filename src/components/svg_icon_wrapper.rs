@@ -1,6 +1,26 @@
-use yew::prelude::*;
 use stylist::Style;
 use stylist::style;
+use yew::prelude::*;
+
+use crate::components::text_input::TextInput;
+use crate::components::text_input::TextInputProps;
+use crate::routes::routes::Routes;
+use gloo::console::log;
+use lazy_static::__Deref;
+use stylist::yew::styled_component;
+use web_sys::FocusEvent;
+use yew::use_context;
+use yew::use_effect;
+use yew::use_state;
+use yew::ContextProvider;
+use yew::{html, Callback, Html, Properties};
+use yew_router::hooks::use_history;
+use yew_router::prelude::*;
+
+#[derive(Properties, PartialEq)]
+pub struct SvgIconWrapperProps {
+  pub message: String,
+}
 
 pub enum Msg {
     AddOne,
@@ -35,16 +55,16 @@ impl SvgIconWrapper {
 
 impl Component for SvgIconWrapper {
     type Message = Msg;
-    type Properties = ();
+    type Properties = SvgIconWrapperProps;
 
-    fn create(_ctx: &Context<Self>) -> Self {
+    fn create(ctx: &Context<Self>) -> Self {
         Self { 
           value: 0,
           stylesheet: Self::style(),
          }
     }
 
-    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
+    fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
@@ -55,13 +75,14 @@ impl Component for SvgIconWrapper {
         }
     }
     //https://codepen.io/shawnc8160/pen/xxRYOWg
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         // let link = ctx.link();
         html! {
           <div
             class={self.stylesheet.clone()}
           >
+          {ctx.props().message.clone()}
             <svg
               style="
                 width: 75%;

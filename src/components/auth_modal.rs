@@ -53,7 +53,7 @@ pub fn auth_modal() -> Html {
           flex-direction: column;
         "
       >
-        <SvgIconWrapper />
+        <SvgIconWrapper message={"svg".to_owned()}/>
         <h1
           class="MuiTypography-root MuiTypography-h5"
           style="
