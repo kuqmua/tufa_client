@@ -109,4 +109,12 @@ impl Component for SvgIconWrapper {
           </div>
         }
     }
+
+    fn changed(&mut self, ctx: &Context<Self>) -> bool {
+      true
+    }
+    
+    fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {}
+    
+    fn destroy(&mut self, ctx: &Context<Self>) {}
 }
