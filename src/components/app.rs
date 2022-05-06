@@ -1,8 +1,9 @@
+use crate::components::header::Header;
 use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
 use yew::prelude::*;
 use yew_router::prelude::*;
-use crate::components::header::Header;
+use yewdux::prelude::*;
 
 pub enum AppMessage {
     ActionOne,
@@ -19,15 +20,15 @@ impl Component for App {
         true
     }
     fn view(&self, _ctx: &Context<Self>) -> Html {
-    //     <style>
-    //     body {
-    //         padding: 0px;
-    //         margin: 0px;
-    //     }
-    // </style>
+        //     <style>
+        //     body {
+        //         padding: 0px;
+        //         margin: 0px;
+        //     }
+        // </style>
         html! {
 
-          <div 
+          <div
               style="
                   width: 100%; 
                   display: flex; 
