@@ -23,6 +23,7 @@ impl Component for Counter {
         html! {
           <div>
             <h1>{format!("counter pressed {} times", 0)}</h1>
+            <button>{"click me"}</button>
           </div>
         }
     }

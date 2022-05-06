@@ -1,10 +1,10 @@
+use crate::components::counter::Counter;
 use crate::components::header::Header;
 use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
 use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::*;
-
 pub enum AppMessage {
     ActionOne,
 }
@@ -38,6 +38,7 @@ impl Component for App {
               "
           >
               <Header/>
+              <Counter/>
               <BrowserRouter>
                   <Switch<Routes> render={Switch::render(switch)} />
               </BrowserRouter>
