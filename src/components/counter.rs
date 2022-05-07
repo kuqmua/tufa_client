@@ -22,10 +22,15 @@ impl Component for Counter {
         true
     }
     fn view(&self, ctx: &Context<Self>) -> Html {
+        let count = ctx.props().state().count;
+        let onclick = ctx
+            .props()
+            .dispatch()
+            .reduce_callback(|state| state.count += 1);
         html! {
           <div>
-            <h1>{format!("counter pressed {} times", 0)}</h1>
-            <button>{"click me"}</button>
+            <h1>{format!("counter pressed {} times", count)}</h1>
+            <button onclick={onclick}>{"click me"}</button>
           </div>
         }
     }
