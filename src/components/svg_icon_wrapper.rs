@@ -1,12 +1,8 @@
 use stylist::style;
 use stylist::Style;
+use yew::html;
 use yew::prelude::*;
-use yew::{html, Html, Properties};
-
-#[derive(Properties, PartialEq)]
-pub struct SvgIconWrapperProps {
-    pub message: String,
-}
+use yew::Html;
 
 pub enum Msg {
     AddOne,
@@ -45,15 +41,13 @@ impl SvgIconWrapper {
 
 impl Component for SvgIconWrapper {
     type Message = Msg;
-    type Properties = SvgIconWrapperProps;
-
+    type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
         Self {
             value: 0,
             stylesheet: Self::style(),
         }
     }
-
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::AddOne => {
@@ -73,7 +67,6 @@ impl Component for SvgIconWrapper {
           <div
             class={self.stylesheet.clone()}
           >
-          {ctx.props().message.clone()}
             <svg
               style="
                 width: 75%;
@@ -87,7 +80,6 @@ impl Component for SvgIconWrapper {
                 flex-shrink: 0;
                 user-select: none;
               "
-              class="MuiSvgIcon-root MuiAvatar-fallback"
               focusable="false"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -100,12 +92,9 @@ impl Component for SvgIconWrapper {
           </div>
         }
     }
-
     fn changed(&mut self, _ctx: &Context<Self>) -> bool {
         true
     }
-
     fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
-
     fn destroy(&mut self, _ctx: &Context<Self>) {}
 }
