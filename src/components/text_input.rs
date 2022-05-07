@@ -1,10 +1,8 @@
+use super::secure::ContextProviderStruct;
 use crate::components::header::Header;
-use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
-
-use super::secure::ContextProviderStruct;
 
 #[derive(Properties, PartialEq)]
 pub struct TextInputProps {

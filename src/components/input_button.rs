@@ -1,8 +1,8 @@
+use gloo::console::log;
 use reqwasm::http::Request;
 use serde_json::from_str;
 use tufa_common::json_example::JsonExample;
 use yew::prelude::*;
-use gloo::console::log;
 
 pub enum Msg {
     AddOne,
@@ -13,19 +13,22 @@ pub struct InputButton {
 }
 
 impl InputButton {
-  pub fn set_first(&mut self, first: i64) {
-      self.value = first;
-  }
-  pub fn set_second(&mut self, second: String) {
-      self.some_string = second;
-  }
+    pub fn set_first(&mut self, first: i64) {
+        self.value = first;
+    }
+    pub fn set_second(&mut self, second: String) {
+        self.some_string = second;
+    }
 }
 
 impl Component for InputButton {
     type Message = Msg;
     type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { value: 0, some_string: String::from("init") }
+        Self {
+            value: 0,
+            some_string: String::from("init"),
+        }
     }
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
@@ -43,13 +46,12 @@ impl Component for InputButton {
                                     log!(format!("ok {:#?}", n));
                                     let json: Result<JsonExample, serde_json::Error> = from_str(&n);
                                     match json {
-                                        Ok(l) => {
-                                          
-                                          let mut bbb = l.second.clone();
-                                          // self.some_string = "ertrer".to_string();
-                                          // self.set_second(bbb);
-                                          // log!("ok {:#?}", l);
-                                        },
+                                        Ok(_l) => {
+                                            // let mut bbb = l.second.clone();
+                                            // self.some_string = "ertrer".to_string();
+                                            // self.set_second(bbb);
+                                            // log!("ok {:#?}", l);
+                                        }
                                         Err(e) => log!(format!("2err {:#?}", e)),
                                     }
                                 }

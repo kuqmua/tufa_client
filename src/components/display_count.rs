@@ -7,7 +7,7 @@ pub struct DisplayCount;
 impl Component for DisplayCount {
     type Message = ();
     type Properties = DispatchProps<BasicStore<YewduxStore>>;
-    fn create(ctx: &Context<Self>) -> Self {
+    fn create(_ctx: &Context<Self>) -> Self {
         Self
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {

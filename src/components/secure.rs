@@ -1,12 +1,12 @@
 use crate::components::text_input::TextInput;
-use crate::components::text_input::TextInputProps;
 use crate::routes::routes::Routes;
 use gloo::console::log;
+use impl_display::ImplDisplayDerive;
 use lazy_static::__Deref;
+use std::fmt;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
 use web_sys::FocusEvent;
-use yew::use_context;
 use yew::use_effect;
 use yew::use_state;
 use yew::ContextProvider;
@@ -29,21 +29,11 @@ pub struct SecureState {
 
 const STYLE_FILE: &str = include_str!("example.css");
 
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq, ImplDisplayDerive)]
 pub enum Color {
     Normal,
     Ok,
     Error,
-}
-
-impl Color {
-    pub fn to_string(&self) -> String {
-        match &self {
-            Color::Normal => "normal".to_string(),
-            Color::Ok => "ok".to_string(),
-            Color::Error => "error".to_string(),
-        }
-    }
 }
 
 #[derive(Clone, Debug, PartialEq, Default)]
@@ -53,7 +43,6 @@ pub struct ContextProviderStruct {
 #[styled_component(Secure)]
 pub fn secure(props: &SecureProps) -> Html {
     let history = use_history().unwrap();
-
     let onclick = Callback::once(move |_| history.push(Routes::Home));
     let class = "my_title";
     let option: Option<&str> = Some("kekw");
@@ -65,7 +54,6 @@ pub fn secure(props: &SecureProps) -> Html {
     ];
     let example_list_for_ter = vec!["oneiter", "twoiter", "threeiter"];
     let example_list_for_function = vec!["one_function", "two_function", "three_function"];
-
     let stylesheet = style!(
         r#"
             background-color: blue;
@@ -73,12 +61,8 @@ pub fn secure(props: &SecureProps) -> Html {
     )
     .unwrap();
     let file_stylesheet = Style::new(STYLE_FILE).unwrap();
-    //<h1 class={file_stylesheet}>{"file_stylesheet"}</h1>
     props.on_load.emit("i loaded".to_string());
-    // let text_input_props = TextInputProps {
-    //     name: String::from("text_input"),
-    // };
-    let state = use_state(|| SecureState::default());
+    let state = use_state(SecureState::default);
     let cloned_state = state.clone();
     let username_changed = Callback::from(move |new_username: String| {
         // let mut data = cloned_state.deref().clone();
@@ -89,13 +73,10 @@ pub fn secure(props: &SecureProps) -> Html {
             ..cloned_state.deref().clone()
         });
     });
-    let cloned_state_two = state.clone();
     let onsubmit = Callback::from(move |event: FocusEvent| {
         event.prevent_default();
-        let data = cloned_state_two.deref().clone();
         log!("onsubmit")
     });
-
     let context = ContextProviderStruct {
         data: String::from("fff"),
     };

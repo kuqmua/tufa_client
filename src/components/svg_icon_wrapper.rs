@@ -47,14 +47,14 @@ impl Component for SvgIconWrapper {
     type Message = Msg;
     type Properties = SvgIconWrapperProps;
 
-    fn create(ctx: &Context<Self>) -> Self {
+    fn create(_ctx: &Context<Self>) -> Self {
         Self {
             value: 0,
             stylesheet: Self::style(),
         }
     }
 
-    fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
+    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::AddOne => {
                 self.value += 1;
@@ -101,11 +101,11 @@ impl Component for SvgIconWrapper {
         }
     }
 
-    fn changed(&mut self, ctx: &Context<Self>) -> bool {
+    fn changed(&mut self, _ctx: &Context<Self>) -> bool {
         true
     }
 
-    fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {}
+    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
 
-    fn destroy(&mut self, ctx: &Context<Self>) {}
+    fn destroy(&mut self, _ctx: &Context<Self>) {}
 }
