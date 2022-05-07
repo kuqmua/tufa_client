@@ -1,6 +1,7 @@
 pub mod app;
 pub mod auth_modal;
 pub mod counter;
+pub mod display_count;
 pub mod form;
 pub mod header;
 pub mod input_button;

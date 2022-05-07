@@ -27,9 +27,9 @@ impl Component for Counter {
             .props()
             .dispatch()
             .reduce_callback(|state| state.count += 1);
+        // .reduce_callback_with(|state, event| state.count += 1);
         html! {
           <div>
-            <h1>{format!("counter pressed {} times", count)}</h1>
             <button onclick={onclick}>{"click me"}</button>
           </div>
         }

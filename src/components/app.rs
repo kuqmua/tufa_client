@@ -1,4 +1,5 @@
 use crate::components::counter::Counter;
+use crate::components::display_count::DisplayCount;
 use crate::components::header::Header;
 use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
@@ -44,6 +45,7 @@ impl Component for App {
               "
           >
               <Header/>
+              <WithDispatch<DisplayCount>/>
               <WithDispatch<Counter>/>
               <BrowserRouter>
                   <Switch<Routes> render={Switch::render(switch)} />
