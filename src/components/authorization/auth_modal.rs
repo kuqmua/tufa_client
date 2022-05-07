@@ -100,9 +100,9 @@ impl Component for AuthModal {
                       box-sizing: border-box;
                     "
                   >
-                    <InputForm message_handle={"Login".to_owned()}/>
-                    <InputForm message_handle={"Password".to_owned()}/>
-                    <InputForm message_handle={"Repeat password".to_owned()}/>
+                    <InputForm placeholder={"Login".to_owned()}/>
+                    <InputForm placeholder={"Password".to_owned()}/>
+                    <InputForm placeholder={"Repeat password".to_owned()}/>
                   </div>
                   <SubmitButton />
                   <div

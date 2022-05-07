@@ -2,7 +2,7 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct InputFormProps {
-    pub message_handle: String,
+    pub placeholder: String,
 }
 pub enum InputFormMessage {
     ActionOne,
@@ -67,33 +67,6 @@ impl Component for InputForm {
                 width: 100%;
               "
             >
-              <label
-                data-shrink="false"
-                for="email"
-                id="email-label"
-                style="
-                  -webkit-font-smoothing: antialiased;
-                  box-sizing: inherit;
-                  color: rgba(0, 0, 0, 0.54);
-                  padding: 0;
-                  font-size: 1rem;
-                  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-                  font-weight: 400;
-                  line-height: 1;
-                  letter-spacing: 0.00938em;
-                  display: block;
-                  transform-origin: top left;
-                  top: 0;
-                  left: 0;
-                  position: absolute;
-                  transition: color 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms,transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
-                  z-index: 1;
-                  transform: translate(14px, 20px) scale(1);
-                  pointer-events: none;
-                "
-              >
-                {ctx.props().message_handle.clone()}
-              </label>
               <div
                 style="
                   -webkit-font-smoothing: antialiased;
@@ -113,6 +86,7 @@ impl Component for InputForm {
                 "
               >
                 <input
+                  placeholder={ctx.props().placeholder.clone()}
                   aria-invalid="false"
                   autocomplete="email"
                   id="email"
@@ -188,27 +162,6 @@ impl Component for InputForm {
                       visibility: hidden;
                     "
                   >
-                    <span
-                      style="
-                        -webkit-font-smoothing: antialiased;
-                        color: rgba(0, 0, 0, 0.87);
-                        cursor: text;
-                        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-                        font-weight: 400;
-                        line-height: 1.1876em;
-                        letter-spacing: 0.00938em;
-                        pointer-events: none;
-                        font-size: 0.75em;
-                        text-align: left;
-                        visibility: hidden;
-                        box-sizing: inherit;
-                        display: inline-block;
-                        padding-left: 5px;
-                        padding-right: 5px;
-                      "
-                    >
-                      {"Email Address&nbsp;*"}
-                    </span>
                   </legend>
                 </fieldset>
               </div>
