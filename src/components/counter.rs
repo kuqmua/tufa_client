@@ -5,6 +5,8 @@ use yew::prelude::*;
 // use yew_router::prelude::*;
 use yewdux::prelude::*;
 
+use crate::store::YewduxStore;
+
 pub enum CounterMessage {
     ActionOne,
 }
@@ -12,7 +14,7 @@ pub struct Counter;
 
 impl Component for Counter {
     type Message = ();
-    type Properties = ();
+    type Properties = DispatchProps<BasicStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
         Self
     }

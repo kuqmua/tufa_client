@@ -2,19 +2,25 @@ use crate::components::counter::Counter;
 use crate::components::header::Header;
 use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
+use crate::store::init;
+use crate::store::YewduxStore;
 use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::*;
+
 pub enum AppMessage {
     ActionOne,
 }
-pub struct App {}
+pub struct App {
+    dispatch: Dispatch<BasicStore<YewduxStore>>,
+}
 
 impl Component for App {
     type Message = AppMessage;
-    type Properties = ();
+    type Properties = DispatchProps<BasicStore<YewduxStore>>;
     fn create(_ctx: &Context<Self>) -> Self {
-        Self {}
+        let dispatch = init();
+        Self { dispatch }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
         true
@@ -38,7 +44,7 @@ impl Component for App {
               "
           >
               <Header/>
-              <Counter/>
+              <WithDispatch<Counter>/>
               <BrowserRouter>
                   <Switch<Routes> render={Switch::render(switch)} />
               </BrowserRouter>
