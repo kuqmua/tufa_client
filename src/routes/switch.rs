@@ -14,7 +14,7 @@ pub fn switch(routes: &Routes) -> Html {
     let custom_from_submit = Callback::from(|data: SecureProps| log!("first is", data.first));
     match routes {
         Routes::Home => html! {
-         <AuthModal/>
+            <WithDispatch<AuthModal>/>
         },
         Routes::Secure => html! {
             <Secure first="my_first_prop" color={Color::Ok} on_load={main_title_head} onsubmit={custom_from_submit}/>

@@ -16,6 +16,15 @@ impl Component for InputForm {
         Self {}
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+        // match msg {
+        //     Msg::AddOne => {
+        //         self.value += 1;
+        //         // the value has changed so we need to
+        //         // re-render for it to appear on the page
+        //         true
+        //     }
+        //     Msg::Other => false,
+        // }
         true
     }
     fn view(&self, ctx: &Context<Self>) -> Html {

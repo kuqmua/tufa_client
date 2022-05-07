@@ -9,7 +9,6 @@ pub enum Msg {
     Other,
 }
 pub struct SvgIconWrapper {
-    value: i64,
     pub stylesheet: Style,
 }
 
@@ -25,11 +24,8 @@ impl SvgIconWrapper {
               display: flex;
               overflow: hidden;
               position: relative;
-              font-size: 1.25rem;
               align-items: center;
               flex-shrink: 0;
-              font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-              line-height: 1;
               user-select: none;
               border-radius: 50%;
               justify-content: center;
@@ -44,21 +40,17 @@ impl Component for SvgIconWrapper {
     type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
         Self {
-            value: 0,
             stylesheet: Self::style(),
         }
     }
-    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
-        match msg {
-            Msg::AddOne => {
-                self.value += 1;
-                // the value has changed so we need to
-                // re-render for it to appear on the page
-                true
-            }
-            Msg::Other => false,
-        }
+    fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+        false
     }
+    fn changed(&mut self, _ctx: &Context<Self>) -> bool {
+        true
+    }
+    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
+    fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
           <div
@@ -89,9 +81,4 @@ impl Component for SvgIconWrapper {
           </div>
         }
     }
-    fn changed(&mut self, _ctx: &Context<Self>) -> bool {
-        true
-    }
-    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
-    fn destroy(&mut self, _ctx: &Context<Self>) {}
 }

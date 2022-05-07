@@ -13,7 +13,7 @@ pub enum AppMessage {
     ActionOne,
 }
 pub struct App {
-    dispatch: Dispatch<BasicStore<YewduxStore>>,
+    pub dispatch: Dispatch<BasicStore<YewduxStore>>,
 }
 
 impl Component for App {
@@ -27,8 +27,21 @@ impl Component for App {
         true
     }
     fn view(&self, _ctx: &Context<Self>) -> Html {
+        let handle_form_submit = Callback::from(|event: FocusEvent| {
+            event.prevent_default();
+        });
+        // let handle_username_change =
+        //     ctx.props()
+        //         .dispatch()
+        //         .reduce_callback_with(|state, event: Event| {
+        //             let username = event
+        //                 .target()
+        //                 .unwrap()
+        //                 .unchecked_into::<HtmlInputElement>()
+        //                 .value();
+        //             // state.username
+        //         });
         html! {
-
           <div
               style="
                   width: 100%; 
