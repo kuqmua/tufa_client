@@ -1,5 +1,5 @@
-use crate::components::form::Form;
 use crate::components::input_button::InputButton;
+use crate::components::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
 use gloo::console::log;
@@ -95,8 +95,8 @@ pub fn auth_modal() -> Html {
               box-sizing: border-box;
             "
              >
-               <Form />
-               <Form />
+               <InputForm message_handle={"Login".to_owned()}/>
+               <InputForm message_handle={"Password".to_owned()}/>
                <div
                  class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
                >

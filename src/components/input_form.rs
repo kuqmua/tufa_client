@@ -1,22 +1,24 @@
-use crate::components::display_count::DisplayCount;
 use yew::prelude::*;
-use yewdux::prelude::WithDispatch;
 
-pub enum FormMessage {
+#[derive(Properties, PartialEq)]
+pub struct InputFormProps {
+    pub message_handle: String,
+}
+pub enum InputFormMessage {
     ActionOne,
 }
-pub struct Form {}
+pub struct InputForm {}
 
-impl Component for Form {
-    type Message = FormMessage;
-    type Properties = ();
+impl Component for InputForm {
+    type Message = InputFormMessage;
+    type Properties = InputFormProps;
     fn create(_ctx: &Context<Self>) -> Self {
         Self {}
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
         true
     }
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
           <div
             class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
@@ -84,24 +86,7 @@ impl Component for Form {
                   pointer-events: none;
                 "
               >
-                {"Email Address"}
-                <span
-                  aria-hidden="true"
-                  class="MuiFormLabel-asterisk MuiInputLabel-asterisk"
-                  style="
-                    -webkit-font-smoothing: antialiased;
-                    color: rgba(0, 0, 0, 0.54);
-                    font-size: 1rem;
-                    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-                    font-weight: 400;
-                    line-height: 1;
-                    letter-spacing: 0.00938em;
-                    pointer-events: none;
-                    box-sizing: inherit;
-                  "
-                >
-                {" *"}
-                </span>
+                {ctx.props().message_handle.clone()}
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
