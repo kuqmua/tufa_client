@@ -25,6 +25,11 @@ pub fn text_input(props: &TextInputProps) -> Html {
         handle_onchange.emit(value);
     });
     let secure_context = use_context::<ContextProviderStruct>();
+    // let history_option = use_history();
+    // let onclick: Callback<MouseEvent> = match history_option {
+    //     Some(history) => Callback::once(move |_| history.push(Routes::Secure)),
+    //     None => Callback::once(move |_| log!("Update1")),
+    // };
     html! {
         <div>
             <input type="text" name={props.name.clone()} onchange={onchange}/>

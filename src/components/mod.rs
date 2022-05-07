@@ -1,10 +1,8 @@
 pub mod app;
-pub mod auth_modal;
+pub mod authorization;
 pub mod counter;
 pub mod display_count;
 pub mod header;
-pub mod input_button;
-pub mod input_form;
 pub mod secure;
 pub mod svg_icon_wrapper;
 pub mod text_input;

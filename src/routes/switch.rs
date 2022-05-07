@@ -1,7 +1,8 @@
+use crate::components::authorization::auth_modal::AuthModal;
 use crate::components::counter::Counter;
+use crate::components::secure::Color;
 use crate::components::secure::Secure;
 use crate::components::secure::SecureProps;
-use crate::components::{auth_modal::AuthModal, secure::Color};
 use crate::routes::routes::Routes;
 use gloo::console::log;
 use yew::{html, Callback, Html};

@@ -1,8 +1,7 @@
-use crate::components::input_button::InputButton;
-use crate::components::input_form::InputForm;
+use crate::components::authorization::input_button::InputButton;
+use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
-use gloo::console::log;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -23,11 +22,6 @@ impl Component for AuthModal {
     fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
     fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        // let history_option = use_history();
-        // let onclick: Callback<MouseEvent> = match history_option {
-        //     Some(history) => Callback::once(move |_| history.push(Routes::Secure)),
-        //     None => Callback::once(move |_| log!("Update1")),
-        // };
         html! {
           <div
             id="root"
