@@ -60,7 +60,7 @@ impl Component for SvgIconWrapper {
         }
     }
     //https://codepen.io/shawnc8160/pen/xxRYOWg
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self, _ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         // let link = ctx.link();
         html! {
