@@ -9,4 +9,6 @@ pub enum Routes {
     #[not_found]
     #[at("/404")]
     NotFound,
+    #[at("/counter")]
+    CounterHandle,
 }

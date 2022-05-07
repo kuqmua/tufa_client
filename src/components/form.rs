@@ -1,4 +1,6 @@
+use crate::components::display_count::DisplayCount;
 use yew::prelude::*;
+use yewdux::prelude::WithDispatch;
 
 pub enum FormMessage {
     ActionOne,

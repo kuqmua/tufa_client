@@ -27,12 +27,6 @@ impl Component for App {
         true
     }
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        //     <style>
-        //     body {
-        //         padding: 0px;
-        //         margin: 0px;
-        //     }
-        // </style>
         html! {
 
           <div
