@@ -9,15 +9,11 @@ pub enum Msg {
 }
 pub struct InputButton {
     value: i64,
-    some_string: String,
 }
 
 impl InputButton {
     pub fn set_first(&mut self, first: i64) {
         self.value = first;
-    }
-    pub fn set_second(&mut self, second: String) {
-        self.some_string = second;
     }
 }
 
@@ -25,10 +21,7 @@ impl Component for InputButton {
     type Message = Msg;
     type Properties = ();
     fn create(_ctx: &Context<Self>) -> Self {
-        Self {
-            value: 0,
-            some_string: String::from("init"),
-        }
+        Self { value: 0 }
     }
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
@@ -73,12 +66,9 @@ impl Component for InputButton {
     fn view(&self, ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         let link = ctx.link();
-        let some_string = &self.some_string;
         //for some reason page re renders if it would be button
-        let class = "MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-4 MuiButton-containedPrimary MuiButton-fullWidth";
         html! {
           <span
-            class={class}
             onclick={link.callback(|_| Msg::AddOne)}
             tabindex="0"
             type="submit"
@@ -115,7 +105,6 @@ impl Component for InputButton {
             "
           >
             <span
-              class="MuiButton-label"
               style="
                 -webkit-font-smoothing: antialiased;
                 cursor: pointer;
@@ -137,9 +126,7 @@ impl Component for InputButton {
             >
               {"Sign Up"}
             </span>
-            <div>{some_string}</div>
             <span
-              class="MuiTouchRipple-root"
               style="
                 -webkit-font-smoothing: antialiased;
                 cursor: pointer;

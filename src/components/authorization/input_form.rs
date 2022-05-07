@@ -21,7 +21,6 @@ impl Component for InputForm {
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
           <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
             style="
               -webkit-font-smoothing: antialiased;
               color: rgba(0, 0, 0, 0.87);
@@ -39,7 +38,6 @@ impl Component for InputForm {
             "
           >
             <div
-              class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
               style="
                 -webkit-font-smoothing: antialiased;
                 color: rgba(0, 0, 0, 0.87);
@@ -61,7 +59,6 @@ impl Component for InputForm {
               "
             >
               <label
-                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
                 data-shrink="false"
                 for="email"
                 id="email-label"
@@ -89,7 +86,6 @@ impl Component for InputForm {
                 {ctx.props().message_handle.clone()}
               </label>
               <div
-                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
                 style="
                   -webkit-font-smoothing: antialiased;
                   color: rgba(0, 0, 0, 0.87);
@@ -113,7 +109,6 @@ impl Component for InputForm {
                   id="email"
                   name="email"
                   type="text"
-                  class="MuiInputBase-input MuiOutlinedInput-input"
                   value=""
                   style="
                     -webkit-font-smoothing: antialiased;
@@ -137,7 +132,6 @@ impl Component for InputForm {
                 />
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-5 MuiOutlinedInput-notchedOutline"
                   style="
                     -webkit-font-smoothing: antialiased;
                     color: rgba(0, 0, 0, 0.87);
@@ -164,7 +158,6 @@ impl Component for InputForm {
                   "
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-7"
                     style="
                       -webkit-font-smoothing: antialiased;
                       color: rgba(0, 0, 0, 0.87);

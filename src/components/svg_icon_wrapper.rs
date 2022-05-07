@@ -17,23 +17,23 @@ impl SvgIconWrapper {
     fn style() -> Style {
         style!(
             "
-    margin: 8px;
-    background-color: #19857b;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    font-size: 1.25rem;
-    align-items: center;
-    flex-shrink: 0;
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    line-height: 1;
-    user-select: none;
-    border-radius: 50%;
-    justify-content: center;
-    "
+              margin: 8px;
+              background-color: #19857b;
+              color: #fff;
+              width: 40px;
+              height: 40px;
+              display: flex;
+              overflow: hidden;
+              position: relative;
+              font-size: 1.25rem;
+              align-items: center;
+              flex-shrink: 0;
+              font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+              line-height: 1;
+              user-select: none;
+              border-radius: 50%;
+              justify-content: center;
+            "
         )
         .unwrap()
     }
@@ -59,10 +59,7 @@ impl Component for SvgIconWrapper {
             Msg::Other => false,
         }
     }
-    //https://codepen.io/shawnc8160/pen/xxRYOWg
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
-        // let link = ctx.link();
         html! {
           <div
             class={self.stylesheet.clone()}

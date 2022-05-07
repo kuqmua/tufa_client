@@ -40,7 +40,6 @@ impl Component for AuthModal {
             "
           >
           <div
-            class="MuiContainer-root MuiContainer-maxWidthXs"
             style="
         max-width: 444px;
         width: 100%;
@@ -53,7 +52,6 @@ impl Component for AuthModal {
       "
           >
             <div
-              class="makeStyles-paper-1"
               style="
           display: flex;
           margin-top: 64px;
@@ -63,7 +61,6 @@ impl Component for AuthModal {
             >
               <SvgIconWrapper/>
               <h1
-                class="MuiTypography-root MuiTypography-h5"
                 style="
             font-size: 1.5rem;
             font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -84,7 +81,6 @@ impl Component for AuthModal {
                 {"Sign up"}
               </h1>
               <form
-                class="makeStyles-form-3"
                 novalidate=true
                 style="
             width: 100%;
@@ -94,7 +90,6 @@ impl Component for AuthModal {
           "
               >
                 <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
                   style="
               width: calc(100% + 16px);
               margin: -8px;
@@ -105,14 +100,9 @@ impl Component for AuthModal {
                 >
                   <InputForm message_handle={"Login".to_owned()}/>
                   <InputForm message_handle={"Password".to_owned()}/>
-                  <div
-                    class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
-                  >
-                  </div>
                 </div>
                 <InputButton />
                 <div
-                  class="MuiGrid-root MuiGrid-container MuiGrid-justify-content-xs-flex-end"
                   style="
               justify-content: flex-end;
               width: 100%;
@@ -122,7 +112,6 @@ impl Component for AuthModal {
             "
                 >
                   <div
-                    class="MuiGrid-root MuiGrid-item"
                     style="
                 margin: 0;
                 box-sizing: border-box;
@@ -130,7 +119,6 @@ impl Component for AuthModal {
               "
                   >
                     <a
-                      class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body2 MuiTypography-colorPrimary"
                       href=""
                       style="
                   text-decoration: none;
