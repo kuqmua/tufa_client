@@ -4,11 +4,15 @@ use serde_json::from_str;
 use tufa_common::json_example::JsonExample;
 use yew::prelude::*;
 
+#[derive(Properties, PartialEq)]
+pub struct SubmitButtonProps {
+    pub action: Callback<FocusEvent>,
+}
 pub struct SubmitButton {}
 
 impl Component for SubmitButton {
     type Message = ();
-    type Properties = ();
+    type Properties = SubmitButtonProps;
     fn create(_ctx: &Context<Self>) -> Self {
         Self {}
     }
@@ -49,11 +53,10 @@ impl Component for SubmitButton {
     //https://codepen.io/shawnc8160/pen/xxRYOWg
     fn view(&self, ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
-        let link = ctx.link();
         //for some reason page re renders if it would be button
         html! {
-          <span
-            onclick={link.callback(|_| log!("click"))}
+          <button
+            // onclick={link.callback(|_| log!("submit button click"))}
             tabindex="0"
             type="submit"
             style="
@@ -110,7 +113,7 @@ impl Component for SubmitButton {
             >
               {"Sign Up"}
             </span>
-          </span>
+          </button>
         }
     }
 }

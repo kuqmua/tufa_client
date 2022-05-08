@@ -1,6 +1,3 @@
-use gloo::console::log;
-use wasm_bindgen::JsCast;
-use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
 #[derive(PartialEq)]
@@ -27,17 +24,13 @@ pub struct InputFormProps {
 pub enum InputFormMessage {
     ActionOne,
 }
-pub struct InputForm {
-    value: String,
-}
+pub struct InputForm {}
 
 impl Component for InputForm {
     type Message = InputFormMessage;
     type Properties = InputFormProps;
     fn create(_ctx: &Context<Self>) -> Self {
-        Self {
-            value: String::default(),
-        }
+        Self {}
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
         // match msg {
@@ -129,7 +122,7 @@ impl Component for InputForm {
                   id={ctx.props().placeholder.clone()}
                   name="email"
                   type={ctx.props().input_type.get()}
-                  value=""
+                  // value=""
                   style="
                     -webkit-font-smoothing: antialiased;
                     font: inherit;

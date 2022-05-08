@@ -14,38 +14,37 @@ use yewdux::prelude::Dispatcher;
 use yewdux::prelude::WithDispatchProps;
 
 pub struct AuthModal {
-    login: String,
+    pub dispatch: DispatchProps<BasicStore<YewduxStore>>,
 }
 
 impl Component for AuthModal {
     type Message = ();
     type Properties = DispatchProps<BasicStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
+        let _dispatch = ctx.props().dispatch().clone();
         Self {
-            login: String::default(),
+            dispatch: _dispatch,
         }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
-        log!("upd");
         true
     }
     fn changed(&mut self, _ctx: &Context<Self>) -> bool {
-        log!("chd");
         true
     }
-    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {
-        log!("rnd");
-    }
+    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
     fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, ctx: &Context<Self>) -> Html {
-        // let modify_login = Callback::from(|state, login_value|{
-        //   let state = &self.state.clone();
-
-        //   state.set(state)
-        // });
-        let handle_form_submit = Callback::from(|event: FocusEvent| {
-            event.prevent_default();
-        });
+        let handle_form_submit = {
+            log!("handle_form_submit");
+            let ctx = ctx.props().state();
+            Callback::from(move |event: FocusEvent| {
+                // event.prevent_default();
+                let username = ctx.username.clone();
+                let password = ctx.password.clone();
+                log!("Username: ", username, "Password: ", password);
+            })
+        };
         let handle_username_change =
             ctx.props()
                 .dispatch()
@@ -129,7 +128,7 @@ impl Component for AuthModal {
                   {"Sign up"}
                 </h1>
                 <form
-                  // onsubmit={handle_form_submit}
+                  onsubmit={handle_form_submit.clone()}
                   novalidate=true
                   style="
                     width: 100%;
@@ -151,7 +150,9 @@ impl Component for AuthModal {
                     <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
                     // <InputForm placeholder={"Repeat password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
                   </div>
-                  <SubmitButton />
+                  <div>
+                    <SubmitButton action={handle_form_submit} />
+                  </div>
                   <div
                     style="
                       justify-content: flex-end;
