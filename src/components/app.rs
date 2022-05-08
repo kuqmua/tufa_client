@@ -5,6 +5,8 @@ use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
 use crate::store::init;
 use crate::store::YewduxStore;
+use wasm_bindgen::JsCast;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::*;
@@ -26,21 +28,21 @@ impl Component for App {
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
         true
     }
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         let handle_form_submit = Callback::from(|event: FocusEvent| {
             event.prevent_default();
         });
-        // let handle_username_change =
-        //     ctx.props()
-        //         .dispatch()
-        //         .reduce_callback_with(|state, event: Event| {
-        //             let username = event
-        //                 .target()
-        //                 .unwrap()
-        //                 .unchecked_into::<HtmlInputElement>()
-        //                 .value();
-        //             // state.username
-        //         });
+        let handle_username_change =
+            ctx.props()
+                .dispatch()
+                .reduce_callback_with(|state, event: Event| {
+                    let username = event
+                        .target()
+                        .unwrap()
+                        .unchecked_into::<HtmlInputElement>()
+                        .value();
+                    state.username = username;
+                });
         html! {
           <div
               style="

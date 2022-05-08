@@ -1,29 +1,75 @@
+use crate::components::authorization::input_form::HtmlInputTypes;
 use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
 use crate::{components::authorization::submit_button::SubmitButton, store::YewduxStore};
+use gloo::console::log;
+use wasm_bindgen::JsCast;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::BasicStore;
 use yewdux::prelude::DispatchProps;
+use yewdux::prelude::Dispatcher;
+use yewdux::prelude::WithDispatchProps;
 
-pub struct AuthModal {}
+pub struct AuthModal {
+    login: String,
+}
 
 impl Component for AuthModal {
     type Message = ();
     type Properties = DispatchProps<BasicStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
-        Self {}
+        Self {
+            login: String::default(),
+        }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+        log!("upd");
         true
     }
     fn changed(&mut self, _ctx: &Context<Self>) -> bool {
+        log!("chd");
         true
     }
-    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
+    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {
+        log!("rnd");
+    }
     fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, ctx: &Context<Self>) -> Html {
+        // let modify_login = Callback::from(|state, login_value|{
+        //   let state = &self.state.clone();
+
+        //   state.set(state)
+        // });
+        let handle_form_submit = Callback::from(|event: FocusEvent| {
+            event.prevent_default();
+        });
+        let handle_username_change =
+            ctx.props()
+                .dispatch()
+                .reduce_callback_with(|state, event: Event| {
+                    let username = event
+                        .target()
+                        .unwrap()
+                        .unchecked_into::<HtmlInputElement>()
+                        .value();
+                    state.username = username;
+                    log!("username", state.username.clone());
+                });
+        let handle_password_change =
+            ctx.props()
+                .dispatch()
+                .reduce_callback_with(|state, event: Event| {
+                    let password = event
+                        .target()
+                        .unwrap()
+                        .unchecked_into::<HtmlInputElement>()
+                        .value();
+                    state.password = password;
+                    log!("password", state.password.clone());
+                });
         html! {
           <div
             id="root"
@@ -83,6 +129,7 @@ impl Component for AuthModal {
                   {"Sign up"}
                 </h1>
                 <form
+                  // onsubmit={handle_form_submit}
                   novalidate=true
                   style="
                     width: 100%;
@@ -100,9 +147,9 @@ impl Component for AuthModal {
                       box-sizing: border-box;
                     "
                   >
-                    <InputForm placeholder={"Login".to_owned()}/>
-                    <InputForm placeholder={"Password".to_owned()}/>
-                    <InputForm placeholder={"Repeat password".to_owned()}/>
+                    <InputForm placeholder={"Login".to_owned()} input_type={HtmlInputTypes::Text} action={handle_username_change} />
+                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
+                    // <InputForm placeholder={"Repeat password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
                   </div>
                   <SubmitButton />
                   <div

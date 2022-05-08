@@ -1,19 +1,43 @@
+use gloo::console::log;
+use wasm_bindgen::JsCast;
+use web_sys::HtmlInputElement;
 use yew::prelude::*;
+
+#[derive(PartialEq)]
+pub enum HtmlInputTypes {
+    Text,
+    Password, //todo
+}
+
+impl HtmlInputTypes {
+    pub fn get(&self) -> String {
+        match self {
+            HtmlInputTypes::Text => "text".to_string(),
+            HtmlInputTypes::Password => "password".to_string(),
+        }
+    }
+}
 
 #[derive(Properties, PartialEq)]
 pub struct InputFormProps {
     pub placeholder: String,
+    pub input_type: HtmlInputTypes,
+    pub action: Callback<Event>,
 }
 pub enum InputFormMessage {
     ActionOne,
 }
-pub struct InputForm {}
+pub struct InputForm {
+    value: String,
+}
 
 impl Component for InputForm {
     type Message = InputFormMessage;
     type Properties = InputFormProps;
     fn create(_ctx: &Context<Self>) -> Self {
-        Self {}
+        Self {
+            value: String::default(),
+        }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
         // match msg {
@@ -28,6 +52,18 @@ impl Component for InputForm {
         true
     }
     fn view(&self, ctx: &Context<Self>) -> Html {
+        // let onchange = Callback::from(|event: Event| {
+        //     event.prevent_default();
+        //     let value = event
+        //         .target()
+        //         .unwrap()
+        //         .unchecked_into::<HtmlInputElement>()
+        //         .value();
+        //     log!("onchange", value);
+        //     let mut state = &self.value.clone();
+        //     // state.value = value;
+        //     // state.set(state)
+        // });
         html! {
           <div
             style="
@@ -87,11 +123,12 @@ impl Component for InputForm {
               >
                 <input
                   placeholder={ctx.props().placeholder.clone()}
+                  onchange={ctx.props().action.clone()}
                   aria-invalid="false"
                   autocomplete="email"
-                  id="email"
+                  id={ctx.props().placeholder.clone()}
                   name="email"
-                  type="text"
+                  type={ctx.props().input_type.get()}
                   value=""
                   style="
                     -webkit-font-smoothing: antialiased;
