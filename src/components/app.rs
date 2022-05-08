@@ -16,12 +16,12 @@ pub enum AppMessage {
     ActionOne,
 }
 pub struct App {
-    pub dispatch: Dispatch<BasicStore<YewduxStore>>,
+    pub dispatch: Dispatch<PersistentStore<YewduxStore>>,
 }
 
 impl Component for App {
     type Message = AppMessage;
-    type Properties = DispatchProps<BasicStore<YewduxStore>>;
+    type Properties = DispatchProps<PersistentStore<YewduxStore>>;
     fn create(_ctx: &Context<Self>) -> Self {
         let dispatch = init();
         Self { dispatch }

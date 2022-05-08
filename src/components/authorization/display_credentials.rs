@@ -3,12 +3,12 @@ use yew::prelude::*;
 use yewdux::prelude::*;
 
 pub struct DisplayCredentials {
-    pub dispatch: DispatchProps<BasicStore<YewduxStore>>,
+    pub dispatch: DispatchProps<PersistentStore<YewduxStore>>,
 }
 
 impl Component for DisplayCredentials {
     type Message = ();
-    type Properties = DispatchProps<BasicStore<YewduxStore>>;
+    type Properties = DispatchProps<PersistentStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
         let _dispatch = ctx.props().dispatch().clone();
         Self {

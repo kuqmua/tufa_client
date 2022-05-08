@@ -6,7 +6,7 @@ pub struct DisplayCount;
 
 impl Component for DisplayCount {
     type Message = ();
-    type Properties = DispatchProps<BasicStore<YewduxStore>>;
+    type Properties = DispatchProps<PersistentStore<YewduxStore>>;
     fn create(_ctx: &Context<Self>) -> Self {
         Self
     }

@@ -1,12 +1,12 @@
 use yew::prelude::*;
-use yewdux::prelude::BasicStore;
+use yewdux::prelude::PersistentStore;
 
 use crate::store::YewduxStore;
 use yewdux_functional::use_store;
 
 #[function_component(YewduxFunctionalDisplayCredentials)]
 pub fn yewdux_functional_display_credentials() -> Html {
-    let store = use_store::<BasicStore<YewduxStore>>();
+    let store = use_store::<PersistentStore<YewduxStore>>();
     let username = store
         .state()
         .map(|state| state.username.clone())

@@ -9,19 +9,19 @@ use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
-use yewdux::prelude::BasicStore;
 use yewdux::prelude::DispatchProps;
 use yewdux::prelude::Dispatcher;
+use yewdux::prelude::PersistentStore;
 use yewdux::prelude::WithDispatch;
 use yewdux::prelude::WithDispatchProps;
 
 pub struct AuthModal {
-    pub dispatch: DispatchProps<BasicStore<YewduxStore>>,
+    pub dispatch: DispatchProps<PersistentStore<YewduxStore>>,
 }
 
 impl Component for AuthModal {
     type Message = ();
-    type Properties = DispatchProps<BasicStore<YewduxStore>>;
+    type Properties = DispatchProps<PersistentStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
         let _dispatch = ctx.props().dispatch().clone();
         Self {

@@ -3,12 +3,12 @@ use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
-use yewdux::prelude::{BasicStore, Dispatcher};
+use yewdux::prelude::{PersistentStore, Dispatcher};
 use yewdux_functional::use_store;
 
 #[function_component(YewduxFunctionalEditUsername)]
 pub fn yewdux_functional_edit_username() -> Html {
-    let store = use_store::<BasicStore<YewduxStore>>();
+    let store = use_store::<PersistentStore<YewduxStore>>();
     let handle_form_submit = store
         .dispatch()
         .reduce_callback_with(|state, event: FocusEvent| {
