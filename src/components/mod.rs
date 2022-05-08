@@ -7,3 +7,4 @@ pub mod secure;
 pub mod svg_icon_wrapper;
 pub mod text_input;
 pub mod yewdux_functional_component_example;
+pub mod yewdux_functional_display_credentials;
