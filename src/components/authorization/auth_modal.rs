@@ -1,3 +1,4 @@
+use crate::components::authorization::display_credentials::DisplayCredentials;
 use crate::components::authorization::input_form::HtmlInputTypes;
 use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
@@ -11,6 +12,7 @@ use yew_router::prelude::*;
 use yewdux::prelude::BasicStore;
 use yewdux::prelude::DispatchProps;
 use yewdux::prelude::Dispatcher;
+use yewdux::prelude::WithDispatch;
 use yewdux::prelude::WithDispatchProps;
 
 pub struct AuthModal {
@@ -36,10 +38,9 @@ impl Component for AuthModal {
     fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, ctx: &Context<Self>) -> Html {
         let handle_form_submit = {
-            log!("handle_form_submit");
             let ctx = ctx.props().state();
             Callback::from(move |event: FocusEvent| {
-                // event.prevent_default();
+                event.prevent_default();
                 let username = ctx.username.clone();
                 let password = ctx.password.clone();
                 log!("Username: ", username, "Password: ", password);
@@ -192,6 +193,7 @@ impl Component for AuthModal {
               </div>
             </div>
             <Link<Routes> to={Routes::Secure}>{ "Go to Secure" }</Link<Routes>>
+            <WithDispatch<DisplayCredentials>/>
           </div>
         }
     }

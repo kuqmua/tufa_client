@@ -2,13 +2,18 @@ use crate::store::YewduxStore;
 use yew::prelude::*;
 use yewdux::prelude::*;
 
-pub struct DisplayCredentials;
+pub struct DisplayCredentials {
+    pub dispatch: DispatchProps<BasicStore<YewduxStore>>,
+}
 
 impl Component for DisplayCredentials {
     type Message = ();
     type Properties = DispatchProps<BasicStore<YewduxStore>>;
-    fn create(_ctx: &Context<Self>) -> Self {
-        Self
+    fn create(ctx: &Context<Self>) -> Self {
+        let _dispatch = ctx.props().dispatch().clone();
+        Self {
+            dispatch: _dispatch,
+        }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
         true

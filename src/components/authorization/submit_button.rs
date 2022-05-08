@@ -48,7 +48,8 @@ impl Component for SubmitButton {
         });
         // the value has changed so we need to
         // re-render for it to appear on the page
-        true
+        // true
+        false
     }
     //https://codepen.io/shawnc8160/pen/xxRYOWg
     fn view(&self, ctx: &Context<Self>) -> Html {
