@@ -2,6 +2,7 @@ pub mod app;
 pub mod authorization;
 pub mod counter;
 pub mod display_count;
+pub mod get_data_from_server_button;
 pub mod header;
 pub mod secure;
 pub mod svg_icon_wrapper;
