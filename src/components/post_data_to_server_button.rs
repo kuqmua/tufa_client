@@ -29,12 +29,16 @@ pub fn post_data_to_server_button() -> Html {
                         request_result_another_cloned.set(RequestResult::Error);
                         log!("error 57435634753434 ", e.to_string());
                     }
-                    Ok(f) => {
-                        request_result_another_cloned.set(RequestResult::Success);
-                        let text = f.text().await;
-                        match text {
-                            Err(e) => log!("error 46396426462 ", e.to_string()),
-                            Ok(t) => log!("f ", t),
+                    Ok(response) => {
+                        let status = response.status();
+                        match status {
+                            200 => {
+                                request_result_another_cloned.set(RequestResult::Success);
+                            }
+                            _ => {
+                                request_result_another_cloned.set(RequestResult::Error);
+                                log!("response status is ", response.status());
+                            }
                         }
                     }
                 }
