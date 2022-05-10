@@ -4,6 +4,7 @@ use crate::components::get_data_from_server_button::GetDataFromServerButton;
 use crate::components::header::Header;
 use crate::components::post_data_to_server_button::PostDataToServerButton;
 use crate::components::yewdux_functional_component_example::YewduxFunctionalComponentExample;
+use crate::components::set_timeout_example::SetTimeoutExample;
 use crate::routes::routes::Routes;
 use crate::routes::switch::switch;
 use crate::store::init;
@@ -41,6 +42,7 @@ impl Component for App {
               "
           >
               <Header/>
+              <SetTimeoutExample/>
               <PostDataToServerButton/>
               <GetDataFromServerButton/>
               <YewduxFunctionalComponentExample/>
