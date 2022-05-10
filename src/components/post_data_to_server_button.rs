@@ -1,3 +1,4 @@
+use crate::helpers::request_result::RequestResult;
 use gloo::console::log;
 use reqwasm::http::Request;
 use serde_json::json;
@@ -5,9 +6,13 @@ use yew::prelude::*;
 
 #[function_component(PostDataToServerButton)]
 pub fn post_data_to_server_button() -> Html {
+    let request_result = use_state(|| RequestResult::NotExecuted);
     let onclick: Callback<MouseEvent> = {
+        let request_result_cloned = request_result.clone();
         Callback::from(move |_| {
+            let request_result_another_cloned = request_result_cloned.clone();
             wasm_bindgen_futures::spawn_local(async move {
+                request_result_another_cloned.set(RequestResult::Pending);
                 match Request::post("http://127.0.0.1:8081/api/json/json_example_post")
                     .header("content-type", "application/json")
                     .body(
@@ -20,8 +25,12 @@ pub fn post_data_to_server_button() -> Html {
                     .send()
                     .await
                 {
-                    Err(e) => log!("error 57435634753434 ", e.to_string()),
+                    Err(e) => {
+                        request_result_another_cloned.set(RequestResult::Error);
+                        log!("error 57435634753434 ", e.to_string());
+                    }
                     Ok(f) => {
+                        request_result_another_cloned.set(RequestResult::Success);
                         let text = f.text().await;
                         match text {
                             Err(e) => log!("error 46396426462 ", e.to_string()),
@@ -33,6 +42,9 @@ pub fn post_data_to_server_button() -> Html {
         })
     };
     html! {
-      <button onclick={onclick}>{"post json example"}</button>
+      <div>
+        {format!("{}",*request_result)}
+        <button onclick={onclick}>{"post json example"}</button>
+      </div>
     }
 }
