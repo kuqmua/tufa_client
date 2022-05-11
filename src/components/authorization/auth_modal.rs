@@ -1,5 +1,5 @@
 use crate::components::authorization::display_credentials::DisplayCredentials;
-use crate::components::authorization::input_form::HtmlInputTypes;
+use crate::helpers::html_input_type::HtmlInputType;
 use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
@@ -147,8 +147,8 @@ impl Component for AuthModal {
                       box-sizing: border-box;
                     "
                   >
-                    <InputForm placeholder={"Login".to_owned()} input_type={HtmlInputTypes::Text} action={handle_username_change} />
-                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
+                    <InputForm placeholder={"Login".to_owned()} input_type={HtmlInputType::Text} action={handle_username_change} />
+                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change} />
                     // <InputForm placeholder={"Repeat password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
                   </div>
                   <div>

@@ -1,62 +1,24 @@
 use yew::prelude::*;
-
-#[derive(PartialEq)]
-pub enum HtmlInputTypes {
-    Text,
-    Password, //todo
-}
-
-impl HtmlInputTypes {
-    pub fn get(&self) -> String {
-        match self {
-            HtmlInputTypes::Text => "text".to_string(),
-            HtmlInputTypes::Password => "password".to_string(),
-        }
-    }
-}
+use crate::helpers::html_input_type::HtmlInputType;
 
 #[derive(Properties, PartialEq)]
 pub struct InputFormProps {
     pub placeholder: String,
-    pub input_type: HtmlInputTypes,
+    pub input_type: HtmlInputType,
     pub action: Callback<Event>,
-}
-pub enum InputFormMessage {
-    ActionOne,
 }
 pub struct InputForm {}
 
 impl Component for InputForm {
-    type Message = InputFormMessage;
+    type Message = ();
     type Properties = InputFormProps;
     fn create(_ctx: &Context<Self>) -> Self {
         Self {}
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
-        // match msg {
-        //     Msg::AddOne => {
-        //         self.value += 1;
-        //         // the value has changed so we need to
-        //         // re-render for it to appear on the page
-        //         true
-        //     }
-        //     Msg::Other => false,
-        // }
         true
     }
     fn view(&self, ctx: &Context<Self>) -> Html {
-        // let onchange = Callback::from(|event: Event| {
-        //     event.prevent_default();
-        //     let value = event
-        //         .target()
-        //         .unwrap()
-        //         .unchecked_into::<HtmlInputElement>()
-        //         .value();
-        //     log!("onchange", value);
-        //     let mut state = &self.value.clone();
-        //     // state.value = value;
-        //     // state.set(state)
-        // });
         html! {
           <div
             style="
