@@ -1,4 +1,4 @@
-use crate::components::authorization::display_credentials::DisplayCredentials;
+use crate::components::examples::display_credentials::DisplayCredentials;
 use crate::helpers::html_input_type::HtmlInputType;
 use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;

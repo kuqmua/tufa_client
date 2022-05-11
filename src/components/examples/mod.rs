@@ -9,3 +9,4 @@ pub mod display_count;
 pub mod post_data_to_server_button;
 pub mod without_html_tag_example;
 pub mod example;
+pub mod display_credentials;

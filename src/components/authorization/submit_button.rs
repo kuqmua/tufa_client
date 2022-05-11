@@ -1,7 +1,3 @@
-use gloo::console::log;
-use reqwasm::http::Request;
-use serde_json::from_str;
-use tufa_common::json_example::JsonExample;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -23,7 +19,7 @@ impl Component for SubmitButton {
     }
     // false
     //https://codepen.io/shawnc8160/pen/xxRYOWg
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self, _ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         //for some reason page re renders if it would be button
         html! {
