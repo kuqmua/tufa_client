@@ -12,7 +12,6 @@ impl Persistent for YewduxStore {
     fn key() -> &'static str {
         "Introduction.rs"
     }
-
     fn area() -> yewdux::prelude::Area {
         Area::Local
     }

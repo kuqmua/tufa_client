@@ -1,5 +1,4 @@
 use crate::components::secure::ContextProviderStruct;
-use crate::components::header::Header;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
@@ -18,10 +17,8 @@ pub fn text_input(props: &TextInputProps) -> Html {
             .target()
             .unwrap()
             .unchecked_into::<HtmlInputElement>()
+            // .value_of()
             .value();
-        // log!(target.clone());
-        // log!(target.value_of());
-        // log!(input.value());
         handle_onchange.emit(value);
     });
     let secure_context = use_context::<ContextProviderStruct>();
@@ -34,7 +31,6 @@ pub fn text_input(props: &TextInputProps) -> Html {
         <div>
             <input type="text" name={props.name.clone()} onchange={onchange}/>
             <p>{"use context: "}{secure_context.unwrap_or_default().data}</p>
-           <Header/>
         </div>
 
     }

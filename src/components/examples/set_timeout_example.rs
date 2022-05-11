@@ -13,7 +13,6 @@ pub fn set_timeout_example() -> Html {
         if *should_say_hi {
             <div>{"i say hi"}</div>
         }
-        <div></div>
       </div>
     }
 }
