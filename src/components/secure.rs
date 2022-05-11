@@ -1,4 +1,4 @@
-use crate::components::text_input::TextInput;
+use crate::components::examples::text_input::TextInput;
 use crate::routes::routes::Routes;
 use gloo::console::log;
 use impl_display::ImplDisplayDerive;

@@ -1,4 +1,4 @@
-use super::secure::ContextProviderStruct;
+use crate::components::secure::ContextProviderStruct;
 use crate::components::header::Header;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
