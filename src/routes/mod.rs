@@ -1,2 +1,2 @@
 pub mod routes;
-pub mod switch;
+pub mod switch_routes;

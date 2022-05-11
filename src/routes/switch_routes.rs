@@ -9,7 +9,7 @@ use yew::{html, Callback, Html};
 use yew_router::prelude::Link;
 use yewdux::prelude::*;
 
-pub fn switch(routes: &Routes) -> Html {
+pub fn switch_routes(routes: &Routes) -> Html {
     let main_title_head: Callback<String> = Callback::from(|message| log!(message));
     let custom_from_submit = Callback::from(|data: SecureProps| log!("first is", data.first));
     match routes {

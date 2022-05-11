@@ -7,7 +7,7 @@ use crate::components::examples::yewdux_functional_component_example::YewduxFunc
 use crate::components::examples::set_timeout_example::SetTimeoutExample;
 use crate::components::examples::without_html_tag_example::WithoutHtmlTagExample;
 use crate::routes::routes::Routes;
-use crate::routes::switch::switch;
+use crate::routes::switch_routes::switch_routes;
 use crate::store::init;
 use crate::store::YewduxStore;
 use yew::prelude::*;
@@ -51,7 +51,7 @@ impl Component for App {
               <WithDispatch<DisplayCount>/>
               <WithDispatch<Counter>/>
               <BrowserRouter>
-                  <Switch<Routes> render={Switch::render(switch)} />
+                  <Switch<Routes> render={Switch::render(switch_routes)} />
               </BrowserRouter>
           </div>
         }
