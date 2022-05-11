@@ -43,13 +43,6 @@ impl Component for App {
               "
           >
               <Header/>
-              <WithoutHtmlTagExample/>
-              <SetTimeoutExample/>
-              <PostDataToServerButton/>
-              <GetDataFromServerButton/>
-              <YewduxFunctionalComponentExample/>
-              <WithDispatch<DisplayCount>/>
-              <WithDispatch<Counter>/>
               <BrowserRouter>
                   <Switch<Routes> render={Switch::render(switch_routes)} />
               </BrowserRouter>

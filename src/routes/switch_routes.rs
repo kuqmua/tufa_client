@@ -3,6 +3,7 @@ use crate::components::examples::counter::Counter;
 use crate::components::secure::Color;
 use crate::components::secure::Secure;
 use crate::components::secure::SecureProps;
+use crate::components::examples::example::Example;
 use crate::routes::routes::Routes;
 use gloo::console::log;
 use yew::{html, Callback, Html};
@@ -26,5 +27,6 @@ pub fn switch_routes(routes: &Routes) -> Html {
            </div>
         },
         Routes::CounterHandle => html! { <WithDispatch<Counter>/> },
+        Routes::Example => html! { <WithDispatch<Example>/> },
     }
 }

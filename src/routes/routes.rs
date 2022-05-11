@@ -11,4 +11,6 @@ pub enum Routes {
     NotFound,
     #[at("/counter")]
     CounterHandle,
+    #[at("/example")]
+    Example
 }
