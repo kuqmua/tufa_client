@@ -3,7 +3,9 @@ use yew_router::prelude::*;
 #[derive(Clone, Routable, PartialEq)]
 pub enum Routes {
     #[at("/")]
-    Home,
+    SignUp,
+    #[at("/sign_in")]
+    SignIn,
     #[at("/secure")]
     Secure,
     #[not_found]

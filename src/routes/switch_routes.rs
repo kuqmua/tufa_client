@@ -1,4 +1,5 @@
-use crate::components::authorization::auth_modal::AuthModal;
+use crate::components::authorization::sign_up::component::SignUp;
+use crate::components::authorization::sign_in::component::SignIn;
 use crate::components::examples::counter::Counter;
 use crate::components::secure::Color;
 use crate::components::secure::Secure;
@@ -14,8 +15,11 @@ pub fn switch_routes(routes: &Routes) -> Html {
     let main_title_head: Callback<String> = Callback::from(|message| log!(message));
     let custom_from_submit = Callback::from(|data: SecureProps| log!("first is", data.first));
     match routes {
-        Routes::Home => html! {
-            <WithDispatch<AuthModal>/>
+        Routes::SignUp => html! {
+            <WithDispatch<SignUp>/>
+        },
+        Routes::SignIn => html! {
+            <WithDispatch<SignIn>/>
         },
         Routes::Secure => html! {
             <Secure first="my_first_prop" color={Color::Ok} on_load={main_title_head} onsubmit={custom_from_submit}/>
@@ -23,7 +27,7 @@ pub fn switch_routes(routes: &Routes) -> Html {
         Routes::NotFound => html! {
            <div>
               <h1>{ "404" }</h1>
-              <Link<Routes> to={Routes::Home}>{ "click here to go to home" }</Link<Routes>>
+              <Link<Routes> to={Routes::SignUp}>{ "click here to go to sign up" }</Link<Routes>>
            </div>
         },
         Routes::CounterHandle => html! { <WithDispatch<Counter>/> },

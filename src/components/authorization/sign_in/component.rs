@@ -13,12 +13,12 @@ use yewdux::prelude::Dispatcher;
 use yewdux::prelude::PersistentStore;
 use yewdux::prelude::WithDispatchProps;
 
-pub struct AuthModal {
+pub struct SignIn {
     pub dispatch: DispatchProps<PersistentStore<YewduxStore>>,
     pub header_name: String,
 }
 
-impl Component for AuthModal {
+impl Component for SignIn {
     type Message = ();
     type Properties = DispatchProps<PersistentStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
@@ -26,7 +26,7 @@ impl Component for AuthModal {
         // let header_name = ctx.props().header_name;
         Self {
             dispatch: _dispatch,
-            header_name: String::from("Sign up")
+            header_name: String::from("Sign in")
         }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {

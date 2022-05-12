@@ -43,7 +43,7 @@ pub struct ContextProviderStruct {
 #[styled_component(Secure)]
 pub fn secure(props: &SecureProps) -> Html {
     let history = use_history().unwrap();
-    let onclick = Callback::once(move |_| history.push(Routes::Home));
+    let onclick = Callback::once(move |_| history.push(Routes::SignUp));
     let class = "my_title";
     let option: Option<&str> = Some("kekw");
     let example_list = vec!["one", "two", "three"];
