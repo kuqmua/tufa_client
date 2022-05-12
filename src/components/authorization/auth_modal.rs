@@ -1,4 +1,3 @@
-use crate::components::examples::display_credentials::DisplayCredentials;
 use crate::helpers::html_input_type::HtmlInputType;
 use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
@@ -12,11 +11,11 @@ use yew_router::prelude::*;
 use yewdux::prelude::DispatchProps;
 use yewdux::prelude::Dispatcher;
 use yewdux::prelude::PersistentStore;
-use yewdux::prelude::WithDispatch;
 use yewdux::prelude::WithDispatchProps;
 
 pub struct AuthModal {
     pub dispatch: DispatchProps<PersistentStore<YewduxStore>>,
+    pub header_name: String,
 }
 
 impl Component for AuthModal {
@@ -24,8 +23,10 @@ impl Component for AuthModal {
     type Properties = DispatchProps<PersistentStore<YewduxStore>>;
     fn create(ctx: &Context<Self>) -> Self {
         let _dispatch = ctx.props().dispatch().clone();
+        // let header_name = ctx.props().header_name;
         Self {
             dispatch: _dispatch,
+            header_name: String::from("Sign up")
         }
     }
     fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
@@ -126,7 +127,7 @@ impl Component for AuthModal {
                     font-weight: bold;
                   "
                 >
-                  {"Sign up"}
+                  {self.header_name.clone()}
                 </h1>
                 <form
                   onsubmit={handle_form_submit.clone()}
@@ -193,7 +194,6 @@ impl Component for AuthModal {
               </div>
             </div>
             <Link<Routes> to={Routes::Secure}>{ "Go to Secure" }</Link<Routes>>
-            <WithDispatch<DisplayCredentials>/>
           </div>
         }
     }

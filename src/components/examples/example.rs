@@ -10,6 +10,7 @@ use crate::components::examples::post_data_to_server_button::PostDataToServerBut
 use crate::components::examples::yewdux_functional_component_example::YewduxFunctionalComponentExample;
 use crate::components::examples::set_timeout_example::SetTimeoutExample;
 use crate::components::examples::without_html_tag_example::WithoutHtmlTagExample;
+use crate::components::examples::display_credentials::DisplayCredentials;
 
 pub struct Example {}
 
@@ -39,6 +40,7 @@ impl Component for Example {
               <YewduxFunctionalComponentExample/>
               <WithDispatch<DisplayCount>/>
               <WithDispatch<Counter>/>
+              <WithDispatch<DisplayCredentials>/>
           </div>
         }
     }
