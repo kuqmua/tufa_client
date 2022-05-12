@@ -1,6 +1,7 @@
 use crate::components::authorization::sign_up::component::SignUp;
 use crate::components::authorization::sign_in::component::SignIn;
 use crate::components::examples::counter::Counter;
+use crate::components::home::Home;
 use crate::components::secure::Color;
 use crate::components::secure::Secure;
 use crate::components::secure::SecureProps;
@@ -15,6 +16,9 @@ pub fn switch_routes(routes: &Routes) -> Html {
     let main_title_head: Callback<String> = Callback::from(|message| log!(message));
     let custom_from_submit = Callback::from(|data: SecureProps| log!("first is", data.first));
     match routes {
+        Routes::Home => html! {
+            <WithDispatch<Home>/>
+        },
         Routes::SignUp => html! {
             <WithDispatch<SignUp>/>
         },
