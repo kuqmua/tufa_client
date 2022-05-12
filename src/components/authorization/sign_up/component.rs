@@ -149,8 +149,8 @@ impl Component for SignUp {
                     "
                   >
                     <InputForm placeholder={"Login".to_owned()} input_type={HtmlInputType::Text} action={handle_username_change} />
-                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change} />
-                    // <InputForm placeholder={"Repeat password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
+                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change.clone()} />
+                    <InputForm placeholder={"Repeat password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change} />
                   </div>
                   <div>
                     <SubmitButton action={handle_form_submit} />
