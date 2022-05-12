@@ -2,6 +2,7 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct SubmitButtonProps {
+    pub placeholder: Option<String>,
     pub action: Option<Callback<FocusEvent>>,
 }
 pub struct SubmitButton {}
@@ -19,7 +20,7 @@ impl Component for SubmitButton {
     }
     // false
     //https://codepen.io/shawnc8160/pen/xxRYOWg
-    fn view(&self, _ctx: &Context<Self>) -> Html {
+    fn view(&self, ctx: &Context<Self>) -> Html {
         // This gives us a component's "`Scope`" which allows us to send messages, etc to the component.
         //for some reason page re renders if it would be button
         html! {
@@ -80,7 +81,7 @@ impl Component for SubmitButton {
                 justify-content: inherit;
               "
             >
-              {"Sign Up"}
+              {ctx.props().placeholder.clone().unwrap_or("submit button".to_string())}
             </span>
           </button>
         }
