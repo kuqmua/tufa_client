@@ -35,8 +35,8 @@ impl Component for App {
                   align-items: center;
               "
           >
-              <Header/>
               <BrowserRouter>
+                  <Header/>
                   <Switch<Routes> render={Switch::render(switch_routes)} />
               </BrowserRouter>
           </div>
