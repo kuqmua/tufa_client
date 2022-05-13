@@ -35,6 +35,13 @@ impl Component for App {
                   align-items: center;
               "
           >
+            <style>
+            {"body { 
+              background-color: #16202A;
+              margin: 0px;
+              padding: 0px;
+            }"}
+            </style>
               <BrowserRouter>
                   <Header/>
                   <Switch<Routes> render={Switch::render(switch_routes)} />
