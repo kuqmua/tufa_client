@@ -24,7 +24,8 @@ pub fn switch_routes(routes: &Routes) -> Html {
             <SignUp/>
         },
         Routes::SignIn => html! {
-            <WithDispatch<SignIn>/>
+            // <WithDispatch<SignIn>/>
+            <SignIn/>
         },
         Routes::Secure => html! {
             <Secure first="my_first_prop" color={Color::Ok} on_load={main_title_head} onsubmit={custom_from_submit}/>

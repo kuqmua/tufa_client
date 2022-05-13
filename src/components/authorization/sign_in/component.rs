@@ -1,80 +1,59 @@
-use crate::helpers::html_input_type::HtmlInputType;
-use crate::components::authorization::input_form::InputForm;
 use crate::components::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
+use yew::prelude::*;
+use yew_router::prelude::*;
+use yewdux::prelude::Dispatcher;
+use yewdux::prelude::PersistentStore;
 use crate::{components::authorization::submit_button::SubmitButton, store::YewduxStore};
 use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
-use yew::prelude::*;
-use yew_router::prelude::*;
-use yewdux::prelude::DispatchProps;
-use yewdux::prelude::Dispatcher;
-use yewdux::prelude::PersistentStore;
-use yewdux::prelude::WithDispatchProps;
+use crate::helpers::html_input_type::HtmlInputType;
+use crate::components::authorization::input_form::InputForm;
+use yewdux_functional::use_store;
 
-pub struct SignIn {
-    pub dispatch: DispatchProps<PersistentStore<YewduxStore>>,
-    pub header_name: String,
-}
-
-impl Component for SignIn {
-    type Message = ();
-    type Properties = DispatchProps<PersistentStore<YewduxStore>>;
-    fn create(ctx: &Context<Self>) -> Self {
-        let _dispatch = ctx.props().dispatch().clone();
-        // let header_name = ctx.props().header_name;
-        Self {
-            dispatch: _dispatch,
-            header_name: String::from("Sign in")
-        }
-    }
-    // fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
-    //     // true
-    //     false
-    // }
-    // fn changed(&mut self, _ctx: &Context<Self>) -> bool {
-    //     // true
-    //     false
-    // }
-    // fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
-    // fn destroy(&mut self, _ctx: &Context<Self>) {}
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        let handle_form_submit = {
-            let ctx = ctx.props().state();
-            Callback::from(move |event: FocusEvent| {
-                event.prevent_default();
-                let username = ctx.username.clone();
-                let password = ctx.password.clone();
-                log!("Username: ", username, "Password: ", password);
-            })
-        };
-        let handle_username_change =
-            ctx.props()
-                .dispatch()
-                .reduce_callback_with(|state, event: Event| {
-                    let username = event
-                        .target()
-                        .unwrap()
-                        .unchecked_into::<HtmlInputElement>()
-                        .value();
-                    state.username = username;
-                    log!("username", state.username.clone());
-                });
-        let handle_password_change =
-            ctx.props()
-                .dispatch()
-                .reduce_callback_with(|state, event: Event| {
-                    let password = event
-                        .target()
-                        .unwrap()
-                        .unchecked_into::<HtmlInputElement>()
-                        .value();
-                    state.password = password;
-                    log!("password", state.password.clone());
-                });
-        html! {
-          <div
+#[function_component(SignIn)]
+pub fn sign_in() -> Html {
+    let store = use_store::<PersistentStore<YewduxStore>>();
+    let username = use_state(|| String::from(""));
+    let password = use_state(|| String::from(""));
+    let username_cloned = username.clone();
+    let password_cloned = password.clone();
+    let header_name = "Sign in";
+    let history = use_history().unwrap();
+    let handle_form_submit = store
+    .dispatch()
+    .reduce_callback(move |state| {
+        state.username = username_cloned.to_string();
+        state.password = password_cloned.to_string();
+        history.push(Routes::Home);
+    });
+    let handle_username_change =
+        store
+            .dispatch()
+            .reduce_callback_with(|state, event: Event| {
+                let username = event
+                    .target()
+                    .unwrap()
+                    .unchecked_into::<HtmlInputElement>()
+                    .value();
+                state.username = username;
+                log!("username", state.username.clone());
+            });
+    let handle_password_change =
+        store
+            .dispatch()
+            .reduce_callback_with(|state, event: Event| {
+                let password = event
+                    .target()
+                    .unwrap()
+                    .unchecked_into::<HtmlInputElement>()
+                    .value();
+                state.password = password;
+                log!("password", state.password.clone());
+            });
+    html! {
+        <div
             id="root"
             style="
               display: block;
@@ -129,10 +108,10 @@ impl Component for SignIn {
                     font-weight: bold;
                   "
                 >
-                  {self.header_name.clone()}
+                  {header_name}
                 </h1>
                 <form
-                  onsubmit={handle_form_submit.clone()}
+                  onsubmit={handle_form_submit}
                   novalidate=true
                   style="
                     width: 100%;
@@ -151,10 +130,10 @@ impl Component for SignIn {
                     "
                   >
                     <InputForm placeholder={"Login".to_owned()} input_type={HtmlInputType::Text} action={handle_username_change} />
-                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change} />
+                    <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change.clone()} />
                   </div>
                   <div>
-                    <SubmitButton placeholder={self.header_name.clone()} />
+                    <SubmitButton placeholder={header_name}/>
                   </div>
                   <div
                     style="
@@ -196,6 +175,5 @@ impl Component for SignIn {
             </div>
             <Link<Routes> to={Routes::Secure}>{ "Go to Secure" }</Link<Routes>>
           </div>
-        }
     }
 }

@@ -26,7 +26,6 @@ pub fn sign_up() -> Html {
     .reduce_callback(move |state| {
         state.username = username_cloned.to_string();
         state.password = password_cloned.to_string();
-        log!("handle_username_change username", state.username.clone());
         history.push(Routes::SignIn);
     });
     let handle_username_change =
