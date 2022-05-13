@@ -20,7 +20,8 @@ pub fn switch_routes(routes: &Routes) -> Html {
             <WithDispatch<Home>/>
         },
         Routes::SignUp => html! {
-            <WithDispatch<SignUp>/>
+            // <WithDispatch<SignUp>/>
+            <SignUp/>
         },
         Routes::SignIn => html! {
             <WithDispatch<SignIn>/>

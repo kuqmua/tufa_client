@@ -154,7 +154,7 @@ impl Component for SignIn {
                     <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change} />
                   </div>
                   <div>
-                    <SubmitButton action={handle_form_submit} placeholder={self.header_name.clone()} />
+                    <SubmitButton placeholder={self.header_name.clone()} />
                   </div>
                   <div
                     style="
