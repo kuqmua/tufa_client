@@ -43,7 +43,7 @@ impl Component for Home {
                 data-line-end="1"
                 style="
                 -webkit-text-size-adjust: 100%;
-                color: #373D49;
+                color: #ffffa2;
                 box-sizing: border-box;
                 font-family: \"Source Sans Pro\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;
                 font-feature-settings: 'dlig' 1,'liga' 1,'lnum' 1,'kern' 1;
