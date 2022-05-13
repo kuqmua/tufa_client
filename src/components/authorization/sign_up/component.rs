@@ -29,14 +29,16 @@ impl Component for SignUp {
             header_name: String::from("Sign up")
         }
     }
-    fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
-        true
-    }
-    fn changed(&mut self, _ctx: &Context<Self>) -> bool {
-        true
-    }
-    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
-    fn destroy(&mut self, _ctx: &Context<Self>) {}
+    // fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+    //     // true
+    //     false
+    // }
+    // fn changed(&mut self, _ctx: &Context<Self>) -> bool {
+    //     // true
+    //     false
+    // }
+    // fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
+    // fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, ctx: &Context<Self>) -> Html {
         let handle_form_submit = {
             let ctx = ctx.props().state();
@@ -186,7 +188,7 @@ impl Component for SignUp {
                           cursor: pointer;
                         "
                       >
-                        {"Already have an account? Sign in"}
+                      {"Already have an account? "}<Link<Routes> to={Routes::SignIn}>{ "Sign in" }</Link<Routes>>
                       </a>
                     </div>
                   </div>

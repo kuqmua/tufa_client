@@ -29,14 +29,16 @@ impl Component for SignIn {
             header_name: String::from("Sign in")
         }
     }
-    fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
-        true
-    }
-    fn changed(&mut self, _ctx: &Context<Self>) -> bool {
-        true
-    }
-    fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
-    fn destroy(&mut self, _ctx: &Context<Self>) {}
+    // fn update(&mut self, _ctx: &Context<Self>, _msg: Self::Message) -> bool {
+    //     // true
+    //     false
+    // }
+    // fn changed(&mut self, _ctx: &Context<Self>) -> bool {
+    //     // true
+    //     false
+    // }
+    // fn rendered(&mut self, _ctx: &Context<Self>, _first_render: bool) {}
+    // fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, ctx: &Context<Self>) -> Html {
         let handle_form_submit = {
             let ctx = ctx.props().state();
@@ -150,10 +152,9 @@ impl Component for SignIn {
                   >
                     <InputForm placeholder={"Login".to_owned()} input_type={HtmlInputType::Text} action={handle_username_change} />
                     <InputForm placeholder={"Password".to_owned()} input_type={HtmlInputType::Password} action={handle_password_change} />
-                    // <InputForm placeholder={"Repeat password".to_owned()} input_type={HtmlInputTypes::Password} action={handle_password_change} />
                   </div>
                   <div>
-                    <SubmitButton action={handle_form_submit} placeholder={self.header_name.clone()}/>
+                    <SubmitButton action={handle_form_submit} placeholder={self.header_name.clone()} />
                   </div>
                   <div
                     style="
@@ -186,7 +187,7 @@ impl Component for SignIn {
                           cursor: pointer;
                         "
                       >
-                        {"Already have an account? Sign in"}
+                      {"Don't have an account? "}<Link<Routes> to={Routes::SignUp}>{ "Sign up" }</Link<Routes>>
                       </a>
                     </div>
                   </div>
