@@ -2,7 +2,6 @@ use crate::{store::YewduxStore};
 use yew::prelude::*;
 use yewdux::prelude::DispatchProps;
 use yewdux::prelude::PersistentStore;
-use tufa_common::helpers::git::get_git_html_info::get_git_html_info;
 
 pub struct Home {}
 
@@ -59,6 +58,7 @@ impl Component for Home {
                 >
                     <a 
                     id="commit_string_0"
+                    href=""
                     style="
                     -webkit-text-size-adjust: 100%;
                     font-family: \"Source Sans Pro\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;
