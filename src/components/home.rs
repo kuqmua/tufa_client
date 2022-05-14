@@ -21,108 +21,143 @@ impl Component for Home {
     fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              margin-left: 5px;
+              margin-right: 5px;
+              width: 300px;
+            "
+          >
+            <img 
+              src="https://telegrator.ru/wp-content/uploads/2021/05/chat_avatar-136.jpg" 
+              alt="avatar"
+              style="
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+                margin-right: 5px;
+              "
+            />
             <div
-                style="
-                -webkit-text-size-adjust: 100%;
-                color: #373D49;
-                box-sizing: border-box;
-                font-family: Georgia,Cambria,serif;
-                height: 100%;
-                font-weight: 400;
-                line-height: 2rem;
-                max-width: 1024px;
-                margin: 0 auto;
-                overflow: auto;
-                padding: 2%;
-                font-size: 1rem;
-                "
+              style="
+                display: flex;
+                flex-direction: column;
+              "
             >
-                <h3 
-                class="code-line" 
-                data-line-start="0" 
-                data-line-end="1"
+              <div
                 style="
-                -webkit-text-size-adjust: 100%;
-                color: #ffffa2;
-                box-sizing: border-box;
-                font-family: \"Source Sans Pro\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;
-                font-feature-settings: 'dlig' 1,'liga' 1,'lnum' 1,'kern' 1;
-                font-style: normal;
-                font-weight: 600;
-                margin-top: 0;
-                line-height: 3rem;
-                font-size: 1.6457143rem;
-                margin-bottom: .07599rem;
-                padding-top: .92401rem;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-start;
+                  align-items: flex-start;
                 "
+              >
+                <img 
+                  src="https://telegrator.ru/wp-content/uploads/2021/05/chat_avatar-136.jpg" 
+                  alt="avatar"
+                  style="
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 2px;
+                    margin-right: 5px;
+                  "
+                />
+                <div
+                  style="
+                    color: #A2B0B9;
+                  "
                 >
-                    <a 
-                    id="commit_string_0"
-                    href=""
-                    style="
-                    -webkit-text-size-adjust: 100%;
-                    font-family: \"Source Sans Pro\",\"Helvetica Neue\",Helvetica,Arial,sans-serif;
-                    font-feature-settings: 'dlig' 1,'liga' 1,'lnum' 1,'kern' 1;
-                    font-style: normal;
-                    font-weight: 600;
-                    line-height: 3rem;
-                    font-size: 1.6457143rem;
-                    box-sizing: border-box;
-                    background: 0 0;
-                    cursor: pointer;
-                    color: #35D7BB;
-                    text-decoration: none;
-                    "
-                    ></a>{"commit string"}
-                </h3>
-                <pre
+                  {"author r/subreddit 1h"}
+                </div>
+              </div>
+              <div
                 style="
-                -webkit-text-size-adjust: 100%;
-                font-weight: 400;
-                box-sizing: border-box;
-                display: block;
-                margin: 0 0 10px;
-                word-break: break-all;
-                word-wrap: break-word;
-                color: #333;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                overflow: auto;
-                font-family: monospace,monospace;
-                padding: .66001rem 9.5px 9.5px;
-                line-height: 2rem;
-                background: linear-gradient(to bottom,#fff 0,#fff .75rem,#f5f7fa .75rem,#f5f7fa 2.75rem,#fff 2.75rem,#fff 4rem);
-                background-size: 100% 4rem;
-                border-color: #D3DAEA;
-                margin-bottom: 1.33999rem;
-                font-size: 1rem;
-                padding-top: .66001rem;
+                  color: #A2B0B9;
                 "
-                >
-                    <code 
-                    class="has-line-data" 
-                    data-line-start="2" 
-                    data-line-end="4"
-                    style="
-                    -webkit-text-size-adjust: 100%;
-                    font-weight: 400;
-                    word-break: break-all;
-                    word-wrap: break-word;
-                    line-height: 2rem;
-                    box-sizing: border-box;
-                    font-family: monospace,monospace;
-                    padding: 0;
-                    font-size: inherit;
-                    color: inherit;
-                    white-space: pre-wrap;
-                    background-color: transparent;
-                    border-radius: 0;
-                    "
-                    >
-                        {"commit string sss"}
-                    </code>
-                </pre>
+              >
+                {"
+                  some huge text some huge text some huge text
+                  some huge text some huge text some huge text
+                  some huge text some huge text some huge text
+                  some huge text some huge text some huge text
+                  some huge text some huge text some huge text
+                  some huge text some huge text some huge text
+                "}
+              </div>
+              <img 
+                  src="https://funik.ru/wp-content/uploads/2018/10/17478da42271207e1d86.jpg" 
+                  alt="avatar"
+                  style="
+                    width: 100%;
+                    border-radius: 10px;
+                  "
+              />
             </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                margin-left: 5px;
+                width: 50px;
+              "
+            >
+              <div
+                style="
+                  border-radius: 5px;
+                  border: 2px solid #A2B0B9;
+                  width: 50px;
+                  height: 50px;
+                  margin-bottom: 10px;
+                "
+              >
+              </div>
+              <div
+                style="
+                  border-radius: 5px;
+                  border: 2px solid #A2B0B9;
+                  width: 50px;
+                  height: 50px;
+                  margin-bottom: 10px;
+                "
+              >
+              </div>
+              <div
+                style="
+                  border-radius: 5px;
+                  border: 2px solid #A2B0B9;
+                  width: 50px;
+                  height: 50px;
+                  margin-bottom: 10px;
+                "
+              >
+              </div>
+              <div
+                style="
+                  border-radius: 5px;
+                  border: 2px solid #A2B0B9;
+                  width: 50px;
+                  height: 50px;
+                  margin-bottom: 10px;
+                "
+              >
+              </div>
+              <div
+                style="
+                  border-radius: 5px;
+                  border: 2px solid #A2B0B9;
+                  width: 50px;
+                  height: 50px;
+                  margin-bottom: 10px;
+                "
+              >
+              </div>
+            </div>
+          </div>
         }
     }
 }
