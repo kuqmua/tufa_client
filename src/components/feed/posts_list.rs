@@ -17,8 +17,8 @@ pub fn posts_list() -> Html {
           align-items: flex-start;
           width: 500px;
           background-color: #1E2832;
-          padding-left: 5px;
-          padding-right: 5px;
+          padding-left: 8px;
+          padding-right: 8px;
         "
       >
         {posts_vec}

@@ -9,18 +9,15 @@ pub fn post() -> Html {
             flex-direction: row;
             justify-content: center;
             align-items: flex-start;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            margin-left: 5px;
-            margin-right: 5px;
-            width: 500px;
+            margin-top: 8px;
+            margin-bottom: 8px;
             background-color: #1E2832;
           "
         >
           <div
             style="
               width: 60px;
-              margin-right: 5px;
+              margin-right: 8px;
               display: flex;
               justify-content: flex-start;
             "
@@ -56,12 +53,14 @@ pub fn post() -> Html {
                   width: 20px;
                   height: 20px;
                   border-radius: 2px;
-                  margin-right: 5px;
+                  margin-right: 8px;
                 "
               />
               <div
                 style="
-                  color: #A2B0B9;
+                  color: white;
+                  margin-bottom: 8px;
+                  font-size: 20px;
                 "
               >
                 {"author r/subreddit 1h"}
@@ -69,8 +68,9 @@ pub fn post() -> Html {
             </div>
             <div
               style="
-                color: #A2B0B9;
-                margin-bottom: 10px;
+                color: white;
+                margin-bottom: 8px;
+                font-size: 18px;
               "
             >
               {"
@@ -96,7 +96,7 @@ pub fn post() -> Html {
               display: flex;
               flex-direction: column;
               justify-content: flex-start;
-              margin-left: 5px;
+              margin-left: 8px;
               width: 50px;
             "
           >
@@ -106,7 +106,7 @@ pub fn post() -> Html {
                 border: 2px solid #A2B0B9;
                 width: 35px;
                 height: 35px;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -123,7 +123,7 @@ pub fn post() -> Html {
                 border: 2px solid #A2B0B9;
                 width: 35px;
                 height: 35px;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
