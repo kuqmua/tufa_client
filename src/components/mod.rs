@@ -6,3 +6,4 @@ pub mod svg_icon_wrapper;
 pub mod examples;
 pub mod home;
 pub mod feed;
+pub mod svg;
