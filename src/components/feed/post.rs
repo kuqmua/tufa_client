@@ -70,6 +70,7 @@ pub fn post() -> Html {
             <div
               style="
                 color: #A2B0B9;
+                margin-bottom: 10px;
               "
             >
               {"
@@ -86,7 +87,7 @@ pub fn post() -> Html {
                 alt="avatar"
                 style="
                   width: 100%;
-                  border-radius: 10px;
+                  border-radius: 15px;
                 "
             />
           </div>
