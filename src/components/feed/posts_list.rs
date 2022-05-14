@@ -19,6 +19,8 @@ pub fn posts_list() -> Html {
           background-color: #1E2832;
           padding-left: 8px;
           padding-right: 8px;
+          border-right: 0.5px solid #ffffa2;
+          border-left: 0.5px solid #ffffa2;
         "
       >
         {posts_vec}

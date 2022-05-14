@@ -104,7 +104,7 @@ pub fn post() -> Html {
             <div
               style="
                 border-radius: 10px;
-                border: 2px solid #A2B0B9;
+                border: 1px solid #A2B0B9;
                 width: 35px;
                 height: 35px;
                 margin-bottom: 8px;
@@ -118,7 +118,7 @@ pub fn post() -> Html {
             <div
               style="
                 border-radius: 10px;
-                border: 2px solid #A2B0B9;
+                border: 1px solid #A2B0B9;
                 width: 35px;
                 height: 35px;
                 margin-bottom: 8px;
