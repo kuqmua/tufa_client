@@ -1,8 +1,8 @@
-use crate::{store::YewduxStore};
+use crate::components::feed::posts_list::PostsList;
+use crate::store::YewduxStore;
 use yew::prelude::*;
 use yewdux::prelude::DispatchProps;
 use yewdux::prelude::PersistentStore;
-use crate::components::feed::posts_list::PostsList;
 
 pub struct Home {}
 
@@ -22,7 +22,11 @@ impl Component for Home {
     fn destroy(&mut self, _ctx: &Context<Self>) {}
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
-          <div>
+          <div
+            style="
+              padding-top: 50px;
+            "
+          >
             <PostsList/>
           </div>
         }
