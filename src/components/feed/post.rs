@@ -1,6 +1,6 @@
+use crate::components::feed::expand_more_button::ExpandMoreButton;
 use crate::components::feed::favorite_button::FavoriteButton;
 use crate::components::feed::share_button::ShareButton;
-use crate::components::svg::expand_more::ExpandMore;
 use yew::prelude::*;
 
 #[function_component(Post)]
@@ -84,20 +84,7 @@ pub fn post() -> Html {
               width: 50px;
             "
         >
-          <div
-            style="
-                border-radius: 10px;
-                border: 1px solid #A2B0B9;
-                width: 35px;
-                height: 35px;
-                margin-bottom: 8px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-              "
-          >
-            <ExpandMore height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
-          </div>
+          <ExpandMoreButton/>
           <ShareButton/>
           <FavoriteButton/>
         </div>
