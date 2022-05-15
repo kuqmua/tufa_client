@@ -1,3 +1,4 @@
+use crate::components::feed::button_wrapper::ButtonWrapper;
 use crate::components::svg::favorite::Favorite;
 use crate::components::svg::favorite_border::FavoriteBorder;
 use yew::{function_component, html, use_state, Callback};
@@ -9,27 +10,13 @@ pub fn favorite_button() -> Html {
     let change_is_liked = Callback::from(move |_| {
         is_liked_cloned.set(!*is_liked_cloned);
     });
+    let icon_size = "24px".to_owned();
+    let html_handle = if *is_liked {
+        html! {<Favorite height={icon_size.clone()} width={icon_size} fill={"#ffffa2".to_owned()}/>}
+    } else {
+        html! {<FavoriteBorder height={icon_size.clone()} width={icon_size} fill={"#A2B0B9".to_owned()}/>}
+    };
     html! {
-      <button
-        style="
-          border-radius: 10px;
-          border: 1px solid #A2B0B9;
-          width: 35px;
-          height: 35px;
-          margin-bottom: 8px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: #1E2832;
-        "
-        onclick={change_is_liked}
-      >
-        if *is_liked {
-          <Favorite height={"24px".to_owned()} width={"24px".to_owned()} fill={"#ffffa2".to_owned()}/>
-        }
-        else {
-          <FavoriteBorder height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
-        }
-      </button>
+      <ButtonWrapper inner_html={html_handle} callback={change_is_liked}/>
     }
 }
