@@ -26,6 +26,8 @@ impl Component for App {
     }
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! {
+          <BrowserRouter>
+            <Header/>
           <div
               style="
                   width: 100%; 
@@ -39,12 +41,12 @@ impl Component for App {
             // body {
             //     background: linear-gradient(270deg, #4ad2af, #ff0000);
             //     background-size: 400% 400%;
-            
+
             //     -webkit-animation: AnimationName 30s ease infinite;
             //     -moz-animation: AnimationName 30s ease infinite;
             //     animation: AnimationName 30s ease infinite;
             // }
-            
+
             // @-webkit-keyframes AnimationName {
             //     0%{background-position:53% 0%}
             //     50%{background-position:48% 100%}
@@ -66,7 +68,7 @@ impl Component for App {
             //     animation: gradient 15s ease infinite;
             //     height: 100vh;
             // }
-            
+
             // @keyframes gradient {
             //     0% {
             //         background-position: 0% 50%;
@@ -86,11 +88,10 @@ impl Component for App {
               }
             "}
             </style>
-              <BrowserRouter>
-                  <Header/>
-                  <Switch<Routes> render={Switch::render(switch_routes)} />
-              </BrowserRouter>
+            <Switch<Routes> render={Switch::render(switch_routes)} />
           </div>
+
+          </BrowserRouter>
         }
     }
 }
