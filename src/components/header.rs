@@ -20,8 +20,8 @@ pub fn header() -> Html {
               height: 100%; 
               justify-content: space-between; 
               align-items: center;
-              padding-right: 8px;
-              padding-left: 8px;
+              padding-right: 20px;
+              padding-left: 20px;
             "
           >
             <div
@@ -31,7 +31,6 @@ pub fn header() -> Html {
             >
               <Menu height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
             </div>
-            <Link<Routes> to={Routes::Home}>{ "home" }</Link<Routes>>
             <div
               style="
                 color: white
