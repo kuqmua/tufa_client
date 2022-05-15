@@ -10,7 +10,7 @@ pub fn favorite_button() -> Html {
         is_liked_cloned.set(!*is_liked_cloned);
     });
     html! {
-      <div
+      <button
         style="
           border-radius: 10px;
           border: 1px solid #A2B0B9;
@@ -20,6 +20,7 @@ pub fn favorite_button() -> Html {
           display: flex;
           justify-content: center;
           align-items: center;
+          background-color: #1E2832;
         "
         onclick={change_is_liked}
       >
@@ -29,6 +30,6 @@ pub fn favorite_button() -> Html {
         else {
           <FavoriteBorder height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
         }
-      </div>
+      </button>
     }
 }
