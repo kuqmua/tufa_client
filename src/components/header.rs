@@ -1,17 +1,17 @@
 use crate::components::svg::menu::Menu;
 use crate::components::svg::person_outline::PersonOutline;
-use crate::routes::routes::Routes;
+// use crate::routes::routes::Routes;
 use yew::{function_component, html};
-use yew_router::prelude::Link;
+// use yew_router::prelude::Link;
 
 #[function_component(Header)]
 pub fn header() -> Html {
-    // let use_s
     html! {
       <header
         style="
           height: 50px; 
-          width: 100%; 
+          width: 100%;
+          min-width: 470px;
           background-color: #16202A;
           border-bottom: 1px solid #ffffa2;
           position: fixed;
