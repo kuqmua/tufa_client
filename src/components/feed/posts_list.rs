@@ -12,6 +12,7 @@ pub fn posts_list() -> Html {
           justify-content: center;
           align-items: flex-start;
           width: 470px;
+          min-width: 470px;
           background-color: #1E2832;
           padding-left: 8px;
           padding-right: 8px;
