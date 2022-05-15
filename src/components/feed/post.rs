@@ -44,31 +44,12 @@ pub fn post() -> Html {
         >
           <div
             style="
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: flex-start;
-              "
+              color: white;
+              margin-bottom: 8px;
+              font-size: 20px;
+            "
           >
-            <img
-              src="https://telegrator.ru/wp-content/uploads/2021/05/chat_avatar-136.jpg"
-              alt="avatar"
-              style="
-                  width: 20px;
-                  height: 20px;
-                  border-radius: 2px;
-                  margin-right: 8px;
-                "
-            />
-            <div
-              style="
-                  color: white;
-                  margin-bottom: 8px;
-                  font-size: 20px;
-                "
-            >
-              {"author r/subreddit 1h"}
-            </div>
+            {"Author"}
           </div>
           <div
             style="
