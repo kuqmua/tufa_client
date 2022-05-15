@@ -1,11 +1,11 @@
+use crate::routes::routes::Routes;
 use yew::{function_component, html};
 use yew_router::prelude::Link;
-use crate::routes::routes::Routes;
 
 #[function_component(Header)]
 pub fn header() -> Html {
     html! {
-        <div 
+        <header
             style="
                 height: 50px; 
                 width: 100%; 
@@ -21,6 +21,6 @@ pub fn header() -> Html {
                 {"----------"}
                 <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
             </div>
-        </div>
+        </header>
     }
 }
