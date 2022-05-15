@@ -9,3 +9,5 @@ rustup target add wasm32-unknown-unknown
 ```
 trunk serve
 ```
+### fonts source
+[link](https://fonts.google.com/)
