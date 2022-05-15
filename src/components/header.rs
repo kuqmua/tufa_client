@@ -1,10 +1,12 @@
 use crate::components::svg::menu::Menu;
+use crate::components::svg::person_outline::PersonOutline;
 use crate::routes::routes::Routes;
 use yew::{function_component, html};
 use yew_router::prelude::Link;
 
 #[function_component(Header)]
 pub fn header() -> Html {
+    // let use_s
     html! {
       <header
         style="
@@ -29,16 +31,26 @@ pub fn header() -> Html {
                 padding: 8px;
               "
             >
-              <Menu height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
+              <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={"#A2B0B9".to_owned()}/>
+            </div>
+            <div
+              style="
+                font-size: 30px;
+                font-family: 'Koulen', cursive;
+                color: white;
+              "
+            >
+              {"Tufa Client"}
             </div>
             <div
               style="
                 color: white
               "
             >
-              <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
-                {"----------"}
-              <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
+            //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
+            //     {"----------"}
+            //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
+              <PersonOutline height={"26px".to_owned()} width={"26px".to_owned()} fill={"#A2B0B9".to_owned()}/>
             </div>
           </div>
         </header>
