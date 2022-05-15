@@ -1,3 +1,5 @@
+use crate::components::svg::favorite::Favorite;
+use crate::components::svg::favorite_border::FavoriteBorder;
 use crate::components::svg::share::Share;
 use yew::prelude::*;
 
@@ -127,7 +129,21 @@ pub fn post() -> Html {
                 align-items: center;
               "
           >
-            <Share height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
+            <Favorite height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
+          </div>
+          <div
+            style="
+                border-radius: 10px;
+                border: 1px solid #A2B0B9;
+                width: 35px;
+                height: 35px;
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
+          >
+            <FavoriteBorder height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
           </div>
         </div>
       </div>
