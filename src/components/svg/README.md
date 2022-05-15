@@ -1,2 +1,2 @@
 ### icons from fonts.google.com
-[link](https://fonts.google.com/icons)
+[link](https://fonts.google.com/icons?icon.set=Material+Icons)
