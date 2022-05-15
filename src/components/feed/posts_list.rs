@@ -1,13 +1,9 @@
-use yew::prelude::*;
 use crate::components::feed::post::Post;
+use yew::prelude::*;
 
 #[function_component(PostsList)]
 pub fn posts_list() -> Html {
-    let posts_vec= vec![
-        html!{<Post/>},
-        html!{<Post/>},
-        html!{<Post/>}
-    ];
+    let posts_vec = vec![html! {<Post/>}, html! {<Post/>}, html! {<Post/>}];
     html! {
       <div
         style="
@@ -15,7 +11,7 @@ pub fn posts_list() -> Html {
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
-          width: 500px;
+          width: 470px;
           background-color: #1E2832;
           padding-left: 8px;
           padding-right: 8px;
