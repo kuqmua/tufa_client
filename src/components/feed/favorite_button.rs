@@ -1,9 +1,14 @@
 use crate::components::svg::favorite::Favorite;
-use yew::{function_component, html, use_state};
+use crate::components::svg::favorite_border::FavoriteBorder;
+use yew::{function_component, html, use_state, Callback};
 
 #[function_component(FavoriteButton)]
 pub fn favorite_button() -> Html {
     let is_liked = use_state(|| false);
+    let is_liked_cloned = is_liked.clone();
+    let change_is_liked = Callback::from(move |_| {
+        is_liked_cloned.set(!*is_liked_cloned);
+    });
     html! {
       <div
         style="
@@ -16,13 +21,13 @@ pub fn favorite_button() -> Html {
           justify-content: center;
           align-items: center;
         "
+        onclick={change_is_liked}
       >
         if *is_liked {
           <Favorite height={"24px".to_owned()} width={"24px".to_owned()} fill={"#ffffa2".to_owned()}/>
         }
         else {
-        //   <FavoriteBorder height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
-        <Favorite height={"24px".to_owned()} width={"24px".to_owned()} fill={"#ffffa2".to_owned()}/>
+          <FavoriteBorder height={"24px".to_owned()} width={"24px".to_owned()} fill={"#A2B0B9".to_owned()}/>
         }
       </div>
     }
