@@ -16,7 +16,8 @@ pub fn header() -> Html {
         ">
           <div
             style="
-              display: flex; 
+              display: flex;
+              height: 100%; 
               justify-content: space-between; 
               align-items: center;
               padding-right: 8px;
