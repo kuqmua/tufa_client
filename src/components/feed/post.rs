@@ -14,7 +14,6 @@ pub fn post() -> Html {
             align-items: flex-start;
             margin-top: 8px;
             margin-bottom: 8px;
-            background-color: #1E2832;
           "
       >
         <div

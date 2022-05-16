@@ -13,7 +13,7 @@ pub fn header() -> Html {
           width: 100%;
           min-width: 470px;
           background-color: #16202A;
-          border-bottom: 1px solid #ffffa2;
+          border-bottom: 1px solid #1E2832;
           position: fixed;
         ">
           <div
