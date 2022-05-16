@@ -3,6 +3,7 @@ use crate::store::YewduxStore;
 use yew::prelude::*;
 use yewdux::prelude::DispatchProps;
 use yewdux::prelude::PersistentStore;
+use crate::components::feed::expander::Expander;
 
 pub struct Home {}
 
@@ -28,6 +29,7 @@ impl Component for Home {
             "
           >
             <PostsList/>
+            <Expander/>
           </div>
         }
     }

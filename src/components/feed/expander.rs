@@ -5,13 +5,15 @@ pub fn expander() -> Html {
     html! {
       <div
         style="
-          height: 200px; 
-          width: 470px;
+          height: 400px; 
+          width: 486px;
           min-width: 470px;
           background-color: #16202A;
-          border-bottom: 1px solid #1E2832;
+          border-top: 1px solid white;
+          border-left: 1px solid white;
+          border-right: 1px solid white;
           position: fixed;
-          border-radius: 20px 20px 0px 0px;
+          border-radius: 30px 30px 0px 0px;
           bottom: 0px;
         ">
           
