@@ -18,7 +18,8 @@ pub fn switch_routes(routes: &Routes) -> Html {
     let custom_from_submit = Callback::from(|data: SecureProps| log!("first is", data.first));
     match routes {
         Routes::Home => html! {
-            <WithDispatch<Home>/>
+            // <WithDispatch<Home>/>
+            <Home/>
         },
         Routes::Markdown => html! {
             <MarkdownLike/>
