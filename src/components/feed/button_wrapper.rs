@@ -9,11 +9,12 @@ pub struct ButtonWrapperProps {
 
 #[function_component(ButtonWrapper)]
 pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
+  
     html! {
       <button
         style="
           border-radius: 10px;
-          border: 1px solid #A2B0B9;
+          border: 1px solid #1E2832;
           width: 35px;
           height: 35px;
           margin-bottom: 8px;

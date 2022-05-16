@@ -14,7 +14,7 @@ pub fn favorite_button() -> Html {
     let html_handle = if *is_liked {
         html! {<Favorite height={icon_size.clone()} width={icon_size} fill={"#ffffa2".to_owned()}/>}
     } else {
-        html! {<FavoriteBorder height={icon_size.clone()} width={icon_size} fill={"#A2B0B9".to_owned()}/>}
+        html! {<FavoriteBorder height={icon_size.clone()} width={icon_size} fill={"#5B6267".to_owned()}/>}
     };
     html! {
       <ButtonWrapper inner_html={html_handle} callback={change_is_liked}/>
