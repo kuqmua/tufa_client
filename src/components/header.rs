@@ -31,7 +31,7 @@ pub fn header() -> Html {
                 padding: 8px;
               "
             >
-              <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={"#A2B0B9".to_owned()}/>
+              <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
             </div>
             <div
               style="
@@ -50,7 +50,7 @@ pub fn header() -> Html {
             //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
             //     {"----------"}
             //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
-              <PersonOutline height={"26px".to_owned()} width={"26px".to_owned()} fill={"#A2B0B9".to_owned()}/>
+              <PersonOutline height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
             </div>
           </div>
         </header>
