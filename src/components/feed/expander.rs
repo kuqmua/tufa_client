@@ -15,8 +15,29 @@ pub fn expander() -> Html {
           position: fixed;
           border-radius: 30px 30px 0px 0px;
           bottom: 0px;
+          display: flex;
+          justify-content: space-evenly;
+          align-items: center;
+          flex-direction: column;
         ">
-          
+          <div
+            style="
+              color: white
+          ">
+            {"one"}
+          </div>
+          <div
+            style="
+              color: white
+          ">
+            {"two"}
+          </div>
+          <div
+            style="
+              color: white
+          ">
+            {"three"}
+          </div>
       </div>
     }
 }
