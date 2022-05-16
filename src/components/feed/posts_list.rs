@@ -1,9 +1,15 @@
 use crate::components::feed::post::Post;
-use yew::prelude::*;
+use web_sys::MouseEvent;
+use yew::{function_component, html, Callback, Properties};
+
+#[derive(Properties, PartialEq)]
+pub struct PostsListProps {
+    pub callback: Callback<MouseEvent>,
+}
 
 #[function_component(PostsList)]
-pub fn posts_list() -> Html {
-    let posts_vec = vec![html! {<Post/>}, html! {<Post/>}, html! {<Post/>}];
+pub fn posts_list(props: &PostsListProps) -> Html {
+    let posts_vec = vec![html! {<Post callback={props.callback.clone()}/>}, html! {<Post  callback={props.callback.clone()}/>}, html! {<Post  callback={props.callback.clone()}/>}];
     html! {
       <div
         style="

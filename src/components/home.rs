@@ -1,17 +1,24 @@
 use crate::components::feed::posts_list::PostsList;
 use crate::components::feed::expander::Expander;
-use yew::{function_component, html};
+use yew::{function_component, html, use_state, Callback};
 
 #[function_component(Home)]
 pub fn home() -> Html {
+  let show_expander = use_state(|| false);
+  let show_expander_cloned = show_expander.clone();
+  let change_show_expander = Callback::from(move |_| {
+      show_expander_cloned.set(!*show_expander_cloned);
+  });
   html! {
     <div
       style="
         padding-top: 50px;
       "
     >
-      <PostsList/>
-      <Expander/>
+      <PostsList callback={change_show_expander}/>
+      if *show_expander {
+        <Expander/>
+      }
     </div>
   }
 }

@@ -3,8 +3,13 @@ use crate::components::feed::buttons::favorite_button::FavoriteButton;
 use crate::components::feed::buttons::share_button::ShareButton;
 use yew::prelude::*;
 
+#[derive(Properties, PartialEq)]
+pub struct PostProps {
+    pub callback: Callback<MouseEvent>,
+}
+
 #[function_component(Post)]
-pub fn post() -> Html {
+pub fn post(props: &PostProps) -> Html {
     html! {
       <div
         style="
@@ -83,7 +88,7 @@ pub fn post() -> Html {
               width: 50px;
             "
         >
-          <ExpandMoreButton/>
+          <ExpandMoreButton callback={props.callback.clone()}/>
           <ShareButton/>
           <FavoriteButton/>
         </div>
