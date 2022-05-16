@@ -1,4 +1,4 @@
-use crate::components::feed::button_wrapper::ButtonWrapper;
+use crate::components::feed::buttons::button_wrapper::ButtonWrapper;
 use crate::components::svg::expand_more::ExpandMore;
 use yew::{function_component, html, Callback};
 

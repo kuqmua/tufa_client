@@ -9,7 +9,6 @@ pub struct ButtonWrapperProps {
 
 #[function_component(ButtonWrapper)]
 pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
-  
     html! {
       <button
         style="

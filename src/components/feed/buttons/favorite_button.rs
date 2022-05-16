@@ -1,4 +1,4 @@
-use crate::components::feed::button_wrapper::ButtonWrapper;
+use crate::components::feed::buttons::button_wrapper::ButtonWrapper;
 use crate::components::svg::favorite::Favorite;
 use crate::components::svg::favorite_border::FavoriteBorder;
 use yew::{function_component, html, use_state, Callback};

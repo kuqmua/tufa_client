@@ -1,6 +1,6 @@
-use crate::components::feed::expand_more_button::ExpandMoreButton;
-use crate::components::feed::favorite_button::FavoriteButton;
-use crate::components::feed::share_button::ShareButton;
+use crate::components::feed::buttons::expand_more_button::ExpandMoreButton;
+use crate::components::feed::buttons::favorite_button::FavoriteButton;
+use crate::components::feed::buttons::share_button::ShareButton;
 use yew::prelude::*;
 
 #[function_component(Post)]
