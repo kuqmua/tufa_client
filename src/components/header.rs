@@ -9,50 +9,82 @@ pub fn header() -> Html {
     html! {
       <header
         style="
-          height: 50px; 
           width: 100%;
           min-width: 470px;
           background-color: #16202A;
-          border-bottom: 1px solid #1E2832;
           position: fixed;
+          display: flex;
+          flex-direction: column;
         ">
           <div
             style="
+              height: 42px; 
+              border-bottom: 1px solid #1E2832;
               display: flex;
-              height: 100%; 
-              justify-content: space-between; 
-              align-items: center;
-              padding-right: 20px;
-              padding-left: 20px;
+              flex-direction: column;
             "
           >
             <div
               style="
-                padding: 8px;
+                display: flex;
+                height: 100%; 
+                justify-content: space-between; 
+                align-items: center;
+                padding-right: 20px;
+                padding-left: 20px;
               "
             >
-              <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
-            </div>
-            <div
-              style="
-                font-size: 30px;
-                font-family: 'Koulen', cursive;
-                color: white;
-              "
-            >
-              {"Tufa Client"}
-            </div>
-            <div
-              style="
-                color: white
-              "
-            >
-            //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
-            //     {"----------"}
-            //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
-              <PersonOutline height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
+              </div>
+              <div
+                style="
+                  font-size: 30px;
+                  font-family: 'Koulen', cursive;
+                  color: white;
+                "
+              >
+                {"Tufa Client"}
+              </div>
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+          //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
+          //     {"----------"}
+          //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
+                <PersonOutline height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
+              </div>
             </div>
           </div>
-        </header>
+          // width: 100%;
+          // display: flex;
+          // justify-content: flex-end;
+          <div
+            style="
+              position: absolute;
+              top: 50px;
+              right: 0px;
+            "
+          >
+            <div
+              style="
+                height: 400px;
+                width: 200px;
+                background-color: white;
+              "
+            >
+            </div>
+          </div>
+      </header>
     }
 }
