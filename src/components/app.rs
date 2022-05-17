@@ -1,4 +1,4 @@
-use crate::components::header::Header;
+use crate::components::header::component::Header;
 use crate::routes::routes::Routes;
 use crate::routes::switch_routes::switch_routes;
 use crate::store::init;
