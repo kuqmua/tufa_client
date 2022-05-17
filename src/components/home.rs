@@ -12,7 +12,7 @@ pub fn home() -> Html {
   html! {
     <div
       style="
-        padding-top: 50px;
+        padding-top: 43px;
       "
     >
       <PostsList callback={change_show_expander}/>
