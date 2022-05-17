@@ -66,9 +66,6 @@ pub fn header() -> Html {
               </div>
             </div>
           </div>
-          // width: 100%;
-          // display: flex;
-          // justify-content: flex-end;
           <div
             style="
               position: absolute;
@@ -80,8 +77,28 @@ pub fn header() -> Html {
               border-left: 1px solid #222c36;
               border-bottom: 1px solid #222c36;
               background-color: #16202A;
+              display: flex;
+              justify-content: space-evenly;
+              flex-direction: column;
+              padding: 13px;
             "
           >
+            <div
+              style="
+                color: white;
+                display: flex;
+                flex-direction: row;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-left: 8px;
+                padding-right: 8px;
+                background-color: #ffffff33;
+                border-radius: 5px 5px 5px 5px;
+                height: 25px;
+              "
+            >
+              {"Logout"}
+            </div>
           </div>
       </header>
     }
