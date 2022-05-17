@@ -1,6 +1,6 @@
 use crate::components::svg::menu::Menu;
-use crate::components::svg::person_outline::PersonOutline;
 use crate::components::profile_actions_panel::ProfileActionsPanel;
+use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
 use web_sys::MouseEvent;
 // use crate::routes::routes::Routes;
 use yew::{function_component, html, use_state, Callback};
@@ -59,18 +59,10 @@ pub fn header() -> Html {
               >
                 {"Tufa Client"}
               </div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                "
-              >
-          //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
-          //     {"----------"}
-          //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
-                <PersonOutline height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
-              </div>
+          // //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
+          // //     {"----------"}
+          // //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
+              <PersonOutlineButton callback={change_profile_actions_panel_opened}/>
             </div>
           </div>
           if *profile_actions_panel_opened {
