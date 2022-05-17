@@ -7,3 +7,4 @@ pub mod examples;
 pub mod home;
 pub mod feed;
 pub mod svg;
+pub mod profile_actions_panel;
