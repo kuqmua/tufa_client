@@ -19,7 +19,7 @@ pub fn header() -> Html {
           <div
             style="
               height: 42px; 
-              border-bottom: 1px solid #1E2832;
+              border-bottom: 1px solid #222c36;
               display: flex;
               flex-direction: column;
             "
@@ -72,18 +72,16 @@ pub fn header() -> Html {
           <div
             style="
               position: absolute;
-              top: 50px;
+              top: 43px;
               right: 0px;
+              height: 400px;
+              width: 200px;
+              border-radius: 0px 0px 0px 20px;
+              border-left: 1px solid #222c36;
+              border-bottom: 1px solid #222c36;
+              background-color: #16202A;
             "
           >
-            <div
-              style="
-                height: 400px;
-                width: 200px;
-                background-color: white;
-              "
-            >
-            </div>
           </div>
       </header>
     }

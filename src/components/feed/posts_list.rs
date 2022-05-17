@@ -21,8 +21,8 @@ pub fn posts_list(props: &PostsListProps) -> Html {
           min-width: 470px;
           padding-left: 8px;
           padding-right: 8px;
-          border-right: 1px solid #1E2832;
-          border-left: 1px solid #1E2832;
+          border-right: 1px solid #222c36;
+          border-left: 1px solid #222c36;
         "
       >
         {posts_vec}

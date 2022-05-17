@@ -13,14 +13,14 @@ pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
       <button
         style="
           border-radius: 10px;
-          border: 1px solid #1E2832;
+          border: 1px solid #222c36;
           width: 35px;
           height: 35px;
           margin-bottom: 8px;
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #1E2832;
+          background-color: #222c36;
         "
         onclick={&props.callback}
       >
