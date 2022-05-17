@@ -1,5 +1,6 @@
 use crate::components::svg::menu::Menu;
 use crate::components::svg::person_outline::PersonOutline;
+use crate::components::svg::logout::Logout;
 // use crate::routes::routes::Routes;
 use yew::{function_component, html};
 // use yew_router::prelude::Link;
@@ -10,7 +11,7 @@ pub fn header() -> Html {
       <header
         style="
           width: 100%;
-          min-width: 470px;
+          min-width: 250px;
           background-color: #16202A;
           position: fixed;
           display: flex;
@@ -72,7 +73,7 @@ pub fn header() -> Html {
               top: 43px;
               right: 0px;
               height: 400px;
-              width: 200px;
+              width: 190px;
               border-radius: 0px 0px 0px 20px;
               border-left: 1px solid #222c36;
               border-bottom: 1px solid #222c36;
@@ -90,14 +91,26 @@ pub fn header() -> Html {
                 flex-direction: row;
                 padding-top: 5px;
                 padding-bottom: 5px;
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 10px;
+                padding-right: 10px;
                 background-color: #ffffff33;
                 border-radius: 5px 5px 5px 5px;
                 height: 25px;
+                display: flex;
+                align-items: center;
               "
             >
-              {"Logout"}
+              <Logout height={"22px".to_owned()} width={"22px".to_owned()} fill={"white".to_owned()}/>
+              <div
+                style="
+                  color: white;
+                  margin-left: 10px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                {"Logout"}
+              </div>
             </div>
           </div>
       </header>
