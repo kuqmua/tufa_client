@@ -1,6 +1,7 @@
 use crate::components::feed::buttons::button_wrapper::ButtonWrapper;
 use crate::components::svg::favorite::Favorite;
 use crate::components::svg::favorite_border::FavoriteBorder;
+use crate::constants::FEED_ICONS_COLOR;
 use yew::{function_component, html, use_state, Callback};
 
 #[function_component(FavoriteButton)]
@@ -14,7 +15,7 @@ pub fn favorite_button() -> Html {
     let html_handle = if *is_liked {
         html! {<Favorite height={icon_size.clone()} width={icon_size} fill={"#ffffa2".to_owned()}/>}
     } else {
-        html! {<FavoriteBorder height={icon_size.clone()} width={icon_size} fill={"#5B6267".to_owned()}/>}
+        html! {<FavoriteBorder height={icon_size.clone()} width={icon_size} fill={FEED_ICONS_COLOR.to_owned()}/>}
     };
     html! {
       <ButtonWrapper inner_html={html_handle} callback={change_is_liked}/>
