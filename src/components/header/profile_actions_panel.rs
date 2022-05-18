@@ -1,25 +1,30 @@
 use crate::components::svg::logout::Logout;
+use crate::constants::INTERFACE_LINES_COLOR;
 use yew::{function_component, html};
 
 #[function_component(ProfileActionsPanel)]
 pub fn profile_actions_panel() -> Html {
+    let style_handle = format!(
+        "
+        position: absolute;
+        top: 43px;
+        right: 0px;
+        height: 400px;
+        width: 190px;
+        border-radius: 0px 0px 0px 20px;
+        border-left: 1px solid {};
+        border-bottom: 1px solid {};
+        background-color: #16202A;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        padding: 13px;
+      ",
+        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
+    );
     html! {
       <div
-        style="
-          position: absolute;
-          top: 43px;
-          right: 0px;
-          height: 400px;
-          width: 190px;
-          border-radius: 0px 0px 0px 20px;
-          border-left: 1px solid #222c36;
-          border-bottom: 1px solid #222c36;
-          background-color: #16202A;
-          display: flex;
-          justify-content: space-evenly;
-          flex-direction: column;
-          padding: 13px;
-        "
+        style={style_handle}
       >
         <div
           style="

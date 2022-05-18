@@ -1,4 +1,5 @@
 use crate::components::feed::post::Post;
+use crate::constants::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 
@@ -9,10 +10,13 @@ pub struct PostsListProps {
 
 #[function_component(PostsList)]
 pub fn posts_list(props: &PostsListProps) -> Html {
-    let posts_vec = vec![html! {<Post callback={props.callback.clone()}/>}, html! {<Post  callback={props.callback.clone()}/>}, html! {<Post  callback={props.callback.clone()}/>}];
-    html! {
-      <div
-        style="
+    let posts_vec = vec![
+        html! {<Post callback={props.callback.clone()}/>},
+        html! {<Post  callback={props.callback.clone()}/>},
+        html! {<Post  callback={props.callback.clone()}/>},
+    ];
+    let style_handle = format!(
+        "
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -21,9 +25,14 @@ pub fn posts_list(props: &PostsListProps) -> Html {
           min-width: 470px;
           padding-left: 8px;
           padding-right: 8px;
-          border-right: 1px solid #222c36;
-          border-left: 1px solid #222c36;
-        "
+          border-right: 1px solid {};
+          border-left: 1px solid {};
+        ",
+        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
+    );
+    html! {
+      <div
+        style={style_handle}
       >
         {posts_vec}
       </div>

@@ -1,6 +1,7 @@
 use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
 use crate::components::header::profile_actions_panel::ProfileActionsPanel;
+use crate::constants::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
 // use crate::routes::routes::Routes;
 use yew::{function_component, html, use_state, Callback};
@@ -16,6 +17,15 @@ pub fn header() -> Html {
     let do_something_with_menu: Callback<MouseEvent> = Callback::from(move |_| {
         println!("this message will not be shown");
     });
+    let header_div_style_handle = format!(
+        "
+          height: 42px; 
+          border-bottom: 1px solid {};
+          display: flex;
+          flex-direction: column;
+        ",
+        INTERFACE_LINES_COLOR
+    );
     html! {
       <header
         style="
@@ -27,12 +37,7 @@ pub fn header() -> Html {
           flex-direction: column;
         ">
           <div
-            style="
-              height: 42px; 
-              border-bottom: 1px solid #222c36;
-              display: flex;
-              flex-direction: column;
-            "
+            style={header_div_style_handle}
           >
             <div
               style="
