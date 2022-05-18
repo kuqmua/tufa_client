@@ -1,6 +1,7 @@
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
 use crate::components::header::profile_actions_panel::ProfileActionsPanel;
 use crate::components::svg::menu::Menu;
+use crate::constants::HEADER_ICONS_COLOR;
 use web_sys::MouseEvent;
 // use crate::routes::routes::Routes;
 use yew::{function_component, html, use_state, Callback};
@@ -48,7 +49,7 @@ pub fn header() -> Html {
                   align-items: center;
                 "
               >
-                <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={"#5B6267".to_owned()}/>
+                <Menu height={"26px".to_owned()} width={"26px".to_owned()} fill={HEADER_ICONS_COLOR.to_owned()}/>
               </div>
               <div
                 style="
