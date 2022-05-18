@@ -1,10 +1,9 @@
 pub mod app;
 pub mod authorization;
-pub mod header;
-pub mod secure;
-pub mod svg_icon_wrapper;
 pub mod examples;
-pub mod home;
 pub mod feed;
+pub mod header;
+pub mod home;
+pub mod secure;
 pub mod svg;
-pub mod profile_actions_panel;
+pub mod svg_icon_wrapper;

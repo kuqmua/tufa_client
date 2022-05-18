@@ -1,5 +1,5 @@
-use yew::{function_component, html};
 use crate::components::svg::logout::Logout;
+use yew::{function_component, html};
 
 #[function_component(ProfileActionsPanel)]
 pub fn profile_actions_panel() -> Html {
