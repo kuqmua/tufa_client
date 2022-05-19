@@ -1,9 +1,14 @@
 use crate::constants::INTERFACE_LINES_COLOR;
-use yew::{function_component, html};
+use yew::{function_component, html, Properties, Html};
 use crate::components::feed::expander::touch_line::TouchLine;
 
+#[derive(Properties, PartialEq)]
+pub struct ExpanderProps {
+  pub inner_html: Html,
+}
+
 #[function_component(Expander)]
-pub fn expander() -> Html {
+pub fn expander(props: &ExpanderProps) -> Html {
     let style_handle = format!(
       "
         height: 400px; 
@@ -28,33 +33,7 @@ pub fn expander() -> Html {
         style={style_handle}
       >
           <TouchLine/>
-          <div
-            style="
-              display: flex;
-              justify-content: space-evenly;
-              align-items: center;
-              flex-direction: column;
-              height: 100%;
-          ">
-            <div
-              style="
-                color: white
-            ">
-                {"one"}
-            </div>
-            <div
-              style="
-                color: white
-            ">
-              {"two"}
-            </div>
-            <div
-              style="
-                color: white
-            ">
-              {"three"}
-            </div>
-          </div>
+          {props.inner_html.clone()}
       </div>
     }
 }
