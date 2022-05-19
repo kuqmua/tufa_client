@@ -1,4 +1,4 @@
-use crate::components::feed::expander::Expander;
+use crate::components::feed::expander::component::Expander;
 use crate::components::feed::posts_list::PostsList;
 use yew::{function_component, html, use_state, Callback};
 
