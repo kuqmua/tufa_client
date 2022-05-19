@@ -7,3 +7,4 @@ pub const ACTIVE_COLOR: &str = "#ffffa2";
 pub const BACKGROUND_COLOR: &str = "#16202A";
 pub const FEED_WIDTH_PX: u32 = 470;
 pub const DEFAULT_PADDING_PX: u32 = 8;
+pub const HEADER_HEIGHT_PX: u32 = 42;
