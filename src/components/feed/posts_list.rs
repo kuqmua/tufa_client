@@ -1,5 +1,6 @@
 use crate::components::feed::post::Post;
 use crate::constants::INTERFACE_LINES_COLOR;
+use crate::constants::FEED_WIDTH;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 
@@ -22,14 +23,14 @@ pub fn posts_list(props: &PostsListProps) -> Html {
           flex-direction: column;
           justify-content: center;
           align-items: flex-start;
-          width: 470px;
-          min-width: 470px;
+          width: {}px;
+          min-width: {}px;
           padding-left: 8px;
           padding-right: 8px;
           border-right: 1px solid {};
           border-left: 1px solid {};
         ",
-        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
+        FEED_WIDTH, FEED_WIDTH, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
     );
     html! {
       <div
