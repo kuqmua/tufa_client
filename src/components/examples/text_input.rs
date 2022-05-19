@@ -1,4 +1,4 @@
-use crate::components::secure::ContextProviderStruct;
+use crate::components::examples::secure::ContextProviderStruct;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;

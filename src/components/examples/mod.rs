@@ -11,3 +11,4 @@ pub mod without_html_tag_example;
 pub mod example;
 pub mod display_credentials;
 pub mod markdown_like;
+pub mod secure;
