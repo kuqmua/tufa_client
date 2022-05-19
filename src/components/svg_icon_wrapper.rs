@@ -3,6 +3,7 @@ use stylist::Style;
 use yew::html;
 use yew::prelude::*;
 use yew::Html;
+use crate::components::svg::person_outline::PersonOutline;
 
 pub enum Msg {
     AddOne,
@@ -56,28 +57,29 @@ impl Component for SvgIconWrapper {
           <div
             class={self.stylesheet.clone()}
           >
-            <svg
-              style="
-                width: 75%;
-                height: 75%;
-                fill: currentColor;
-                width: 1em;
-                height: 1em;
-                display: inline-block;
-                font-size: 1.5rem;
-                transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-                flex-shrink: 0;
-                user-select: none;
-              "
-              focusable="false"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-              >
-              </path>
-            </svg>
+            // <svg
+            //   style="
+            //     width: 75%;
+            //     height: 75%;
+            //     fill: currentColor;
+            //     width: 1em;
+            //     height: 1em;
+            //     display: inline-block;
+            //     font-size: 1.5rem;
+            //     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            //     flex-shrink: 0;
+            //     user-select: none;
+            //   "
+            //   focusable="false"
+            //   viewBox="0 0 24 24"
+            //   aria-hidden="true"
+            // >
+            //   <path
+            //     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+            //   >
+            //   </path>
+            // </svg>
+            <PersonOutline height={"75%"} width={"75%"} fill={"white".to_owned()}/>
           </div>
         }
     }
