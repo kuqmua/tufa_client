@@ -2,9 +2,11 @@ use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
 use crate::components::header::profile_actions_panel::ProfileActionsPanel;
 use crate::constants::INTERFACE_LINES_COLOR;
+use crate::constants::HEADER_HEIGHT_PX;
+use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use web_sys::MouseEvent;
-// use crate::routes::routes::Routes;
 use yew::{function_component, html, use_state, Callback};
+// use crate::routes::routes::Routes;
 // use yew_router::prelude::Link;
 
 #[function_component(Header)]
@@ -19,12 +21,12 @@ pub fn header() -> Html {
     });
     let header_div_style_handle = format!(
         "
-          height: 42px; 
-          border-bottom: 1px solid {};
+          height: {}px; 
+          border-bottom: {}px solid {};
           display: flex;
           flex-direction: column;
         ",
-        INTERFACE_LINES_COLOR
+        HEADER_HEIGHT_PX, HEADER_BORDER_BOTTOM_PX, INTERFACE_LINES_COLOR
     );
     html! {
       <header
