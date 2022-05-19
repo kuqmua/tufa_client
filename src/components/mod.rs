@@ -6,4 +6,3 @@ pub mod header;
 pub mod home;
 pub mod secure;
 pub mod svg;
-pub mod svg_icon_wrapper;

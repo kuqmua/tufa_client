@@ -1,4 +1,4 @@
-use crate::components::svg_icon_wrapper::SvgIconWrapper;
+use crate::components::authorization::svg_icon_wrapper::SvgIconWrapper;
 use crate::routes::routes::Routes;
 use yew::prelude::*;
 use yew_router::prelude::*;
