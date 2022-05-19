@@ -4,3 +4,4 @@
 * make stule struct with methods like in flutter
 * make common padding/margin constants
 * expander as wrapper component
+* material design spiner
