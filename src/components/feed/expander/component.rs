@@ -1,4 +1,5 @@
 use crate::constants::INTERFACE_LINES_COLOR;
+use crate::constants::BACKGROUND_COLOR;
 use yew::{function_component, html, Properties, Html};
 use crate::components::feed::expander::touch_line::TouchLine;
 
@@ -15,7 +16,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
         height: 400px; 
         width: 466px;
         min-width: 466px;
-        background-color: #16202A;
+        background-color: {};
         border-top: 1px solid {};
         border-left: 1px solid {};
         border-right: 1px solid {};
@@ -27,7 +28,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
         flex-direction: column;
         padding: 10px;
       ",
-        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, border_radius, border_radius
+      BACKGROUND_COLOR, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, border_radius, border_radius
     );
     html! {
       <div
