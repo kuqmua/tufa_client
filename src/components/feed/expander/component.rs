@@ -1,10 +1,11 @@
 use crate::constants::INTERFACE_LINES_COLOR;
 use yew::{function_component, html};
+use crate::components::feed::expander::touch_line::TouchLine;
 
 #[function_component(Expander)]
 pub fn expander() -> Html {
     let style_handle = format!(
-        "
+      "
         height: 400px; 
         width: 466px;
         min-width: 466px;
@@ -26,13 +27,7 @@ pub fn expander() -> Html {
       <div
         style={style_handle}
       >
-          <div
-            style="
-              background-color: #ffffa2;
-              height: 5px;
-              width: 60px;
-              border-radius: 3px;
-          "/>
+          <TouchLine/>
           <div
             style="
               display: flex;
