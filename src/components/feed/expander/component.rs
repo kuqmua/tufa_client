@@ -9,6 +9,7 @@ pub struct ExpanderProps {
 
 #[function_component(Expander)]
 pub fn expander(props: &ExpanderProps) -> Html {
+    let border_radius = "30px";
     let style_handle = format!(
       "
         height: 400px; 
@@ -19,14 +20,14 @@ pub fn expander(props: &ExpanderProps) -> Html {
         border-left: 1px solid {};
         border-right: 1px solid {};
         position: fixed;
-        border-radius: 30px 30px 0px 0px;
+        border-radius: {} {} 0px 0px;
         bottom: 0px;
         display: flex;
         align-items: center;
         flex-direction: column;
         padding: 10px;
       ",
-        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
+        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, border_radius, border_radius
     );
     html! {
       <div
