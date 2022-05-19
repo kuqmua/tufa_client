@@ -1,6 +1,6 @@
 use crate::components::feed::post::Post;
 use crate::constants::INTERFACE_LINES_COLOR;
-use crate::constants::FEED_WIDTH;
+use crate::constants::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 
@@ -30,7 +30,7 @@ pub fn posts_list(props: &PostsListProps) -> Html {
           border-right: 1px solid {};
           border-left: 1px solid {};
         ",
-        FEED_WIDTH, FEED_WIDTH, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
+        FEED_WIDTH_PX, FEED_WIDTH_PX, INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
     );
     html! {
       <div
