@@ -7,6 +7,7 @@ pub struct SpinnerProps {
     pub fill: String,
 }
 // was not in material design
+//https://codepen.io/mrrocks/pen/ExLovj
 #[function_component(Spinner)]
 pub fn spinner(props: &SpinnerProps) -> Html {
     html! {
