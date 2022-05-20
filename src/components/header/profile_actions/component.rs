@@ -2,8 +2,8 @@ use crate::components::svg::logout::Logout;
 use crate::constants::INTERFACE_LINES_COLOR;
 use yew::{function_component, html};
 
-#[function_component(ProfileActionsPanel)]
-pub fn profile_actions_panel() -> Html {
+#[function_component(ProfileActions)]
+pub fn profile_actions() -> Html {
     let style_handle = format!(
         "
         position: absolute;

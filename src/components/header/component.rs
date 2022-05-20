@@ -1,6 +1,6 @@
 use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
-use crate::components::header::profile_actions_panel::ProfileActionsPanel;
+use crate::components::header::profile_actions::component::ProfileActions;
 use crate::constants::INTERFACE_LINES_COLOR;
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
@@ -68,7 +68,7 @@ pub fn header() -> Html {
             </div>
           </div>
           if *profile_actions_panel_opened {
-            <ProfileActionsPanel/>
+            <ProfileActions/>
           }
       </header>
     }
