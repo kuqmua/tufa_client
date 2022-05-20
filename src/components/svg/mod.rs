@@ -5,3 +5,4 @@ pub mod menu;
 pub mod person_outline;
 pub mod share;
 pub mod logout;
+pub mod spinner;
