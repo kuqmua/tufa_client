@@ -1,5 +1,6 @@
 use crate::routes::routes::Routes;
 use crate::constants::INTERFACE_LINES_COLOR;
+use crate::constants::BACKGROUND_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback};
 use yew_router::history::History;
@@ -18,13 +19,13 @@ pub fn profile_actions() -> Html {
         border-radius: 0px 0px 0px 20px;
         border-left: 1px solid {};
         border-bottom: 1px solid {};
-        background-color: #16202A;
+        background-color: {};
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
         padding: 13px;
       ",
-        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
+        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, BACKGROUND_COLOR
     );
     let history = use_history().unwrap();
     let go_to_sign_in: Callback<MouseEvent> = Callback::once(move |_| {
