@@ -1,6 +1,10 @@
-use crate::components::svg::logout::Logout;
+use crate::routes::routes::Routes;
 use crate::constants::INTERFACE_LINES_COLOR;
-use yew::{function_component, html};
+use web_sys::MouseEvent;
+use yew::{function_component, html, Callback};
+use yew_router::history::History;
+use yew_router::hooks::use_history;
+use crate::components::header::profile_actions::buttons::logout_button::LogoutButton;
 
 #[function_component(ProfileActions)]
 pub fn profile_actions() -> Html {
@@ -22,38 +26,15 @@ pub fn profile_actions() -> Html {
       ",
         INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR
     );
+    let history = use_history().unwrap();
+    let go_to_sign_in: Callback<MouseEvent> = Callback::once(move |_| {
+      history.push(Routes::SignIn);
+    });
     html! {
       <div
         style={style_handle}
       >
-        <div
-          style="
-            color: white;
-            display: flex;
-            flex-direction: row;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            background-color: #ffffff33;
-            border-radius: 5px 5px 5px 5px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-          "
-        >
-          <Logout height={"22px".to_owned()} width={"22px".to_owned()} fill={"white".to_owned()}/>
-          <div
-            style="
-              color: white;
-              margin-left: 10px;
-              display: flex;
-              align-items: center;
-            "
-          >
-            {"Logout"}
-          </div>
-        </div>
+        <LogoutButton callback={go_to_sign_in}/>
       </div>
     }
 }
