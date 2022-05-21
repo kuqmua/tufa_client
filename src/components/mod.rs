@@ -5,3 +5,4 @@ pub mod feed;
 pub mod header;
 pub mod home;
 pub mod svg;
+pub mod drawer;
