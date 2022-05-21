@@ -14,6 +14,6 @@ pub fn person_outline_button(props: &PersonOutlineButtonProps) -> Html {
     let icon_size = "26px".to_owned();
     let html_handle = html! {<PersonOutline height={icon_size.clone()} width={icon_size} fill={HEADER_ICONS_COLOR.to_owned()}/>};
     html! {
-      <ButtonWrapper inner_html={html_handle} callback={props.callback.clone()}/>
+      <ButtonWrapper inner_html={html_handle} callback={props.callback.clone()} id={"person_outline_button".to_owned()}/>
     }
 }

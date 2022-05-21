@@ -6,6 +6,7 @@ use crate::constants::BACKGROUND_COLOR;
 pub struct ButtonWrapperProps {
     pub inner_html: Html,
     pub callback: Callback<MouseEvent>,
+    pub id: String,
 }
 
 #[function_component(ButtonWrapper)]
@@ -27,7 +28,8 @@ pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
     html! {
       <button
         style={style_handle}
-        onclick={&props.callback}
+        onclick={props.callback.clone()}
+        id={props.id.clone()}
       >
        {props.inner_html.clone()}
       </button>
