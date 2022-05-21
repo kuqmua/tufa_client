@@ -5,19 +5,19 @@ use crate::constants::INTERFACE_LINES_COLOR;
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use web_sys::MouseEvent;
-use yew::{function_component, html, use_state, Callback};
-// use crate::routes::routes::Routes;
-// use yew_router::prelude::Link;
+use yew::{function_component, html, use_state, Callback, Properties};
+
+#[derive(Properties, PartialEq)]
+pub struct HeaderProps {
+    pub callback: Callback<MouseEvent>,
+}
 
 #[function_component(Header)]
-pub fn header() -> Html {
+pub fn header(props: &HeaderProps) -> Html {
     let profile_actions_panel_opened = use_state(|| false);
     let profile_actions_panel_opened_cloned = profile_actions_panel_opened.clone();
     let change_profile_actions_panel_opened: Callback<MouseEvent> = Callback::from(move |_| {
         profile_actions_panel_opened_cloned.set(!*profile_actions_panel_opened_cloned);
-    });
-    let do_something_with_menu: Callback<MouseEvent> = Callback::from(move |_| {
-        println!("this message will not be shown");
     });
     let header_div_style_handle = format!(
         "
@@ -51,7 +51,7 @@ pub fn header() -> Html {
                 padding-left: 20px;
               "
             >
-              <MenuButton callback={do_something_with_menu}/>
+              <MenuButton callback={&props.callback}/>
               <div
                 style="
                   font-size: 30px;
