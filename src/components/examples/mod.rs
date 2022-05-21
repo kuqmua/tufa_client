@@ -12,3 +12,4 @@ pub mod example;
 pub mod display_credentials;
 pub mod markdown_like;
 pub mod secure;
+pub mod persistent_store_example;
