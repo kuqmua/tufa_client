@@ -1,6 +1,7 @@
 use crate::components::header::profile_actions::buttons::logout_button::LogoutButton;
 use crate::components::header::profile_actions::buttons::settings_button::SettingsButton;
 use crate::constants::BACKGROUND_COLOR;
+use crate::constants::DEFAULT_PADDING_PX;
 use crate::constants::INTERFACE_LINES_COLOR;
 use crate::routes::routes::Routes;
 use web_sys::MouseEvent;
@@ -10,6 +11,9 @@ use yew_router::hooks::use_history;
 
 #[function_component(ProfileActions)]
 pub fn profile_actions() -> Html {
+    let padding: u32 = 13;
+    //todo add assertion here;
+    let padding_bottom = padding - DEFAULT_PADDING_PX;
     let style_handle = format!(
         "
         position: absolute;
@@ -25,8 +29,12 @@ pub fn profile_actions() -> Html {
         justify-content: space-evenly;
         flex-direction: column;
         padding: 13px;
+        padding-top: 13px;
+        padding-left: 13px;
+        padding-right: 13px;
+        padding-bottom: {}px;
       ",
-        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, BACKGROUND_COLOR
+        INTERFACE_LINES_COLOR, INTERFACE_LINES_COLOR, BACKGROUND_COLOR, padding_bottom
     );
     let history = use_history().unwrap();
     let go_to_sign_in: Callback<MouseEvent> = Callback::once(move |_| {
