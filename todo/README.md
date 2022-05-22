@@ -5,3 +5,6 @@
 * make common padding/margin constants
 * expander as wrapper component
 * material design spiner
+* proc macro to implement component around all the buttons inside </br>
+https://fonts.google.com/icons?icon.set=Material+Icons </br>
+like make http, save icons, open them, rewrite and make component around it inside namespace
