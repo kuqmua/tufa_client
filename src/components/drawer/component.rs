@@ -5,8 +5,7 @@ use yew::{function_component, html, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
-    pub aside_navigation_style: String,
-    pub aside_label_style: String,
+    pub is_drawer_open: bool,
     pub callback: Callback<MouseEvent>,
 }
 
@@ -25,10 +24,44 @@ pub fn drawer(props: &DrawerProps) -> Html {
       ",
         SHADOW_COLOR
     );
+    let transform = if props.is_drawer_open {
+        "none".to_string()
+    } else {
+        "translateX(-100%)".to_string()
+    };
+    let aside_navigation_style = format!(
+        "
+      position: fixed;
+      z-index: 99;
+      width: 350px;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      transform: {};
+      display: grid;
+      transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    ",
+        transform
+    );
+    let aside_label_style = format!(
+        "
+      position: fixed;
+      z-index: 98;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      transform: {};
+      display: grid;
+      opacity: 0.5;
+  
+    ",
+        transform
+    );
     html! {
       <>
         <aside
-          style={props.aside_navigation_style.clone()}
+          style={aside_navigation_style.clone()}
         >
           <nav
             style={nav_style}
@@ -36,7 +69,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
           </nav>
         </aside>
         <aside
-          style={props.aside_label_style.clone()}
+          style={aside_label_style.clone()}
         >
           <label
             for="menu-opener"

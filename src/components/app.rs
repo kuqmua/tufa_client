@@ -8,50 +8,17 @@ use yew_router::prelude::*;
 
 #[function_component(App)]
 pub fn app() -> Html {
-    let drawer_opened = use_state(|| false);
-    let drawer_opened_cloned = drawer_opened.clone();
-    let drawer_opened_cloned_second = drawer_opened;
+    let is_drawer_open = use_state(|| false);
+    let is_drawer_open_cloned_first = is_drawer_open.clone();
+    let is_drawer_open_cloned_second = is_drawer_open;
     let oninput = Callback::from(move |_| {
-        drawer_opened_cloned.set(!*drawer_opened_cloned);
+        is_drawer_open_cloned_first.set(!*is_drawer_open_cloned_first);
     });
-    let transform = if *drawer_opened_cloned_second {
-        "none".to_string()
-    } else {
-        "translateX(-100%)".to_string()
-    };
-    let aside_navigation_style = format!(
-        "
-      position: fixed;
-      z-index: 99;
-      width: 350px;
-      height: 100%;
-      top: 0;
-      bottom: 0;
-      transform: {};
-      display: grid;
-      transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    ",
-        transform
-    );
-    let aside_label_style = format!(
-        "
-      position: fixed;
-      z-index: 98;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      bottom: 0;
-      transform: {};
-      display: grid;
-      opacity: 0.5;
-  
-    ",
-        transform
-    );
+
     html! {
       <BrowserRouter>
         <Header callback={oninput.clone()}/>
-        <Drawer aside_navigation_style={aside_navigation_style} aside_label_style={aside_label_style} callback={oninput}/>
+        <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
         <div
           style="
           width: 100%; 
