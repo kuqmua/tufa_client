@@ -1,4 +1,5 @@
 use crate::constants::BACKGROUND_COLOR;
+use crate::constants::DEFAULT_PADDING_PX;
 use crate::constants::SHADOW_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
@@ -15,8 +16,12 @@ pub fn drawer(props: &DrawerProps) -> Html {
         "
         transition: all 500ms cubic-bezier(0.4, 0.0, 0.2, 1);
         background-color: {};
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: {}px;
       ",
-        BACKGROUND_COLOR
+        BACKGROUND_COLOR, DEFAULT_PADDING_PX
     );
     let label_style = format!(
         "
@@ -67,6 +72,14 @@ pub fn drawer(props: &DrawerProps) -> Html {
           <nav
             style={nav_style}
           >
+            <div
+              style="
+                width: 100px;
+                height: 100%;
+                background-color: grey;
+              "
+            >
+            </div>
           </nav>
         </aside>
         <aside
