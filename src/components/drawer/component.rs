@@ -1,5 +1,7 @@
+use crate::constants::BACKGROUND_COLOR;
+use crate::constants::SHADOW_COLOR;
 use web_sys::MouseEvent;
-use yew::{function_component, html, Properties, Callback};
+use yew::{function_component, html, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
@@ -9,23 +11,31 @@ pub struct DrawerProps {
 
 #[function_component(Drawer)]
 pub fn drawer(props: &DrawerProps) -> Html {
+    let nav_style = format!(
+        "
+        transition: all 500ms cubic-bezier(0.4, 0.0, 0.2, 1);
+        background-color: {};
+      ",
+        BACKGROUND_COLOR
+    );
+    let label_style = format!(
+        "
+        background-color: {}; 
+        opacity: 0.5;
+      ",
+        SHADOW_COLOR
+    );
     html! {
-      <aside 
+      <aside
         style={props.style.clone()}
       >
-        <nav 
-          style="
-            transition: all 500ms cubic-bezier(0.4, 0.0, 0.2, 1);
-            background-color: rgb(21, 255, 0);
-          "
+        <nav
+          style={nav_style}
         >
         </nav>
-        <label 
-          for="menu-opener" 
-          style="
-            background-color: yellow; 
-            opacity: 0.5;
-          "
+        <label
+          for="menu-opener"
+          style={label_style}
           onclick={&props.callback}
         >
         </label>
