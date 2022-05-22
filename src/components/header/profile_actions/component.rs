@@ -1,11 +1,12 @@
-use crate::routes::routes::Routes;
-use crate::constants::INTERFACE_LINES_COLOR;
+use crate::components::header::profile_actions::buttons::logout_button::LogoutButton;
+use crate::components::header::profile_actions::buttons::settings_button::SettingsButton;
 use crate::constants::BACKGROUND_COLOR;
+use crate::constants::INTERFACE_LINES_COLOR;
+use crate::routes::routes::Routes;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback};
 use yew_router::history::History;
 use yew_router::hooks::use_history;
-use crate::components::header::profile_actions::buttons::logout_button::LogoutButton;
 
 #[function_component(ProfileActions)]
 pub fn profile_actions() -> Html {
@@ -29,12 +30,16 @@ pub fn profile_actions() -> Html {
     );
     let history = use_history().unwrap();
     let go_to_sign_in: Callback<MouseEvent> = Callback::once(move |_| {
-      history.push(Routes::SignIn);
+        history.push(Routes::SignIn);
+    });
+    let go_to_settings: Callback<MouseEvent> = Callback::once(move |_| {
+        // history.push(Routes::Settings);
     });
     html! {
       <div
         style={style_handle}
       >
+        <SettingsButton callback={go_to_settings}/>
         <LogoutButton callback={go_to_sign_in}/>
       </div>
     }
