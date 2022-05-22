@@ -1,8 +1,9 @@
 pub mod expand_more;
 pub mod favorite;
 pub mod favorite_border;
+pub mod logout;
 pub mod menu;
 pub mod person_outline;
+pub mod settings_black;
 pub mod share;
-pub mod logout;
 pub mod spinner;
