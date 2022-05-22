@@ -15,7 +15,7 @@ pub fn profile_actions() -> Html {
         position: absolute;
         top: 43px;
         right: 0px;
-        height: 400px;
+        height: fit-content;
         width: 190px;
         border-radius: 0px 0px 0px 20px;
         border-left: 1px solid {};
