@@ -58,6 +58,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
     ",
         transform
     );
+    //todo gradient color between two states
     html! {
       <>
         <aside
