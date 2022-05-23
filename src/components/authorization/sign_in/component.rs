@@ -53,6 +53,15 @@ pub fn sign_in() -> Html {
                 log!("password", state.password.clone());
             });
     html! {
+      <div
+        style="
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
         <div
             id="root"
             style="
@@ -68,7 +77,7 @@ pub fn sign_in() -> Html {
               -webkit-font-smoothing: antialiased;
               box-sizing: inherit;
             "
-          >
+        >
             <div
               style="
                 max-width: 444px;
@@ -175,5 +184,6 @@ pub fn sign_in() -> Html {
             </div>
             <Link<Routes> to={Routes::Secure}>{ "Go to Secure" }</Link<Routes>>
           </div>
+        </div>
     }
 }

@@ -20,8 +20,10 @@ pub fn app() -> Html {
         <Header callback={oninput.clone()}/>
         <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
         <div
+        //for some reason height: 100%; is not working
           style="
           width: 100%; 
+          height: 100vh;
           display: flex; 
           justify-content: center; 
           flex-direction: column; 
@@ -72,12 +74,12 @@ pub fn app() -> Html {
           //     }
           // }
           {"
-          body { 
-            background-color: #16202A;
-            margin: 0px;
-            padding: 0px;
-          }
-        "}
+            body { 
+              background-color: #16202A;
+              margin: 0px;
+              padding: 0px;
+            }
+          "}
           </style>
           <Switch<Routes> render={Switch::render(switch_routes)} />
         </div>
