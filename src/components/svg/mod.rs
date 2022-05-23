@@ -7,3 +7,4 @@ pub mod person_outline;
 pub mod settings_black;
 pub mod share;
 pub mod spinner;
+pub mod warning;
