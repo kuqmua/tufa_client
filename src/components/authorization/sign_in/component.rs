@@ -55,7 +55,6 @@ pub fn sign_in() -> Html {
             });
     let component = html! {
       <div
-        id="root"
         style="
           display: block;
           color: rgba(0, 53, 0, 0.87);
@@ -68,6 +67,7 @@ pub fn sign_in() -> Html {
           background-color: #fff;
           -webkit-font-smoothing: antialiased;
           box-sizing: inherit;
+          border-radius: 10px;
         "
       >
         <div
@@ -138,11 +138,12 @@ pub fn sign_in() -> Html {
               </div>
               <div
                 style="
-                  justify-content: flex-end;
+                  justify-content: center;
                   width: 100%;
                   display: flex;
                   flex-wrap: wrap;
                   box-sizing: border-box;
+                  margin-bottom: 10px;
                 "
               >
                 <div
@@ -174,7 +175,6 @@ pub fn sign_in() -> Html {
             </form>
           </div>
         </div>
-        <Link<Routes> to={Routes::Secure}>{ "Go to Secure" }</Link<Routes>>
       </div>
     };
     html! {<CenterFormWrapper inner_html={component}/>}
