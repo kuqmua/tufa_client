@@ -53,6 +53,15 @@ pub fn sign_up() -> Html {
                 log!("password", state.password.clone());
             });
     html! {
+      <div
+        style="
+          width: 100%;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
         <div
             id="root"
             style="
@@ -176,5 +185,6 @@ pub fn sign_up() -> Html {
             </div>
             <Link<Routes> to={Routes::Secure}>{ "Go to Secure" }</Link<Routes>>
           </div>
+        </div>
     }
 }
