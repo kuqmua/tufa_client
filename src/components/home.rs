@@ -23,23 +23,20 @@ pub fn home() -> Html {
       ",
       padding_summary
     );
-    //
     let is_drawer_open = use_state(|| false);
     let is_drawer_open_cloned_first = is_drawer_open.clone();
     let is_drawer_open_cloned_second = is_drawer_open;
     let oninput = Callback::from(move |_| {
         is_drawer_open_cloned_first.set(!*is_drawer_open_cloned_first);
     });
-    //
     html! {
       <>
         <Header callback={oninput.clone()}/>
         <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
         <div
-          //for some reason height: 100%; is not working
           style="
             width: 100%; 
-            height: 100vh;
+            height: 100%;
             display: flex; 
             justify-content: center; 
             flex-direction: column; 

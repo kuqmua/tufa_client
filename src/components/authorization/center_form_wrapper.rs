@@ -7,6 +7,7 @@ pub struct CenterFormWrapperProps {
 
 #[function_component(CenterFormWrapper)]
 pub fn center_form_wrapper(props: &CenterFormWrapperProps) -> Html {
+    //for some reason height: 100%; is not working
     html! {
       <div
         style="
