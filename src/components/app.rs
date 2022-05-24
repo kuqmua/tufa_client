@@ -1,35 +1,18 @@
-use crate::components::drawer::component::Drawer;
-use crate::components::header::component::Header;
 use crate::routes::routes::Routes;
 use crate::routes::switch_routes::switch_routes;
-use yew::prelude::*;
-use yew::{function_component, html, Callback};
+use yew::{function_component, html};
 use yew_router::prelude::*;
 
 #[function_component(App)]
 pub fn app() -> Html {
-    let is_drawer_open = use_state(|| false);
-    let is_drawer_open_cloned_first = is_drawer_open.clone();
-    let is_drawer_open_cloned_second = is_drawer_open;
-    let oninput = Callback::from(move |_| {
-        is_drawer_open_cloned_first.set(!*is_drawer_open_cloned_first);
-    });
-
+    // let is_drawer_open = use_state(|| false);
+    // let is_drawer_open_cloned_first = is_drawer_open.clone();
+    // let is_drawer_open_cloned_second = is_drawer_open;
+    // let oninput = Callback::from(move |_| {
+    //     is_drawer_open_cloned_first.set(!*is_drawer_open_cloned_first);
+    // });
     html! {
       <BrowserRouter>
-        <Header callback={oninput.clone()}/>
-        <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
-        <div
-        //for some reason height: 100%; is not working
-          style="
-          width: 100%; 
-          height: 100vh;
-          display: flex; 
-          justify-content: center; 
-          flex-direction: column; 
-          align-items: center;
-        "
-        >
           <style>
           // body {
           //     background: linear-gradient(270deg, #4ad2af, #ff0000);
@@ -82,7 +65,6 @@ pub fn app() -> Html {
           "}
           </style>
           <Switch<Routes> render={Switch::render(switch_routes)} />
-        </div>
       </BrowserRouter>
     }
 }
