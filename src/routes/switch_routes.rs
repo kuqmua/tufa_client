@@ -36,8 +36,22 @@ pub fn switch_routes(routes: &Routes) -> Html {
             <Secure first="my_first_prop" color={Color::Ok} on_load={main_title_head} onsubmit={custom_from_submit}/>
         },
         Routes::NotFound => html! {
-           <div>
-              <h1>{ "404" }</h1>
+           <div
+             style="
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               flex-direction: column;
+               height: 100vh;
+               width: 100%;
+             "
+           >
+              <h1
+                style="
+                  color: white;
+                  padding: 10px;
+                "
+              >{ "404" }</h1>
               <Link<Routes> to={Routes::SignUp}>{ "click here to go to sign up" }</Link<Routes>>
            </div>
         },
