@@ -35,11 +35,11 @@ pub fn drawer(props: &DrawerProps) -> Html {
     if props.is_drawer_open {
       transform = "none".to_string();
       opacity = "1".to_string();
-      animation = "taadaa 10s".to_string();
+      animation = "".to_string();
     } else {
       transform = "translateX(-100%)".to_string();
       opacity = "0".to_string();
-      animation = "".to_string();
+      animation = "taadaa 5s".to_string();
     };
   //   let transform = if props.is_drawer_open {
   //     // "none".to_string()
@@ -57,7 +57,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
       bottom: 0;
       transform: {};
       display: grid;
-      transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transition: transform 5s cubic-bezier(0.4, 0.0, 0.2, 1);
     ",
         transform
     );
@@ -73,6 +73,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
       display: grid;
       
       animation: {};
+      transition: transform 5s cubic-bezier(0.4, 0.0, 0.2, 1);
     ",
         transform, 
         // opacity, 
@@ -86,11 +87,11 @@ pub fn drawer(props: &DrawerProps) -> Html {
         {"
         @keyframes taadaa { 
           0% {
-            opacity: 0;
+            opacity: 1;
           }
         
           100% {
-            opacity: 1;
+            opacity: 0;
           }
         }
         
