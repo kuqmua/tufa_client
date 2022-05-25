@@ -26,6 +26,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
     let label_style = format!(
         "
         background-color: {}; 
+        opacity: 0.5;
       ",
         SHADOW_COLOR
     );
@@ -87,16 +88,16 @@ pub fn drawer(props: &DrawerProps) -> Html {
         {"
         @keyframes label_in { 
           0% {
-            opacity: 1;
+            opacity: 0;
           }
         
           100% {
-            opacity: 0;
+            opacity: 0.5;
           }
         }
         @keyframes label_out { 
           0% {
-            opacity: 1;
+            opacity: 0.5;
           }
         
           100% {
