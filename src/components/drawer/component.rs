@@ -31,15 +31,15 @@ pub fn drawer(props: &DrawerProps) -> Html {
     );
     let transform: String;
     let opacity: String;
-    let animation: String;
+    let label_animation: String;
     if props.is_drawer_open {
       transform = "none".to_string();
       opacity = "1".to_string();
-      animation = "".to_string();
+      label_animation = "label_in 5s".to_string();
     } else {
       transform = "translateX(-100%)".to_string();
       opacity = "0".to_string();
-      animation = "taadaa 5s".to_string();
+      label_animation = "label_out 5s".to_string();
     };
   //   let transform = if props.is_drawer_open {
   //     // "none".to_string()
@@ -77,7 +77,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
     ",
         transform, 
         // opacity, 
-        animation
+        label_animation
     );
     // opacity: {};
     //todo gradient color between two states
@@ -85,7 +85,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
       <>
         <style>
         {"
-        @keyframes taadaa { 
+        @keyframes label_in { 
           0% {
             opacity: 1;
           }
@@ -94,8 +94,15 @@ pub fn drawer(props: &DrawerProps) -> Html {
             opacity: 0;
           }
         }
+        @keyframes label_out { 
+          0% {
+            opacity: 1;
+          }
         
-
+          100% {
+            opacity: 0;
+          }
+        }
         "}
         // #box {
         //   background-color: #e16971;
