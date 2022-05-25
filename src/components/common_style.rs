@@ -52,6 +52,15 @@ pub fn common_style() -> Html {
             margin: 0px;
             padding: 0px;
           }
+          @keyframes taadaa { 
+            0% {
+              opacity: 0;
+            }
+          
+            100% {
+              opacity: 1;
+            }
+          }
         "}
       </style>
     }

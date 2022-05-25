@@ -29,11 +29,24 @@ pub fn drawer(props: &DrawerProps) -> Html {
       ",
         SHADOW_COLOR
     );
-    let transform = if props.is_drawer_open {
-        "none".to_string()
+    let transform: String;
+    let opacity: String;
+    let animation: String;
+    if props.is_drawer_open {
+      transform = "none".to_string();
+      opacity = "1".to_string();
+      animation = "taadaa 10s".to_string();
     } else {
-        "translateX(-100%)".to_string()
+      transform = "translateX(-100%)".to_string();
+      opacity = "0".to_string();
+      animation = "".to_string();
     };
+  //   let transform = if props.is_drawer_open {
+  //     // "none".to_string()
+  //     "none".to_string()
+  // } else {
+  //     "translateX(-100%)".to_string()
+  // };
     let aside_navigation_style = format!(
         "
       position: fixed;
@@ -58,14 +71,36 @@ pub fn drawer(props: &DrawerProps) -> Html {
       bottom: 0;
       transform: {};
       display: grid;
-      opacity: 0.5;
-  
+      
+      animation: {};
     ",
-        transform
+        transform, 
+        // opacity, 
+        animation
     );
+    // opacity: {};
     //todo gradient color between two states
     html! {
       <>
+        <style>
+        {"
+        @keyframes taadaa { 
+          0% {
+            opacity: 0;
+          }
+        
+          100% {
+            opacity: 1;
+          }
+        }
+        
+
+        "}
+        // #box {
+        //   background-color: #e16971;
+        //   animation: taadaa 10s;
+        // }
+        </style>
         <aside
           style={aside_navigation_style.clone()}
         >
@@ -86,6 +121,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
           style={aside_label_style.clone()}
         >
           <label
+            id="box"
             for="menu-opener"
             style={label_style}
             onclick={&props.callback}
