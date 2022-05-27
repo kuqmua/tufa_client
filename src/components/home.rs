@@ -6,6 +6,7 @@ use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
+use crate::components::test_drawer::TestDrawer;
 
 #[function_component(Home)]
 pub fn home() -> Html {
@@ -32,7 +33,8 @@ pub fn home() -> Html {
     html! {
       <>
         <Header callback={oninput.clone()}/>
-        <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
+        // <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
+        <TestDrawer/>
         <div
           style="
             width: 100%; 
