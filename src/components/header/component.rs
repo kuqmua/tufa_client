@@ -1,6 +1,7 @@
 use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
 use crate::components::header::profile_actions::component::ProfileActions;
+use crate::components::test_drawer_button::TestDrawerButton;
 use crate::constants::INTERFACE_LINES_COLOR;
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
@@ -52,6 +53,7 @@ pub fn header(props: &HeaderProps) -> Html {
               "
             >
               <MenuButton callback={&props.callback}/>
+              <TestDrawerButton/>
               <div
                 style="
                   font-size: 30px;
