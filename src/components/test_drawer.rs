@@ -82,9 +82,6 @@ pub fn test_drawer() -> Html {
           }
           "}
         </style>
-        <div>
-          <a href="#" data-drawer-trigger="data-drawer-trigger" aria-controls="drawer-name-left" aria-expanded="false">{"Open Drawer from left side"}</a>
-        </div>
         <section class="drawer drawer--left" id="drawer-name-left" data-drawer-target="data-drawer-target">
           <div class="drawer__overlay" data-drawer-close="data-drawer-close" tabindex="-1"></div>
           <div class="drawer__wrapper"></div>
