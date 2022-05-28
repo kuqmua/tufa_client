@@ -25,8 +25,9 @@
       }, 50); 
     };
     var closeDrawer = function (event) {
-      var closestParent = event.closest('[data-drawer-target]'),
+      var closestParent = document.getElementById('drawer-name-left'),
         childrenTrigger = document.querySelector('[aria-controls="drawer-name-left');
+        // childrenTrigger = document.getElementById('[aria-controls="drawer-name-left');
       closestParent.classList.remove('is-visible');
       if (childrenTrigger.getAttribute('aria-expanded') === 'true') {
         childrenTrigger.setAttribute('aria-expanded', false);
@@ -50,7 +51,7 @@
     };
     var keydownHandler = function (event) {
       if (event.key === 'Escape' || event.keyCode === 27) {
-        var drawer = document.querySelector('[data-drawer-target]');
+        var drawer = document.getElementById('drawer-name-left')
           if (drawer.classList.contains('is-active')) {
             closeDrawer(drawer);
           }
