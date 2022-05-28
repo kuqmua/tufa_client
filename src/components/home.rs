@@ -91,30 +91,6 @@ pub fn home() -> Html {
   //
     html! {
       <>
-        //
-        <style>
-          {"
-          .drawer__header {
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-          }
-          .drawer__close {
-            margin: 0;
-            padding: 0;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-            width: 15px;
-            height: 15px;
-            flex-shrink: 0;
-            margin-left: 1rem;
-          }
-          "}
-        </style>
-        //
         <Header callback={on_open.clone()}/>
         // <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
         <TestDrawer 
