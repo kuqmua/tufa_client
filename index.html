@@ -13,7 +13,7 @@
 <script>
   var drawer = function () {
     var openDrawer = function (trigger) {
-      var target = document.getElementById('drawer-name-left');
+      var target = document.getElementById('drawer-section');
       target.classList.add('is-active');
       trigger.setAttribute('aria-expanded', true);
       setTimeout(function () {
@@ -21,7 +21,7 @@
       }, 50); 
     };
     var closeDrawer = function () {
-      var closestParent = document.getElementById('drawer-name-left');
+      var closestParent = document.getElementById('drawer-section');
       closestParent.classList.remove('is-visible');
       document.getElementById('menu_button').setAttribute('aria-expanded', false);
       setTimeout(function () {
@@ -40,7 +40,7 @@
     };
     // var keydownHandler = function (event) {
     //   if (event.key === 'Escape' || event.keyCode === 27) {
-    //     var drawer = document.getElementById('drawer-name-left')
+    //     var drawer = document.getElementById('drawer-section')
     //       if (drawer.classList.contains('is-active')) {
     //         closeDrawer(drawer);
     //       }

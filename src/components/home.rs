@@ -9,6 +9,8 @@ use crate::components::header::component::Header;
 use crate::components::test_drawer::TestDrawer;
 use gloo::console::log;
 
+use yew::prelude::*;
+
 #[function_component(Home)]
 pub fn home() -> Html {
     let show_expander = use_state(|| false);
@@ -29,16 +31,33 @@ pub fn home() -> Html {
     let is_drawer_open_cloned_first = is_drawer_open.clone();
     let is_drawer_open_cloned_second = is_drawer_open.clone();
     let is_drawer_open_cloned_third = is_drawer_open.clone();
+    
+    let drawer_display_value = use_state(|| String::from("none"));
+    let drawer_display_value_cloned_first = drawer_display_value.clone();
+    let drawer_display_value_cloned_second = drawer_display_value.clone();
+
     let on_open = Callback::from(move |_| {
         log!("before is_drawer_open", *is_drawer_open_cloned_first.clone());
         is_drawer_open_cloned_first.set(true);
         log!("after is_drawer_open", *is_drawer_open_cloned_first.clone());
+        let drawer_display_value_cloned_first_cloned = drawer_display_value_cloned_first.clone();
+        gloo::timers::callback::Timeout::new(50, move || {
+          drawer_display_value_cloned_first_cloned.set(String::from("block"));
+      }).forget();
     });
     let on_close = Callback::from(move |_| {
       log!("before is_drawer_open", *is_drawer_open_cloned_third.clone());
       is_drawer_open_cloned_third.set(false);
       log!("after is_drawer_open", *is_drawer_open_cloned_third.clone());
+      let drawer_display_value_cloned_second_cloned = drawer_display_value_cloned_second.clone();
+      gloo::timers::callback::Timeout::new(350, move || {
+        drawer_display_value_cloned_second_cloned.set(String::from("none"));
+    }).forget();
   });
+  //
+
+
+  //
     html! {
       <>
         //

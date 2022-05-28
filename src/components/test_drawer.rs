@@ -15,7 +15,7 @@ pub fn test_drawer(props: &TestDrawerProps) -> Html {
     else {
         "none".to_owned()
     };
-    let style_handle = format!(
+    let style_handle_section = format!(
         "
           display: {};
         ",
@@ -25,7 +25,8 @@ pub fn test_drawer(props: &TestDrawerProps) -> Html {
       <>
         <section 
           class="drawer" 
-          id="drawer-name-left" 
+        //   style={style_handle_section}
+          id="drawer-section" 
         >
           <div 
             class="drawer__overlay" 
