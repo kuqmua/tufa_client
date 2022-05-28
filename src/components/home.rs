@@ -9,8 +9,6 @@ use crate::components::header::component::Header;
 use crate::components::test_drawer::TestDrawer;
 use gloo::console::log;
 
-use yew::prelude::*;
-
 #[function_component(Home)]
 pub fn home() -> Html {
     let show_expander = use_state(|| false);
@@ -32,28 +30,61 @@ pub fn home() -> Html {
     let is_drawer_open_cloned_second = is_drawer_open.clone();
     let is_drawer_open_cloned_third = is_drawer_open.clone();
     
-    let drawer_display_value = use_state(|| String::from("none"));
-    let drawer_display_value_cloned_first = drawer_display_value.clone();
-    let drawer_display_value_cloned_second = drawer_display_value.clone();
+    let drawer_is_active_display_value = use_state(|| String::from("none"));
+    let drawer_is_active_display_value_cloned_first = drawer_is_active_display_value.clone();
+    let drawer_is_active_display_value_cloned_second = drawer_is_active_display_value.clone();
+    let drawer_is_active_display_value_cloned_third = drawer_is_active_display_value.clone();
+    let display_value = &*drawer_is_active_display_value_cloned_third.clone();
+
+    let drawer_wrapper_webkit_transform_value = use_state(|| String::from(""));
+    let drawer_wrapper_webkit_transform_value_cloned_first = drawer_wrapper_webkit_transform_value.clone();
+    let drawer_wrapper_webkit_transform_value_cloned_second = drawer_wrapper_webkit_transform_value.clone();
+    let drawer_wrapper_webkit_transform_value_cloned_third = drawer_wrapper_webkit_transform_value.clone();
+    let drawer_wrapper_webkit_transform = &*drawer_wrapper_webkit_transform_value_cloned_third.clone();
+
+    let drawer_wrapper_transform_value = use_state(|| String::from(""));
+    let drawer_wrapper_transform_value_cloned_first = drawer_wrapper_transform_value.clone();
+    let drawer_wrapper_transform_value_cloned_second = drawer_wrapper_transform_value.clone();
+    let drawer_wrapper_transform_value_cloned_third = drawer_wrapper_transform_value.clone();
+    let drawer_wrapper_transform = &*drawer_wrapper_transform_value_cloned_third.clone();
+
+    let drawer_overlay_opacity_value = use_state(|| String::from(""));
+    let drawer_overlay_opacity_value_cloned_first = drawer_overlay_opacity_value.clone();
+    let drawer_overlay_opacity_value_cloned_second = drawer_overlay_opacity_value.clone();
+    let drawer_overlay_opacity_value_cloned_third = drawer_overlay_opacity_value.clone();
+    let drawer_overlay_opacity = &*drawer_overlay_opacity_value_cloned_third.clone();
+    
+    //-webkit-transform: {};//translate3d(0, 0, 0)
+    //transform: {};//translate3d(0, 0, 0)
+    //opacity: {};//0.5
 
     let on_open = Callback::from(move |_| {
         log!("before is_drawer_open", *is_drawer_open_cloned_first.clone());
         is_drawer_open_cloned_first.set(true);
         log!("after is_drawer_open", *is_drawer_open_cloned_first.clone());
-        let drawer_display_value_cloned_first_cloned = drawer_display_value_cloned_first.clone();
+        drawer_is_active_display_value_cloned_first.set(String::from("block"));
+        let drawer_wrapper_webkit_transform_value_cloned_first_cloned = drawer_wrapper_webkit_transform_value_cloned_first.clone();
+        let drawer_wrapper_transform_value_cloned_first_cloned = drawer_wrapper_transform_value_cloned_first.clone();
+        let drawer_overlay_opacity_value_cloned_first_cloned = drawer_overlay_opacity_value_cloned_first.clone();
         gloo::timers::callback::Timeout::new(50, move || {
-          drawer_display_value_cloned_first_cloned.set(String::from("block"));
+          drawer_wrapper_webkit_transform_value_cloned_first_cloned.set(String::from("translate3d(0, 0, 0)"));
+          drawer_wrapper_transform_value_cloned_first_cloned.set(String::from("translate3d(0, 0, 0)"));
+          drawer_overlay_opacity_value_cloned_first_cloned.set(String::from("0.5"));
       }).forget();
     });
     let on_close = Callback::from(move |_| {
       log!("before is_drawer_open", *is_drawer_open_cloned_third.clone());
       is_drawer_open_cloned_third.set(false);
       log!("after is_drawer_open", *is_drawer_open_cloned_third.clone());
-      let drawer_display_value_cloned_second_cloned = drawer_display_value_cloned_second.clone();
+      drawer_wrapper_webkit_transform_value_cloned_second.set(String::from(""));
+      drawer_wrapper_transform_value_cloned_second.set(String::from(""));
+      drawer_overlay_opacity_value_cloned_second.set(String::from(""));
+      let drawer_is_active_display_value_cloned_second_cloned = drawer_is_active_display_value_cloned_second.clone();
       gloo::timers::callback::Timeout::new(350, move || {
-        drawer_display_value_cloned_second_cloned.set(String::from("none"));
+        drawer_is_active_display_value_cloned_second_cloned.set(String::from("none"));
     }).forget();
   });
+  
   //
 
 
@@ -65,23 +96,6 @@ pub fn home() -> Html {
           {"
           .drawer {
             display: none;
-          }
-          .drawer__overlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 200;
-            opacity: 0;
-            transition: opacity 0.3s;
-            will-change: opacity;
-            background-color: #000;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;          
           }
           .drawer__header {
             padding: 1.5rem;
@@ -142,7 +156,14 @@ pub fn home() -> Html {
         //
         <Header callback={on_open.clone()}/>
         // <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
-        <TestDrawer is_drawer_open={*is_drawer_open_cloned_second} callback={on_close.clone()}/>
+        <TestDrawer 
+          is_drawer_open={*is_drawer_open_cloned_second} 
+          callback={on_close.clone()}
+          drawer_is_active_display_value={display_value.clone()}
+          drawer_wrapper_webkit_transform={drawer_wrapper_webkit_transform.clone()}
+          drawer_wrapper_transform={drawer_wrapper_transform.clone()}
+          drawer_overlay_opacity={drawer_overlay_opacity.clone()}
+        />
         <div
           style="
             width: 100%; 
