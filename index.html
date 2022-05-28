@@ -20,7 +20,7 @@
         target.classList.add('is-visible');
       }, 50); 
     };
-    var closeDrawer = function (event) {
+    var closeDrawer = function () {
       var closestParent = document.getElementById('drawer-name-left');
       closestParent.classList.remove('is-visible');
       document.getElementById('menu_button').setAttribute('aria-expanded', false);
@@ -38,16 +38,16 @@
         closeDrawer(close);
       }
     };
-    var keydownHandler = function (event) {
-      if (event.key === 'Escape' || event.keyCode === 27) {
-        var drawer = document.getElementById('drawer-name-left')
-          if (drawer.classList.contains('is-active')) {
-            closeDrawer(drawer);
-          }
-      }
-    };
+    // var keydownHandler = function (event) {
+    //   if (event.key === 'Escape' || event.keyCode === 27) {
+    //     var drawer = document.getElementById('drawer-name-left')
+    //       if (drawer.classList.contains('is-active')) {
+    //         closeDrawer(drawer);
+    //       }
+    //   }
+    // };
     document.addEventListener('click', clickHandler, false);
-    document.addEventListener('keydown', keydownHandler, false);
+    // document.addEventListener('keydown', closeDrawer, false);//exit button
   };
   drawer();
 </script>
