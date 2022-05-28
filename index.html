@@ -13,39 +13,28 @@
 <script>
   var drawer = function () {
     var openDrawer = function (trigger) {
-      var target = document.getElementById(trigger.getAttribute('aria-controls'));
+      var target = document.getElementById('drawer-name-left');
       target.classList.add('is-active');
-      if (trigger.getAttribute('aria-expanded') === 'true') {
-        trigger.setAttribute('aria-expanded', false);
-      } else {
-        trigger.setAttribute('aria-expanded', true);
-      } 
+      trigger.setAttribute('aria-expanded', true);
       setTimeout(function () {
         target.classList.add('is-visible');
       }, 50); 
     };
     var closeDrawer = function (event) {
-      var closestParent = document.getElementById('drawer-name-left'),
-        childrenTrigger = document.querySelector('[aria-controls="drawer-name-left');
-        // childrenTrigger = document.getElementById('[aria-controls="drawer-name-left');
+      var closestParent = document.getElementById('drawer-name-left');
       closestParent.classList.remove('is-visible');
-      if (childrenTrigger.getAttribute('aria-expanded') === 'true') {
-        childrenTrigger.setAttribute('aria-expanded', false);
-      } else {
-        childrenTrigger.setAttribute('aria-expanded', true);
-      } 
+      document.getElementById('menu_button').setAttribute('aria-expanded', false);
       setTimeout(function () {
         closestParent.classList.remove('is-active');
       }, 350);             
     };
     var clickHandler = function (event) {
-      var toggle = event.target,
-        open = toggle.closest('[data-drawer-trigger]'),
-        close = toggle.closest('[data-drawer-close]');
+      var toggle = event.target;
+      var open = toggle.closest('[data-drawer-trigger]');
       if (open) {
         openDrawer(open);
       }
-      if (close) {
+      else {
         closeDrawer(close);
       }
     };
