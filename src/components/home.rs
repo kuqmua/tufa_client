@@ -53,10 +53,6 @@ pub fn home() -> Html {
     let drawer_overlay_opacity_value_cloned_second = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity_value_cloned_third = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity = &*drawer_overlay_opacity_value_cloned_third.clone();
-    
-    //-webkit-transform: {};//translate3d(0, 0, 0)
-    //transform: {};//translate3d(0, 0, 0)
-    //opacity: {};//0.5
 
     let on_open = Callback::from(move |_| {
         log!("before is_drawer_open", *is_drawer_open_cloned_first.clone());
@@ -84,11 +80,6 @@ pub fn home() -> Html {
         drawer_is_active_display_value_cloned_second_cloned.set(String::from("none"));
     }).forget();
   });
-  
-  //
-
-
-  //
     html! {
       <>
         <Header callback={on_open.clone()}/>

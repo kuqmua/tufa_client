@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <title>Yew App</title>
@@ -9,46 +8,4 @@
   <link href="https://fonts.googleapis.com/css2?family=Koulen&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
-
-<script>
-  var drawer = function () {
-    var openDrawer = function (trigger) {
-      var target = document.getElementById('drawer-section');
-      target.classList.add('is-active');
-      trigger.setAttribute('aria-expanded', true);
-      setTimeout(function () {
-        target.classList.add('is-visible');
-      }, 50); 
-    };
-    var closeDrawer = function () {
-      var closestParent = document.getElementById('drawer-section');
-      closestParent.classList.remove('is-visible');
-      document.getElementById('menu_button').setAttribute('aria-expanded', false);
-      setTimeout(function () {
-        closestParent.classList.remove('is-active');
-      }, 350);             
-    };
-    var clickHandler = function (event) {
-      var toggle = event.target;
-      var open = toggle.closest('[data-drawer-trigger]');
-      if (open) {
-        openDrawer(open);
-      }
-      else {
-        closeDrawer(close);
-      }
-    };
-    // var keydownHandler = function (event) {
-    //   if (event.key === 'Escape' || event.keyCode === 27) {
-    //     var drawer = document.getElementById('drawer-section')
-    //       if (drawer.classList.contains('is-active')) {
-    //         closeDrawer(drawer);
-    //       }
-    //   }
-    // };
-    document.addEventListener('click', clickHandler, false);
-    // document.addEventListener('keydown', closeDrawer, false);//exit button
-  };
-  drawer();
-</script>
 </html>
