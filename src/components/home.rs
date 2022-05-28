@@ -36,13 +36,13 @@ pub fn home() -> Html {
     let drawer_is_active_display_value_cloned_third = drawer_is_active_display_value.clone();
     let display_value = &*drawer_is_active_display_value_cloned_third.clone();
 
-    let drawer_wrapper_webkit_transform_value = use_state(|| String::from(""));
+    let drawer_wrapper_webkit_transform_value = use_state(|| String::from("translate3d(-100%, 0, 0)"));
     let drawer_wrapper_webkit_transform_value_cloned_first = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform_value_cloned_second = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform_value_cloned_third = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform = &*drawer_wrapper_webkit_transform_value_cloned_third.clone();
 
-    let drawer_wrapper_transform_value = use_state(|| String::from(""));
+    let drawer_wrapper_transform_value = use_state(|| String::from("translate3d(-100%, 0, 0)"));
     let drawer_wrapper_transform_value_cloned_first = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform_value_cloned_second = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform_value_cloned_third = drawer_wrapper_transform_value.clone();
@@ -76,8 +76,8 @@ pub fn home() -> Html {
       log!("before is_drawer_open", *is_drawer_open_cloned_third.clone());
       is_drawer_open_cloned_third.set(false);
       log!("after is_drawer_open", *is_drawer_open_cloned_third.clone());
-      drawer_wrapper_webkit_transform_value_cloned_second.set(String::from(""));
-      drawer_wrapper_transform_value_cloned_second.set(String::from(""));
+      drawer_wrapper_webkit_transform_value_cloned_second.set(String::from("translate3d(-100%, 0, 0)"));
+      drawer_wrapper_transform_value_cloned_second.set(String::from("translate3d(-100%, 0, 0)"));
       drawer_overlay_opacity_value_cloned_second.set(String::from(""));
       let drawer_is_active_display_value_cloned_second_cloned = drawer_is_active_display_value_cloned_second.clone();
       gloo::timers::callback::Timeout::new(350, move || {
@@ -94,9 +94,6 @@ pub fn home() -> Html {
         //
         <style>
           {"
-          .drawer {
-            display: none;
-          }
           .drawer__header {
             padding: 1.5rem;
             display: flex;
@@ -114,42 +111,6 @@ pub fn home() -> Html {
             height: 15px;
             flex-shrink: 0;
             margin-left: 1rem;
-          }
-          .drawer__wrapper {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            height: 100%;
-            width: 100%;
-            max-width: 500px;
-            z-index: 9999;
-            overflow: auto;
-            transition: transform 0.3s;
-            will-change: transform;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column; 
-            -webkit-transform: translate3d(103%, 0, 0);
-            transform: translate3d(103%, 0, 0); /* extra 3% because of box-shadow */ 
-            -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
-            box-shadow: 0 2px 6px #777;
-          }
-          .drawer__wrapper {
-            left: 0;
-            right: auto;
-            -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
-          }
-          .drawer.is-active {
-            display: block;
-          }
-          .drawer.is-visible .drawer__wrapper {
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-          }
-          .drawer.is-visible .drawer__overlay {
-            opacity: 0.5;
           }
           "}
         </style>

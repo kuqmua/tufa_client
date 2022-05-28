@@ -42,8 +42,25 @@ pub fn test_drawer(props: &TestDrawerProps) -> Html {
       );
       let drawer_wrapper_style = format!(
         "
-         -webkit-transform: {};//translate3d(0, 0, 0)
-         transform: {};//translate3d(0, 0, 0)
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: auto;
+          bottom: 0;
+          height: 100%;
+          width: 100%;
+          max-width: 500px;
+          z-index: 9999;
+          overflow: auto;
+          transition: transform 0.3s;
+          will-change: transform;
+          background-color: #fff;
+          display: flex;
+          flex-direction: column; 
+          -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
+          box-shadow: 0 2px 6px #777;
+          -webkit-transform: {};
+          transform: {};
         ",
         props.drawer_wrapper_webkit_transform.clone(),
         props.drawer_wrapper_transform.clone()
@@ -62,7 +79,6 @@ pub fn test_drawer(props: &TestDrawerProps) -> Html {
           >
           </div>
           <div 
-            class="drawer__wrapper"
             style={drawer_wrapper_style}
           >
           </div>
