@@ -32,8 +32,6 @@ pub fn menu_button(props: &MenuButtonProps) -> Html {
         <button
           style={style_handle}
           onclick={props.callback.clone()}
-          // id={props.id.clone()}
-          id="menu_button"
           data-drawer-trigger="data-drawer-trigger" 
           aria-controls="drawer-name-left" 
           aria-expanded="false"

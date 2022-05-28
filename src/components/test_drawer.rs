@@ -1,5 +1,6 @@
 use web_sys::MouseEvent;
 use yew::{function_component, html, Properties, Callback};
+use crate::constants::BACKGROUND_COLOR;
 
 #[derive(Properties, PartialEq)]
 pub struct TestDrawerProps {
@@ -54,23 +55,22 @@ pub fn test_drawer(props: &TestDrawerProps) -> Html {
           overflow: auto;
           transition: transform 0.3s;
           will-change: transform;
-          background-color: #fff;
+          background-color: {};
           display: flex;
           flex-direction: column; 
           -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
-          box-shadow: 0 2px 6px #777;
+          box-shadow: 0 2px 6px black;
           -webkit-transform: {};
           transform: {};
         ",
+        BACKGROUND_COLOR,
         props.drawer_wrapper_webkit_transform.clone(),
         props.drawer_wrapper_transform.clone()
       );
     html! {
       <>
         <section 
-          class="drawer" 
           style={section_style}
-          id="drawer-section" 
         >
           <div 
             data-drawer-close="data-drawer-close" 
