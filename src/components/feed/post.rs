@@ -89,7 +89,7 @@ pub fn post(props: &PostProps) -> Html {
             "
         >
           <ExpandMoreButton callback={props.callback.clone()}/>
-          <ShareButton/>
+          <ShareButton callback={props.callback.clone()}/>
           <FavoriteButton/>
         </div>
       </div>
