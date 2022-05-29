@@ -4,7 +4,6 @@ use crate::constants::BACKGROUND_COLOR;
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
-    pub is_drawer_open: bool,
     pub callback: Callback<MouseEvent>,
     pub drawer_is_active_display_value: String,
     pub drawer_wrapper_webkit_transform: String,

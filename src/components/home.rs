@@ -65,16 +65,11 @@ pub fn home() -> Html {
       ",
       padding_summary
     );
-    let is_drawer_open = use_state(|| false);
-    let is_drawer_open_cloned_first = is_drawer_open.clone();
-    let is_drawer_open_cloned_second = is_drawer_open.clone();
-    let is_drawer_open_cloned_third = is_drawer_open.clone();
     let drawer_style = use_state(|| DrawerChangingStyle::initial());
     let drawer_style_cloned_first = drawer_style.clone();
     let drawer_style_cloned_second = drawer_style.clone();
     let drawer_style_cloned_third = drawer_style.clone();
     let on_open = Callback::from(move |_| {
-        is_drawer_open_cloned_first.set(true);
         drawer_style_cloned_first.set(DrawerChangingStyle::opened_before_timeout());
         let drawer_style_cloned_first_another = drawer_style_cloned_first.clone();
         gloo::timers::callback::Timeout::new(50, move || {
@@ -82,7 +77,6 @@ pub fn home() -> Html {
       }).forget();
     });
     let on_close = Callback::from(move |_| {
-      is_drawer_open_cloned_third.set(false);
       drawer_style_cloned_second.set(DrawerChangingStyle::closed_before_timeout());
       let drawer_style_cloned_second_another = drawer_style_cloned_second.clone();
       gloo::timers::callback::Timeout::new(350, move || {
@@ -93,7 +87,6 @@ pub fn home() -> Html {
       <>
         <Header callback={on_open.clone()}/>
         <Drawer 
-          is_drawer_open={*is_drawer_open_cloned_second} 
           callback={on_close.clone()}
           drawer_is_active_display_value={drawer_style_cloned_third.display.clone()}
           drawer_wrapper_webkit_transform={drawer_style_cloned_third.webkit_transform.clone()}
