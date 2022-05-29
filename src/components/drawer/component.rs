@@ -1,142 +1,89 @@
-use crate::constants::BACKGROUND_COLOR;
-use crate::constants::DEFAULT_PADDING_PX;
-use crate::constants::SHADOW_COLOR;
 use web_sys::MouseEvent;
-use yew::{function_component, html, Callback, Properties};
+use yew::{function_component, html, Properties, Callback};
+use crate::constants::BACKGROUND_COLOR;
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
     pub is_drawer_open: bool,
     pub callback: Callback<MouseEvent>,
+    pub drawer_is_active_display_value: String,
+    pub drawer_wrapper_webkit_transform: String,
+    pub drawer_wrapper_transform: String,
+    pub drawer_overlay_opacity: String,
 }
 
 #[function_component(Drawer)]
 pub fn drawer(props: &DrawerProps) -> Html {
-    let nav_style = format!(
-        "
-        transition: all 500ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    //todo: add esc keydown handling support(from working drawer.html) 
+    let section_style = format!(
+      "
+        display: {};
+      ",
+      props.drawer_is_active_display_value.clone()
+    );
+    let drawer_overlay_style = format!(
+      "
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 200;
+        opacity: 0;
+        transition: opacity 0.3s;
+        will-change: opacity;
+        background-color: #000;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; 
+        opacity: {};
+      ",
+      props.drawer_overlay_opacity.clone()
+    );
+    let drawer_wrapper_style = format!(
+      "
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: auto;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        max-width: 500px;
+        z-index: 9999;
+        overflow: auto;
+        transition: transform 0.3s;
+        will-change: transform;
         background-color: {};
         display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding: {}px;
+        flex-direction: column; 
+        -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
+        box-shadow: 0 2px 6px black;
+        -webkit-transform: {};
+        transform: {};
       ",
-        BACKGROUND_COLOR, DEFAULT_PADDING_PX
+      BACKGROUND_COLOR,
+      props.drawer_wrapper_webkit_transform.clone(),
+      props.drawer_wrapper_transform.clone()
     );
-    let label_style = format!(
-        "
-        background-color: {}; 
-        opacity: 0.5;
-      ",
-        SHADOW_COLOR
-    );
-    let transform: String;
-    let opacity: String;
-    let label_animation: String;
-    if props.is_drawer_open {
-      transform = "none".to_string();
-      opacity = "1".to_string();
-      label_animation = "label_in 5s".to_string();
-    } else {
-      transform = "translateX(-100%)".to_string();
-      opacity = "0".to_string();
-      label_animation = "label_out 5s".to_string();
-    };
-  //   let transform = if props.is_drawer_open {
-  //     // "none".to_string()
-  //     "none".to_string()
-  // } else {
-  //     "translateX(-100%)".to_string()
-  // };
-    let aside_navigation_style = format!(
-        "
-      position: fixed;
-      z-index: 99;
-      width: 350px;
-      height: 100%;
-      top: 0;
-      bottom: 0;
-      transform: {};
-      display: grid;
-      transition: transform 5s cubic-bezier(0.4, 0.0, 0.2, 1);
-    ",
-        transform
-    );
-    let aside_label_style = format!(
-        "
-      position: fixed;
-      z-index: 98;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      bottom: 0;
-      transform: {};
-      display: grid;
-      
-      animation: {};
-      transition: transform 5s cubic-bezier(0.4, 0.0, 0.2, 1);
-    ",
-        transform, 
-        // opacity, 
-        label_animation
-    );
-    // opacity: {};
-    //todo gradient color between two states
     html! {
       <>
-        <style>
-        {"
-        @keyframes label_in { 
-          0% {
-            opacity: 0;
-          }
-        
-          100% {
-            opacity: 0.5;
-          }
-        }
-        @keyframes label_out { 
-          0% {
-            opacity: 0.5;
-          }
-        
-          100% {
-            opacity: 0;
-          }
-        }
-        "}
-        // #box {
-        //   background-color: #e16971;
-        //   animation: taadaa 10s;
-        // }
-        </style>
-        <aside
-          style={aside_navigation_style.clone()}
+        <section 
+          style={section_style}
         >
-          <nav
-            style={nav_style}
-          >
-            <div
-              style="
-                width: 100px;
-                height: 100%;
-                background-color: grey;
-              "
-            >
-            </div>
-          </nav>
-        </aside>
-        <aside
-          style={aside_label_style.clone()}
-        >
-          <label
-            id="box"
-            for="menu-opener"
-            style={label_style}
+          <div 
+            data-drawer-close="data-drawer-close" 
+            style={drawer_overlay_style}
             onclick={&props.callback}
           >
-          </label>
-        </aside>
+          </div>
+          <div 
+            style={drawer_wrapper_style}
+          >
+          </div>
+        </section>
       </>
     }
 }

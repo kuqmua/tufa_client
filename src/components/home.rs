@@ -4,10 +4,8 @@ use crate::components::feed::expander::expand_more_content::ExpandMoreContent;
 use yew::{function_component, html, use_state, Callback};
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
-// use crate::components::drawer::component::Drawer;
+use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
-use crate::components::test_drawer::TestDrawer;
-use gloo::console::log;
 
 #[function_component(Home)]
 pub fn home() -> Html {
@@ -29,35 +27,28 @@ pub fn home() -> Html {
     let is_drawer_open_cloned_first = is_drawer_open.clone();
     let is_drawer_open_cloned_second = is_drawer_open.clone();
     let is_drawer_open_cloned_third = is_drawer_open.clone();
-    
     let drawer_is_active_display_value = use_state(|| String::from("none"));
     let drawer_is_active_display_value_cloned_first = drawer_is_active_display_value.clone();
     let drawer_is_active_display_value_cloned_second = drawer_is_active_display_value.clone();
     let drawer_is_active_display_value_cloned_third = drawer_is_active_display_value.clone();
     let display_value = &*drawer_is_active_display_value_cloned_third.clone();
-
     let drawer_wrapper_webkit_transform_value = use_state(|| String::from("translate3d(-100%, 0, 0)"));
     let drawer_wrapper_webkit_transform_value_cloned_first = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform_value_cloned_second = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform_value_cloned_third = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform = &*drawer_wrapper_webkit_transform_value_cloned_third.clone();
-
     let drawer_wrapper_transform_value = use_state(|| String::from("translate3d(-100%, 0, 0)"));
     let drawer_wrapper_transform_value_cloned_first = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform_value_cloned_second = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform_value_cloned_third = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform = &*drawer_wrapper_transform_value_cloned_third.clone();
-
     let drawer_overlay_opacity_value = use_state(|| String::from(""));
     let drawer_overlay_opacity_value_cloned_first = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity_value_cloned_second = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity_value_cloned_third = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity = &*drawer_overlay_opacity_value_cloned_third.clone();
-
     let on_open = Callback::from(move |_| {
-        log!("before is_drawer_open", *is_drawer_open_cloned_first.clone());
         is_drawer_open_cloned_first.set(true);
-        log!("after is_drawer_open", *is_drawer_open_cloned_first.clone());
         drawer_is_active_display_value_cloned_first.set(String::from("block"));
         let drawer_wrapper_webkit_transform_value_cloned_first_cloned = drawer_wrapper_webkit_transform_value_cloned_first.clone();
         let drawer_wrapper_transform_value_cloned_first_cloned = drawer_wrapper_transform_value_cloned_first.clone();
@@ -69,9 +60,7 @@ pub fn home() -> Html {
       }).forget();
     });
     let on_close = Callback::from(move |_| {
-      log!("before is_drawer_open", *is_drawer_open_cloned_third.clone());
       is_drawer_open_cloned_third.set(false);
-      log!("after is_drawer_open", *is_drawer_open_cloned_third.clone());
       drawer_wrapper_webkit_transform_value_cloned_second.set(String::from("translate3d(-100%, 0, 0)"));
       drawer_wrapper_transform_value_cloned_second.set(String::from("translate3d(-100%, 0, 0)"));
       drawer_overlay_opacity_value_cloned_second.set(String::from(""));
@@ -83,8 +72,7 @@ pub fn home() -> Html {
     html! {
       <>
         <Header callback={on_open.clone()}/>
-        // <Drawer is_drawer_open={*is_drawer_open_cloned_second} callback={oninput}/>
-        <TestDrawer 
+        <Drawer 
           is_drawer_open={*is_drawer_open_cloned_second} 
           callback={on_close.clone()}
           drawer_is_active_display_value={display_value.clone()}

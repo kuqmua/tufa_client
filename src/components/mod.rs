@@ -7,4 +7,3 @@ pub mod home;
 pub mod svg;
 pub mod drawer;
 pub mod common_style;
-pub mod test_drawer;
