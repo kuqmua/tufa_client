@@ -1,6 +1,7 @@
 use web_sys::MouseEvent;
 use yew::{function_component, html, Properties, Callback};
 use crate::constants::BACKGROUND_COLOR;
+use crate::constants::FEED_WIDTH_PX;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 
 #[derive(Properties, PartialEq)]
@@ -49,7 +50,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
         bottom: 0;
         height: 100%;
         width: 100%;
-        max-width: 500px;
+        width: {}px;
         z-index: 9999;
         overflow: auto;
         transition: transform 0.3s;
@@ -58,10 +59,10 @@ pub fn drawer(props: &DrawerProps) -> Html {
         display: flex;
         flex-direction: column; 
         -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
-        box-shadow: 0 2px 6px black;
         -webkit-transform: {};
         transform: {};
       ",
+      FEED_WIDTH_PX,
       BACKGROUND_COLOR,
       changing_style.webkit_transform,
       changing_style.transform
