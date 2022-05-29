@@ -1,24 +1,22 @@
 use web_sys::MouseEvent;
 use yew::{function_component, html, Properties, Callback};
-use crate::constants::BACKGROUND_COLOR;
+use crate::{constants::BACKGROUND_COLOR, components::home::DrawerChangingStyleState};
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
     pub callback: Callback<MouseEvent>,
-    pub drawer_is_active_display_value: String,
-    pub drawer_wrapper_webkit_transform: String,
-    pub drawer_wrapper_transform: String,
-    pub drawer_overlay_opacity: String,
+    pub style_state: DrawerChangingStyleState,
 }
 
 #[function_component(Drawer)]
 pub fn drawer(props: &DrawerProps) -> Html {
     //todo: add esc keydown handling support(from working drawer.html) 
+    let changing_style = props.style_state.get_value();
     let section_style = format!(
       "
         display: {};
       ",
-      props.drawer_is_active_display_value.clone()
+      changing_style.display
     );
     let drawer_overlay_style = format!(
       "
@@ -39,7 +37,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
         user-select: none; 
         opacity: {};
       ",
-      props.drawer_overlay_opacity.clone()
+      changing_style.opacity
     );
     let drawer_wrapper_style = format!(
       "
@@ -64,8 +62,8 @@ pub fn drawer(props: &DrawerProps) -> Html {
         transform: {};
       ",
       BACKGROUND_COLOR,
-      props.drawer_wrapper_webkit_transform.clone(),
-      props.drawer_wrapper_transform.clone()
+      changing_style.webkit_transform,
+      changing_style.transform
     );
     html! {
       <>
