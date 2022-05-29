@@ -6,7 +6,7 @@ use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
-use crate::components::drawer::component::DrawerChangingStyleState;
+use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 
 #[function_component(Home)]
 pub fn home() -> Html {
