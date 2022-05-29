@@ -27,48 +27,57 @@ pub fn home() -> Html {
     let is_drawer_open_cloned_first = is_drawer_open.clone();
     let is_drawer_open_cloned_second = is_drawer_open.clone();
     let is_drawer_open_cloned_third = is_drawer_open.clone();
-    let drawer_is_active_display_value = use_state(|| String::from("none"));
+    let initial_drawer_display = String::from("none");
+    let opened_drawer_display = String::from("block");
+    let drawer_is_active_display_value = use_state(|| initial_drawer_display.clone());
     let drawer_is_active_display_value_cloned_first = drawer_is_active_display_value.clone();
     let drawer_is_active_display_value_cloned_second = drawer_is_active_display_value.clone();
     let drawer_is_active_display_value_cloned_third = drawer_is_active_display_value.clone();
     let display_value = &*drawer_is_active_display_value_cloned_third.clone();
-    let drawer_wrapper_webkit_transform_value = use_state(|| String::from("translate3d(-100%, 0, 0)"));
+    let initial_drawer_translate_3d = String::from("translate3d(-100%, 0, 0)");
+    let opened_drawer_translate_3d = String::from("translate3d(0, 0, 0)");
+    let drawer_wrapper_webkit_transform_value = use_state(|| initial_drawer_translate_3d.clone());
     let drawer_wrapper_webkit_transform_value_cloned_first = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform_value_cloned_second = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform_value_cloned_third = drawer_wrapper_webkit_transform_value.clone();
     let drawer_wrapper_webkit_transform = &*drawer_wrapper_webkit_transform_value_cloned_third.clone();
-    let drawer_wrapper_transform_value = use_state(|| String::from("translate3d(-100%, 0, 0)"));
+    let drawer_wrapper_transform_value = use_state(|| initial_drawer_translate_3d.clone());
     let drawer_wrapper_transform_value_cloned_first = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform_value_cloned_second = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform_value_cloned_third = drawer_wrapper_transform_value.clone();
     let drawer_wrapper_transform = &*drawer_wrapper_transform_value_cloned_third.clone();
-    let drawer_overlay_opacity_value = use_state(|| String::from(""));
+    let initial_drawer_opacity = String::from("");
+    let opened_drawer_opacity = String::from("0.5");
+    let drawer_overlay_opacity_value = use_state(|| initial_drawer_opacity.clone());
     let drawer_overlay_opacity_value_cloned_first = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity_value_cloned_second = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity_value_cloned_third = drawer_overlay_opacity_value.clone();
     let drawer_overlay_opacity = &*drawer_overlay_opacity_value_cloned_third.clone();
     let on_open = Callback::from(move |_| {
         is_drawer_open_cloned_first.set(true);
-        drawer_is_active_display_value_cloned_first.set(String::from("block"));
+        drawer_is_active_display_value_cloned_first.set(opened_drawer_display.clone());
         let drawer_wrapper_webkit_transform_value_cloned_first_cloned = drawer_wrapper_webkit_transform_value_cloned_first.clone();
         let drawer_wrapper_transform_value_cloned_first_cloned = drawer_wrapper_transform_value_cloned_first.clone();
         let drawer_overlay_opacity_value_cloned_first_cloned = drawer_overlay_opacity_value_cloned_first.clone();
+        let opened_drawer_translate_3d_cloned = opened_drawer_translate_3d.clone();
+        let opened_drawer_opacity_cloned =  opened_drawer_opacity.clone();
         gloo::timers::callback::Timeout::new(50, move || {
-          drawer_wrapper_webkit_transform_value_cloned_first_cloned.set(String::from("translate3d(0, 0, 0)"));
-          drawer_wrapper_transform_value_cloned_first_cloned.set(String::from("translate3d(0, 0, 0)"));
-          drawer_overlay_opacity_value_cloned_first_cloned.set(String::from("0.5"));
+          drawer_wrapper_webkit_transform_value_cloned_first_cloned.set(String::from(opened_drawer_translate_3d_cloned.clone()));
+          drawer_wrapper_transform_value_cloned_first_cloned.set(String::from(opened_drawer_translate_3d_cloned));
+          drawer_overlay_opacity_value_cloned_first_cloned.set(opened_drawer_opacity_cloned);
       }).forget();
     });
     let on_close = Callback::from(move |_| {
       is_drawer_open_cloned_third.set(false);
-      drawer_wrapper_webkit_transform_value_cloned_second.set(String::from("translate3d(-100%, 0, 0)"));
-      drawer_wrapper_transform_value_cloned_second.set(String::from("translate3d(-100%, 0, 0)"));
-      drawer_overlay_opacity_value_cloned_second.set(String::from(""));
+      drawer_wrapper_webkit_transform_value_cloned_second.set(initial_drawer_translate_3d.clone());
+      drawer_wrapper_transform_value_cloned_second.set(initial_drawer_translate_3d.clone());
+      drawer_overlay_opacity_value_cloned_second.set(initial_drawer_opacity.clone());
       let drawer_is_active_display_value_cloned_second_cloned = drawer_is_active_display_value_cloned_second.clone();
+      let initial_drawer_display_cloned = initial_drawer_display.clone();
       gloo::timers::callback::Timeout::new(350, move || {
-        drawer_is_active_display_value_cloned_second_cloned.set(String::from("none"));
-    }).forget();
-  });
+        drawer_is_active_display_value_cloned_second_cloned.set(initial_drawer_display_cloned);
+      }).forget();
+    });
     html! {
       <>
         <Header callback={on_open.clone()}/>
