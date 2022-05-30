@@ -1,6 +1,7 @@
 use crate::components::feed::expander::component::Expander;
 use crate::components::feed::posts_list::PostsList;
 use crate::components::feed::expander::expand_more_content::ExpandMoreContent;
+use crate::components::feed::expander::share_content::ShareContent;
 use yew::{function_component, html, use_state, Callback};
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
@@ -81,7 +82,7 @@ pub fn home() -> Html {
         },
       }
     });
-    let share_inner_html = html!{<ExpandMoreContent/>};
+    let share_inner_html = html!{<ShareContent/>};
     let expand_more_inner_html = html!{<ExpandMoreContent/>};
     let expander_handler = match *expander_status_clone_for_logic {
       ExpanderStatus::Closed => html!{},//maybe rewrite it somehow?
