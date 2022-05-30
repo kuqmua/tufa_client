@@ -8,26 +8,25 @@ use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 
-#[Derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
   Closed,
   Share,
   ExpandMore
 }
 
+// impl Clone for ExpanderStatus {
+//   fn clone(&self) -> Self {
+//     match *self {
+//         ExpanderStatus::Closed => ExpanderStatus::Closed,
+//         ExpanderStatus::Share => ExpanderStatus::Share,
+//         ExpanderStatus::ExpandMore => ExpanderStatus::ExpandMore,
+//     }
+//   }
+// }
+
 #[function_component(Home)]
-pub fn home() -> Html {
-    let expander_status = use_state(|| ExpanderStatus::Closed);
-    let expander_status_cloned_share = expander_status.clone();
-    let expander_status_cloned_expand_more = expander_status.clone();
-    let expander_status_cloned_to_props = expander_status.clone();
-    let expander_status_to_share = Callback::from(move |_| {
-        expander_status_cloned_share.set(ExpanderStatus::Share);
-    });
-    let expander_status_to_expand_more = Callback::from(move |_| {
-      expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
-  });
-    let inner_html = html!{<ExpandMoreContent/>};
+pub fn home() -> Html {    
     let padding_summary = HEADER_HEIGHT_PX + HEADER_BORDER_BOTTOM_PX;
     let style_handle = format!(
       "
@@ -53,6 +52,37 @@ pub fn home() -> Html {
       }).forget();
     });
     let drawer_style_enum_handle = &*drawer_style.clone();
+    let inner_html = html!{<ExpandMoreContent/>};
+    let expander_status = use_state(|| ExpanderStatus::Closed);
+    let expander_status_clone_for_logic = expander_status.clone();
+    let expander_status_cloned_share = expander_status.clone();
+    let expander_status_to_share = Callback::from(move |_| {
+      match *expander_status_cloned_share {
+        ExpanderStatus::Share => {
+          expander_status_cloned_share.set(ExpanderStatus::Closed);
+        },
+        _ => {
+          expander_status_cloned_share.set(ExpanderStatus::Share);
+        },
+      }
+    });
+    let expander_status_cloned_expand_more = expander_status.clone();
+    let expander_status_to_expand_more = Callback::from(move |_| {
+      match *expander_status_cloned_expand_more {
+        ExpanderStatus::ExpandMore => {
+          expander_status_cloned_expand_more.set(ExpanderStatus::Closed);
+        },
+        _ => {
+          expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
+        },
+      }
+    });
+    let expander_handler = match *expander_status_clone_for_logic {
+      ExpanderStatus::Closed => html!{},//maybe rewrite it somehow?
+      ExpanderStatus::Share => html!{<Expander inner_html={inner_html}/>},
+      ExpanderStatus::ExpandMore => html!{<Expander inner_html={inner_html}/>},
+    };
+    
     html! {
       <>
         <Header callback={on_open.clone()}/>
@@ -73,10 +103,11 @@ pub fn home() -> Html {
           <div
             style={style_handle}
           >
-            <PostsList callback={change_show_expander} is_expander_opened={*show_expander_cloned_second.clone()}/>
-            if *show_expander {
-              <Expander inner_html={inner_html}/>
-            }
+            <PostsList 
+              share_callback={expander_status_to_share}
+              expand_more_callback={expander_status_to_expand_more}
+            />
+            {expander_handler}
           </div>
         </div>
       </>

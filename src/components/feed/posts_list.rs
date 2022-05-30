@@ -8,15 +8,29 @@ use yew::{function_component, html, Callback, Properties};
 pub struct PostsListProps {
   pub share_callback: Callback<MouseEvent>,
   pub expand_more_callback: Callback<MouseEvent>,
-  pub is_expander_opened: bool,
 }
 
 #[function_component(PostsList)]
 pub fn posts_list(props: &PostsListProps) -> Html {
     let posts_vec = vec![
-        html! {<Post callback={props.callback.clone()}/>},
-        html! {<Post callback={props.callback.clone()}/>},
-        html! {<Post callback={props.callback.clone()}/>},
+        html! {
+          <Post 
+            share_callback={props.share_callback.clone()}
+            expand_more_callback={props.expand_more_callback.clone()}
+          />
+        },
+        html! {
+          <Post 
+            share_callback={props.share_callback.clone()}
+            expand_more_callback={props.expand_more_callback.clone()}
+          />
+        },
+        html! {
+          <Post 
+            share_callback={props.share_callback.clone()}
+            expand_more_callback={props.expand_more_callback.clone()}
+          />
+        }
     ];
     let style_handle = format!(
         "
