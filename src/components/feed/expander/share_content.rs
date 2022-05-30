@@ -1,7 +1,7 @@
 use yew::{function_component, html};
 
-#[function_component(ExpandMoreContent)]
-pub fn expand_more_content() -> Html {
+#[function_component(ShareContent)]
+pub fn share_content() -> Html {
     html! {
       <div
         style="
@@ -15,19 +15,19 @@ pub fn expand_more_content() -> Html {
           style="
             color: white
         ">
-            {"expand_more_one"}
+            {"share_one"}
         </div>
         <div
           style="
             color: white
         ">
-          {"expand_more_two"}
+          {"share_two"}
         </div>
         <div
           style="
             color: white
         ">
-          {"expand_more_three"}
+          {"share_three"}
         </div>
       </div>
     }

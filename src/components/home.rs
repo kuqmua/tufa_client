@@ -59,7 +59,6 @@ pub fn home() -> Html {
       }).forget();
     });
     let drawer_style_enum_handle = &*drawer_style.clone();
-    let inner_html = html!{<ExpandMoreContent/>};
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_to_share = Callback::from(move |_| {
       match *expander_status_cloned_share {
@@ -82,10 +81,12 @@ pub fn home() -> Html {
         },
       }
     });
+    let share_inner_html = html!{<ExpandMoreContent/>};
+    let expand_more_inner_html = html!{<ExpandMoreContent/>};
     let expander_handler = match *expander_status_clone_for_logic {
       ExpanderStatus::Closed => html!{},//maybe rewrite it somehow?
-      ExpanderStatus::Share => html!{<Expander inner_html={inner_html}/>},
-      ExpanderStatus::ExpandMore => html!{<Expander inner_html={inner_html}/>},
+      ExpanderStatus::Share => html!{<Expander inner_html={share_inner_html}/>},
+      ExpanderStatus::ExpandMore => html!{<Expander inner_html={expand_more_inner_html}/>},
     };
     
     html! {
