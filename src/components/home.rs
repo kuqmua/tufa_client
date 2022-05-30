@@ -34,17 +34,24 @@ pub fn home() -> Html {
       ",
       padding_summary
     );
+    let expander_status = use_state(|| ExpanderStatus::Closed);
+    let expander_status_clone_for_logic = expander_status.clone();
+
     let drawer_style = use_state(|| DrawerChangingStyleState::Initial);
     let drawer_style_cloned_on_open = drawer_style.clone();
+    let expander_status_clone_drawer_on_open = expander_status.clone();
     let on_open = Callback::from(move |_| {
+      expander_status_clone_drawer_on_open.set(ExpanderStatus::Closed);
       drawer_style_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
-        let drawer_style_cloned_first_another = drawer_style_cloned_on_open.clone();
-        gloo::timers::callback::Timeout::new(50, move || {
+      let drawer_style_cloned_first_another = drawer_style_cloned_on_open.clone();
+      gloo::timers::callback::Timeout::new(50, move || {
           drawer_style_cloned_first_another.set(DrawerChangingStyleState::OpenedAfterTimeout);
       }).forget();
     });
     let drawer_style_cloned_on_close = drawer_style.clone();
+    let expander_status_clone_drawer_on_close = expander_status.clone();
     let on_close = Callback::from(move |_| {
+      expander_status_clone_drawer_on_close.set(ExpanderStatus::Closed);
       drawer_style_cloned_on_close.set(DrawerChangingStyleState::ClosedBeforeTimeout);
       let drawer_style_cloned_second_another = drawer_style_cloned_on_close.clone();
       gloo::timers::callback::Timeout::new(350, move || {
@@ -53,8 +60,6 @@ pub fn home() -> Html {
     });
     let drawer_style_enum_handle = &*drawer_style.clone();
     let inner_html = html!{<ExpandMoreContent/>};
-    let expander_status = use_state(|| ExpanderStatus::Closed);
-    let expander_status_clone_for_logic = expander_status.clone();
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_to_share = Callback::from(move |_| {
       match *expander_status_cloned_share {
