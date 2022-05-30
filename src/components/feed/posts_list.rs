@@ -6,8 +6,9 @@ use yew::{function_component, html, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct PostsListProps {
-    pub callback: Callback<MouseEvent>,
-    pub is_expander_opened: bool,
+  pub share_callback: Callback<MouseEvent>,
+  pub expand_more_callback: Callback<MouseEvent>,
+  pub is_expander_opened: bool,
 }
 
 #[function_component(PostsList)]

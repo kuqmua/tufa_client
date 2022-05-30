@@ -5,7 +5,8 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct PostProps {
-    pub callback: Callback<MouseEvent>,
+    pub share_callback: Callback<MouseEvent>,
+    pub expand_more_callback: Callback<MouseEvent>,
 }
 
 #[function_component(Post)]
@@ -88,8 +89,8 @@ pub fn post(props: &PostProps) -> Html {
               width: 50px;
             "
         >
-          <ExpandMoreButton callback={props.callback.clone()}/>
-          <ShareButton callback={props.callback.clone()}/>
+          <ExpandMoreButton callback={props.expand_more_callback.clone()}/>
+          <ShareButton callback={props.share_callback.clone()}/>
           <FavoriteButton/>
         </div>
       </div>

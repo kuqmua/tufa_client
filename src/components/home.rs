@@ -8,14 +8,25 @@ use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 
+#[Derive(Debug)]
+pub enum ExpanderStatus {
+  Closed,
+  Share,
+  ExpandMore
+}
+
 #[function_component(Home)]
 pub fn home() -> Html {
-    let show_expander = use_state(|| false);
-    let show_expander_cloned = show_expander.clone();
-    let show_expander_cloned_second = show_expander.clone();
-    let change_show_expander = Callback::from(move |_| {
-        show_expander_cloned.set(!*show_expander_cloned);
+    let expander_status = use_state(|| ExpanderStatus::Closed);
+    let expander_status_cloned_share = expander_status.clone();
+    let expander_status_cloned_expand_more = expander_status.clone();
+    let expander_status_cloned_to_props = expander_status.clone();
+    let expander_status_to_share = Callback::from(move |_| {
+        expander_status_cloned_share.set(ExpanderStatus::Share);
     });
+    let expander_status_to_expand_more = Callback::from(move |_| {
+      expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
+  });
     let inner_html = html!{<ExpandMoreContent/>};
     let padding_summary = HEADER_HEIGHT_PX + HEADER_BORDER_BOTTOM_PX;
     let style_handle = format!(
