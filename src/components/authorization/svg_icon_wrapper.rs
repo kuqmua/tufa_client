@@ -1,9 +1,9 @@
+use crate::components::svg::person_outline::PersonOutline;
 use stylist::style;
 use stylist::Style;
 use yew::html;
 use yew::prelude::*;
 use yew::Html;
-use crate::components::svg::person_outline::PersonOutline;
 
 pub enum Msg {
     AddOne,

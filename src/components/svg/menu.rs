@@ -10,11 +10,11 @@ pub struct MenuProps {
 #[function_component(Menu)]
 pub fn menu(props: &MenuProps) -> Html {
     html! {
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        viewBox="0 0 24 24" 
-        height={props.height.clone()} 
-        width={props.width.clone()} 
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        height={props.height.clone()}
+        width={props.width.clone()}
         fill={props.fill.clone()}
       >
         <path d="M0 0h24v24H0V0z" fill="none"/>

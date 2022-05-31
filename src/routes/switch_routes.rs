@@ -1,12 +1,12 @@
-use crate::components::authorization::sign_up::component::SignUp;
 use crate::components::authorization::sign_in::component::SignIn;
+use crate::components::authorization::sign_up::component::SignUp;
 use crate::components::examples::counter::Counter;
-use crate::components::home::Home;
+use crate::components::examples::example::Example;
+use crate::components::examples::markdown_like::MarkdownLike;
 use crate::components::examples::secure::Color;
 use crate::components::examples::secure::Secure;
 use crate::components::examples::secure::SecureProps;
-use crate::components::examples::example::Example;
-use crate::components::examples::markdown_like::MarkdownLike;
+use crate::components::home::Home;
 use crate::routes::routes::Routes;
 use gloo::console::log;
 use yew::{html, Callback, Html};

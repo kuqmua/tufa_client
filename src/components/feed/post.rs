@@ -5,8 +5,8 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct PostProps {
-  pub share_callback: Callback<MouseEvent>,
-  pub expand_more_callback: Callback<MouseEvent>,
+    pub share_callback: Callback<MouseEvent>,
+    pub expand_more_callback: Callback<MouseEvent>,
 }
 
 #[function_component(Post)]

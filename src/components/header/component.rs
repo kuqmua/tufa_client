@@ -1,9 +1,9 @@
 use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
 use crate::components::header::profile_actions::component::ProfileActions;
-use crate::constants::INTERFACE_LINES_COLOR;
-use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
+use crate::constants::HEADER_HEIGHT_PX;
+use crate::constants::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback, Properties};
 

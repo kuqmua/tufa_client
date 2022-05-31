@@ -3,7 +3,7 @@ use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
-use yewdux::prelude::{PersistentStore, Dispatcher};
+use yewdux::prelude::{Dispatcher, PersistentStore};
 use yewdux_functional::use_store;
 
 #[function_component(YewduxFunctionalEditUsername)]

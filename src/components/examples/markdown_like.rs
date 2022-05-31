@@ -19,9 +19,9 @@ pub fn markdown_like() -> Html {
             font-size: 1rem;
             "
         >
-            <h3 
-            class="code-line" 
-            data-line-start="0" 
+            <h3
+            class="code-line"
+            data-line-start="0"
             data-line-end="1"
             style="
             -webkit-text-size-adjust: 100%;
@@ -38,7 +38,7 @@ pub fn markdown_like() -> Html {
             padding-top: .92401rem;
             "
             >
-                <a 
+                <a
                 id="commit_string_0"
                 href=""
                 style="
@@ -81,9 +81,9 @@ pub fn markdown_like() -> Html {
             padding-top: .66001rem;
             "
             >
-                <code 
-                class="has-line-data" 
-                data-line-start="2" 
+                <code
+                class="has-line-data"
+                data-line-start="2"
                 data-line-end="4"
                 style="
                 -webkit-text-size-adjust: 100%;

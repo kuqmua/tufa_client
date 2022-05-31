@@ -1,36 +1,36 @@
 use crate::components::feed::post::Post;
-use crate::constants::INTERFACE_LINES_COLOR;
 use crate::constants::FEED_WIDTH_PX;
+use crate::constants::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct PostsListProps {
-  pub share_callback: Callback<MouseEvent>,
-  pub expand_more_callback: Callback<MouseEvent>,
+    pub share_callback: Callback<MouseEvent>,
+    pub expand_more_callback: Callback<MouseEvent>,
 }
 
 #[function_component(PostsList)]
 pub fn posts_list(props: &PostsListProps) -> Html {
     let posts_vec = vec![
         html! {
-          <Post 
+          <Post
             share_callback={props.share_callback.clone()}
             expand_more_callback={props.expand_more_callback.clone()}
           />
         },
         html! {
-          <Post 
+          <Post
             share_callback={props.share_callback.clone()}
             expand_more_callback={props.expand_more_callback.clone()}
           />
         },
         html! {
-          <Post 
+          <Post
             share_callback={props.share_callback.clone()}
             expand_more_callback={props.expand_more_callback.clone()}
           />
-        }
+        },
     ];
     let style_handle = format!(
         "

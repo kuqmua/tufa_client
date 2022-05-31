@@ -1,5 +1,5 @@
-use yew::prelude::*;
 use crate::helpers::html_input_type::HtmlInputType;
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct InputFormProps {

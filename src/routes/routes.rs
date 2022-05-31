@@ -18,5 +18,5 @@ pub enum Routes {
     #[at("/counter")]
     CounterHandle,
     #[at("/example")]
-    Example
+    Example,
 }

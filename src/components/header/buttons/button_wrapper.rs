@@ -1,6 +1,6 @@
+use crate::constants::BACKGROUND_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
-use crate::constants::BACKGROUND_COLOR;
 
 #[derive(Properties, PartialEq)]
 pub struct ButtonWrapperProps {
@@ -13,7 +13,7 @@ pub struct ButtonWrapperProps {
 pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
     let size_px: u32 = 26;
     let style_handle = format!(
-      "
+        "
         width: {}px;
         height: {}px;
         display: flex;
@@ -23,7 +23,7 @@ pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
         border: 1px solid {};
         padding: 0px;
       ",
-      size_px, size_px, BACKGROUND_COLOR, BACKGROUND_COLOR
+        size_px, size_px, BACKGROUND_COLOR, BACKGROUND_COLOR
     );
     html! {
       <button

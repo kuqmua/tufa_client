@@ -20,7 +20,3 @@ pub fn logout(props: &LogoutProps) -> Html {
         </svg>
     }
 }
-
-
-
-

@@ -1,16 +1,16 @@
+use crate::components::examples::counter::Counter;
+use crate::components::examples::display_count::DisplayCount;
+use crate::components::examples::display_credentials::DisplayCredentials;
+use crate::components::examples::get_data_from_server_button::GetDataFromServerButton;
+use crate::components::examples::post_data_to_server_button::PostDataToServerButton;
+use crate::components::examples::set_timeout_example::SetTimeoutExample;
+use crate::components::examples::without_html_tag_example::WithoutHtmlTagExample;
+use crate::components::examples::yewdux_functional_component_example::YewduxFunctionalComponentExample;
+use crate::store::YewduxStore;
 use yew::html;
 use yew::prelude::*;
 use yew::Html;
-use crate::store::YewduxStore;
 use yewdux::prelude::*;
-use crate::components::examples::counter::Counter;
-use crate::components::examples::display_count::DisplayCount;
-use crate::components::examples::get_data_from_server_button::GetDataFromServerButton;
-use crate::components::examples::post_data_to_server_button::PostDataToServerButton;
-use crate::components::examples::yewdux_functional_component_example::YewduxFunctionalComponentExample;
-use crate::components::examples::set_timeout_example::SetTimeoutExample;
-use crate::components::examples::without_html_tag_example::WithoutHtmlTagExample;
-use crate::components::examples::display_credentials::DisplayCredentials;
 
 pub struct Example {}
 

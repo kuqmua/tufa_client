@@ -10,7 +10,7 @@ pub fn touch_line() -> Html {
           width: 60px;
           border-radius: 3px;
       ",
-      ACTIVE_COLOR,
+        ACTIVE_COLOR,
     );
     html! {
       <div

@@ -1,17 +1,17 @@
+use crate::components::authorization::center_form_wrapper::CenterFormWrapper;
+use crate::components::authorization::input_form::InputForm;
 use crate::components::authorization::svg_icon_wrapper::SvgIconWrapper;
+use crate::helpers::html_input_type::HtmlInputType;
 use crate::routes::routes::Routes;
-use yew::prelude::*;
-use yew_router::prelude::*;
-use yewdux::prelude::Dispatcher;
-use yewdux::prelude::PersistentStore;
 use crate::{components::authorization::submit_button::SubmitButton, store::YewduxStore};
 use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
-use crate::helpers::html_input_type::HtmlInputType;
-use crate::components::authorization::input_form::InputForm;
+use yew::prelude::*;
+use yew_router::prelude::*;
+use yewdux::prelude::Dispatcher;
+use yewdux::prelude::PersistentStore;
 use yewdux_functional::use_store;
-use crate::components::authorization::center_form_wrapper::CenterFormWrapper;
 
 #[function_component(SignUp)]
 pub fn sign_up() -> Html {
@@ -22,38 +22,34 @@ pub fn sign_up() -> Html {
     let password_cloned = password.clone();
     let header_name = "Sign up";
     let history = use_history().unwrap();
-    let handle_form_submit = store
-    .dispatch()
-    .reduce_callback(move |state| {
+    let handle_form_submit = store.dispatch().reduce_callback(move |state| {
         state.username = username_cloned.to_string();
         state.password = password_cloned.to_string();
         history.push(Routes::SignIn);
     });
-    let handle_username_change =
-        store
-            .dispatch()
-            .reduce_callback_with(|state, event: Event| {
-                let username = event
-                    .target()
-                    .unwrap()
-                    .unchecked_into::<HtmlInputElement>()
-                    .value();
-                state.username = username;
-                log!("username", state.username.clone());
-            });
-    let handle_password_change =
-        store
-            .dispatch()
-            .reduce_callback_with(|state, event: Event| {
-                let password = event
-                    .target()
-                    .unwrap()
-                    .unchecked_into::<HtmlInputElement>()
-                    .value();
-                state.password = password;
-                log!("password", state.password.clone());
-            });
-    let component = html!{
+    let handle_username_change = store
+        .dispatch()
+        .reduce_callback_with(|state, event: Event| {
+            let username = event
+                .target()
+                .unwrap()
+                .unchecked_into::<HtmlInputElement>()
+                .value();
+            state.username = username;
+            log!("username", state.username.clone());
+        });
+    let handle_password_change = store
+        .dispatch()
+        .reduce_callback_with(|state, event: Event| {
+            let password = event
+                .target()
+                .unwrap()
+                .unchecked_into::<HtmlInputElement>()
+                .value();
+            state.password = password;
+            log!("password", state.password.clone());
+        });
+    let component = html! {
       <div
         style="
           display: block;

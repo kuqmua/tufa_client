@@ -1,10 +1,10 @@
 pub mod app;
 pub mod authorization;
+pub mod common_style;
+pub mod drawer;
 pub mod examples;
 pub mod feed;
 pub mod header;
 pub mod home;
-pub mod svg;
-pub mod drawer;
-pub mod common_style;
 pub mod right_drawer;
+pub mod svg;

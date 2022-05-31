@@ -1,8 +1,8 @@
-use web_sys::MouseEvent;
-use yew::{function_component, html, Properties, Callback};
+use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::constants::BACKGROUND_COLOR;
 use crate::constants::FEED_WIDTH_PX;
-use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
+use web_sys::MouseEvent;
+use yew::{function_component, html, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
@@ -12,16 +12,16 @@ pub struct DrawerProps {
 
 #[function_component(Drawer)]
 pub fn drawer(props: &DrawerProps) -> Html {
-    //todo: add esc keydown handling support(from working drawer.html) 
+    //todo: add esc keydown handling support(from working drawer.html)
     let changing_style = props.style_state.get_value();
     let section_style = format!(
-      "
+        "
         display: {};
       ",
-      changing_style.display
+        changing_style.display
     );
     let drawer_overlay_style = format!(
-      "
+        "
         position: fixed;
         top: 0;
         right: 0;
@@ -39,10 +39,10 @@ pub fn drawer(props: &DrawerProps) -> Html {
         user-select: none; 
         opacity: {};
       ",
-      changing_style.opacity
+        changing_style.opacity
     );
     let drawer_wrapper_style = format!(
-      "
+        "
         position: fixed;
         top: 0;
         left: 0;
@@ -62,22 +62,19 @@ pub fn drawer(props: &DrawerProps) -> Html {
         -webkit-transform: {};
         transform: {};
       ",
-      FEED_WIDTH_PX,
-      BACKGROUND_COLOR,
-      changing_style.webkit_transform,
-      changing_style.transform
+        FEED_WIDTH_PX, BACKGROUND_COLOR, changing_style.webkit_transform, changing_style.transform
     );
     html! {
       <>
-        <section 
+        <section
           style={section_style}
         >
-          <div 
+          <div
             style={drawer_overlay_style}
             onclick={&props.callback}
           >
           </div>
-          <div 
+          <div
             style={drawer_wrapper_style}
           >
           </div>

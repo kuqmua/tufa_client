@@ -39,10 +39,10 @@
 //           </aside>
 //             <div
 //               style="
-//                 width: 100%; 
-//                 display: flex; 
-//                 justify-content: center; 
-//                 flex-direction: column; 
+//                 width: 100%;
+//                 display: flex;
+//                 justify-content: center;
+//                 flex-direction: column;
 //                 align-items: center;
 //               "
 //             >
@@ -90,7 +90,7 @@
 //               //     }
 //               // }
 //               {"
-//                 body { 
+//                 body {
 //                   background-color: #16202A;
 //                   margin: 0px;
 //                   padding: 0px;
