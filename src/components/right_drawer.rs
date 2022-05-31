@@ -22,14 +22,14 @@ impl DrawerChangingStyleState {
     match *self {
         DrawerChangingStyleState::Initial => RightDrawerChangingStyle {
           display: String::from("none"),
-          transform: String::from("translate3d(-100%, 0, 0)"),
-          webkit_transform: String::from("translate3d(-100%, 0, 0)"),
+          transform: String::from("translate3d(100%, 0, 0)"),
+          webkit_transform: String::from("translate3d(100%, 0, 0)"),
           opacity: String::from(""),
         },
         DrawerChangingStyleState::OpenedBeforeTimeout => RightDrawerChangingStyle {
           display: String::from("block"),
-          transform: String::from("translate3d(-100%, 0, 0)"),
-          webkit_transform: String::from("translate3d(-100%, 0, 0)"),
+          transform: String::from("translate3d(100%, 0, 0)"),
+          webkit_transform: String::from("translate3d(100%, 0, 0)"),
           opacity: String::from(""),
         },
         DrawerChangingStyleState::OpenedAfterTimeout => RightDrawerChangingStyle {
@@ -40,8 +40,8 @@ impl DrawerChangingStyleState {
         },
         DrawerChangingStyleState::ClosedBeforeTimeout => RightDrawerChangingStyle {
           display: String::from("block"),
-          transform: String::from("translate3d(-100%, 0, 0)"),
-          webkit_transform: String::from("translate3d(-100%, 0, 0)"),
+          transform: String::from("translate3d(100%, 0, 0)"),
+          webkit_transform: String::from("translate3d(100%, 0, 0)"),
           opacity: String::from(""),
         },
     }
@@ -102,8 +102,8 @@ pub fn drawer(props: &RightDrawerProps) -> Html {
       "
         position: fixed;
         top: 0;
-        left: 0;
-        right: auto;
+        left: auto;
+        right: 0;
         bottom: 0;
         height: 100%;
         width: 100%;
@@ -130,7 +130,6 @@ pub fn drawer(props: &RightDrawerProps) -> Html {
           style={section_style}
         >
           <div 
-            data-drawer-close="data-drawer-close" 
             style={drawer_overlay_style}
             onclick={&props.callback}
           >

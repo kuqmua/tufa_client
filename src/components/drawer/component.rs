@@ -73,7 +73,6 @@ pub fn drawer(props: &DrawerProps) -> Html {
           style={section_style}
         >
           <div 
-            data-drawer-close="data-drawer-close" 
             style={drawer_overlay_style}
             onclick={&props.callback}
           >
