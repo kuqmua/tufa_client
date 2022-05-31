@@ -28,31 +28,60 @@ pub fn home() -> Html {
     );
     let expander_status = use_state(|| ExpanderStatus::Closed);
     let expander_status_clone_for_logic = expander_status.clone();
-    let drawer_style = use_state(|| DrawerChangingStyleState::Initial);
-    let drawer_style_cloned_on_open = drawer_style.clone();
-    let expander_status_clone_drawer_on_open = expander_status.clone();
-    let on_open = Callback::from(move |_| {
-        expander_status_clone_drawer_on_open.set(ExpanderStatus::Closed);
-        drawer_style_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
-        let drawer_style_cloned_first_another = drawer_style_cloned_on_open.clone();
+
+
+//
+    let drawer_style_left = use_state(|| DrawerChangingStyleState::Initial);
+    let drawer_style_left_cloned_on_open = drawer_style_left.clone();
+    let expander_status_clone_drawer_on_open_left = expander_status.clone();
+    let on_open_left = Callback::from(move |_| {
+        expander_status_clone_drawer_on_open_left.set(ExpanderStatus::Closed);
+        drawer_style_left_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
+        let drawer_style_left_cloned_first_another = drawer_style_left_cloned_on_open.clone();
         gloo::timers::callback::Timeout::new(50, move || {
-            drawer_style_cloned_first_another.set(DrawerChangingStyleState::OpenedAfterTimeout);
+            drawer_style_left_cloned_first_another.set(DrawerChangingStyleState::OpenedAfterTimeout);
         })
         .forget();
     });
-    let drawer_style_cloned_on_close = drawer_style.clone();
-    let expander_status_clone_drawer_on_close = expander_status.clone();
-    let on_close = Callback::from(move |_| {
-        expander_status_clone_drawer_on_close.set(ExpanderStatus::Closed);
-        drawer_style_cloned_on_close.set(DrawerChangingStyleState::ClosedBeforeTimeout);
-        let drawer_style_cloned_second_another = drawer_style_cloned_on_close.clone();
+    let drawer_style_left_cloned_on_close = drawer_style_left.clone();
+    let expander_status_clone_drawer_on_close_left = expander_status.clone();
+    let on_close_left = Callback::from(move |_| {
+        expander_status_clone_drawer_on_close_left.set(ExpanderStatus::Closed);
+        drawer_style_left_cloned_on_close.set(DrawerChangingStyleState::ClosedBeforeTimeout);
+        let drawer_style_left_cloned_second_another = drawer_style_left_cloned_on_close.clone();
         gloo::timers::callback::Timeout::new(350, move || {
-            drawer_style_cloned_second_another.set(DrawerChangingStyleState::Initial);
+            drawer_style_left_cloned_second_another.set(DrawerChangingStyleState::Initial);
         })
         .forget();
     });
-    let drawer_style_enum_handle_left = &*drawer_style.clone();
-    let drawer_style_enum_handle_right = &*drawer_style.clone();
+    let drawer_style_left_enum_handle = &*drawer_style_left.clone();
+////
+let drawer_style_right = use_state(|| DrawerChangingStyleState::Initial);
+let drawer_style_right_cloned_on_open = drawer_style_right.clone();
+let expander_status_clone_drawer_on_open_right = expander_status.clone();
+let on_open_right = Callback::from(move |_| {
+    expander_status_clone_drawer_on_open_right.set(ExpanderStatus::Closed);
+    drawer_style_right_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
+    let drawer_style_right_cloned_first_another = drawer_style_right_cloned_on_open.clone();
+    gloo::timers::callback::Timeout::new(50, move || {
+        drawer_style_right_cloned_first_another.set(DrawerChangingStyleState::OpenedAfterTimeout);
+    })
+    .forget();
+});
+let drawer_style_right_cloned_on_close = drawer_style_right.clone();
+let expander_status_clone_drawer_on_close_right = expander_status.clone();
+let on_close_right = Callback::from(move |_| {
+    expander_status_clone_drawer_on_close_right.set(ExpanderStatus::Closed);
+    drawer_style_right_cloned_on_close.set(DrawerChangingStyleState::ClosedBeforeTimeout);
+    let drawer_style_right_cloned_second_another = drawer_style_right_cloned_on_close.clone();
+    gloo::timers::callback::Timeout::new(350, move || {
+        drawer_style_right_cloned_second_another.set(DrawerChangingStyleState::Initial);
+    })
+    .forget();
+});
+    let drawer_style_right_enum_handle = &*drawer_style_right.clone();
+//
+
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_to_share = Callback::from(move |_| match *expander_status_cloned_share {
         ExpanderStatus::Share => {
@@ -81,15 +110,15 @@ pub fn home() -> Html {
     };
     html! {
       <>
-        <Header callback={on_open.clone()}/>
+        <Header left_drawer_callback={on_open_left.clone()} right_drawer_callback={on_open_right.clone()}/>
         <Drawer
-          callback={on_close.clone()}
-          style_state={drawer_style_enum_handle_left.clone()}
+          callback={on_close_left.clone()}
+          style_state={drawer_style_left_enum_handle.clone()}
           drawer_position={DrawerPosition::Left}
         />
         <Drawer
-          callback={on_close.clone()}
-          style_state={drawer_style_enum_handle_right.clone()}
+          callback={on_close_right.clone()}
+          style_state={drawer_style_right_enum_handle.clone()}
           drawer_position={DrawerPosition::Right}
         />
         <div

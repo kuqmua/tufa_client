@@ -9,7 +9,8 @@ use yew::{function_component, html, use_state, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct HeaderProps {
-    pub callback: Callback<MouseEvent>,
+    pub left_drawer_callback: Callback<MouseEvent>,
+    pub right_drawer_callback: Callback<MouseEvent>,
 }
 
 #[function_component(Header)]
@@ -51,7 +52,7 @@ pub fn header(props: &HeaderProps) -> Html {
                 padding-left: 20px;
               "
             >
-              <MenuButton callback={&props.callback}/>
+              <MenuButton callback={&props.left_drawer_callback}/>
               <div
                 style="
                   font-size: 30px;
