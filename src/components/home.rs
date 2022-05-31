@@ -17,16 +17,6 @@ pub enum ExpanderStatus {
     ExpandMore,
 }
 
-// impl Clone for ExpanderStatus {
-//   fn clone(&self) -> Self {
-//     match *self {
-//         ExpanderStatus::Closed => ExpanderStatus::Closed,
-//         ExpanderStatus::Share => ExpanderStatus::Share,
-//         ExpanderStatus::ExpandMore => ExpanderStatus::ExpandMore,
-//     }
-//   }
-// }
-
 #[function_component(Home)]
 pub fn home() -> Html {
     let padding_summary = HEADER_HEIGHT_PX + HEADER_BORDER_BOTTOM_PX;
@@ -38,7 +28,6 @@ pub fn home() -> Html {
     );
     let expander_status = use_state(|| ExpanderStatus::Closed);
     let expander_status_clone_for_logic = expander_status.clone();
-
     let drawer_style = use_state(|| DrawerChangingStyleState::Initial);
     let drawer_style_cloned_on_open = drawer_style.clone();
     let expander_status_clone_drawer_on_open = expander_status.clone();
@@ -90,7 +79,6 @@ pub fn home() -> Html {
         ExpanderStatus::Share => html! {<Expander inner_html={share_inner_html}/>},
         ExpanderStatus::ExpandMore => html! {<Expander inner_html={expand_more_inner_html}/>},
     };
-
     html! {
       <>
         <Header callback={on_open.clone()}/>
@@ -104,10 +92,6 @@ pub fn home() -> Html {
           style_state={drawer_style_enum_handle_right.clone()}
           drawer_position={DrawerPosition::Right}
         />
-        // <RightDrawer
-        //   callback={on_close.clone()}
-        //   style_state={drawer_style_enum_handle.clone()}
-        // />
         <div
           style="
             width: 100%; 
