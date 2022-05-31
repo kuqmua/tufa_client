@@ -6,5 +6,4 @@ pub mod examples;
 pub mod feed;
 pub mod header;
 pub mod home;
-pub mod right_drawer;
 pub mod svg;

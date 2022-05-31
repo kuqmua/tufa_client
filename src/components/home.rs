@@ -8,8 +8,6 @@ use yew::{function_component, html, use_state, Callback};
 use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
-// use crate::components::right_drawer::DrawerChangingStyleState;
-// use crate::components::right_drawer::RightDrawer;
 use crate::components::drawer::position::DrawerPosition;
 
 #[derive(Debug, PartialEq)]
