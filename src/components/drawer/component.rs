@@ -3,11 +3,13 @@ use crate::constants::BACKGROUND_COLOR;
 use crate::constants::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
+use crate::components::drawer::position::DrawerPosition;
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
     pub callback: Callback<MouseEvent>,
     pub style_state: DrawerChangingStyleState,
+    pub drawer_position: DrawerPosition,
 }
 
 #[function_component(Drawer)]

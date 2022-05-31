@@ -5,11 +5,12 @@ use crate::components::feed::posts_list::PostsList;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use yew::{function_component, html, use_state, Callback};
-// use crate::components::drawer::component::Drawer;
+use crate::components::drawer::component::Drawer;
 use crate::components::header::component::Header;
-// use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
-use crate::components::right_drawer::DrawerChangingStyleState;
-use crate::components::right_drawer::RightDrawer;
+use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
+// use crate::components::right_drawer::DrawerChangingStyleState;
+// use crate::components::right_drawer::RightDrawer;
+use crate::components::drawer::position::DrawerPosition;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -63,7 +64,8 @@ pub fn home() -> Html {
         })
         .forget();
     });
-    let drawer_style_enum_handle = &*drawer_style.clone();
+    let drawer_style_enum_handle_left = &*drawer_style.clone();
+    let drawer_style_enum_handle_right = &*drawer_style.clone();
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_to_share = Callback::from(move |_| match *expander_status_cloned_share {
         ExpanderStatus::Share => {
@@ -94,14 +96,20 @@ pub fn home() -> Html {
     html! {
       <>
         <Header callback={on_open.clone()}/>
-        // <Drawer
+        <Drawer
+          callback={on_close.clone()}
+          style_state={drawer_style_enum_handle_left.clone()}
+          drawer_position={DrawerPosition::Left}
+        />
+        <Drawer
+          callback={on_close.clone()}
+          style_state={drawer_style_enum_handle_right.clone()}
+          drawer_position={DrawerPosition::Right}
+        />
+        // <RightDrawer
         //   callback={on_close.clone()}
         //   style_state={drawer_style_enum_handle.clone()}
         // />
-        <RightDrawer
-          callback={on_close.clone()}
-          style_state={drawer_style_enum_handle.clone()}
-        />
         <div
           style="
             width: 100%; 
