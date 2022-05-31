@@ -24,18 +24,18 @@ impl Clone for DrawerChangingStyleState {
 }
 
 impl DrawerChangingStyleState {
-    pub fn get_value(&self) -> DrawerChangingStyle {
+    pub fn get_value(&self, translate_sign: String) -> DrawerChangingStyle {
         match *self {
             DrawerChangingStyleState::Initial => DrawerChangingStyle {
                 display: String::from("none"),
-                transform: String::from("translate3d(-100%, 0, 0)"),
-                webkit_transform: String::from("translate3d(-100%, 0, 0)"),
+                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
                 opacity: String::from(""),
             },
             DrawerChangingStyleState::OpenedBeforeTimeout => DrawerChangingStyle {
                 display: String::from("block"),
-                transform: String::from("translate3d(-100%, 0, 0)"),
-                webkit_transform: String::from("translate3d(-100%, 0, 0)"),
+                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
                 opacity: String::from(""),
             },
             DrawerChangingStyleState::OpenedAfterTimeout => DrawerChangingStyle {
@@ -46,8 +46,8 @@ impl DrawerChangingStyleState {
             },
             DrawerChangingStyleState::ClosedBeforeTimeout => DrawerChangingStyle {
                 display: String::from("block"),
-                transform: String::from("translate3d(-100%, 0, 0)"),
-                webkit_transform: String::from("translate3d(-100%, 0, 0)"),
+                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
                 opacity: String::from(""),
             },
         }

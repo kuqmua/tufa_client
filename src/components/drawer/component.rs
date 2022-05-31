@@ -15,7 +15,8 @@ pub struct DrawerProps {
 #[function_component(Drawer)]
 pub fn drawer(props: &DrawerProps) -> Html {
     //todo: add esc keydown handling support(from working drawer.html)
-    let changing_style = props.style_state.get_value();
+    let drawer_position_style = props.drawer_position.get_style();
+    let changing_style = props.style_state.get_value(drawer_position_style.translate_sign);
     let section_style = format!(
         "
         display: {};
@@ -47,8 +48,8 @@ pub fn drawer(props: &DrawerProps) -> Html {
         "
         position: fixed;
         top: 0;
-        left: 0;
-        right: auto;
+        left: {};
+        right: {};
         bottom: 0;
         height: 100%;
         width: 100%;
@@ -64,7 +65,12 @@ pub fn drawer(props: &DrawerProps) -> Html {
         -webkit-transform: {};
         transform: {};
       ",
-        FEED_WIDTH_PX, BACKGROUND_COLOR, changing_style.webkit_transform, changing_style.transform
+        drawer_position_style.left_value,
+        drawer_position_style.right_value,
+        FEED_WIDTH_PX, 
+        BACKGROUND_COLOR, 
+        changing_style.webkit_transform, 
+        changing_style.transform
     );
     html! {
       <>
