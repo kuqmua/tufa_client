@@ -1,44 +1,44 @@
 #[derive(Debug, PartialEq)]
-pub enum RightDrawerChangingStyleState {
+pub enum DrawerChangingStyleState {
   Initial,
   OpenedBeforeTimeout,
   OpenedAfterTimeout,
   ClosedBeforeTimeout,
 }
 
-impl Clone for RightDrawerChangingStyleState {
+impl Clone for DrawerChangingStyleState {
   fn clone(&self) -> Self {
     match *self {
-        RightDrawerChangingStyleState::Initial => RightDrawerChangingStyleState::Initial,
-        RightDrawerChangingStyleState::OpenedBeforeTimeout => RightDrawerChangingStyleState::OpenedBeforeTimeout,
-        RightDrawerChangingStyleState::OpenedAfterTimeout => RightDrawerChangingStyleState::OpenedAfterTimeout,
-        RightDrawerChangingStyleState::ClosedBeforeTimeout => RightDrawerChangingStyleState::ClosedBeforeTimeout,
+        DrawerChangingStyleState::Initial => DrawerChangingStyleState::Initial,
+        DrawerChangingStyleState::OpenedBeforeTimeout => DrawerChangingStyleState::OpenedBeforeTimeout,
+        DrawerChangingStyleState::OpenedAfterTimeout => DrawerChangingStyleState::OpenedAfterTimeout,
+        DrawerChangingStyleState::ClosedBeforeTimeout => DrawerChangingStyleState::ClosedBeforeTimeout,
     }
   }
 }
 
-impl RightDrawerChangingStyleState {
+impl DrawerChangingStyleState {
   pub fn get_value(&self) -> RightDrawerChangingStyle {
     match *self {
-        RightDrawerChangingStyleState::Initial => RightDrawerChangingStyle {
+        DrawerChangingStyleState::Initial => RightDrawerChangingStyle {
           display: String::from("none"),
           transform: String::from("translate3d(-100%, 0, 0)"),
           webkit_transform: String::from("translate3d(-100%, 0, 0)"),
           opacity: String::from(""),
         },
-        RightDrawerChangingStyleState::OpenedBeforeTimeout => RightDrawerChangingStyle {
+        DrawerChangingStyleState::OpenedBeforeTimeout => RightDrawerChangingStyle {
           display: String::from("block"),
           transform: String::from("translate3d(-100%, 0, 0)"),
           webkit_transform: String::from("translate3d(-100%, 0, 0)"),
           opacity: String::from(""),
         },
-        RightDrawerChangingStyleState::OpenedAfterTimeout => RightDrawerChangingStyle {
+        DrawerChangingStyleState::OpenedAfterTimeout => RightDrawerChangingStyle {
           display: String::from("block"),
           transform: String::from("translate3d(0, 0, 0)"),
           webkit_transform: String::from("translate3d(0, 0, 0)"),
           opacity: String::from("0.5"),
         },
-        RightDrawerChangingStyleState::ClosedBeforeTimeout => RightDrawerChangingStyle {
+        DrawerChangingStyleState::ClosedBeforeTimeout => RightDrawerChangingStyle {
           display: String::from("block"),
           transform: String::from("translate3d(-100%, 0, 0)"),
           webkit_transform: String::from("translate3d(-100%, 0, 0)"),
@@ -64,7 +64,7 @@ use crate::constants::FEED_WIDTH_PX;
 #[derive(Properties, PartialEq)]
 pub struct RightDrawerProps {
     pub callback: Callback<MouseEvent>,
-    pub style_state: RightDrawerChangingStyleState,
+    pub style_state: DrawerChangingStyleState,
 }
 
 #[function_component(RightDrawer)]
