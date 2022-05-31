@@ -30,8 +30,6 @@ pub fn menu_button(props: &MenuButtonProps) -> Html {
         <button
           style={style_handle}
           onclick={props.callback.clone()}
-          aria-controls="drawer-name-left"
-          aria-expanded="false"
         >
           <Menu height={icon_size.clone()} width={icon_size} fill={HEADER_ICONS_COLOR.to_owned()}/>
         </button>

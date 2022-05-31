@@ -1,11 +1,10 @@
 use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
-use crate::components::header::profile_actions::component::ProfileActions;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::constants::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
-use yew::{function_component, html, use_state, Callback, Properties};
+use yew::{function_component, html, Callback, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct HeaderProps {
@@ -15,11 +14,11 @@ pub struct HeaderProps {
 
 #[function_component(Header)]
 pub fn header(props: &HeaderProps) -> Html {
-    let profile_actions_panel_opened = use_state(|| false);
-    let profile_actions_panel_opened_cloned = profile_actions_panel_opened.clone();
-    let change_profile_actions_panel_opened: Callback<MouseEvent> = Callback::from(move |_| {
-        profile_actions_panel_opened_cloned.set(!*profile_actions_panel_opened_cloned);
-    });
+    // let profile_actions_panel_opened = use_state(|| false);
+    // let profile_actions_panel_opened_cloned = profile_actions_panel_opened.clone();
+    // let change_profile_actions_panel_opened: Callback<MouseEvent> = Callback::from(move |_| {
+    //     profile_actions_panel_opened_cloned.set(!*profile_actions_panel_opened_cloned);
+    // });
     let header_div_style_handle = format!(
         "
           height: {}px; 
@@ -65,12 +64,12 @@ pub fn header(props: &HeaderProps) -> Html {
           // //   <Link<Routes> to={Routes::SignUp}>{ "sign up" }</Link<Routes>>
           // //     {"----------"}
           // //   <Link<Routes> to={Routes::SignIn}>{ "sign ip" }</Link<Routes>>
-              <PersonOutlineButton callback={change_profile_actions_panel_opened}/>
+              <PersonOutlineButton callback={&props.right_drawer_callback}/>
             </div>
           </div>
-          if *profile_actions_panel_opened {
-            <ProfileActions/>
-          }
+          // if *profile_actions_panel_opened {
+          //   <ProfileActions/>
+          // }
       </header>
     }
 }
