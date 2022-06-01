@@ -61,6 +61,8 @@ pub fn drawer(props: &DrawerProps) -> Html {
         background-color: {};
         display: flex;
         flex-direction: column; 
+        justify-content: center;
+        align-items: center;
         -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
         -webkit-transform: {};
         transform: {};
