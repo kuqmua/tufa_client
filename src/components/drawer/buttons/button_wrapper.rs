@@ -11,7 +11,7 @@ pub struct ButtonWrapperProps {
 
 #[function_component(ButtonWrapper)]
 pub fn button_wrapper(props: &ButtonWrapperProps) -> Html {
-    let size_px: u32 = 26;
+    let size_px: u32 = 35;
     let style_handle = format!(
         "
         width: {}px;
