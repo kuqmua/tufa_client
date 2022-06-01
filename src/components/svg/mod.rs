@@ -9,3 +9,4 @@ pub mod settings_black;
 pub mod share;
 pub mod spinner;
 pub mod warning;
+pub mod close_black;
