@@ -75,6 +75,19 @@ pub fn drawer(props: &DrawerProps) -> Html {
         changing_style.webkit_transform, 
         changing_style.transform
     );
+    let justify_content_value = match props.drawer_position {
+      DrawerPosition::Left => String::from("flex-end"),
+      DrawerPosition::Right => String::from("flex-start"),
+    };
+    let close_button_wrapper_style =  format!(
+      "
+        display: flex;
+        justify-content: {};
+        flex-direction: row;
+        width: 100%;
+      ",
+      justify_content_value
+    );
     html! {
       <>
         <section
@@ -89,12 +102,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
             style={drawer_wrapper_style}
           >
             <div
-              style="
-                display: flex;
-                justify-content: flex-end;
-                flex-direction: row;
-                width: 100%;
-              "
+              style={close_button_wrapper_style}
             >
               <CloseButton callback={&props.callback.clone()}/>
             </div>
