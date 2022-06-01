@@ -4,6 +4,7 @@ use crate::constants::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 use crate::components::drawer::position::DrawerPosition;
+use crate::components::drawer::buttons::close_button::CloseButton;
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
@@ -61,7 +62,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
         background-color: {};
         display: flex;
         flex-direction: column; 
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
         -webkit-transform: {};
@@ -81,12 +82,22 @@ pub fn drawer(props: &DrawerProps) -> Html {
         >
           <div
             style={drawer_overlay_style}
-            onclick={&props.callback}
+            onclick={&props.callback.clone()}
           >
           </div>
           <div
             style={drawer_wrapper_style}
           >
+            <div
+              style="
+                display: flex;
+                justify-content: flex-end;
+                flex-direction: row;
+                width: 100%;
+              "
+            >
+              <CloseButton callback={&props.callback.clone()}/>
+            </div>
           </div>
         </section>
       </>
