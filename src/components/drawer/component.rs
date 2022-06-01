@@ -2,6 +2,7 @@ use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleS
 use crate::constants::BACKGROUND_COLOR;
 use crate::constants::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
+use yew::Html;
 use yew::{function_component, html, Callback, Properties};
 use crate::components::drawer::position::DrawerPosition;
 use crate::components::drawer::buttons::close_button::CloseButton;
@@ -11,6 +12,7 @@ pub struct DrawerProps {
     pub callback: Callback<MouseEvent>,
     pub style_state: DrawerChangingStyleState,
     pub drawer_position: DrawerPosition,
+    pub inner_html: Html,
 }
 
 #[function_component(Drawer)]
@@ -106,6 +108,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
             >
               <CloseButton callback={&props.callback.clone()}/>
             </div>
+            {props.inner_html.clone()}
           </div>
         </section>
       </>

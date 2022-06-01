@@ -108,6 +108,8 @@ let on_close_right = Callback::from(move |_| {
         ExpanderStatus::Share => html! {<Expander inner_html={share_inner_html}/>},
         ExpanderStatus::ExpandMore => html! {<Expander inner_html={expand_more_inner_html}/>},
     };
+    let inner_html_left = html!{};
+    let inner_html_right = html!{};
     html! {
       <>
         <Header left_drawer_callback={on_open_left.clone()} right_drawer_callback={on_open_right.clone()}/>
@@ -115,11 +117,13 @@ let on_close_right = Callback::from(move |_| {
           callback={on_close_left.clone()}
           style_state={drawer_style_left_enum_handle.clone()}
           drawer_position={DrawerPosition::Left}
+          inner_html={inner_html_left}
         />
         <Drawer
           callback={on_close_right.clone()}
           style_state={drawer_style_right_enum_handle.clone()}
           drawer_position={DrawerPosition::Right}
+          inner_html={inner_html_right}
         />
         <div
           style="
