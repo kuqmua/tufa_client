@@ -1,3 +1,4 @@
+pub mod close_black;
 pub mod error;
 pub mod expand_more;
 pub mod favorite;
@@ -9,4 +10,3 @@ pub mod settings_black;
 pub mod share;
 pub mod spinner;
 pub mod warning;
-pub mod close_black;
