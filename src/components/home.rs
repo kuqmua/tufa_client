@@ -84,31 +84,11 @@ pub fn home() -> Html {
     });
     let drawer_style_right_enum_handle = &*drawer_style_right.clone();
     let expander_status_cloned_share = expander_status.clone();
-    // let expander_status_to_share = Callback::from(move |_| match *expander_status_cloned_share {
-    //     ExpanderStatus::Share => {
-    //         expander_status_cloned_share.set(ExpanderStatus::Closed);
-    //     }
-    //     _ => {
-    //         expander_status_cloned_share.set(ExpanderStatus::Share);
-    //     }
-    // });
     let expander_status_cloned_expand_more = expander_status.clone();
-    // let expander_status_to_expand_more =
-    //     Callback::from(move |_| match *expander_status_cloned_expand_more {
-    //         ExpanderStatus::ExpandMore => {
-    //             expander_status_cloned_expand_more.set(ExpanderStatus::Closed);
-    //         }
-    //         _ => {
-    //             expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
-    //         }
-    //     });
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
     let inner_html_left = html! {};
     let inner_html_right = html! {};
-    //
-    //
-    //
     let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
     let expander_style_clone_open_expand_more = expander_style.clone();
     let drawer_style_right_expand_more = drawer_style_right.clone();
@@ -116,8 +96,6 @@ pub fn home() -> Html {
     let expander_on_open_expand_more = Callback::from(move |_| {
         drawer_style_right_expand_more.set(DrawerChangingStyleState::Initial);
         drawer_style_left_expand_more.set(DrawerChangingStyleState::Initial);
-
-        //
         match *expander_status_cloned_expand_more {
                   ExpanderStatus::ExpandMore => {
                       expander_status_cloned_expand_more.set(ExpanderStatus::Closed);
@@ -126,7 +104,6 @@ pub fn home() -> Html {
                       expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
                   }
               }
-        //
         expander_style_clone_open_expand_more.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
         let expander_style_clone_open_another = expander_style_clone_open_expand_more.clone();
         gloo::timers::callback::Timeout::new(50, move || {
@@ -141,8 +118,6 @@ pub fn home() -> Html {
     let expander_on_open_share = Callback::from(move |_| {
       drawer_style_right_share.set(DrawerChangingStyleState::Initial);
       drawer_style_left_share.set(DrawerChangingStyleState::Initial);
-
-      //
       match *expander_status_cloned_share {
         ExpanderStatus::Share => {
             expander_status_cloned_share.set(ExpanderStatus::Closed);
@@ -151,7 +126,6 @@ pub fn home() -> Html {
             expander_status_cloned_share.set(ExpanderStatus::Share);
         }
     }
-      //
       expander_style_clone_open_share.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
       let expander_style_clone_open_another = expander_style_clone_open_share.clone();
       gloo::timers::callback::Timeout::new(50, move || {
@@ -161,9 +135,11 @@ pub fn home() -> Html {
       .forget();
   });
     let expander_style_clone_close = expander_style.clone();
-    // let expander_status_clone_drawer_on_close_left = expander_status.clone();
+    let drawer_style_right_expander_on_close = drawer_style_right.clone();
+    let drawer_style_left_expander_on_close = drawer_style_left.clone();
     let expander_on_close = Callback::from(move |_| {
-        // expander_status_clone_drawer_on_close_left.set(ExpanderStatus::Closed);
+        drawer_style_right_expander_on_close.set(DrawerChangingStyleState::Initial);
+        drawer_style_left_expander_on_close.set(DrawerChangingStyleState::Initial);
         expander_style_clone_close.set(ExpanderChangingStyleState::ClosedBeforeTimeout);
         let expander_style_clone_close_another = expander_style_clone_close.clone();
         gloo::timers::callback::Timeout::new(350, move || {
