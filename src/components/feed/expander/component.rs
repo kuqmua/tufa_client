@@ -91,13 +91,13 @@ pub fn expander(props: &ExpanderProps) -> Html {
         changing_style.opacity
     );
     let drawer_wrapper_style = format!(
+      // left: 0;
+      // right: 0;
         "
         position: fixed;
         top: auto;
-        left: 0;
-        right: 0;
         bottom: 0;
-        height: 100%;
+        height: 400px;
         width: 100%;
         width: {}px;
         z-index: 9999;
