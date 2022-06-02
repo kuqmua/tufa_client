@@ -10,6 +10,8 @@ use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use yew::{function_component, html, use_state, Callback};
 
+use crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState;
+
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
     Closed,
@@ -102,13 +104,41 @@ pub fn home() -> Html {
         });
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
-    let expander_handler = match *expander_status_clone_for_logic {
-        ExpanderStatus::Closed => html! {}, //maybe rewrite it somehow?
-        ExpanderStatus::Share => html! {<Expander inner_html={share_inner_html}/>},
-        ExpanderStatus::ExpandMore => html! {<Expander inner_html={expand_more_inner_html}/>},
-    };
+    // let expander_handler = match *expander_status_clone_for_logic {
+    //     ExpanderStatus::Closed => html! {}, //maybe rewrite it somehow?
+    //     ExpanderStatus::Share => html! {<Expander inner_html={share_inner_html} />},
+    //     ExpanderStatus::ExpandMore => html! {<Expander inner_html={expand_more_inner_html}/>},
+    // };
     let inner_html_left = html! {};
     let inner_html_right = html! {};
+    //
+    //
+    //
+    let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
+    let expander_style_clone_open = expander_style.clone();
+    // let expander_status_clone_drawer_on_open_left = expander_status.clone();
+    let expander_on_open = Callback::from(move |_| {
+        // expander_status_clone_drawer_on_open_left.set(ExpanderStatus::Closed);
+        expander_style_clone_open.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
+        let expander_style_clone_open_another = expander_style_clone_open.clone();
+        gloo::timers::callback::Timeout::new(50, move || {
+          expander_style_clone_open_another
+                .set(ExpanderChangingStyleState::OpenedAfterTimeout);
+        })
+        .forget();
+    });
+    let expander_style_clone_close = expander_style.clone();
+    // let expander_status_clone_drawer_on_close_left = expander_status.clone();
+    let expander_on_close = Callback::from(move |_| {
+        // expander_status_clone_drawer_on_close_left.set(ExpanderStatus::Closed);
+        expander_style_clone_close.set(ExpanderChangingStyleState::ClosedBeforeTimeout);
+        let expander_style_clone_close_another = expander_style_clone_close.clone();
+        gloo::timers::callback::Timeout::new(350, move || {
+            expander_style_clone_close_another.set(ExpanderChangingStyleState::Initial);
+        })
+        .forget();
+    });
+    let expander_style_clone_close_handle = &*expander_style.clone().clone();
     html! {
       <>
         <Header left_drawer_callback={on_open_left.clone()} right_drawer_callback={on_open_right.clone()}/>
@@ -141,7 +171,32 @@ pub fn home() -> Html {
               share_callback={expander_status_to_share}
               expand_more_callback={expander_status_to_expand_more}
             />
-            {expander_handler}
+            <div
+              style="
+                width: 150px;
+                height: 150px;
+                background-color: red;
+              "
+              onclick={expander_on_open}
+            >
+            {"fdg"}
+            </div>
+            <div
+            style="
+              width: 150px;
+              height: 150px;
+              background-color: blue;
+            "
+            onclick={expander_on_close}
+          >
+          {"fdg"}
+          </div>
+            // {expander_handler}
+            <Expander 
+              // callback: Callback<MouseEvent>,
+              style_state={expander_style_clone_close_handle.clone()}
+              inner_html={expand_more_inner_html}
+            />
           </div>
         </div>
       </>

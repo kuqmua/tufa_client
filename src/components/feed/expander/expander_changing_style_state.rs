@@ -24,18 +24,18 @@ impl Clone for ExpanderChangingStyleState {
 }
 
 impl ExpanderChangingStyleState {
-    pub fn get_value(&self, translate_sign: String) -> ExpanderChangingStyle {
+    pub fn get_value(&self) -> ExpanderChangingStyle {
         match *self {
             ExpanderChangingStyleState::Initial => ExpanderChangingStyle {
                 display: String::from("none"),
-                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
-                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                transform: String::from("translate3d(100%, 0, 0)"),
+                webkit_transform: String::from("translate3d(100%, 0, 0)"),
                 opacity: String::from(""),
             },
             ExpanderChangingStyleState::OpenedBeforeTimeout => ExpanderChangingStyle {
                 display: String::from("block"),
-                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
-                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                transform: String::from("translate3d(100%, 0, 0)"),
+                webkit_transform: String::from("translate3d(100%, 0, 0)"),
                 opacity: String::from(""),
             },
             ExpanderChangingStyleState::OpenedAfterTimeout => ExpanderChangingStyle {
@@ -46,15 +46,15 @@ impl ExpanderChangingStyleState {
             },
             ExpanderChangingStyleState::ClosedBeforeTimeout => ExpanderChangingStyle {
                 display: String::from("block"),
-                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
-                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                transform: String::from("translate3d(100%, 0, 0)"),
+                webkit_transform: String::from("translate3d(100%, 0, 0)"),
                 opacity: String::from(""),
             },
         }
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct ExpanderChangingStyle {
     pub display: String,
     pub transform: String,
