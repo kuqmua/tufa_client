@@ -104,29 +104,57 @@ pub fn home() -> Html {
     //     });
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
-    // let expander_handler = match *expander_status_clone_for_logic {
-    //     ExpanderStatus::Closed => html! {}, //maybe rewrite it somehow?
-    //     ExpanderStatus::Share => html! {<Expander inner_html={share_inner_html} />},
-    //     ExpanderStatus::ExpandMore => html! {<Expander inner_html={expand_more_inner_html}/>},
-    // };
     let inner_html_left = html! {};
     let inner_html_right = html! {};
     //
     //
     //
     let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
-    let expander_style_clone_open = expander_style.clone();
+    let expander_style_clone_open_expand_more = expander_style.clone();
     // let expander_status_clone_drawer_on_open_left = expander_status.clone();
-    let expander_on_open = Callback::from(move |_| {
+    let expander_on_open_expand_more = Callback::from(move |_| {
         // expander_status_clone_drawer_on_open_left.set(ExpanderStatus::Closed);
-        expander_style_clone_open.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
-        let expander_style_clone_open_another = expander_style_clone_open.clone();
+
+        //
+        match *expander_status_cloned_expand_more {
+                  ExpanderStatus::ExpandMore => {
+                      expander_status_cloned_expand_more.set(ExpanderStatus::Closed);
+                  }
+                  _ => {
+                      expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
+                  }
+              }
+        //
+        expander_style_clone_open_expand_more.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
+        let expander_style_clone_open_another = expander_style_clone_open_expand_more.clone();
         gloo::timers::callback::Timeout::new(50, move || {
           expander_style_clone_open_another
                 .set(ExpanderChangingStyleState::OpenedAfterTimeout);
         })
         .forget();
     });
+    let expander_style_clone_open_share = expander_style.clone();
+    let expander_on_open_share = Callback::from(move |_| {
+      // expander_status_clone_drawer_on_open_left.set(ExpanderStatus::Closed);
+
+      //
+      match *expander_status_cloned_share {
+        ExpanderStatus::Share => {
+            expander_status_cloned_share.set(ExpanderStatus::Closed);
+        }
+        _ => {
+            expander_status_cloned_share.set(ExpanderStatus::Share);
+        }
+    }
+      //
+      expander_style_clone_open_share.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
+      let expander_style_clone_open_another = expander_style_clone_open_share.clone();
+      gloo::timers::callback::Timeout::new(50, move || {
+        expander_style_clone_open_another
+              .set(ExpanderChangingStyleState::OpenedAfterTimeout);
+      })
+      .forget();
+  });
     let expander_style_clone_close = expander_style.clone();
     // let expander_status_clone_drawer_on_close_left = expander_status.clone();
     let expander_on_close = Callback::from(move |_| {
@@ -139,6 +167,23 @@ pub fn home() -> Html {
         .forget();
     });
     let expander_style_clone_close_handle = &*expander_style.clone().clone();
+    let expander_handler = match *expander_status_clone_for_logic {
+      ExpanderStatus::Closed => html! {}, //maybe rewrite it somehow?
+      ExpanderStatus::Share => html! {
+        <Expander 
+          callback={expander_on_close}
+          style_state={expander_style_clone_close_handle.clone()}
+          inner_html={share_inner_html}
+        />
+      },
+      ExpanderStatus::ExpandMore => html! {
+        <Expander 
+          callback={expander_on_close}
+          style_state={expander_style_clone_close_handle.clone()}
+          inner_html={expand_more_inner_html}
+        />
+      },
+  };
     html! {
       <>
         <Header left_drawer_callback={on_open_left.clone()} right_drawer_callback={on_open_right.clone()}/>
@@ -168,36 +213,10 @@ pub fn home() -> Html {
             style={style_handle}
           >
             <PostsList
-              share_callback={expander_on_open.clone()}//expander_status_to_share
-              expand_more_callback={expander_on_open.clone()}//expander_status_to_expand_more
+              share_callback={expander_on_open_share.clone()}//expander_status_to_share
+              expand_more_callback={expander_on_open_expand_more.clone()}//expander_status_to_expand_more
             />
-          //   <div
-          //     style="
-          //       width: 150px;
-          //       height: 150px;
-          //       background-color: red;
-          //     "
-          //     onclick={expander_on_open}
-          //   >
-          //   {"fdg"}
-          //   </div>
-          //   <div
-          //   style="
-          //     width: 150px;
-          //     height: 150px;
-          //     background-color: blue;
-          //   "
-          //   onclick={expander_on_close.clone()
-          //   }
-          // >
-          // {"fdg"}
-          // </div>
-            // {expander_handler}
-            <Expander 
-              callback={expander_on_close}
-              style_state={expander_style_clone_close_handle.clone()}
-              inner_html={expand_more_inner_html}
-            />
+            {expander_handler}
           </div>
         </div>
       </>
