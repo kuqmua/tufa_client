@@ -139,6 +139,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
           <div
             style={drawer_wrapper_style}
           >
+            {props.inner_html.clone()}
           </div>
         </section>
       </>
