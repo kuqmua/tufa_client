@@ -54,7 +54,7 @@ use crate::components::feed::expander::expander_changing_style_state::ExpanderCh
 
 #[derive(Properties, PartialEq, Debug, Clone)]
 pub struct ExpanderProps {
-    // pub callback: Callback<MouseEvent>,
+    pub callback: Callback<MouseEvent>,
     pub style_state: ExpanderChangingStyleState,
     pub inner_html: Html,
 }
@@ -69,6 +69,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
       ",
         changing_style.display
     );
+    let border_radius = "30px";
     let drawer_overlay_style = format!(
         "
         position: fixed;
@@ -112,11 +113,18 @@ pub fn expander(props: &ExpanderProps) -> Html {
         -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
         -webkit-transform: {};
         transform: {};
+        border-radius: {} {} 0px 0px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 8px;
       ",
         FEED_WIDTH_PX,
         BACKGROUND_COLOR,
         changing_style.webkit_transform,
-        changing_style.transform
+        changing_style.transform,
+        border_radius, 
+        border_radius
     );
     html! {
       <>
@@ -125,7 +133,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
         >
           <div
             style={drawer_overlay_style}
-            // onclick={&props.callback.clone()}
+            onclick={&props.callback.clone()}
           >
           </div>
           <div

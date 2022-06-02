@@ -84,24 +84,24 @@ pub fn home() -> Html {
     });
     let drawer_style_right_enum_handle = &*drawer_style_right.clone();
     let expander_status_cloned_share = expander_status.clone();
-    let expander_status_to_share = Callback::from(move |_| match *expander_status_cloned_share {
-        ExpanderStatus::Share => {
-            expander_status_cloned_share.set(ExpanderStatus::Closed);
-        }
-        _ => {
-            expander_status_cloned_share.set(ExpanderStatus::Share);
-        }
-    });
+    // let expander_status_to_share = Callback::from(move |_| match *expander_status_cloned_share {
+    //     ExpanderStatus::Share => {
+    //         expander_status_cloned_share.set(ExpanderStatus::Closed);
+    //     }
+    //     _ => {
+    //         expander_status_cloned_share.set(ExpanderStatus::Share);
+    //     }
+    // });
     let expander_status_cloned_expand_more = expander_status.clone();
-    let expander_status_to_expand_more =
-        Callback::from(move |_| match *expander_status_cloned_expand_more {
-            ExpanderStatus::ExpandMore => {
-                expander_status_cloned_expand_more.set(ExpanderStatus::Closed);
-            }
-            _ => {
-                expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
-            }
-        });
+    // let expander_status_to_expand_more =
+    //     Callback::from(move |_| match *expander_status_cloned_expand_more {
+    //         ExpanderStatus::ExpandMore => {
+    //             expander_status_cloned_expand_more.set(ExpanderStatus::Closed);
+    //         }
+    //         _ => {
+    //             expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
+    //         }
+    //     });
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
     // let expander_handler = match *expander_status_clone_for_logic {
@@ -168,32 +168,33 @@ pub fn home() -> Html {
             style={style_handle}
           >
             <PostsList
-              share_callback={expander_status_to_share}
-              expand_more_callback={expander_status_to_expand_more}
+              share_callback={expander_on_open.clone()}//expander_status_to_share
+              expand_more_callback={expander_on_open.clone()}//expander_status_to_expand_more
             />
-            <div
-              style="
-                width: 150px;
-                height: 150px;
-                background-color: red;
-              "
-              onclick={expander_on_open}
-            >
-            {"fdg"}
-            </div>
-            <div
-            style="
-              width: 150px;
-              height: 150px;
-              background-color: blue;
-            "
-            onclick={expander_on_close}
-          >
-          {"fdg"}
-          </div>
+          //   <div
+          //     style="
+          //       width: 150px;
+          //       height: 150px;
+          //       background-color: red;
+          //     "
+          //     onclick={expander_on_open}
+          //   >
+          //   {"fdg"}
+          //   </div>
+          //   <div
+          //   style="
+          //     width: 150px;
+          //     height: 150px;
+          //     background-color: blue;
+          //   "
+          //   onclick={expander_on_close.clone()
+          //   }
+          // >
+          // {"fdg"}
+          // </div>
             // {expander_handler}
             <Expander 
-              // callback: Callback<MouseEvent>,
+              callback={expander_on_close}
               style_state={expander_style_clone_close_handle.clone()}
               inner_html={expand_more_inner_html}
             />

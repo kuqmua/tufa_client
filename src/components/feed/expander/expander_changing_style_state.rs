@@ -28,14 +28,14 @@ impl ExpanderChangingStyleState {
         match *self {
             ExpanderChangingStyleState::Initial => ExpanderChangingStyle {
                 display: String::from("none"),
-                transform: String::from("translate3d(100%, 0, 0)"),
-                webkit_transform: String::from("translate3d(100%, 0, 0)"),
+                transform: String::from("translate3d(0, 100%, 0)"),
+                webkit_transform: String::from("translate3d(0, 100%, 0)"),
                 opacity: String::from(""),
             },
             ExpanderChangingStyleState::OpenedBeforeTimeout => ExpanderChangingStyle {
                 display: String::from("block"),
-                transform: String::from("translate3d(100%, 0, 0)"),
-                webkit_transform: String::from("translate3d(100%, 0, 0)"),
+                transform: String::from("translate3d(0, 100%, 0)"),
+                webkit_transform: String::from("translate3d(0, 100%, 0)"),
                 opacity: String::from(""),
             },
             ExpanderChangingStyleState::OpenedAfterTimeout => ExpanderChangingStyle {
@@ -46,8 +46,8 @@ impl ExpanderChangingStyleState {
             },
             ExpanderChangingStyleState::ClosedBeforeTimeout => ExpanderChangingStyle {
                 display: String::from("block"),
-                transform: String::from("translate3d(100%, 0, 0)"),
-                webkit_transform: String::from("translate3d(100%, 0, 0)"),
+                transform: String::from("translate3d(0, 100%, 0)"),
+                webkit_transform: String::from("translate3d(0, 100%, 0)"),
                 opacity: String::from(""),
             },
         }
