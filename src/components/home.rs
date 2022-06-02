@@ -80,8 +80,6 @@ let on_close_right = Callback::from(move |_| {
     .forget();
 });
     let drawer_style_right_enum_handle = &*drawer_style_right.clone();
-//
-
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_to_share = Callback::from(move |_| match *expander_status_cloned_share {
         ExpanderStatus::Share => {
