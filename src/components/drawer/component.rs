@@ -1,11 +1,11 @@
+use crate::components::drawer::buttons::close_button::CloseButton;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
+use crate::components::drawer::position::DrawerPosition;
 use crate::constants::BACKGROUND_COLOR;
 use crate::constants::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
 use yew::Html;
 use yew::{function_component, html, Callback, Properties};
-use crate::components::drawer::position::DrawerPosition;
-use crate::components::drawer::buttons::close_button::CloseButton;
 
 #[derive(Properties, PartialEq)]
 pub struct DrawerProps {
@@ -19,7 +19,9 @@ pub struct DrawerProps {
 pub fn drawer(props: &DrawerProps) -> Html {
     //todo: add esc keydown handling support(from working drawer.html)
     let drawer_position_style = props.drawer_position.get_style();
-    let changing_style = props.style_state.get_value(drawer_position_style.translate_sign);
+    let changing_style = props
+        .style_state
+        .get_value(drawer_position_style.translate_sign);
     let section_style = format!(
         "
         display: {};
@@ -72,23 +74,23 @@ pub fn drawer(props: &DrawerProps) -> Html {
       ",
         drawer_position_style.left_value,
         drawer_position_style.right_value,
-        FEED_WIDTH_PX, 
-        BACKGROUND_COLOR, 
-        changing_style.webkit_transform, 
+        FEED_WIDTH_PX,
+        BACKGROUND_COLOR,
+        changing_style.webkit_transform,
         changing_style.transform
     );
     let justify_content_value = match props.drawer_position {
-      DrawerPosition::Left => String::from("flex-end"),
-      DrawerPosition::Right => String::from("flex-start"),
+        DrawerPosition::Left => String::from("flex-end"),
+        DrawerPosition::Right => String::from("flex-start"),
     };
-    let close_button_wrapper_style =  format!(
-      "
+    let close_button_wrapper_style = format!(
+        "
         display: flex;
         justify-content: {};
         flex-direction: row;
         width: 100%;
       ",
-      justify_content_value
+        justify_content_value
     );
     html! {
       <>
