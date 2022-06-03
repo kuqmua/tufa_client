@@ -106,16 +106,15 @@ pub fn home() -> Html {
         drawer_style_right_expand_more.set(DrawerChangingStyleState::Initial);
         drawer_style_left_expand_more.set(DrawerChangingStyleState::Initial);
         if let ExpanderStatus::Closed = *expander_status_cloned_expand_more {
-          expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
-          expander_style_clone_open_expand_more
-              .set(ExpanderChangingStyleState::OpenedBeforeTimeout);
-          let expander_style_clone_open_another =
-              expander_style_clone_open_expand_more.clone();
-          gloo::timers::callback::Timeout::new(50, move || {
-              expander_style_clone_open_another
-                  .set(ExpanderChangingStyleState::OpenedAfterTimeout);
-          })
-          .forget();
+            expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
+            expander_style_clone_open_expand_more
+                .set(ExpanderChangingStyleState::OpenedBeforeTimeout);
+            let expander_style_clone_open_another = expander_style_clone_open_expand_more.clone();
+            gloo::timers::callback::Timeout::new(50, move || {
+                expander_style_clone_open_another
+                    .set(ExpanderChangingStyleState::OpenedAfterTimeout);
+            })
+            .forget();
         }
     });
     let expander_style_clone_open_share = expander_style.clone();
@@ -125,15 +124,14 @@ pub fn home() -> Html {
         drawer_style_right_share.set(DrawerChangingStyleState::Initial);
         drawer_style_left_share.set(DrawerChangingStyleState::Initial);
         if let ExpanderStatus::Closed = *expander_status_cloned_share {
-          expander_status_cloned_share.set(ExpanderStatus::Share);
-          expander_style_clone_open_share
-              .set(ExpanderChangingStyleState::OpenedBeforeTimeout);
-          let expander_style_clone_open_another = expander_style_clone_open_share.clone();
-          gloo::timers::callback::Timeout::new(50, move || {
-              expander_style_clone_open_another
-                  .set(ExpanderChangingStyleState::OpenedAfterTimeout);
-          })
-          .forget();
+            expander_status_cloned_share.set(ExpanderStatus::Share);
+            expander_style_clone_open_share.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
+            let expander_style_clone_open_another = expander_style_clone_open_share.clone();
+            gloo::timers::callback::Timeout::new(50, move || {
+                expander_style_clone_open_another
+                    .set(ExpanderChangingStyleState::OpenedAfterTimeout);
+            })
+            .forget();
         }
     });
     let expander_style_clone_close = expander_style.clone();
@@ -172,8 +170,8 @@ pub fn home() -> Html {
     };
     html! {
       <>
-        <Header 
-          left_drawer_callback={on_open_left.clone()} 
+        <Header
+          left_drawer_callback={on_open_left.clone()}
           right_drawer_callback={on_open_right.clone()}
         />
         <Drawer

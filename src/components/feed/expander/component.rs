@@ -1,9 +1,9 @@
+use crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState;
 use crate::constants::BACKGROUND_COLOR;
 use crate::constants::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
 use yew::Callback;
 use yew::{function_component, html, Html, Properties};
-use crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState;
 
 #[derive(Properties, PartialEq, Debug, Clone)]
 pub struct ExpanderProps {
@@ -24,7 +24,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
     );
     let border_radius = "30px";
     let drawer_overlay_style = format!(
-      "
+        "
         position: fixed;
         top: 0;
         right: 0;
@@ -45,7 +45,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
         changing_style.opacity
     );
     let drawer_wrapper_style = format!(
-      "
+        "
         position: fixed;
         top: auto;
         bottom: 0;
