@@ -154,24 +154,28 @@ pub fn home() -> Html {
     let expander_style_clone_close_handle = &*expander_style.clone().clone();
     let expander_inner_html = match *expander_status_clone_for_logic {
         ExpanderStatus::Closed => html! {
-        <div
-          style="
-            width: 100%;
-            height: 100%;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          "
-        >
-          {"user must not see this interface. if he see it then there is bug in the code"}
-        </div>}, //maybe rewrite it somehow?
+          <div
+            style="
+              width: 100%;
+              height: 100%;
+              color: white;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            {"user must not see this interface. if he see it then there is bug in the code"}
+          </div>
+        }, //maybe rewrite it somehow?
         ExpanderStatus::Share => share_inner_html,
         ExpanderStatus::ExpandMore => expand_more_inner_html,
     };
     html! {
       <>
-        <Header left_drawer_callback={on_open_left.clone()} right_drawer_callback={on_open_right.clone()}/>
+        <Header 
+          left_drawer_callback={on_open_left.clone()} 
+          right_drawer_callback={on_open_right.clone()}
+        />
         <Drawer
           callback={on_close_left.clone()}
           style_state={drawer_style_left_enum_handle.clone()}
@@ -202,10 +206,10 @@ pub fn home() -> Html {
               expand_more_callback={expander_on_open_expand_more.clone()}//expander_status_to_expand_more
             />
             <Expander
-            callback={expander_on_close}
-            style_state={expander_style_clone_close_handle.clone()}
-            inner_html={expander_inner_html}
-          />
+              callback={expander_on_close}
+              style_state={expander_style_clone_close_handle.clone()}
+              inner_html={expander_inner_html}
+            />
           </div>
         </div>
       </>
