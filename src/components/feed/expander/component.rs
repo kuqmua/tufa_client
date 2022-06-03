@@ -18,7 +18,7 @@ use crate::components::feed::expander::expander_changing_style_state::ExpanderCh
 //     let border_radius = "30px";
 //     let style_handle = format!(
 //         "
-//         height: fit-content; 
+//         height: fit-content;
 //         width: {}px;
 //         min-width: {}px;
 //         background-color: {};
@@ -92,8 +92,8 @@ pub fn expander(props: &ExpanderProps) -> Html {
         changing_style.opacity
     );
     let drawer_wrapper_style = format!(
-      // left: 0;
-      // right: 0;
+        // left: 0;
+        // right: 0;
         "
         position: fixed;
         top: auto;
@@ -123,7 +123,7 @@ pub fn expander(props: &ExpanderProps) -> Html {
         BACKGROUND_COLOR,
         changing_style.webkit_transform,
         changing_style.transform,
-        border_radius, 
+        border_radius,
         border_radius
     );
     html! {
@@ -145,4 +145,3 @@ pub fn expander(props: &ExpanderProps) -> Html {
       </>
     }
 }
-
