@@ -11,6 +11,7 @@ use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
+use crate::components::alert::Alert;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -151,20 +152,7 @@ pub fn home() -> Html {
     });
     let expander_style_clone_close_handle = &*expander_style.clone().clone();
     let expander_inner_html = match *expander_status_clone_for_logic {
-        ExpanderStatus::Closed => html! {
-          <div
-            style="
-              width: 100%;
-              height: 100%;
-              color: white;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            "
-          >
-            {"user must not see this interface. if he see it then there is bug in the code"}
-          </div>
-        }, //maybe rewrite it somehow?
+        ExpanderStatus::Closed => html! {<Alert/>},
         ExpanderStatus::Share => share_inner_html,
         ExpanderStatus::ExpandMore => expand_more_inner_html,
     };
