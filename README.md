@@ -1,5 +1,5 @@
 ### this repo was written as tufa_project dependency
-(tufa_project)[https://github.com/kuqmua/tufa_project]
+[tufa_project](https://github.com/kuqmua/tufa_project)
 
 ### setup
 ```
