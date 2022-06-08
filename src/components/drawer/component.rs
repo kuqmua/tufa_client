@@ -44,7 +44,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
-        user-select: none; 
+        user-select: none;
         opacity: {};
       ",
         changing_style.opacity
@@ -65,7 +65,7 @@ pub fn drawer(props: &DrawerProps) -> Html {
         will-change: transform;
         background-color: {};
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */

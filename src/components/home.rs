@@ -1,3 +1,4 @@
+use crate::components::alert::Alert;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -7,11 +8,11 @@ use crate::components::feed::expander::expander_changing_style_state::ExpanderCh
 use crate::components::feed::expander::share_content::ShareContent;
 use crate::components::feed::posts_list::PostsList;
 use crate::components::header::component::Header;
+use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use crate::components::alert::Alert;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -97,7 +98,11 @@ pub fn home() -> Html {
     let expander_status_cloned_close = expander_status.clone();
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
-    let inner_html_left = html! {};
+    let inner_html_left = html! {
+      <div>
+                <PureMaterialButtonOutlined/>
+      </div>
+    };
     let inner_html_right = html! {};
     let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
     let expander_style_clone_open_expand_more = expander_style.clone();
