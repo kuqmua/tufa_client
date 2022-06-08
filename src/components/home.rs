@@ -9,6 +9,7 @@ use crate::components::feed::expander::share_content::ShareContent;
 use crate::components::feed::posts_list::PostsList;
 use crate::components::header::component::Header;
 use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
+use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
@@ -99,8 +100,16 @@ pub fn home() -> Html {
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
     let inner_html_left = html! {
-      <div>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        "
+      >
                 <PureMaterialButtonOutlined/>
+                <PureMaterialProgressCircular/>
       </div>
     };
     let inner_html_right = html! {};
