@@ -1,3 +1,4 @@
+pub mod alert;
 pub mod app;
 pub mod authorization;
 pub mod common_style;
@@ -6,6 +7,6 @@ pub mod examples;
 pub mod feed;
 pub mod header;
 pub mod home;
+pub mod material;
 pub mod svg;
 pub mod ui;
-pub mod alert;
