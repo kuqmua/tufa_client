@@ -10,6 +10,7 @@ use crate::components::feed::posts_list::PostsList;
 use crate::components::header::component::Header;
 use crate::components::material::pure_material_button_contained::PureMaterialButtonContained;
 use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
+use crate::components::material::pure_material_button_text::PureMaterialButtonText;
 use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
 use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
 use crate::components::material::pure_material_radio::PureMaterialRadio;
@@ -120,6 +121,7 @@ pub fn home() -> Html {
         <PureMaterialTextfieldOutlined/>
         <PureMaterialRadio/>
         <PureMaterialButtonContained/>
+        <PureMaterialButtonText/>
       </div>
     };
     let inner_html_right = html! {};
