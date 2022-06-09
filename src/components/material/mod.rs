@@ -8,3 +8,4 @@ pub mod pure_material_radio;
 pub mod pure_material_switch;
 pub mod pure_material_textfield_filled;
 pub mod pure_material_textfield_outlined;
+pub mod pure_material_textfield_standard;

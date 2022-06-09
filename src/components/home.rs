@@ -18,6 +18,7 @@ use crate::components::material::pure_material_radio::PureMaterialRadio;
 use crate::components::material::pure_material_switch::PureMaterialSwitch;
 use crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled;
 use crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined;
+use crate::components::material::pure_material_textfield_standard::PureMaterialTextfieldStandard;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
@@ -126,6 +127,7 @@ pub fn home() -> Html {
         <PureMaterialButtonText/>
         <PureMaterialSwitch/>
         <PureMaterialCheckbox/>
+        <PureMaterialTextfieldStandard/>
       </div>
     };
     let inner_html_right = html! {};
