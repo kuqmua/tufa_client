@@ -11,6 +11,7 @@ use crate::components::header::component::Header;
 use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
 use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
 use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
+use crate::components::material::pure_material_radio::PureMaterialRadio;
 use crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled;
 use crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
@@ -111,11 +112,12 @@ pub fn home() -> Html {
           align-items: center;
         "
       >
-                <PureMaterialButtonOutlined/>
-                <PureMaterialProgressCircular/>
-                <PureMaterialProgressLinear/>
-                <PureMaterialTextfieldFilled/>
-                <PureMaterialTextfieldOutlined/>
+        <PureMaterialButtonOutlined/>
+        <PureMaterialProgressCircular/>
+        <PureMaterialProgressLinear/>
+        <PureMaterialTextfieldFilled/>
+        <PureMaterialTextfieldOutlined/>
+        <PureMaterialRadio/>
       </div>
     };
     let inner_html_right = html! {};
