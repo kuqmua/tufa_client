@@ -12,6 +12,7 @@ use crate::components::material::pure_material_button_outlined::PureMaterialButt
 use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
 use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
 use crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled;
+use crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
@@ -114,6 +115,7 @@ pub fn home() -> Html {
                 <PureMaterialProgressCircular/>
                 <PureMaterialProgressLinear/>
                 <PureMaterialTextfieldFilled/>
+                <PureMaterialTextfieldOutlined/>
       </div>
     };
     let inner_html_right = html! {};
