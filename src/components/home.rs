@@ -8,6 +8,7 @@ use crate::components::feed::expander::expander_changing_style_state::ExpanderCh
 use crate::components::feed::expander::share_content::ShareContent;
 use crate::components::feed::posts_list::PostsList;
 use crate::components::header::component::Header;
+use crate::components::material::pure_material_button_contained::PureMaterialButtonContained;
 use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
 use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
 use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
@@ -118,6 +119,7 @@ pub fn home() -> Html {
         <PureMaterialTextfieldFilled/>
         <PureMaterialTextfieldOutlined/>
         <PureMaterialRadio/>
+        <PureMaterialButtonContained/>
       </div>
     };
     let inner_html_right = html! {};
