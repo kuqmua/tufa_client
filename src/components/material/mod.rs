@@ -5,6 +5,7 @@ pub mod pure_material_checkbox;
 pub mod pure_material_progress_circular;
 pub mod pure_material_progress_linear;
 pub mod pure_material_radio;
+pub mod pure_material_slider;
 pub mod pure_material_switch;
 pub mod pure_material_textfield_filled;
 pub mod pure_material_textfield_outlined;
