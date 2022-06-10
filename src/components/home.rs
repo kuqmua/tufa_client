@@ -1,4 +1,5 @@
 use crate::components::alert::Alert;
+use crate::components::ant_design::antd_btn::AntdBtn;
 use crate::components::ant_design::antd_btn_primary::AntdBtnPrimary;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
@@ -132,6 +133,7 @@ pub fn home() -> Html {
         "
       >
        <AntdBtnPrimary/>
+       <AntdBtn/>
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>
     };
