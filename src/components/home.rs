@@ -1,4 +1,5 @@
 use crate::components::alert::Alert;
+use crate::components::ant_design::antd_btn_primary::AntdBtnPrimary;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -109,6 +110,18 @@ pub fn home() -> Html {
     let expander_status_cloned_close = expander_status.clone();
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
+    //     <PureMaterialButtonOutlined/>
+    // <PureMaterialProgressCircular/>
+    // <PureMaterialProgressLinear/>
+    // <PureMaterialTextfieldFilled/>
+    // <PureMaterialTextfieldOutlined/>
+    // <PureMaterialRadio/>
+    // <PureMaterialButtonContained/>
+    // <PureMaterialButtonText/>
+    // <PureMaterialSwitch/>
+    // <PureMaterialCheckbox/>
+    // <PureMaterialTextfieldStandard/>
+    // <PureMaterialSlider/>
     let inner_html_left = html! {
       <div
         style="
@@ -118,18 +131,8 @@ pub fn home() -> Html {
           align-items: center;
         "
       >
-        <PureMaterialButtonOutlined/>
-        <PureMaterialProgressCircular/>
-        <PureMaterialProgressLinear/>
-        <PureMaterialTextfieldFilled/>
-        <PureMaterialTextfieldOutlined/>
-        <PureMaterialRadio/>
-        <PureMaterialButtonContained/>
-        <PureMaterialButtonText/>
-        <PureMaterialSwitch/>
-        <PureMaterialCheckbox/>
-        <PureMaterialTextfieldStandard/>
-        <PureMaterialSlider/>
+       <AntdBtnPrimary/>
+      // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>
     };
     let inner_html_right = html! {};
