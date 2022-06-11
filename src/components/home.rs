@@ -1,7 +1,4 @@
 use crate::components::alert::Alert;
-use crate::components::ant_design::ant_btn::AntBtn;
-use crate::components::ant_design::ant_btn_primary::AntBtnPrimary;
-use crate::components::ant_design::ant_btn_dashed::AntBtnDashed;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::drawer::component::Drawer;
@@ -135,10 +132,7 @@ pub fn home() -> Html {
           align-items: center;
         "
       >
-       <AntBtnPrimary/>
-       <AntBtn/>
-       <AntBtnDashed/>
-       <Button placeholder={String::from("Button")} button_type={ButtonType::Danger}/>
+       <Button placeholder={String::from("Button")} button_type={ButtonType::Primary}/>
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>
     };
