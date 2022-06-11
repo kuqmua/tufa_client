@@ -123,6 +123,7 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
+    let button_inner_html = html!("Button");
     let inner_html_left = html! {
       <div
         style="
@@ -132,7 +133,7 @@ pub fn home() -> Html {
           align-items: center;
         "
       >
-       <Button placeholder={String::from("Button")} button_type={ButtonType::Primary}/>
+       <Button inner_html={button_inner_html} button_type={ButtonType::Primary}/>
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>
     };
