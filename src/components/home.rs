@@ -2,6 +2,8 @@ use crate::components::alert::Alert;
 use crate::components::ant_design::ant_btn::AntBtn;
 use crate::components::ant_design::ant_btn_primary::AntBtnPrimary;
 use crate::components::ant_design::ant_btn_dashed::AntBtnDashed;
+use crate::components::ant_design::button::Button;
+use crate::components::ant_design::button::ButtonType;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -136,6 +138,7 @@ pub fn home() -> Html {
        <AntBtnPrimary/>
        <AntBtn/>
        <AntBtnDashed/>
+       <Button placeholder={String::from("Button")} button_type={ButtonType::Danger}/>
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>
     };
