@@ -29,6 +29,7 @@ use yew::{function_component, html, use_state, Callback};
 
 use super::ant_design::button::InnerHtmlType;
 use super::ant_design::button::Shape;
+use super::ant_design::button::Size;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -138,9 +139,10 @@ pub fn home() -> Html {
       >
        <Button 
          inner_html={button_inner_html.clone()}
-         disabled={Some(())} 
+        //  disabled={Some(())} 
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
+        size={Size::Small}
        />
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>

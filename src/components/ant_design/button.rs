@@ -61,7 +61,6 @@ impl Shape {
 
 #[derive(PartialEq)]
 pub enum Size {
-    Default, 
     Small, 
     Large,
 }
@@ -93,16 +92,24 @@ pub struct ButtonProps {
 pub fn button(props: &ButtonProps) -> Html {
     let button_only_class = match &props.inner_html {
         None => match &props.icon {
-            Some(_) => String::from("ant-btn-icon-only"),
             None => String::from(""),
+            Some(_) => String::from("ant-btn-icon-only"),
         },
         Some(_) => String::from(""),
     };
+    let size_class = match &props.size {
+        None => String::from(""),
+        Some(size) => match size {
+            Size::Small => String::from("ant-btn-sm"),
+            Size::Large => String::from("ant-btn-lg"),
+        },   
+    };
     let classes = format!(
-        "ant-btn {} {} {}", 
+        "ant-btn {} {} {} {}", 
         props.button_type.as_ref().unwrap_or_default().get_class(),
         props.shape.as_ref().unwrap_or_default().get_class(),
         button_only_class,
+        size_class
     );
     let inner_content = match &props.inner_html {
         None => html!(""),
