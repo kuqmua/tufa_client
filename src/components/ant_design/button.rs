@@ -66,13 +66,19 @@ pub enum Size {
     Large,
 }
 
+#[derive(PartialEq, Clone)]
+pub enum InnerHtmlType {
+    Text(String), //Icon Component
+    InnerHtml(Html), 
+}
+
 #[derive(Properties, PartialEq)]
 pub struct ButtonProps {
     pub disabled: Option<bool>,//maybe i wrong to put Option here
     pub ghost: Option<bool>,
     pub href: Option<String>,
     pub html_type: Option<String>,
-    pub icon: Option<String>,//Icon Component
+    pub icon: Option<Html>,//Icon Component
     pub loading: Option<Loading>,
     pub shape: Option<Shape>,
     pub size: Option<Size>,	
@@ -80,7 +86,7 @@ pub struct ButtonProps {
     pub button_type: Option<ButtonType>,//original "type"
     pub on_click: Option<Callback<MouseEvent>>,
     pub block: Option<bool>,
-    pub inner_html: Option<Html>,
+    pub inner_html: Option<InnerHtmlType>,
 }
 
 #[function_component(Button)]
@@ -90,9 +96,21 @@ pub fn button(props: &ButtonProps) -> Html {
         props.button_type.as_ref().unwrap_or_default().get_class(),
         props.shape.as_ref().unwrap_or_default().get_class(),
     );
+    let inner_content = match &props.inner_html {
+        None => html!(""),
+        Some(inner_html_type) => match inner_html_type {
+            InnerHtmlType::Text(text) => html!{ <span>{text}</span>},
+            InnerHtmlType::InnerHtml(inner_html) => html!{{inner_html.clone()}},//todo
+        },
+    };
+    let inner_icon = match &props.icon {
+        None => html!{},
+        Some(icon) => html!{{icon.clone()}},
+    };
     html! {
       <button type="button" class={classes}>
-        <span>{props.inner_html.clone().unwrap_or_else(|| html!(""))}</span>
+        {inner_icon}
+        {inner_content}
       </button>
     }
 }
