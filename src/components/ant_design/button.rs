@@ -74,7 +74,7 @@ pub enum InnerHtmlType {
 #[derive(Properties, PartialEq)]
 pub struct ButtonProps {
     pub disabled: Option<()>,//or maybe explicit bool?
-    pub ghost: Option<bool>,
+    pub ghost: Option<()>,
     pub href: Option<String>,
     pub html_type: Option<String>,
     pub icon: Option<Html>,//Icon Component
@@ -91,6 +91,10 @@ pub struct ButtonProps {
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
     //todo: button group
+    let ghost_class = match &props.ghost {
+        None => String::from(""),
+        Some(_) => String::from("ant-btn-background-ghost"),
+    };
     let button_only_class = match &props.inner_html {
         None => match &props.icon {
             None => String::from(""),
@@ -106,11 +110,12 @@ pub fn button(props: &ButtonProps) -> Html {
         },   
     };
     let classes = format!(
-        "ant-btn {} {} {} {}", 
+        "ant-btn {} {} {} {} {}", 
         props.button_type.as_ref().unwrap_or_default().get_class(),
         props.shape.as_ref().unwrap_or_default().get_class(),
         button_only_class,
-        size_class
+        size_class,
+        ghost_class
     );
     let inner_content = match &props.inner_html {
         None => html!(""),
