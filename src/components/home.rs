@@ -1,6 +1,8 @@
 use crate::components::alert::Alert;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
+use crate::components::ant_design::icon::Icon;
+use crate::components::ant_design::svg::loading::Loading;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -28,9 +30,10 @@ use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
 use super::ant_design::button::InnerHtmlType;
-use super::ant_design::button::Loading;
+// use super::ant_design::button::Loading;
 use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
+use super::ant_design::icon;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -129,6 +132,7 @@ pub fn home() -> Html {
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
     let button_inner_html = InnerHtmlType::InnerHtml(html!("Button"));
+    let icon_inner_html = html!{<Loading/>};
     let inner_html_left = html! {
       <div
         style="
@@ -146,10 +150,14 @@ pub fn home() -> Html {
         //  disabled={Some(())} 
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
+        icon={Some(icon_inner_html.clone())}
         size={Size::Small}
         // ghost={Some(())}
         // block={Some(())}
         // loading={Loading::Bool(true)}
+       />
+       <Icon
+         inner_html={icon_inner_html}
        />
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>
