@@ -91,10 +91,18 @@ pub struct ButtonProps {
 
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
+    let button_only_class = match &props.inner_html {
+        None => match &props.icon {
+            Some(_) => String::from("ant-btn-icon-only"),
+            None => String::from(""),
+        },
+        Some(_) => String::from(""),
+    };
     let classes = format!(
-        "ant-btn {} {}", 
+        "ant-btn {} {} {}", 
         props.button_type.as_ref().unwrap_or_default().get_class(),
         props.shape.as_ref().unwrap_or_default().get_class(),
+        button_only_class,
     );
     let inner_content = match &props.inner_html {
         None => html!(""),
