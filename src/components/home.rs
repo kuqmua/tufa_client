@@ -27,6 +27,7 @@ use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
+use super::ant_design::button::InnerHtmlType;
 use super::ant_design::button::Shape;
 
 #[derive(Debug, PartialEq)]
@@ -125,7 +126,7 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let button_inner_html = html!("Button");
+    let button_inner_html = InnerHtmlType::InnerHtml(html!("Button"));
     let inner_html_left = html! {
       <div
         style="
@@ -136,9 +137,10 @@ pub fn home() -> Html {
         "
       >
        <Button 
-        //  inner_html={button_inner_html} 
+         inner_html={button_inner_html.clone()}
+         disabled={Some(())} 
          button_type={ButtonType::Primary}
-         shape={Shape::Circle}
+        //  shape={Shape::Circle}
        />
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>

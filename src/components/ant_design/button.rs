@@ -74,7 +74,7 @@ pub enum InnerHtmlType {
 
 #[derive(Properties, PartialEq)]
 pub struct ButtonProps {
-    pub disabled: Option<bool>,//maybe i wrong to put Option here
+    pub disabled: Option<()>,//or maybe explicit bool?
     pub ghost: Option<bool>,
     pub href: Option<String>,
     pub html_type: Option<String>,
@@ -115,8 +115,9 @@ pub fn button(props: &ButtonProps) -> Html {
         None => html!{},
         Some(icon) => html!{{icon.clone()}},
     };
+    let is_button_disabled = props.disabled.is_some();
     html! {
-      <button type="button" class={classes}>
+      <button disabled={is_button_disabled} type="button" class={classes}>
         {inner_icon}
         {inner_content}
       </button>
