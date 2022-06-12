@@ -15,11 +15,11 @@ impl ButtonType {
     pub fn get_class(&self) -> String {//Maybe not a string? another enum?
         match *self {
             ButtonType::Primary => String::from("ant-btn-primary"),
-            ButtonType::Ghost => String::from(""),//todo
+            ButtonType::Ghost => String::from("ant-btn-ghost"),
             ButtonType::Default => String::from(""),//None?
             ButtonType::Dashed => String::from("ant-btn-dashed"),
             ButtonType::Danger => String::from("ant-btn-danger"),
-            ButtonType::Link => String::from(""),//todo
+            ButtonType::Link => String::from("ant-btn-link"),
         }
     }
 }
@@ -54,7 +54,7 @@ impl Shape {
     pub fn get_class(&self) -> String {//Maybe not a string? another enum?
         match *self {
           Shape::Circle => String::from("ant-btn-circle"),
-          Shape::Round => String::from(""),//todo
+          Shape::Round => String::from("ant-btn-round"),//todo
         }
     }
 }
