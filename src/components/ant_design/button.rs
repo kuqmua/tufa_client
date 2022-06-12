@@ -44,6 +44,21 @@ pub enum Shape {
     Round,
 }
 
+impl Default for &Shape {
+    fn default() -> Self {
+        &Shape::Round
+    }
+}
+
+impl Shape {
+    pub fn get_class(&self) -> String {//Maybe not a string? another enum?
+        match *self {
+          Shape::Circle => String::from("ant-btn-circle"),
+          Shape::Round => String::from(""),//todo
+        }
+    }
+}
+
 #[derive(PartialEq)]
 pub enum Size {
     Default, 
@@ -70,7 +85,11 @@ pub struct ButtonProps {
 
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
-    let classes = format!("ant-btn {}", props.button_type.as_ref().unwrap_or_default().get_class());
+    let classes = format!(
+        "ant-btn {} {}", 
+        props.button_type.as_ref().unwrap_or_default().get_class(),
+        props.shape.as_ref().unwrap_or_default().get_class(),
+    );
     html! {
       <button type="button" class={classes}>
         <span>{props.inner_html.clone().unwrap_or_else(|| html!(""))}</span>
