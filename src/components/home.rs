@@ -136,6 +136,9 @@ pub fn home() -> Html {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          height: 100%;
+          width: 100%;
+          padding: 10px;
         "
       >
        <Button 
@@ -145,7 +148,8 @@ pub fn home() -> Html {
         //  shape={Shape::Circle}
         size={Size::Small}
         // ghost={Some(())}
-        loading={Loading::Bool(true)}
+        // block={Some(())}
+        // loading={Loading::Bool(true)}
        />
       // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
       </div>

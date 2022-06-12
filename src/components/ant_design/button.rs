@@ -84,13 +84,17 @@ pub struct ButtonProps {
     pub target: Option<String>,
     pub button_type: Option<ButtonType>,//original "type"
     pub on_click: Option<Callback<MouseEvent>>,
-    pub block: Option<bool>,
+    pub block: Option<()>,
     pub inner_html: Option<InnerHtmlType>,
 }
 
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
     //todo: button group
+    let block_class = match &props.block {
+        None => String::from(""),
+        Some(_) => String::from("ant-btn-block"),
+    };
     let loading_class = match &props.loading {
         None => String::from(""),
         Some(_) => String::from("ant-btn-loading"),
@@ -114,13 +118,14 @@ pub fn button(props: &ButtonProps) -> Html {
         },   
     };
     let classes = format!(
-        "ant-btn {} {} {} {} {} {}", 
+        "ant-btn {} {} {} {} {} {} {}", 
         props.button_type.as_ref().unwrap_or_default().get_class(),
         props.shape.as_ref().unwrap_or_default().get_class(),
         button_only_class,
         size_class,
         ghost_class,
-        loading_class
+        loading_class,
+        block_class
     );
     let inner_content = match &props.inner_html {
         None => html!(""),
