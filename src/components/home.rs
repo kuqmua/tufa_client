@@ -151,7 +151,7 @@ pub fn home() -> Html {
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
         icon={Some(icon_inner_html.clone())}
-        size={Size::Small}
+        size={Size::Large}
         // ghost={Some(())}
         // block={Some(())}
         // loading={Loading::Bool(true)}
