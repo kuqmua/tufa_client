@@ -91,6 +91,10 @@ pub struct ButtonProps {
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
     //todo: button group
+    let loading_class = match &props.loading {
+        None => String::from(""),
+        Some(_) => String::from("ant-btn-loading"),
+    };
     let ghost_class = match &props.ghost {
         None => String::from(""),
         Some(_) => String::from("ant-btn-background-ghost"),
@@ -110,12 +114,13 @@ pub fn button(props: &ButtonProps) -> Html {
         },   
     };
     let classes = format!(
-        "ant-btn {} {} {} {} {}", 
+        "ant-btn {} {} {} {} {} {}", 
         props.button_type.as_ref().unwrap_or_default().get_class(),
         props.shape.as_ref().unwrap_or_default().get_class(),
         button_only_class,
         size_class,
-        ghost_class
+        ghost_class,
+        loading_class
     );
     let inner_content = match &props.inner_html {
         None => html!(""),
@@ -129,9 +134,13 @@ pub fn button(props: &ButtonProps) -> Html {
         Some(icon) => html!{{icon.clone()}},
     };
     let is_button_disabled = props.disabled.is_some();
+    let icon = match props.loading {
+        None => inner_icon,
+        Some(_) => html!{{"loading icon"}},//loading icon html
+    };
     html! {
       <button disabled={is_button_disabled} type="button" class={classes}>
-        {inner_icon}
+        {icon}
         {inner_content}
       </button>
     }
