@@ -1,5 +1,5 @@
 use crate::components::header::profile_actions::buttons::button_wrapper::ButtonWrapper;
-use crate::components::svg::settings_black::SettingsBlack;
+use crate::components::material::svg::settings_black::SettingsBlack;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 

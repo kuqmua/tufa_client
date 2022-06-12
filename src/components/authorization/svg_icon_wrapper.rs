@@ -1,4 +1,4 @@
-use crate::components::svg::person_outline::PersonOutline;
+use crate::components::material::svg::person_outline::PersonOutline;
 use stylist::style;
 use stylist::Style;
 use yew::html;

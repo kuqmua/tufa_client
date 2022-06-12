@@ -1,5 +1,5 @@
 use crate::components::feed::buttons::button_wrapper::ButtonWrapper;
-use crate::components::svg::share::Share;
+use crate::components::material::svg::share::Share;
 use crate::constants::FEED_ICONS_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};

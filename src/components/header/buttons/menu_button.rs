@@ -1,5 +1,5 @@
 use crate::components::header::buttons::button_wrapper::ButtonWrapper;
-use crate::components::svg::menu::Menu;
+use crate::components::material::svg::menu::Menu;
 use crate::constants::HEADER_ICONS_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
