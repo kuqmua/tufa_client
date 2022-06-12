@@ -90,6 +90,7 @@ pub struct ButtonProps {
 
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
+    //todo: button group
     let button_only_class = match &props.inner_html {
         None => match &props.icon {
             None => String::from(""),
