@@ -31,12 +31,6 @@ pub enum Size {
     Large,
 }
 
-#[derive(PartialEq, Clone)]
-pub enum InnerHtmlType {
-    Text(String), //Icon Component
-    InnerHtml(Html), 
-}
-
 #[derive(Properties, PartialEq)]
 pub struct ButtonProps {
     pub disabled: Option<()>,//or maybe explicit bool?
@@ -51,7 +45,7 @@ pub struct ButtonProps {
     pub button_type: Option<ButtonType>,//original "type"
     pub on_click: Option<Callback<MouseEvent>>,
     pub block: Option<()>,
-    pub inner_html: Option<InnerHtmlType>,
+    pub placeholder: Option<String>,
 }
 
 #[function_component(Button)]
@@ -69,7 +63,7 @@ pub fn button(props: &ButtonProps) -> Html {
         None => String::from(""),
         Some(_) => String::from("ant-btn-background-ghost"),
     };
-    let button_only_class = match &props.inner_html {
+    let button_only_class = match &props.placeholder {
         None => match &props.icon {
             None => String::from(""),
             Some(_) => String::from("ant-btn-icon-only"),
@@ -110,59 +104,34 @@ pub fn button(props: &ButtonProps) -> Html {
         loading_class,
         block_class
     );
-    let inner_content = match &props.inner_html {
+    let placeholder = match &props.placeholder {
         None => html!(""),
-        Some(inner_html_type) => match inner_html_type {
-            InnerHtmlType::Text(text) => 
-              html!{ 
-                <span
-                  style="
-                    margin-left: 8px;
-                  "  
-                >
-                  {text}
-                </span>
-              }
-              ,
-            InnerHtmlType::InnerHtml(inner_html) => 
-              html!{
-                <div
-                  style="
-                    margin-left: 8px;
-                  "
-                >
-                  {inner_html.clone()}
-                </div>
-              },//todo
-        },
-    };
-    let inner_icon = match &props.icon {
-        None => html!{},
-        Some(icon) => html!{{icon.clone()}},
+        Some(placeholder) => html!{ 
+          <span>
+            {placeholder}
+          </span>
+        }
     };
     let is_button_disabled = props.disabled.is_some();
     let icon = match props.loading {
-        None => html!{
-            <i 
-              aria-label="icon: loading" 
-              class="anticon anticon-loading"
-            >
-              {inner_icon}
-            </i>
+        None => match &props.icon {
+            None => html!{},
+            Some(icon) => html!{
+              <i class="anticon">
+                {icon.clone()}
+              </i>
+            },
         },
         Some(_) => html!{
-            <i 
-              aria-label="icon: loading" 
-              class="anticon anticon-loading"
-            >
-              <Loading/>
-            </i>
+          <i class="anticon">
+            <Loading/>
+          </i>
         },
     };
     html! {
       <button disabled={is_button_disabled} type="button" class={classes}>
         {icon}
-        {inner_content}
+        {placeholder}
       </button>
     }
 }

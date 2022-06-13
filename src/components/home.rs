@@ -28,10 +28,7 @@ use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-
-use super::ant_design::button::InnerHtmlType;
 use super::ant_design::button::LoadingProp;
-// use super::ant_design::button::Loading;
 use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
 use super::ant_design::icon;
@@ -120,7 +117,7 @@ pub fn home() -> Html {
     let expander_status_cloned_close = expander_status.clone();
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
-    //     <PureMaterialButtonOutlined/>
+    // <PureMaterialButtonOutlined/>
     // <PureMaterialProgressCircular/>
     // <PureMaterialProgressLinear/>
     // <PureMaterialTextfieldFilled/>
@@ -132,7 +129,6 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let button_inner_html = InnerHtmlType::Text(String::from("Button"));
     let icon_inner_html = html!{<Loading/>};
     let inner_html_left = html! {
       <div
@@ -147,11 +143,11 @@ pub fn home() -> Html {
         "
       >
        <Button 
-         inner_html={button_inner_html.clone()}
+         placeholder={String::from("Button")}
         //  disabled={Some(())} 
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
-        icon={Some(icon_inner_html.clone())}
+        // icon={Some(icon_inner_html.clone())}
         size={Size::Large}
         // ghost={Some(())}
         // block={Some(())}
