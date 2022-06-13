@@ -30,6 +30,7 @@ use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
 use super::ant_design::button::InnerHtmlType;
+use super::ant_design::button::LoadingProp;
 // use super::ant_design::button::Loading;
 use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
@@ -131,7 +132,7 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let button_inner_html = InnerHtmlType::InnerHtml(html!("Button"));
+    let button_inner_html = InnerHtmlType::Text(String::from("Button"));
     let icon_inner_html = html!{<Loading/>};
     let inner_html_left = html! {
       <div
@@ -154,7 +155,7 @@ pub fn home() -> Html {
         size={Size::Large}
         // ghost={Some(())}
         // block={Some(())}
-        // loading={Loading::Bool(true)}
+        loading={LoadingProp::Bool(true)}
        />
       //  <Icon
       //    inner_html={icon_inner_html}
