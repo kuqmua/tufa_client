@@ -129,7 +129,8 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let icon_inner_html = html! {<Loading/>};
+    let loading = html!{<Loading/>};
+    let icon_inner_html = html! {<Icon inner_html={loading}/>};
     let inner_html_left = html! {
       <div
         style="
@@ -147,11 +148,11 @@ pub fn home() -> Html {
         //  disabled={Some(())}
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
-        // icon={Some(icon_inner_html.clone())}
+        icon={Some(icon_inner_html.clone())}
         size={Size::Large}
         // ghost={Some(())}
         // block={Some(())}
-        loading={LoadingProp::Bool(true)}
+        // loading={LoadingProp::Bool(true)}
        />
       //  <Icon
       //    inner_html={icon_inner_html}

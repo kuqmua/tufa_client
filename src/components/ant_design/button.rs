@@ -1,4 +1,5 @@
 use crate::components::ant_design::svg::loading::Loading;
+use crate::components::ant_design::icon::Icon;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
 
@@ -114,16 +115,11 @@ pub fn button(props: &ButtonProps) -> Html {
     let icon = match props.loading {
         None => match &props.icon {
             None => html! {},
-            Some(icon) => html! {
-              <i class="anticon">
-                {icon.clone()}
-              </i>
-            },
+            Some(icon) => html! {{icon.clone()}},
         },
-        Some(_) => html! {
-          <i class="anticon">
-            <Loading/>
-          </i>
+        Some(_) => {
+          let loading = html!{<Loading/>};
+          html! {<Icon inner_html={loading}/>}
         },
     };
     html! {
