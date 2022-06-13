@@ -31,6 +31,7 @@ use crate::components::material::pure_material_textfield_outlined::PureMaterialT
 use crate::components::material::pure_material_textfield_standard::PureMaterialTextfieldStandard;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
+use crate::helpers::rotate::Rotate;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
@@ -138,12 +139,14 @@ pub fn home() -> Html {
         spin={Some(())}
       />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
+    let rotate = Rotate::new(60).unwrap();
     let f = html!{
       <Github
         height={String::from("1em")}
         width={String::from("1em")}
         fill={String::from("white")}
-        spin={Some(())}
+        // spin={Some(())}
+        rotate={Some(rotate)}
       />};
     let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
