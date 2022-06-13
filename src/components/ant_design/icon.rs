@@ -18,10 +18,10 @@ pub struct IconProps {
     pub inner_html: Html,      //svg icon type
     pub style: Option<String>, //CSSProperties
     pub theme: Option<Theme>,
-    pub spin: Option<()>,
     pub rotate: Option<u16>, //must be between 0-360 degrees
-                             // pub component: ComponentType<CustomIconComponentProps>//todo
-                             // pub two_tone_color: //todo
+    // pub component: ComponentType<CustomIconComponentProps>//todo
+    // pub two_tone_color: //todo
+    //pub spin: Option<()> // moved into svg
 }
 
 #[function_component(Icon)]
