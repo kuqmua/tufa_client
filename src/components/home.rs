@@ -129,7 +129,12 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let loading = html!{<Loading/>};
+    let loading = html!{
+      <Loading
+        height={String::from("1em")}
+        width={String::from("1em")}
+        fill={String::from("white")}
+      />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     let inner_html_left = html! {
       <div
@@ -144,7 +149,7 @@ pub fn home() -> Html {
         "
       >
        <Button
-         placeholder={String::from("Button")}
+        //  placeholder={String::from("Button")}
         //  disabled={Some(())}
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
