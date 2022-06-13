@@ -19,4 +19,7 @@ impl Rotate {
         self.degrees = possible_degrees;
         Ok(self)
     }
+    pub fn get_degrees(&self) -> u16 {
+        self.degrees
+    }
 }
