@@ -7,6 +7,7 @@ use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::svg::loading::Loading;
+use crate::components::ant_design::svg::github::Github;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -136,6 +137,13 @@ pub fn home() -> Html {
         fill={String::from("white")}
       />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
+    let f = html!{
+      <Github
+        height={String::from("1em")}
+        width={String::from("1em")}
+        fill={String::from("white")}
+      />};
+    let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
       <div
         style="
@@ -159,10 +167,17 @@ pub fn home() -> Html {
         // block={Some(())}
         // loading={LoadingProp::Bool(true)}
        />
-      //  <Icon
-      //    inner_html={icon_inner_html}
-      //  />
-      // <div id="container" style="padding: 24px"><div><button type="button" class="ant-btn ant-btn-primary"><span>{"Primary"}</span></button><button type="button" class="ant-btn"><span>{"Default"}</span></button><button type="button" class="ant-btn ant-btn-dashed"><span>{"Dashed"}</span></button><button type="button" class="ant-btn ant-btn-danger"><span>{"Danger"}</span></button><button type="button" class="ant-btn ant-btn-link"><span>{"Link"}</span></button></div></div>
+       <Button
+       //  placeholder={String::from("Button")}
+       //  disabled={Some(())}
+        button_type={ButtonType::Primary}
+       //  shape={Shape::Circle}
+       icon={Some(g.clone())}
+       size={Size::Large}
+       // ghost={Some(())}
+       // block={Some(())}
+       // loading={LoadingProp::Bool(true)}
+      />
       </div>
     };
     let inner_html_right = html! {};
