@@ -142,6 +142,7 @@ pub fn home() -> Html {
         height={String::from("1em")}
         width={String::from("1em")}
         fill={String::from("white")}
+        spin={Some(())}
       />};
     let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
