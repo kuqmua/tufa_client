@@ -1,19 +1,17 @@
-use yew::{function_component, html, Properties};
-
-#[derive(Properties, PartialEq)]
-pub struct LoadingProps {
-    pub height: String,
-    pub width: String,
-    pub fill: String,
-}
+use yew::{function_component, html};
+use crate::components::ant_design::svg::svg_props::SvgProps;
 
 #[function_component(Loading)]
-pub fn loading(props: &LoadingProps) -> Html {
+pub fn loading(props: &SvgProps) -> Html {
+    let spin_class = match &props.spin {
+        None => String::from(""),
+        Some(_) => String::from("anticon-spin"),
+    };
     html! {
       <svg
         viewBox="0 0 1024 1024"
         focusable="false"
-        class="anticon-spin"
+        class={spin_class}
         data-icon="loading"
         width={props.width.clone()}
         height={props.height.clone()}
