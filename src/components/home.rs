@@ -1,3 +1,7 @@
+use super::ant_design::button::LoadingProp;
+use super::ant_design::button::Shape;
+use super::ant_design::button::Size;
+use super::ant_design::icon;
 use crate::components::alert::Alert;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
@@ -28,10 +32,6 @@ use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use super::ant_design::button::LoadingProp;
-use super::ant_design::button::Shape;
-use super::ant_design::button::Size;
-use super::ant_design::icon;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -129,7 +129,7 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let icon_inner_html = html!{<Loading/>};
+    let icon_inner_html = html! {<Loading/>};
     let inner_html_left = html! {
       <div
         style="
@@ -142,9 +142,9 @@ pub fn home() -> Html {
           padding: 10px;
         "
       >
-       <Button 
+       <Button
          placeholder={String::from("Button")}
-        //  disabled={Some(())} 
+        //  disabled={Some(())}
          button_type={ButtonType::Primary}
         //  shape={Shape::Circle}
         // icon={Some(icon_inner_html.clone())}

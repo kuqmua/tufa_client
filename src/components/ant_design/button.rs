@@ -1,6 +1,6 @@
-use web_sys::MouseEvent;
-use yew::{function_component, html, Properties, Callback, Html};
 use crate::components::ant_design::svg::loading::Loading;
+use web_sys::MouseEvent;
+use yew::{function_component, html, Callback, Html, Properties};
 
 #[derive(PartialEq)]
 pub enum ButtonType {
@@ -14,35 +14,33 @@ pub enum ButtonType {
 #[derive(PartialEq)]
 pub enum LoadingProp {
     Bool(bool),
-    Delay{
-        delay: u32,
-    }
+    Delay { delay: u32 },
 }
 
 #[derive(PartialEq)]
 pub enum Shape {
-    Circle, 
+    Circle,
     Round,
 }
 
 #[derive(PartialEq)]
 pub enum Size {
-    Small, 
+    Small,
     Large,
 }
 
 #[derive(Properties, PartialEq)]
 pub struct ButtonProps {
-    pub disabled: Option<()>,//or maybe explicit bool?
+    pub disabled: Option<()>, //or maybe explicit bool?
     pub ghost: Option<()>,
     pub href: Option<String>,
     pub html_type: Option<String>,
-    pub icon: Option<Html>,//Icon Component
+    pub icon: Option<Html>, //Icon Component
     pub loading: Option<LoadingProp>,
     pub shape: Option<Shape>,
-    pub size: Option<Size>,	
+    pub size: Option<Size>,
     pub target: Option<String>,
-    pub button_type: Option<ButtonType>,//original "type"
+    pub button_type: Option<ButtonType>, //original "type"
     pub on_click: Option<Callback<MouseEvent>>,
     pub block: Option<()>,
     pub placeholder: Option<String>,
@@ -75,14 +73,14 @@ pub fn button(props: &ButtonProps) -> Html {
         Some(size) => match size {
             Size::Small => String::from("ant-btn-sm"),
             Size::Large => String::from("ant-btn-lg"),
-        },   
+        },
     };
     let shape_class = match &props.shape {
         None => String::from(""),
         Some(shape) => match shape {
-          Shape::Circle => String::from("ant-btn-circle"),
-          Shape::Round => String::from("ant-btn-round"),//todo
-        },   
+            Shape::Circle => String::from("ant-btn-circle"),
+            Shape::Round => String::from("ant-btn-round"), //todo
+        },
     };
     let button_type_class = match &props.button_type {
         None => String::from(""),
@@ -92,10 +90,10 @@ pub fn button(props: &ButtonProps) -> Html {
             ButtonType::Dashed => String::from("ant-btn-dashed"),
             ButtonType::Danger => String::from("ant-btn-danger"),
             ButtonType::Link => String::from("ant-btn-link"),
-        },   
+        },
     };
     let classes = format!(
-        "ant-btn {} {} {} {} {} {} {}", 
+        "ant-btn {} {} {} {} {} {} {}",
         button_type_class,
         shape_class,
         button_only_class,
@@ -106,23 +104,23 @@ pub fn button(props: &ButtonProps) -> Html {
     );
     let placeholder = match &props.placeholder {
         None => html!(""),
-        Some(placeholder) => html!{ 
+        Some(placeholder) => html! {
           <span>
             {placeholder}
           </span>
-        }
+        },
     };
     let is_button_disabled = props.disabled.is_some();
     let icon = match props.loading {
         None => match &props.icon {
-            None => html!{},
-            Some(icon) => html!{
+            None => html! {},
+            Some(icon) => html! {
               <i class="anticon">
                 {icon.clone()}
               </i>
             },
         },
-        Some(_) => html!{
+        Some(_) => html! {
           <i class="anticon">
             <Loading/>
           </i>

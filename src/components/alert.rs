@@ -14,6 +14,6 @@ pub fn alert() -> Html {
         "
       >
         {"user must not see this interface. if he see it then there is bug in the code"}
-      </div>   
+      </div>
     }
 }
