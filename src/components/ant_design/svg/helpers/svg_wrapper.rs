@@ -1,5 +1,5 @@
 use yew::{function_component, html};
-use crate::components::ant_design::svg::svg_wrapper_props::SvgWrapperProps;
+use crate::components::ant_design::svg::helpers::svg_wrapper_props::SvgWrapperProps;
 
 #[function_component(SvgWrapper)]
 pub fn svg_wrapper(props: &SvgWrapperProps) -> Html {

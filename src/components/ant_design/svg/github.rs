@@ -1,6 +1,6 @@
 use yew::{function_component, html};
-use crate::components::ant_design::svg::svg_props::SvgProps;
-use crate::components::ant_design::svg::svg_wrapper::SvgWrapper;
+use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
+use crate::components::ant_design::svg::helpers::svg_wrapper::SvgWrapper;
 
 #[function_component(Github)]
 pub fn github(props: &SvgProps) -> Html {
