@@ -8,6 +8,7 @@ use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::svg::loading::Loading;
 use crate::components::ant_design::svg::github::Github;
 use crate::components::ant_design::svg::heart::heart_outlined::HeartOutlined;
+use crate::components::ant_design::svg::down::Down;
 use crate::components::ant_design::svg::heart::heart_filled::HeartFilled;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
@@ -142,7 +143,7 @@ pub fn home() -> Html {
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     let rotate = Rotate::new(60).unwrap();
     let f = html!{
-      <HeartFilled
+      <Down
         height={String::from("1em")}
         width={String::from("1em")}
         fill={String::from("white")}

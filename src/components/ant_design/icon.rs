@@ -17,7 +17,7 @@ impl Default for &Theme {
 pub struct IconProps {
     pub inner_html: Html,      //svg icon type
     pub style: Option<String>, //CSSProperties
-    pub theme: Option<Theme>,
+    // pub theme: Option<Theme>,//explicit svg styles
     // moved into svg
     // pub component: ComponentType<CustomIconComponentProps>//todo
     // pub two_tone_color: //todo

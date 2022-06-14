@@ -16,7 +16,6 @@ pub fn heart_outlined(props: &SvgProps) -> Html {
         viewBox="64 64 896 896"
         focusable="false"
         class={spin_class}
-        data-icon="github"
         width={props.width.clone()}
         height={props.height.clone()}
         fill={props.fill.clone()}

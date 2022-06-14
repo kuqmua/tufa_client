@@ -16,7 +16,6 @@ pub fn loading(props: &SvgProps) -> Html {
         viewBox="0 0 1024 1024"
         focusable="false"
         class={spin_class}
-        data-icon="loading"
         width={props.width.clone()}
         height={props.height.clone()}
         fill={props.fill.clone()}
