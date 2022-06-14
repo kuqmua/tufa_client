@@ -1,12 +1,6 @@
 #[derive(PartialEq)]
 pub enum Theme {
-    Filled,
     Outlined,
+    Filled,
     TwoTone,
-}
-
-impl Default for &Theme {
-    fn default() -> Self {
-        &Theme::Outlined
-    }
 }

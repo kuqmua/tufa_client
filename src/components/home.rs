@@ -149,7 +149,7 @@ pub fn home() -> Html {
         fill={String::from("white")}
         // spin={Some(())}
         rotate={Some(rotate)}
-        theme={Theme::Filled}
+        theme={Theme::TwoTone}
       />};
     let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
