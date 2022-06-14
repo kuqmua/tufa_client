@@ -1,13 +1,14 @@
 use super::ant_design::button::LoadingProp;
 use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
-use super::ant_design::icon;
 use crate::components::alert::Alert;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::svg::loading::Loading;
 use crate::components::ant_design::svg::github::Github;
+use crate::components::ant_design::svg::heart_outlined::HeartOutlined;
+use crate::components::ant_design::svg::heart_filled::HeartFilled;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -141,7 +142,7 @@ pub fn home() -> Html {
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     let rotate = Rotate::new(60).unwrap();
     let f = html!{
-      <Github
+      <HeartFilled
         height={String::from("1em")}
         width={String::from("1em")}
         fill={String::from("white")}
