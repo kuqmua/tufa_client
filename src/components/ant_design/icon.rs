@@ -1,18 +1,5 @@
 use yew::{function_component, html, Html, Properties};
 
-#[derive(PartialEq)]
-pub enum Theme {
-    Filled,
-    Outlined,
-    TwoTone,
-}
-
-impl Default for &Theme {
-    fn default() -> Self {
-        &Theme::Outlined
-    }
-}
-
 #[derive(Properties, PartialEq)]
 pub struct IconProps {
     pub inner_html: Html,      //svg icon type
