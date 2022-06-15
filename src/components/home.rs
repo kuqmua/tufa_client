@@ -137,7 +137,7 @@ pub fn home() -> Html {
       <Loading
         height={String::from("1em")}
         width={String::from("1em")}
-        fill={String::from("white")}
+        fill={String::from("#ffffff")}
         spin={Some(())}
       />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
@@ -146,7 +146,7 @@ pub fn home() -> Html {
       <Heart
         height={String::from("1em")}
         width={String::from("1em")}
-        fill={String::from("white")}
+        fill={String::from("#ff0000")}
         // spin={Some(())}
         rotate={Some(rotate)}
         theme={Theme::TwoTone}

@@ -79,7 +79,7 @@ impl Component for SvgIconWrapper {
             //   >
             //   </path>
             // </svg>
-            <PersonOutline height={"75%"} width={"75%"} fill={"white".to_owned()}/>
+            <PersonOutline height={"75%"} width={"75%"} fill={"#ffffff".to_owned()}/>
           </div>
         }
     }

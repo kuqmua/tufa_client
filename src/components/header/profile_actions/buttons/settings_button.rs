@@ -11,7 +11,7 @@ pub struct SettingsButtonProps {
 #[function_component(SettingsButton)]
 pub fn settings_button(props: &SettingsButtonProps) -> Html {
     let icon_size = "22px".to_owned();
-    let html_handle = html! {<SettingsBlack height={icon_size.clone()} width={icon_size} fill={"white".to_owned()}/>};
+    let html_handle = html! {<SettingsBlack height={icon_size.clone()} width={icon_size} fill={"#ffffff".to_owned()}/>};
     html! {
       <ButtonWrapper inner_html={html_handle} callback={props.callback.clone()} placeholder={"Settings".to_owned()}/>
     }

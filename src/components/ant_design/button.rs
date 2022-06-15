@@ -122,7 +122,7 @@ pub fn button(props: &ButtonProps) -> Html {
             <Loading
               height={String::from("1em")}
               width={String::from("1em")}
-              fill={String::from("white")}
+              fill={String::from("#ffffff")}
             />
           };
           html! {<Icon inner_html={loading}/>}
