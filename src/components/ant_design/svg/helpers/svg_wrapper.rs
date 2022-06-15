@@ -15,13 +15,22 @@ pub fn svg_wrapper(props: &SvgWrapperProps) -> Html {
         None => String::from("64 64 896 896"),
         Some(view_box_handle) => view_box_handle,
     };
+    let common_size = String::from("1em");
+    let width = match props.width.clone() {
+      None => common_size.clone(),
+      Some(width) => width,
+    };
+    let height = match props.height.clone() {
+      None => common_size,
+      Some(height) => height,
+    };
     html! {
       <svg
         viewBox={view_box}
         focusable="false"
         class={spin_class}
-        width={props.width.clone()}
-        height={props.height.clone()}
+        width={width.clone()}
+        height={height.clone()}
         fill={props.fill.clone().to_css_string()}
         aria-hidden="true"
         style={rotate_style}

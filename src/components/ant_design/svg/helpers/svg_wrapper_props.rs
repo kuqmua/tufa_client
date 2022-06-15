@@ -4,8 +4,8 @@ use colorsys::Hsl;
 
 #[derive(Properties, PartialEq)]
 pub struct SvgWrapperProps {
-    pub height: String,
-    pub width: String,
+    pub height: Option<String>,
+    pub width: Option<String>,
     pub fill: Hsl,
     pub spin: Option<()>,
     pub rotate: Option<Rotate>,

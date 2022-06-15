@@ -134,19 +134,11 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let loading = html!{
-      <Loading
-        height={String::from("1em")}
-        width={String::from("1em")}
-        fill={Hsl::new(0.0, 100.0, 100.0, Some(1.0))}
-        spin={Some(())}
-      />};
+    let loading = html!{<Loading spin={Some(())} />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     let rotate = Rotate::new(60).unwrap();
     let f = html!{
       <Heart
-        height={String::from("1em")}
-        width={String::from("1em")}
         fill={Hsl::new(0.0, 100.0, 50.0, Some(1.0))}
         // spin={Some(())}
         rotate={Some(rotate)}
