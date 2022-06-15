@@ -22,7 +22,7 @@ pub fn svg_wrapper(props: &SvgWrapperProps) -> Html {
         class={spin_class}
         width={props.width.clone()}
         height={props.height.clone()}
-        fill={props.fill.clone()}
+        fill={props.fill.to_css_string()}
         aria-hidden="true"
         style={rotate_style}
       >

@@ -1,11 +1,12 @@
 use yew::{Properties, Html};
 use crate::helpers::rotate::Rotate;
+use colorsys::Hsl;
 
 #[derive(Properties, PartialEq)]
 pub struct SvgWrapperProps {
     pub height: String,
     pub width: String,
-    pub fill: String,
+    pub fill: Hsl,
     pub spin: Option<()>,
     pub rotate: Option<Rotate>,
     pub view_box: Option<String>,

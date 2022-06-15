@@ -36,6 +36,7 @@ use crate::constants::HEADER_HEIGHT_PX;
 use crate::helpers::rotate::Rotate;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
+use colorsys::Hsl;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -137,7 +138,7 @@ pub fn home() -> Html {
       <Loading
         height={String::from("1em")}
         width={String::from("1em")}
-        fill={String::from("#ffffff")}
+        fill={Hsl::new(0.0, 100.0, 100.0, Some(1.0))}
         spin={Some(())}
       />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
@@ -146,7 +147,7 @@ pub fn home() -> Html {
       <Heart
         height={String::from("1em")}
         width={String::from("1em")}
-        fill={String::from("#ff0000")}
+        fill={Hsl::new(0.0, 100.0, 50.0, Some(1.0))}
         // spin={Some(())}
         rotate={Some(rotate)}
         theme={Theme::TwoTone}
