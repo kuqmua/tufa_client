@@ -1,3 +1,4 @@
+use colorsys::Hsl;
 use yew::{function_component, html};
 use crate::components::ant_design::svg::helpers::svg_wrapper_props::SvgWrapperProps;
 
@@ -15,6 +16,10 @@ pub fn svg_wrapper(props: &SvgWrapperProps) -> Html {
         None => String::from("64 64 896 896"),
         Some(view_box_handle) => view_box_handle,
     };
+    let fill = match props.fill.clone() {
+      None => Hsl::new(0.0, 100.0, 100.0, Some(1.0)).to_css_string(),
+      Some(fill) => fill.to_css_string(),
+    };
     html! {
       <svg
         viewBox={view_box}
@@ -22,7 +27,7 @@ pub fn svg_wrapper(props: &SvgWrapperProps) -> Html {
         class={spin_class}
         width={props.width.clone()}
         height={props.height.clone()}
-        fill={props.fill.to_css_string()}
+        fill={fill}
         aria-hidden="true"
         style={rotate_style}
       >

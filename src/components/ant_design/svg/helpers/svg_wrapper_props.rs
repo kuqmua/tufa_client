@@ -6,7 +6,7 @@ use colorsys::Hsl;
 pub struct SvgWrapperProps {
     pub height: String,
     pub width: String,
-    pub fill: Hsl,
+    pub fill: Option<Hsl>,
     pub spin: Option<()>,
     pub rotate: Option<Rotate>,
     pub view_box: Option<String>,
