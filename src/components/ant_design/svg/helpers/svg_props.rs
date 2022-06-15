@@ -7,7 +7,7 @@ use colorsys::Hsl;
 pub struct SvgProps {
     pub height: String,
     pub width: String,
-    pub fill: Hsl,
+    pub fill: Option<Hsl>,
     pub spin: Option<()>,
     pub rotate: Option<Rotate>,
     pub theme: Option<Theme>,
