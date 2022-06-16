@@ -1,8 +1,8 @@
 use crate::components::ant_design::svg::loading::Loading;
 use crate::components::ant_design::icon::Icon;
-use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
+use crate::constants::WHITE_HSL;
 
 #[derive(PartialEq)]
 pub enum ButtonType {
@@ -123,7 +123,7 @@ pub fn button(props: &ButtonProps) -> Html {
             <Loading
               height={String::from("1em")}
               width={String::from("1em")}
-              fill={Hsl::new(0.0, 100.0, 100.0, Some(1.0))}
+              fill={WHITE_HSL.clone()}
             />
           };
           html! {<Icon inner_html={loading}/>}

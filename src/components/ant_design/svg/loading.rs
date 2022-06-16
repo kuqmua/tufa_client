@@ -1,7 +1,7 @@
-use colorsys::Hsl;
 use yew::{function_component, html};
 use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_wrapper::SvgWrapper;
+use crate::constants::WHITE_HSL;
 
 #[function_component(Loading)]
 pub fn loading(props: &SvgProps) -> Html {
@@ -10,7 +10,7 @@ pub fn loading(props: &SvgProps) -> Html {
       </path>
     };
     let fill = match props.fill.clone() {
-      None => Hsl::new(0.0, 100.0, 100.0, Some(1.0)),
+      None => WHITE_HSL.clone(),
       Some(fill) => fill,
     };
     html! {
