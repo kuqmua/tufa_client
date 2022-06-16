@@ -5,3 +5,4 @@ pub mod down;
 pub mod helpers;
 pub mod up;
 pub mod close;
+pub mod share_alt;
