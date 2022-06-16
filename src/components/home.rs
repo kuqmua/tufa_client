@@ -9,6 +9,7 @@ use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::svg::loading::Loading;
 use crate::components::ant_design::svg::github::Github;
 use crate::components::ant_design::svg::down::Down;
+use crate::components::ant_design::svg::up::Up;
 use crate::components::ant_design::svg::heart::Heart;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
@@ -136,12 +137,12 @@ pub fn home() -> Html {
     // <PureMaterialSlider/>
     let loading = html!{<Loading spin={Some(())} />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
-    let rotate = Rotate::new(60).unwrap();
+    // let rotate = Rotate::new(60).unwrap();
     let f = html!{
-      <Heart
+      <Up
         fill={Hsl::new(0.0, 100.0, 50.0, Some(1.0))}
         // spin={Some(())}
-        rotate={Some(rotate)}
+        // rotate={Some(rotate)}
         theme={Theme::TwoTone}
       />};
     let g = html! {<Icon inner_html={f}/>};
