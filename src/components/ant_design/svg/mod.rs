@@ -6,3 +6,4 @@ pub mod helpers;
 pub mod up;
 pub mod close;
 pub mod share_alt;
+pub mod login;
