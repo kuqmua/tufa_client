@@ -14,3 +14,4 @@ pub mod reddit;
 pub mod sync;
 pub mod dislike;
 pub mod like;
+pub mod cloud;
