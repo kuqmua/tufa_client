@@ -15,3 +15,4 @@ pub mod sync;
 pub mod dislike;
 pub mod like;
 pub mod cloud;
+pub mod copy;
