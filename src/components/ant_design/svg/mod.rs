@@ -13,3 +13,4 @@ pub mod twitter;
 pub mod reddit;
 pub mod sync;
 pub mod dislike;
+pub mod like;
