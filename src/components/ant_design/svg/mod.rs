@@ -8,3 +8,4 @@ pub mod close;
 pub mod share_alt;
 pub mod login;
 pub mod logout;
+pub mod youtube;
