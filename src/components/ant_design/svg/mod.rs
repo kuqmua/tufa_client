@@ -11,3 +11,4 @@ pub mod logout;
 pub mod youtube;
 pub mod twitter;
 pub mod reddit;
+pub mod sync;
