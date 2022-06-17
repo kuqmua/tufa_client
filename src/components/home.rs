@@ -38,6 +38,7 @@ use crate::helpers::rotate::Rotate;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 use colorsys::Hsl;
+use crate::components::ant_design::paragraph::Paragraph;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -180,6 +181,7 @@ pub fn home() -> Html {
        // block={Some(())}
        // loading={LoadingProp::Bool(true)}
       />
+      <Paragraph/>
       </div>
     };
     let inner_html_right = html! {};
