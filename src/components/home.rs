@@ -186,6 +186,7 @@ pub fn home() -> Html {
       <Paragraph/>
       <Alert
         message={String::from("Message")}
+        description={String::from("this is a description. yeah, it is.")}
         type_handle={AlertType::Error}
       />
       </div>

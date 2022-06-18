@@ -40,16 +40,30 @@ pub fn alert(props: &AlertProps) -> Html {
         None => String::from(""),
         Some(msg) => msg,
     };
+    let description = match props.description.clone() {
+        None => String::from(""),
+        Some(desc) => desc,
+    };
     let type_handle = match props.type_handle.clone() {
         None => AlertType::Info,
         Some(alert_type) => alert_type,
     };
-    let class = format!("ant-alert {} ant-alert-no-icon", type_handle.get_class());
+    let description_class = match props.description.clone() {
+        None => String::from(""),
+        Some(_) => String::from("ant-alert-with-description"),
+    };
+    let class = format!(
+        "ant-alert {} {} ant-alert-no-icon",
+        type_handle.get_class(),
+        description_class
+    );
     html! {
       <div data-show="true" class={class}>
-        <span class="ant-alert-message">{message}
+        <span class="ant-alert-message">
+          {message}
         </span>
         <span class="ant-alert-description">
+          {description}
         </span>
       </div>
     }
