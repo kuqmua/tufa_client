@@ -16,3 +16,4 @@ pub mod switch;
 pub mod slider;
 pub mod select;
 pub mod tree_select;
+pub mod transfer;
