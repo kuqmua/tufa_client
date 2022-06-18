@@ -1,23 +1,29 @@
-// use gloo::worker::Callback;
-// use yew::{function_component, html, Html, Properties};
+use web_sys::MouseEvent;
+use yew::{function_component, html, Callback, Html, Properties};
 
-// #[derive(Properties, PartialEq)]
-// pub struct IconProps {
-//     pub after_close Callback<()>,
-//     pub banner: bool,
-// closable	Whether Alert can be closed	boolean	-
-// closeText	Close text to show	string|ReactNode	-
-// description	Additional content of Alert	string|ReactNode	-
-// icon	Custom icon, effective when showIcon is true	ReactNode	-	3.10.0
-// message	Content of Alert	string|ReactNode	-
-// showIcon	Whether to show icon	boolean	false, in banner mode default is true
-// type	Type of Alert styles, options: success, info, warning, error	string	info, in banner mode default is warning
-// onClose	Callback when Alert is closed	(e: MouseEvent) => void
-// }
+#[derive(Debug, PartialEq)]
+pub enum AlertType {
+    Success,
+    Info,
+    Warning,
+    Error,
+}
 
-// #[function_component(Icon)]
-// pub fn icon(props: &IconProps) -> Html {
-//     html! {
+#[derive(Properties, PartialEq)]
+pub struct AlertProps {
+    pub after_close: Callback<MouseEvent>,
+    pub banner: bool,
+    pub closable: bool,
+    pub close_text: String,  //Html
+    pub description: String, //Html
+    pub icon: Html,
+    pub message: String, //Html
+    pub show_icon: bool,
+    pub type_handle: AlertType,
+    pub on_close: Callback<MouseEvent>,
+}
 
-//     }
-// }
+#[function_component(Alert)]
+pub fn alert(props: &AlertProps) -> Html {
+    html! {}
+}
