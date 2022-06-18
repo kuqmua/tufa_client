@@ -1,3 +1,4 @@
+pub mod alert;
 pub mod auto_complete;
 pub mod avatar;
 pub mod badge;
