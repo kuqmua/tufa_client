@@ -21,6 +21,7 @@ pub mod message;
 pub mod modal;
 pub mod notification;
 pub mod paragraph;
+pub mod popconfirm;
 pub mod popover;
 pub mod progress;
 pub mod radio;
