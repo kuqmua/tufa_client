@@ -1,3 +1,6 @@
+use crate::components::ant_design::icon::Icon;
+use crate::components::ant_design::svg::close::Close;
+use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
 
@@ -23,13 +26,13 @@ impl AlertType {
 #[derive(Properties, PartialEq)]
 pub struct AlertProps {
     pub after_close: Option<Callback<MouseEvent>>,
-    pub banner: Option<bool>,
-    pub closable: Option<bool>,
+    pub banner: Option<()>,
+    pub closable: Option<()>,
     pub close_text: Option<String>,  //Html
     pub description: Option<String>, //Html
     pub icon: Option<Html>,
     pub message: Option<String>,
-    pub show_icon: Option<bool>,
+    pub show_icon: Option<()>,
     pub type_handle: Option<AlertType>,
     pub on_close: Option<Callback<MouseEvent>>,
 }
@@ -57,6 +60,18 @@ pub fn alert(props: &AlertProps) -> Html {
         type_handle.get_class(),
         description_class
     );
+    let close_button = match props.closable {
+        None => html! {},
+        Some(_) => {
+            let close = html! {<Close fill={Hsl::new(0.0, 100.0, 0.0, Some(1.0))}/>};
+            let icon_inner_html = html! {<Icon inner_html={close} additional_class={String::from("anticon-close")} />};
+            html! {
+              <button type="button" class="ant-alert-close-icon" tabindex="0">
+                {icon_inner_html}
+              </button>
+            }
+        }
+    };
     html! {
       <div data-show="true" class={class}>
         <span class="ant-alert-message">
@@ -65,6 +80,7 @@ pub fn alert(props: &AlertProps) -> Html {
         <span class="ant-alert-description">
           {description}
         </span>
+        {close_button}
       </div>
     }
 }
