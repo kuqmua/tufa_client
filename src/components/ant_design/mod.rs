@@ -8,3 +8,4 @@ pub mod auto_complete;
 pub mod checkbox;
 pub mod date_picker;
 pub mod form;
+pub mod input_number;
