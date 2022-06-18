@@ -2,6 +2,7 @@ pub mod auto_complete;
 pub mod avatar;
 pub mod badge;
 pub mod button;
+pub mod carousel;
 pub mod checkbox;
 pub mod collapse;
 pub mod comment;
