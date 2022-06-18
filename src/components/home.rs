@@ -3,6 +3,7 @@ use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
 // use crate::components::alert::Alert;
 use crate::components::ant_design::alert::Alert;
+use crate::components::ant_design::alert::AlertType;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
@@ -183,7 +184,10 @@ pub fn home() -> Html {
        // loading={LoadingProp::Bool(true)}
       />
       <Paragraph/>
-      <Alert/>
+      <Alert
+        message={String::from("Message")}
+        type_handle={AlertType::Error}
+      />
       </div>
     };
     let inner_html_right = html! {};
