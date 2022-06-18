@@ -1,5 +1,6 @@
 pub mod auto_complete;
 pub mod avatar;
+pub mod badge;
 pub mod button;
 pub mod checkbox;
 pub mod date_picker;
