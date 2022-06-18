@@ -17,3 +17,4 @@ pub mod slider;
 pub mod select;
 pub mod tree_select;
 pub mod transfer;
+pub mod time_picker;
