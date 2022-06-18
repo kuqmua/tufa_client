@@ -9,6 +9,7 @@ pub mod checkbox;
 pub mod collapse;
 pub mod comment;
 pub mod date_picker;
+pub mod drawer;
 pub mod dropdown;
 pub mod form;
 pub mod icon;
