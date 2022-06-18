@@ -26,6 +26,7 @@ pub mod popover;
 pub mod progress;
 pub mod radio;
 pub mod rate;
+pub mod result;
 pub mod select;
 pub mod slider;
 pub mod svg;
