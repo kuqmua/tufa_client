@@ -17,6 +17,7 @@ pub mod input;
 pub mod input_number;
 pub mod list;
 pub mod menu;
+pub mod modal;
 pub mod paragraph;
 pub mod popover;
 pub mod radio;
