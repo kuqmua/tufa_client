@@ -29,6 +29,7 @@ pub mod rate;
 pub mod result;
 pub mod select;
 pub mod slider;
+pub mod spin;
 pub mod svg;
 pub mod switch;
 pub mod tag;
