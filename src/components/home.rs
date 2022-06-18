@@ -1,16 +1,18 @@
 use super::ant_design::button::LoadingProp;
 use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
-use crate::components::ant_design::svg::helpers::theme::Theme;
-use crate::components::alert::Alert;
+// use crate::components::alert::Alert;
+use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
-use crate::components::ant_design::svg::loading::Loading;
-use crate::components::ant_design::svg::github::Github;
+use crate::components::ant_design::paragraph::Paragraph;
 use crate::components::ant_design::svg::down::Down;
-use crate::components::ant_design::svg::up::Up;
+use crate::components::ant_design::svg::github::Github;
 use crate::components::ant_design::svg::heart::Heart;
+use crate::components::ant_design::svg::helpers::theme::Theme;
+use crate::components::ant_design::svg::loading::Loading;
+use crate::components::ant_design::svg::up::Up;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -35,10 +37,9 @@ use crate::components::material::pure_material_textfield_standard::PureMaterialT
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::helpers::rotate::Rotate;
+use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use colorsys::Hsl;
-use crate::components::ant_design::paragraph::Paragraph;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -136,16 +137,16 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let loading = html!{<Loading spin={Some(())} />};
+    let loading = html! {<Loading spin={Some(())} />};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     // let rotate = Rotate::new(60).unwrap();
-    let f = html!{
-      <Up
-        fill={Hsl::new(0.0, 100.0, 50.0, Some(1.0))}
-        // spin={Some(())}
-        // rotate={Some(rotate)}
-        theme={Theme::TwoTone}
-      />};
+    let f = html! {
+    <Up
+      fill={Hsl::new(0.0, 100.0, 50.0, Some(1.0))}
+      // spin={Some(())}
+      // rotate={Some(rotate)}
+      theme={Theme::TwoTone}
+    />};
     let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
       <div
@@ -182,6 +183,7 @@ pub fn home() -> Html {
        // loading={LoadingProp::Bool(true)}
       />
       <Paragraph/>
+      <Alert/>
       </div>
     };
     let inner_html_right = html! {};

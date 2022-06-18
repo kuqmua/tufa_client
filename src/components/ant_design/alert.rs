@@ -25,5 +25,12 @@ pub struct AlertProps {
 
 #[function_component(Alert)]
 pub fn alert(props: &AlertProps) -> Html {
-    html! {}
+    html! {
+      <div data-show="true" class="ant-alert ant-alert-info ant-alert-no-icon">
+        <span class="ant-alert-message">
+        </span>
+        <span class="ant-alert-description">
+        </span>
+      </div>
+    }
 }
