@@ -13,3 +13,4 @@ pub mod input;
 pub mod rate;
 pub mod radio;
 pub mod switch;
+pub mod slider;
