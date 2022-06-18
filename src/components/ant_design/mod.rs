@@ -25,5 +25,6 @@ pub mod svg;
 pub mod switch;
 pub mod time_picker;
 pub mod transfer;
+pub mod tree;
 pub mod tree_select;
 pub mod upload;
