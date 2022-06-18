@@ -12,3 +12,4 @@ pub mod input_number;
 pub mod input;
 pub mod rate;
 pub mod radio;
+pub mod switch;
