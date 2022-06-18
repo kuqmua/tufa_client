@@ -3,6 +3,7 @@ pub mod avatar;
 pub mod badge;
 pub mod button;
 pub mod checkbox;
+pub mod collapse;
 pub mod comment;
 pub mod date_picker;
 pub mod dropdown;
