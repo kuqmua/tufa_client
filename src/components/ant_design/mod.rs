@@ -1,6 +1,7 @@
 pub mod alert;
 pub mod auto_complete;
 pub mod avatar;
+pub mod back_top;
 pub mod badge;
 pub mod button;
 pub mod calendar;
