@@ -11,16 +11,16 @@ pub enum AlertType {
 
 #[derive(Properties, PartialEq)]
 pub struct AlertProps {
-    pub after_close: Callback<MouseEvent>,
-    pub banner: bool,
-    pub closable: bool,
-    pub close_text: String,  //Html
-    pub description: String, //Html
-    pub icon: Html,
-    pub message: String, //Html
-    pub show_icon: bool,
-    pub type_handle: AlertType,
-    pub on_close: Callback<MouseEvent>,
+    pub after_close: Option<Callback<MouseEvent>>,
+    pub banner: Option<bool>,
+    pub closable: Option<bool>,
+    pub close_text: Option<String>,  //Html
+    pub description: Option<String>, //Html
+    pub icon: Option<Html>,
+    pub message: Option<String>, //Html
+    pub show_icon: Option<bool>,
+    pub type_handle: Option<AlertType>,
+    pub on_close: Option<Callback<MouseEvent>>,
 }
 
 #[function_component(Alert)]
