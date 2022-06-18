@@ -13,6 +13,7 @@ pub mod form;
 pub mod icon;
 pub mod input;
 pub mod input_number;
+pub mod list;
 pub mod menu;
 pub mod paragraph;
 pub mod radio;
