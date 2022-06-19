@@ -94,7 +94,7 @@ pub fn home() -> Html {
         })
         .forget();
     });
-    let drawer_style_left_enum_handle = &*drawer_style_left.clone();
+    let drawer_style_left_enum_handle = &*drawer_style_left;
     ////
     let drawer_style_right = use_state(|| DrawerChangingStyleState::Initial);
     let drawer_style_right_cloned_on_open = drawer_style_right.clone();
@@ -120,10 +120,10 @@ pub fn home() -> Html {
         })
         .forget();
     });
-    let drawer_style_right_enum_handle = &*drawer_style_right.clone();
+    let drawer_style_right_enum_handle = &*drawer_style_right;
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_cloned_expand_more = expander_status.clone();
-    let expander_status_cloned_close = expander_status.clone();
+    let expander_status_cloned_close = expander_status;
     let share_inner_html = html! {<ShareContent/>};
     let expand_more_inner_html = html! {<ExpandMoreContent/>};
     // <PureMaterialButtonOutlined/>
@@ -244,7 +244,7 @@ pub fn home() -> Html {
         })
         .forget();
     });
-    let expander_style_clone_close_handle = &*expander_style.clone().clone();
+    let expander_style_clone_close_handle = &*expander_style;
     let expander_inner_html = match *expander_status_clone_for_logic {
         ExpanderStatus::Closed => html! {<Alert/>},
         ExpanderStatus::Share => share_inner_html,
@@ -253,17 +253,17 @@ pub fn home() -> Html {
     html! {
       <>
         <Header
-          left_drawer_callback={on_open_left.clone()}
-          right_drawer_callback={on_open_right.clone()}
+          left_drawer_callback={on_open_left}
+          right_drawer_callback={on_open_right}
         />
         <Drawer
-          callback={on_close_left.clone()}
+          callback={on_close_left}
           style_state={drawer_style_left_enum_handle.clone()}
           drawer_position={DrawerPosition::Left}
           inner_html={inner_html_left}
         />
         <Drawer
-          callback={on_close_right.clone()}
+          callback={on_close_right}
           style_state={drawer_style_right_enum_handle.clone()}
           drawer_position={DrawerPosition::Right}
           inner_html={inner_html_right}
