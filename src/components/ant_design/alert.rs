@@ -85,27 +85,34 @@ pub fn alert(props: &AlertProps) -> Html {
     };
     let icon = match props.show_icon {
         None => html! {},
-        Some(_) => match type_handle {
-            AlertType::Success => {
-                let check_circle =
-                    html! {<CheckCircle fill={FillWith::CurrentColor} theme={Theme::Filled}/>};
-                html! {<Icon inner_html={check_circle} additional_class={String::from("anticon-check-circle ant-alert-icon")}/>}
+        Some(_) => {
+            let theme = match props.description.clone() {
+                Some(_) => Theme::TwoTone,
+                None => Theme::Filled,
+            };
+            match type_handle {
+                AlertType::Success => {
+                    let check_circle =
+                        html! {<CheckCircle fill={FillWith::CurrentColor} theme={theme}/>};
+                    html! {<Icon inner_html={check_circle} additional_class={String::from("anticon-check-circle ant-alert-icon")}/>}
+                }
+                AlertType::Info => {
+                    let info_circle =
+                        html! {<InfoCircle fill={FillWith::CurrentColor} theme={theme}/>};
+                    html! {<Icon inner_html={info_circle} additional_class={String::from("anticon-info-circle ant-alert-icon")} />}
+                }
+                AlertType::Warning => {
+                    let exclamation_circle =
+                        html! {<ExclamationCircle fill={FillWith::CurrentColor} theme={theme}/>};
+                    html! {<Icon inner_html={exclamation_circle} additional_class={String::from("anticon-exclamation-circle ant-alert-icon")} />}
+                }
+                AlertType::Error => {
+                    let close_circle =
+                        html! {<CloseCircle fill={FillWith::CurrentColor} theme={theme}/>};
+                    html! {<Icon inner_html={close_circle} additional_class={String::from("anticon-close-circle ant-alert-icon")} />}
+                }
             }
-            AlertType::Info => {
-                let info_circle =
-                    html! {<InfoCircle fill={FillWith::CurrentColor} theme={Theme::Filled}/>};
-                html! {<Icon inner_html={info_circle} additional_class={String::from("anticon-info-circle ant-alert-icon")} />}
-            }
-            AlertType::Warning => {
-                let exclamation_circle = html! {<ExclamationCircle fill={FillWith::CurrentColor} theme={Theme::Filled}/>};
-                html! {<Icon inner_html={exclamation_circle} additional_class={String::from("anticon-exclamation-circle ant-alert-icon")} />}
-            }
-            AlertType::Error => {
-                let close_circle =
-                    html! {<CloseCircle fill={FillWith::CurrentColor} theme={Theme::Filled}/>};
-                html! {<Icon inner_html={close_circle} additional_class={String::from("anticon-close-circle ant-alert-icon")} />}
-            }
-        },
+        }
     };
     html! {
       <div data-show="true" class={class}>
