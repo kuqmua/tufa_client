@@ -1,8 +1,9 @@
-use crate::components::ant_design::svg::loading::Loading;
 use crate::components::ant_design::icon::Icon;
+use crate::components::ant_design::svg::helpers::fill_with::FillWith;
+use crate::components::ant_design::svg::loading::Loading;
+use crate::constants::WHITE_HSL;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
-use crate::constants::WHITE_HSL;
 
 #[derive(PartialEq)]
 pub enum ButtonType {
@@ -119,15 +120,15 @@ pub fn button(props: &ButtonProps) -> Html {
             Some(icon) => html! {{icon.clone()}},
         },
         Some(_) => {
-          let loading = html!{
-            <Loading
-              height={String::from("1em")}
-              width={String::from("1em")}
-              fill={WHITE_HSL.clone()}
-            />
-          };
-          html! {<Icon inner_html={loading}/>}
-        },
+            let loading = html! {
+              <Loading
+                height={String::from("1em")}
+                width={String::from("1em")}
+                fill={FillWith::Hsl(WHITE_HSL.clone())}
+              />
+            };
+            html! {<Icon inner_html={loading}/>}
+        }
     };
     html! {
       <button disabled={is_button_disabled} type="button" class={classes}>

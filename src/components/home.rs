@@ -1,6 +1,7 @@
 use super::ant_design::button::LoadingProp;
 use super::ant_design::button::Shape;
 use super::ant_design::button::Size;
+use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 // use crate::components::alert::Alert;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
@@ -143,7 +144,7 @@ pub fn home() -> Html {
     // let rotate = Rotate::new(60).unwrap();
     let f = html! {
     <Up
-      fill={Hsl::new(0.0, 100.0, 50.0, Some(1.0))}
+      fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))}
       // spin={Some(())}
       // rotate={Some(rotate)}
       theme={Theme::TwoTone}
