@@ -59,10 +59,15 @@ pub fn alert(props: &AlertProps) -> Html {
         None => String::from(""),
         Some(_) => String::from("ant-alert-with-description"),
     };
+    let show_icon_class = match props.show_icon {
+        None => String::from("ant-alert-no-icon"),
+        Some(_) => String::from(""),
+    };
     let class = format!(
-        "ant-alert {} {} ant-alert-no-icon",
+        "ant-alert {} {} {}",
         type_handle.get_class(),
-        description_class
+        description_class,
+        show_icon_class
     );
     let close_button = match props.closable {
         None => html! {},
