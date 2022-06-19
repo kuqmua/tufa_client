@@ -1,5 +1,9 @@
 use crate::components::ant_design::icon::Icon;
+use crate::components::ant_design::svg::check_circle::CheckCircle;
 use crate::components::ant_design::svg::close::Close;
+use crate::components::ant_design::svg::close_circle::CloseCircle;
+use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
+use crate::components::ant_design::svg::info_circle::InfoCircle;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
@@ -72,8 +76,33 @@ pub fn alert(props: &AlertProps) -> Html {
             }
         }
     };
+    let icon = match props.show_icon {
+        None => html! {},
+        Some(_) => match type_handle {
+            AlertType::Success => {
+                let check_circle =
+                    html! {<CheckCircle fill={Hsl::new(0.0, 100.0, 0.0, Some(1.0))}/>};
+                html! {<Icon inner_html={check_circle} additional_class={String::from("anticon-check-circle ant-alert-icon")} />}
+            }
+            AlertType::Info => {
+                let info_circle = html! {<InfoCircle fill={Hsl::new(0.0, 100.0, 0.0, Some(1.0))}/>};
+                html! {<Icon inner_html={info_circle} additional_class={String::from("anticon-info-circle ant-alert-icon")} />}
+            }
+            AlertType::Warning => {
+                let exclamation_circle =
+                    html! {<ExclamationCircle fill={Hsl::new(0.0, 100.0, 0.0, Some(1.0))}/>};
+                html! {<Icon inner_html={exclamation_circle} additional_class={String::from("anticon-exclamation-circle ant-alert-icon")} />}
+            }
+            AlertType::Error => {
+                let close_circle =
+                    html! {<CloseCircle fill={Hsl::new(0.0, 100.0, 0.0, Some(1.0))}/>};
+                html! {<Icon inner_html={close_circle} additional_class={String::from("anticon-close-circle ant-alert-icon")} />}
+            }
+        },
+    };
     html! {
       <div data-show="true" class={class}>
+        {icon}
         <span class="ant-alert-message">
           {message}
         </span>
