@@ -7,6 +7,7 @@ pub mod down;
 pub mod github;
 pub mod heart;
 pub mod helpers;
+pub mod info_circle;
 pub mod like;
 pub mod loading;
 pub mod login;
