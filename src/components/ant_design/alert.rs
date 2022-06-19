@@ -87,7 +87,7 @@ pub fn alert(props: &AlertProps) -> Html {
         None => html! {},
         Some(_) => {
             let theme = match props.description.clone() {
-                Some(_) => Theme::TwoTone,
+                Some(_) => Theme::Outlined,
                 None => Theme::Filled,
             };
             match type_handle {
