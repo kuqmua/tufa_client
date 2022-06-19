@@ -1,5 +1,6 @@
 pub mod check_circle;
 pub mod close;
+pub mod close_circle;
 pub mod cloud;
 pub mod copy;
 pub mod dislike;
