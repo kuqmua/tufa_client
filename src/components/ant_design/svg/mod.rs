@@ -4,6 +4,7 @@ pub mod cloud;
 pub mod copy;
 pub mod dislike;
 pub mod down;
+pub mod exclamation_circle;
 pub mod github;
 pub mod heart;
 pub mod helpers;
