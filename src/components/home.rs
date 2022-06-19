@@ -189,7 +189,8 @@ pub fn home() -> Html {
         message={String::from("Error")}
         description={String::from("This is an error message about copywriting.")}
         type_handle={AlertType::Error}
-        // closable={Some(())}
+        closable={Some(())}
+        close_text={String::from("close text")}
         show_icon={Some(())}
       />
       </div>

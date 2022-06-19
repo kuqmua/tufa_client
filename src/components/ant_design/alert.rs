@@ -72,16 +72,29 @@ pub fn alert(props: &AlertProps) -> Html {
         show_icon_class
     );
     let close_button = match props.closable {
-        None => html! {},
-        Some(_) => {
-            let close = html! {<Close fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))}/>};
-            let icon_inner_html = html! {<Icon inner_html={close} additional_class={String::from("anticon-close")} />};
-            html! {
-              <button type="button" class="ant-alert-close-icon" tabindex="0">
-                {icon_inner_html}
-              </button>
+        None => match props.close_text.clone() {
+            None => html! {},
+            Some(text) => html! {
+                <button type="button" class="ant-alert-close-icon" tabindex="0">
+                  <span class="ant-alert-close-text">{text}</span></button>
+            },
+        },
+        Some(_) => match props.close_text.clone() {
+            None => {
+                let close =
+                    html! {<Close fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))}/>};
+                let icon_inner_html = html! {<Icon inner_html={close} additional_class={String::from("anticon-close")} />};
+                html! {
+                  <button type="button" class="ant-alert-close-icon" tabindex="0">
+                    {icon_inner_html}
+                  </button>
+                }
             }
-        }
+            Some(text) => html! {
+                <button type="button" class="ant-alert-close-icon" tabindex="0">
+                  <span class="ant-alert-close-text">{text}</span></button>
+            },
+        },
     };
     let icon = match props.show_icon {
         None => html! {},
