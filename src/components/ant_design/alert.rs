@@ -71,11 +71,15 @@ pub fn alert(props: &AlertProps) -> Html {
         description_class,
         show_icon_class
     );
+    let on_close = match props.on_close.clone() {
+        None => Callback::<MouseEvent>::from(move |_| {}),
+        Some(_) => Callback::<MouseEvent>::from(move |_| {}),
+    };
     let close_button = match props.closable {
         None => match props.close_text.clone() {
             None => html! {},
             Some(text) => html! {
-                <button type="button" class="ant-alert-close-icon" tabindex="0">
+                <button onclick={on_close} type="button" class="ant-alert-close-icon" tabindex="0">
                   <span class="ant-alert-close-text">{text}</span></button>
             },
         },
@@ -85,13 +89,13 @@ pub fn alert(props: &AlertProps) -> Html {
                     html! {<Close fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))}/>};
                 let icon_inner_html = html! {<Icon inner_html={close} additional_class={String::from("anticon-close")} />};
                 html! {
-                  <button type="button" class="ant-alert-close-icon" tabindex="0">
+                  <button onclick={on_close} type="button" class="ant-alert-close-icon" tabindex="0">
                     {icon_inner_html}
                   </button>
                 }
             }
             Some(text) => html! {
-                <button type="button" class="ant-alert-close-icon" tabindex="0">
+                <button onclick={on_close} type="button" class="ant-alert-close-icon" tabindex="0">
                   <span class="ant-alert-close-text">{text}</span></button>
             },
         },
