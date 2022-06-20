@@ -67,6 +67,13 @@ pub fn alert(props: &AlertProps) -> Html {
         // };
         // (this.props.onClose || noop)(e);
     });
+    let closing_animation_end_clone = closing.clone();
+    let closed_animation_end_clone = closed.clone();
+    let animation_end = || {
+        closing_animation_end_clone.set(false);
+        closed_animation_end_clone.set(true);
+        // (this.props.afterClose || noop)();
+      };
     //
     let message = match props.message.clone() {
         None => String::from(""),
