@@ -47,7 +47,7 @@ pub struct AlertProps {
 pub enum AlertChangingStyleState {
     Opened,
     Closing,
-    Removed,
+    Closed,
 }
 
 impl AlertChangingStyleState {
@@ -55,7 +55,7 @@ impl AlertChangingStyleState {
         match *self {
             AlertChangingStyleState::Opened => String::from("ant-alert-closable"),
             AlertChangingStyleState::Closing => String::from("ant-alert-closing ant-alert-no-icon ant-alert-closable ant-alert-slide-up-leave ant-alert-slide-up-leave-active"),
-            AlertChangingStyleState::Removed => String::from(""),
+            AlertChangingStyleState::Closed => String::from(""),
         }
     }
     pub fn get_value(&self) -> AlertChangingStyle {
@@ -70,7 +70,7 @@ impl AlertChangingStyleState {
                 height: String::from("0%"),
                 opacity: String::from(""),
             },
-            AlertChangingStyleState::Removed => AlertChangingStyle {
+            AlertChangingStyleState::Closed => AlertChangingStyle {
                 should_render: false,
                 height: String::from("0px"),
                 opacity: String::from("0.5"),
@@ -94,6 +94,8 @@ pub struct AlertChangingStyle {
 pub fn alert(props: &AlertProps) -> Html {
     let closing = use_state(|| false);
     let closed = use_state(|| false);
+    let style = use_state(|| String::from(""));
+    let cloned_style = style.clone();
     let alert_changing_style = use_state(|| AlertChangingStyleState::Opened);
     let alert_changing_style_second_clone = alert_changing_style.clone();
     let handle_close = {
@@ -101,16 +103,18 @@ pub fn alert(props: &AlertProps) -> Html {
         let after_close_clone = props.after_close.clone();
         let closing_handle_close_clone = closing.clone();
         let closed_handle_close_clone = closed.clone();
+        let style_clone = style.clone();
         Callback::<MouseEvent>::from(move |e: MouseEvent| {
             let alert_changing_style_cloned = alert_changing_style.clone();
             e.prevent_default();
+
             // // const dom = ReactDOM.findDOMNode(this) as HTMLElement;
             // // dom.style.height = "${dom.offsetHeight}px";
             // style_clone.set(String::from("${dom.offsetHeight}px"));
             // // Magic code
             // // 重复一次后才能正确设置 height
             // // dom.style.height = `${dom.offsetHeight}px`;
-            // style_clone.set(String::from("${dom.offsetHeight}px"));
+            style_clone.set(String::from("${dom.offsetHeight}px"));
             closing_handle_close_clone.set(true);
             if let Some(on_close) = on_close_clone.clone() {
                 on_close.emit(());
@@ -130,7 +134,7 @@ pub fn alert(props: &AlertProps) -> Html {
                     after_close.emit(());
                 };
                 let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
-                alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Removed);
+                alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
             })
             .forget();
         })
@@ -218,12 +222,12 @@ pub fn alert(props: &AlertProps) -> Html {
             }
         }
     };
-    let style_clone = alert_changing_style_second_clone.get_style(); //&*style
     let should_render = alert_changing_style_second_clone.get_value().should_render;
+    let style_handle = &*cloned_style;
     html! {
       <>
       if should_render {
-        <div data-show="true" class={class} >//style={style_clone.clone()}
+        <div data-show="true" class={class} style={style_handle.clone()}>
         {icon}
         <span class="ant-alert-message">
           {message}
