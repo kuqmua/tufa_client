@@ -31,7 +31,7 @@ impl AlertType {
 
 #[derive(Properties, PartialEq)]
 pub struct AlertProps {
-    pub after_close: Option<Callback<MouseEvent>>,
+    pub after_close: Option<Callback<()>>,
     pub banner: Option<()>,
     pub closable: Option<()>,
     pub close_text: Option<String>,  //Html
@@ -48,9 +48,10 @@ pub fn alert(props: &AlertProps) -> Html {
     let closing = use_state(|| false);
     let closed = use_state(|| false);
     let style = use_state(|| String::from(""));
-    let closing_handle_close_clone = closing.clone();
+   
     let handle_close = {
         let on_close_clone = props.on_close.clone();
+        let closing_handle_close_clone = closing.clone();
         let style_clone = style.clone();
         Callback::<MouseEvent>::from(move |e: MouseEvent| {
             e.prevent_default();
@@ -67,16 +68,18 @@ pub fn alert(props: &AlertProps) -> Html {
             };
         })
     };
-    // let animation_end = {
-    //     let closing_animation_end_clone = closing.clone();
-    //     let closed_animation_end_clone = closed.clone();
-    //  = || {
-    //     closing_animation_end_clone.set(false);
-    //     closed_animation_end_clone.set(true);
-    //     // (this.props.afterClose || noop)();
-    //   }
-    // };
-    //
+    let animation_end = {
+        let after_close_clone = props.after_close.clone();
+        let closing_animation_end_clone = closing.clone();
+        let closed_animation_end_clone = closed.clone();
+        Callback::<MouseEvent>::from(move |_: MouseEvent| {
+          closing_animation_end_clone.set(false);
+          closed_animation_end_clone.set(true);
+          if let Some(after_close) = after_close_clone.clone() {
+            after_close.emit(());
+        };
+        })
+    };
     let message = match props.message.clone() {
         None => String::from(""),
         Some(msg) => msg,
