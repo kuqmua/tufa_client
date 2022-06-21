@@ -49,31 +49,33 @@ pub fn alert(props: &AlertProps) -> Html {
     let closed = use_state(|| false);
     let style = use_state(|| String::from(""));
     let closing_handle_close_clone = closing.clone();
-    let on_close_clone = props.on_close.clone();
-    let handle_close = Callback::<MouseEvent>::from(move |e: MouseEvent| {
-        e.prevent_default();
-        // const dom = ReactDOM.findDOMNode(this) as HTMLElement;
-        // dom.style.height = "${dom.offsetHeight}px";
-        // Magic code
-        // 重复一次后才能正确设置 height
-        // dom.style.height = `${dom.offsetHeight}px`;
-        closing_handle_close_clone.set(true);
-        // if let Some(function) = on_close_clone {
-        //     // function();
-        // }
-        // match props.on_close.clone() {
-        //     None => Callback::<MouseEvent>::from(move |_| {}),
-        //     Some(_) => Callback::<MouseEvent>::from(move |_| {}),
-        // };
-        // (this.props.onClose || noop)(e);
-    });
-    let closing_animation_end_clone = closing.clone();
-    let closed_animation_end_clone = closed.clone();
-    let animation_end = || {
-        closing_animation_end_clone.set(false);
-        closed_animation_end_clone.set(true);
-        // (this.props.afterClose || noop)();
-      };
+    let handle_close = {
+        let on_close_clone = props.on_close.clone();
+        let style_clone = style.clone();
+        Callback::<MouseEvent>::from(move |e: MouseEvent| {
+            e.prevent_default();
+            // const dom = ReactDOM.findDOMNode(this) as HTMLElement;
+            // dom.style.height = "${dom.offsetHeight}px";
+            style_clone.set(String::from("${dom.offsetHeight}px"));
+            // Magic code
+            // 重复一次后才能正确设置 height
+            // dom.style.height = `${dom.offsetHeight}px`;
+            style_clone.set(String::from("${dom.offsetHeight}px"));
+            closing_handle_close_clone.set(true);
+            if let Some(on_close) = on_close_clone.clone() {
+                on_close.emit(());
+            };
+        })
+    };
+    // let animation_end = {
+    //     let closing_animation_end_clone = closing.clone();
+    //     let closed_animation_end_clone = closed.clone();
+    //  = || {
+    //     closing_animation_end_clone.set(false);
+    //     closed_animation_end_clone.set(true);
+    //     // (this.props.afterClose || noop)();
+    //   }
+    // };
     //
     let message = match props.message.clone() {
         None => String::from(""),
@@ -115,13 +117,13 @@ pub fn alert(props: &AlertProps) -> Html {
                     html! {<Close fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))}/>};
                 let icon_inner_html = html! {<Icon inner_html={close} additional_class={String::from("anticon-close")} />};
                 html! {
-                  <button type="button" class="ant-alert-close-icon" tabindex="0">// onclick={on_close}
+                  <button onclick={handle_close} type="button" class="ant-alert-close-icon" tabindex="0">// onclick={on_close}
                     {icon_inner_html}
                   </button>
                 }
             }
             Some(text) => html! {
-                <button type="button" class="ant-alert-close-icon" tabindex="0">// onclick={on_close}
+                <button onclick={handle_close} type="button" class="ant-alert-close-icon" tabindex="0">// onclick={on_close}
                   <span class="ant-alert-close-text">{text}</span></button>
             },
         },
@@ -157,9 +159,9 @@ pub fn alert(props: &AlertProps) -> Html {
             }
         }
     };
-    let on_close_clone = &*style;
+    let style_clone = &*style;
     html! {
-      <div data-show="true" class={class} style={on_close_clone.clone()}>
+      <div data-show="true" class={class} style={style_clone.clone()}>
         {icon}
         <span class="ant-alert-message">
           {message}

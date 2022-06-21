@@ -42,6 +42,7 @@ use crate::helpers::rotate::Rotate;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
+use gloo::console::log;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -192,6 +193,9 @@ pub fn home() -> Html {
         closable={Some(())}
         close_text={String::from("close text")}
         show_icon={Some(())}
+        on_close={Callback::from(|_|{
+          log!("onclose");
+        })}
       />
       </div>
     };
