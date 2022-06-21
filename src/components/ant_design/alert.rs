@@ -116,18 +116,18 @@ pub fn alert(props: &AlertProps) -> Html {
                 on_close.emit(());
             };
             alert_changing_style_cloned.set(AlertChangingStyleState::Closing );
-            // let closing_handle_close_clone_clone = closing_handle_close_clone.clone();
-            // let closed_handle_close_clone_clone = closed_handle_close_clone.clone();
+            let closing_handle_close_clone_clone = closing_handle_close_clone.clone();
+            let closed_handle_close_clone_clone = closed_handle_close_clone.clone();
             let after_close_clone_clone = after_close_clone.clone();
             gloo::timers::callback::Timeout::new(300, move || {//0.3second from antd.css
                 let after_close_clone_clone_clone = after_close_clone_clone.clone();
-                    // let closing_animation_end_clone = closing_handle_close_clone_clone.clone();
-                    // let closed_animation_end_clone = closed_handle_close_clone_clone.clone();
-                    // closing_animation_end_clone.set(false);
-                    // closed_animation_end_clone.set(true);
-                //     if let Some(after_close) = after_close_clone.clone() {
-                //       after_close.emit(());
-                //   };
+                    let closing_animation_end_clone = closing_handle_close_clone_clone.clone();
+                    let closed_animation_end_clone = closed_handle_close_clone_clone.clone();
+                    closing_animation_end_clone.set(false);
+                    closed_animation_end_clone.set(true);
+                    if let Some(after_close) = after_close_clone_clone_clone {
+                      after_close.emit(());
+                  };
                 let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
                 alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Removed);
             })
