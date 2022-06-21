@@ -43,6 +43,46 @@ pub struct AlertProps {
     pub on_close: Option<Callback<()>>,
 }
 
+#[derive(Debug, PartialEq, Clone)]
+pub enum AlertChangingStyleState {
+    Opened,
+    FadeAway,
+    Removed,
+}
+
+impl AlertChangingStyleState {
+    pub fn get_value(&self, translate_sign: String) -> AlertChangingStyle {
+        match *self {
+            AlertChangingStyleState::Opened => AlertChangingStyle {
+                display: String::from("none"),
+                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                opacity: String::from(""),
+            },
+            AlertChangingStyleState::FadeAway => AlertChangingStyle {
+                display: String::from("block"),
+                transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
+                opacity: String::from(""),
+            },
+            AlertChangingStyleState::Removed => AlertChangingStyle {
+                display: String::from("block"),
+                transform: String::from("translate3d(0, 0, 0)"),
+                webkit_transform: String::from("translate3d(0, 0, 0)"),
+                opacity: String::from("0.5"),
+            },
+        }
+    }
+}
+
+#[derive(Debug, PartialEq)]
+pub struct AlertChangingStyle {
+    pub display: String,
+    pub transform: String,
+    pub webkit_transform: String,
+    pub opacity: String,
+}
+
 #[function_component(Alert)]
 pub fn alert(props: &AlertProps) -> Html {
     let closing = use_state(|| false);
