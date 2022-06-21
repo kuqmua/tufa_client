@@ -1,6 +1,6 @@
 #[derive(Debug, PartialEq, Clone)]
 pub struct Rotate {
-    degrees: u16
+    degrees: u16,
 }
 
 impl Rotate {
@@ -9,7 +9,7 @@ impl Rotate {
             return Err(possible_degrees);
         }
         Ok(Self {
-            degrees: possible_degrees
+            degrees: possible_degrees,
         })
     }
     pub fn change(mut self, possible_degrees: u16) -> Result<Self, Self> {

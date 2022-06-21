@@ -8,7 +8,7 @@ use crate::components::ant_design::svg::helpers::theme::Theme;
 use crate::components::ant_design::svg::info_circle::InfoCircle;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
-use yew::{function_component, html, Callback, Html, Properties, use_state};
+use yew::{function_component, html, use_state, Callback, Html, Properties};
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum AlertType {
@@ -115,19 +115,20 @@ pub fn alert(props: &AlertProps) -> Html {
             if let Some(on_close) = on_close_clone.clone() {
                 on_close.emit(());
             };
-            alert_changing_style_cloned.set(AlertChangingStyleState::Closing );
+            alert_changing_style_cloned.set(AlertChangingStyleState::Closing);
             let closing_handle_close_clone_clone = closing_handle_close_clone.clone();
             let closed_handle_close_clone_clone = closed_handle_close_clone.clone();
             let after_close_clone_clone = after_close_clone.clone();
-            gloo::timers::callback::Timeout::new(300, move || {//0.3second from antd.css
+            gloo::timers::callback::Timeout::new(300, move || {
+                //0.3second from antd.css
                 let after_close_clone_clone_clone = after_close_clone_clone.clone();
-                    let closing_animation_end_clone = closing_handle_close_clone_clone.clone();
-                    let closed_animation_end_clone = closed_handle_close_clone_clone.clone();
-                    closing_animation_end_clone.set(false);
-                    closed_animation_end_clone.set(true);
-                    if let Some(after_close) = after_close_clone_clone_clone {
-                      after_close.emit(());
-                  };
+                let closing_animation_end_clone = closing_handle_close_clone_clone.clone();
+                let closed_animation_end_clone = closed_handle_close_clone_clone.clone();
+                closing_animation_end_clone.set(false);
+                closed_animation_end_clone.set(true);
+                if let Some(after_close) = after_close_clone_clone_clone {
+                    after_close.emit(());
+                };
                 let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
                 alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Removed);
             })
@@ -217,7 +218,7 @@ pub fn alert(props: &AlertProps) -> Html {
             }
         }
     };
-    let style_clone = alert_changing_style_second_clone.get_style();//&*style
+    let style_clone = alert_changing_style_second_clone.get_style(); //&*style
     let should_render = alert_changing_style_second_clone.get_value().should_render;
     html! {
       <>

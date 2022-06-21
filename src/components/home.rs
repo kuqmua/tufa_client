@@ -40,9 +40,9 @@ use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 use crate::helpers::rotate::Rotate;
 use colorsys::Hsl;
+use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use gloo::console::log;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
