@@ -31,7 +31,7 @@ impl AlertType {
 
 #[derive(Properties, PartialEq)]
 pub struct AlertProps {
-    pub after_close: Option<Callback<()>>,
+    // pub after_close: Option<Callback<()>>,//animation not done yet, todo
     pub banner: Option<()>,
     pub closable: Option<()>,
     pub close_text: Option<String>,  //Html
@@ -92,51 +92,39 @@ pub struct AlertChangingStyle {
 
 #[function_component(Alert)]
 pub fn alert(props: &AlertProps) -> Html {
-    let closing = use_state(|| false);
-    let closed = use_state(|| false);
-    let style = use_state(|| String::from(""));
-    let cloned_style = style.clone();
+    // let style = use_state(|| String::from(""));
+    // let cloned_style = style.clone();
     let alert_changing_style = use_state(|| AlertChangingStyleState::Opened);
     let alert_changing_style_second_clone = alert_changing_style.clone();
     let handle_close = {
         let on_close_clone = props.on_close.clone();
-        let after_close_clone = props.after_close.clone();
-        let closing_handle_close_clone = closing.clone();
-        let closed_handle_close_clone = closed.clone();
-        let style_clone = style.clone();
+        // let after_close_clone = props.after_close.clone();
+        // let style_clone = style.clone();
         Callback::<MouseEvent>::from(move |e: MouseEvent| {
             let alert_changing_style_cloned = alert_changing_style.clone();
             e.prevent_default();
-
             // // const dom = ReactDOM.findDOMNode(this) as HTMLElement;
             // // dom.style.height = "${dom.offsetHeight}px";
             // style_clone.set(String::from("${dom.offsetHeight}px"));
             // // Magic code
             // // 重复一次后才能正确设置 height
             // // dom.style.height = `${dom.offsetHeight}px`;
-            style_clone.set(String::from("${dom.offsetHeight}px"));
-            closing_handle_close_clone.set(true);
+            // style_clone.set(String::from("${dom.offsetHeight}px"));
             if let Some(on_close) = on_close_clone.clone() {
                 on_close.emit(());
             };
-            alert_changing_style_cloned.set(AlertChangingStyleState::Closing);
-            let closing_handle_close_clone_clone = closing_handle_close_clone.clone();
-            let closed_handle_close_clone_clone = closed_handle_close_clone.clone();
-            let after_close_clone_clone = after_close_clone.clone();
-            gloo::timers::callback::Timeout::new(300, move || {
-                //0.3second from antd.css
-                let after_close_clone_clone_clone = after_close_clone_clone.clone();
-                let closing_animation_end_clone = closing_handle_close_clone_clone.clone();
-                let closed_animation_end_clone = closed_handle_close_clone_clone.clone();
-                closing_animation_end_clone.set(false);
-                closed_animation_end_clone.set(true);
-                if let Some(after_close) = after_close_clone_clone_clone {
-                    after_close.emit(());
-                };
-                let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
-                alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
-            })
-            .forget();
+            alert_changing_style_cloned.set(AlertChangingStyleState::Closed);//AlertChangingStyleState::Closing
+            // let after_close_clone_clone = after_close_clone.clone();
+            // gloo::timers::callback::Timeout::new(300, move || {
+            //     //0.3second from antd.css
+            //     // let after_close_clone_clone_clone = after_close_clone_clone.clone();
+            //     // if let Some(after_close) = after_close_clone_clone_clone {
+            //     //     after_close.emit(());
+            //     // };
+            //     let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
+            //     alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
+            // })
+            // .forget();
         })
     };
     let message = match props.message.clone() {
@@ -160,11 +148,11 @@ pub fn alert(props: &AlertProps) -> Html {
         Some(_) => String::from(""),
     };
     let class = format!(
-        "ant-alert {} {} {} {}",
+        "ant-alert {} {} {}",// {}
         type_handle.get_class(),
         description_class,
         show_icon_class,
-        alert_changing_style_second_clone.get_class(),
+        // alert_changing_style_second_clone.get_class(),
     );
     let close_button = match props.closable {
         None => match props.close_text.clone() {
@@ -223,21 +211,21 @@ pub fn alert(props: &AlertProps) -> Html {
         }
     };
     let should_render = alert_changing_style_second_clone.get_value().should_render;
-    let style_handle = &*cloned_style;
+    // let style_handle = &*cloned_style;
     html! {
       <>
-      if should_render {
-        <div data-show="true" class={class} style={style_handle.clone()}>
-        {icon}
-        <span class="ant-alert-message">
-          {message}
-        </span>
-        <span class="ant-alert-description">
-          {description}
-        </span>
-        {close_button}
-        </div>
-      }
+        if should_render {
+          <div data-show="true" class={class}>// style={style_handle.clone()}
+            {icon}
+            <span class="ant-alert-message">
+              {message}
+            </span>
+            <span class="ant-alert-description">
+              {description}
+            </span>
+              {close_button}
+          </div>
+        }
       </>
     }
 }
