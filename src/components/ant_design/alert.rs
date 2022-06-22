@@ -113,18 +113,18 @@ pub fn alert(props: &AlertProps) -> Html {
             if let Some(on_close) = on_close_clone.clone() {
                 on_close.emit(());
             };
-            alert_changing_style_cloned.set(AlertChangingStyleState::Closed);//AlertChangingStyleState::Closing
-            // let after_close_clone_clone = after_close_clone.clone();
-            // gloo::timers::callback::Timeout::new(300, move || {
-            //     //0.3second from antd.css
-            //     // let after_close_clone_clone_clone = after_close_clone_clone.clone();
-            //     // if let Some(after_close) = after_close_clone_clone_clone {
-            //     //     after_close.emit(());
-            //     // };
-            //     let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
-            //     alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
-            // })
-            // .forget();
+            alert_changing_style_cloned.set(AlertChangingStyleState::Closed); //AlertChangingStyleState::Closing
+                                                                              // let after_close_clone_clone = after_close_clone.clone();
+                                                                              // gloo::timers::callback::Timeout::new(300, move || {
+                                                                              //     //0.3second from antd.css
+                                                                              //     // let after_close_clone_clone_clone = after_close_clone_clone.clone();
+                                                                              //     // if let Some(after_close) = after_close_clone_clone_clone {
+                                                                              //     //     after_close.emit(());
+                                                                              //     // };
+                                                                              //     let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
+                                                                              //     alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
+                                                                              // })
+                                                                              // .forget();
         })
     };
     let message = match props.message.clone() {
@@ -148,7 +148,7 @@ pub fn alert(props: &AlertProps) -> Html {
         Some(_) => String::from(""),
     };
     let class = format!(
-        "ant-alert {} {} {}",// {}
+        "ant-alert {} {} {}", // {}
         type_handle.get_class(),
         description_class,
         show_icon_class,

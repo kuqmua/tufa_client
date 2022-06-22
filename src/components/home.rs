@@ -1,7 +1,7 @@
+use crate::components::ant_design::avatar::Avatar;
 use crate::components::ant_design::button::LoadingProp;
 use crate::components::ant_design::button::Shape;
 use crate::components::ant_design::button::Size;
-use crate::components::ant_design::avatar::Avatar;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 // use crate::components::alert::Alert;
 use crate::components::ant_design::alert::Alert;

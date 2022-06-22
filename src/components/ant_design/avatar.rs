@@ -2,7 +2,7 @@ use yew::{function_component, html, Callback, Html, Properties};
 
 #[derive(Debug, PartialEq)]
 pub enum AvatarShape {
-    Circle, 
+    Circle,
     Square,
 }
 
@@ -16,18 +16,18 @@ pub enum AvatarSizeType {
 #[derive(Debug, PartialEq, Clone)]
 pub enum AvatarSize {
     Number(u16),
-    Type(AvatarSizeType)
+    Type(AvatarSizeType),
 }
 
 #[derive(Properties, PartialEq)]
 pub struct AvatarProps {
-    pub icon: Option<Html>,	
+    pub icon: Option<Html>,
     pub shape: Option<AvatarShape>,
     pub size: Option<AvatarSize>,
     pub src: Option<String>,
     // pub src_set	a list of sources to use for different screen resolutions	string	-	3.11.0 //no examples for it yet in antd docs
     pub alt: Option<String>,
-    pub on_error: Option<Callback<()>>
+    pub on_error: Option<Callback<()>>,
 }
 
 #[function_component(Avatar)]
@@ -38,30 +38,33 @@ pub fn avatar(props: &AvatarProps) -> Html {
         None => {
             size_style = String::from("");
             size_class = String::from("");
-        },
+        }
         Some(size_type) => match size_type {
-          AvatarSize::Number(size) => {
-            size_style = format!("width: {}px; height: {}px; line-height: {}px; font-size: 18px;", size, size, size);
-            size_class = String::from("");
-          },
-          AvatarSize::Type(size_type) => match size_type {
-    AvatarSizeType::Large => {
-        size_style = String::from("");
-        size_class = String::from("ant-avatar-lg");
-    },
-    AvatarSizeType::Small => {
-        size_style = String::from("");
-        size_class = String::from("ant-avatar-sm");
-    },
-    AvatarSizeType::Default => {
-        size_style = String::from("");
-        size_class = String::from("");
-    },
-},
+            AvatarSize::Number(size) => {
+                size_style = format!(
+                    "width: {}px; height: {}px; line-height: {}px; font-size: 18px;",
+                    size, size, size
+                );
+                size_class = String::from("");
+            }
+            AvatarSize::Type(size_type) => match size_type {
+                AvatarSizeType::Large => {
+                    size_style = String::from("");
+                    size_class = String::from("ant-avatar-lg");
+                }
+                AvatarSizeType::Small => {
+                    size_style = String::from("");
+                    size_class = String::from("ant-avatar-sm");
+                }
+                AvatarSizeType::Default => {
+                    size_style = String::from("");
+                    size_class = String::from("");
+                }
+            },
         },
     };
     let style = format!("{}", size_style);
-    let class =  format!("ant-avatar ant-avatar-circle {}", size_class);
+    let class = format!("ant-avatar ant-avatar-circle {}", size_class);
     html! {
         <span class={class} style={style}>
           <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
@@ -69,4 +72,3 @@ pub fn avatar(props: &AvatarProps) -> Html {
         </span>
     }
 }
-
