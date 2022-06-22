@@ -1,6 +1,7 @@
-use super::ant_design::button::LoadingProp;
-use super::ant_design::button::Shape;
-use super::ant_design::button::Size;
+use crate::components::ant_design::button::LoadingProp;
+use crate::components::ant_design::button::Shape;
+use crate::components::ant_design::button::Size;
+use crate::components::ant_design::avatar::Avatar;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 // use crate::components::alert::Alert;
 use crate::components::ant_design::alert::Alert;
@@ -197,6 +198,7 @@ pub fn home() -> Html {
           log!("onclose");
         })}
       />
+      <Avatar/>
       </div>
     };
     let inner_html_right = html! {};

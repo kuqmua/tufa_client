@@ -31,7 +31,7 @@ pub enum AvatarShape {
 
 #[derive(Properties, PartialEq)]
 pub struct AvatarProps {
-    pub icon: Html,	
+    pub icon: Option<Html>,	
     pub shape: Option<AvatarShape>,
     pub size: Option<AvatarSize>,
     pub src: Option<String>,
