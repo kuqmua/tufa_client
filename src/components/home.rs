@@ -45,6 +45,8 @@ use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
+use super::ant_design::avatar::AvatarSize;
+
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
     Closed,
@@ -198,7 +200,9 @@ pub fn home() -> Html {
           log!("onclose");
         })}
       />
-      <Avatar/>
+      <Avatar
+        size={AvatarSize::Number(80)}
+      />
       </div>
     };
     let inner_html_right = html! {};

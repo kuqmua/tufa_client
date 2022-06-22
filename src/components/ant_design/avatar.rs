@@ -1,32 +1,22 @@
-use crate::components::ant_design::icon::Icon;
-use crate::components::ant_design::svg::check_circle::CheckCircle;
-use crate::components::ant_design::svg::close::Close;
-use crate::components::ant_design::svg::close_circle::CloseCircle;
-use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
-use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-use crate::components::ant_design::svg::helpers::theme::Theme;
-use crate::components::ant_design::svg::info_circle::InfoCircle;
-use colorsys::Hsl;
-use web_sys::MouseEvent;
-use yew::{function_component, html, use_state, Callback, Html, Properties};
+use yew::{function_component, html, Callback, Html, Properties};
 
 #[derive(Debug, PartialEq)]
+pub enum AvatarShape {
+    Circle, 
+    Square,
+}
+
+#[derive(Debug, PartialEq, Clone)]
 pub enum AvatarSizeType {
     Large,
     Small,
     Default,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum AvatarSize {
     Number(u16),
     Type(AvatarSizeType)
-}
-
-#[derive(Debug, PartialEq)]
-pub enum AvatarShape {
-    Circle, 
-    Square,
 }
 
 #[derive(Properties, PartialEq)]
@@ -42,8 +32,16 @@ pub struct AvatarProps {
 
 #[function_component(Avatar)]
 pub fn avatar(props: &AvatarProps) -> Html {
+    let size = match props.size.clone() {
+        None => String::from(""),
+        Some(size_type) => match size_type {
+          AvatarSize::Number(size) => format!("width: {}px; height: {}px; line-height: {}px; font-size: 18px;", size, size, size),
+          AvatarSize::Type(_) => todo!(),
+        },
+    };
+    let style = format!("{}", size);
     html! {
-        <span class="ant-avatar ant-avatar-circle">
+        <span class="ant-avatar ant-avatar-circle" style={style}>
           <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
           </span>
         </span>
