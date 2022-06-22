@@ -12,3 +12,8 @@ like make http, save icons, open them, rewrite and make component around it insi
 * pack trunk + rust into dockerimage </br>
 https://www.youtube.com/watch?v=uYhLWN86V48&t=142s </br>
 * antd alert animation not done yet
+* use web-sys = { version = "0.3.4", features = ["console"] } </br>
+web_sys::console::log() </br>
+let msg = format!("roots: {:?}\nroots colors: {:?}", roots_serialized, roots_colors_serialized); </br>
+web_console::log_1(&msg.into()); </br>
+instead of gloo console log </br>
