@@ -11,3 +11,4 @@ like make http, save icons, open them, rewrite and make component around it insi
 * same drawer overlay closing function with expander component
 * pack trunk + rust into dockerimage </br>
 https://www.youtube.com/watch?v=uYhLWN86V48&t=142s </br>
+* antd alert animation not done yet
