@@ -46,6 +46,7 @@ use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
 use super::ant_design::avatar::AvatarSize;
+use super::ant_design::avatar::AvatarSizeType;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -201,7 +202,7 @@ pub fn home() -> Html {
         })}
       />
       <Avatar
-        size={AvatarSize::Number(80)}
+        size={AvatarSize::Type(AvatarSizeType::Small)}
       />
       </div>
     };

@@ -32,16 +32,38 @@ pub struct AvatarProps {
 
 #[function_component(Avatar)]
 pub fn avatar(props: &AvatarProps) -> Html {
-    let size = match props.size.clone() {
-        None => String::from(""),
+    let size_style: String;
+    let size_class: String;
+    match props.size.clone() {
+        None => {
+            size_style = String::from("");
+            size_class = String::from("");
+        },
         Some(size_type) => match size_type {
-          AvatarSize::Number(size) => format!("width: {}px; height: {}px; line-height: {}px; font-size: 18px;", size, size, size),
-          AvatarSize::Type(_) => todo!(),
+          AvatarSize::Number(size) => {
+            size_style = format!("width: {}px; height: {}px; line-height: {}px; font-size: 18px;", size, size, size);
+            size_class = String::from("");
+          },
+          AvatarSize::Type(size_type) => match size_type {
+    AvatarSizeType::Large => {
+        size_style = String::from("");
+        size_class = String::from("ant-avatar-lg");
+    },
+    AvatarSizeType::Small => {
+        size_style = String::from("");
+        size_class = String::from("ant-avatar-sm");
+    },
+    AvatarSizeType::Default => {
+        size_style = String::from("");
+        size_class = String::from("");
+    },
+},
         },
     };
-    let style = format!("{}", size);
+    let style = format!("{}", size_style);
+    let class =  format!("ant-avatar ant-avatar-circle {}", size_class);
     html! {
-        <span class="ant-avatar ant-avatar-circle" style={style}>
+        <span class={class} style={style}>
           <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
           </span>
         </span>
