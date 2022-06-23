@@ -1,4 +1,5 @@
 use yew::{function_component, html, Callback, Html, Properties};
+use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum AvatarShape {
@@ -21,7 +22,7 @@ pub enum AvatarSize {
 
 #[derive(Properties, PartialEq)]
 pub struct AvatarProps {
-    pub icon: Option<Html>,
+    pub icon: Option<SvgType>,
     pub shape: Option<AvatarShape>,
     pub size: Option<AvatarSize>,
     pub src: Option<String>,
@@ -70,8 +71,12 @@ pub fn avatar(props: &AvatarProps) -> Html {
           AvatarShape::Square => String::from("ant-avatar-square"),
         },
     };
+    let icon_class = match props.icon.clone() {
+        None => String::from(""),
+        Some(_) => String::from("ant-avatar-icon"),
+    };
     let style = format!("{}", size_style);
-    let class = format!("ant-avatar {} {}", shape_class, size_class);
+    let class = format!("ant-avatar {} {} {}", shape_class, size_class, icon_class);
     html! {
         <span class={class} style={style}>
           <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
