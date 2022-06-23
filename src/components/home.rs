@@ -48,6 +48,7 @@ use yew::{function_component, html, use_state, Callback};
 use super::ant_design::avatar::AvatarShape;
 use super::ant_design::avatar::AvatarSize;
 use super::ant_design::avatar::AvatarSizeType;
+use super::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -205,6 +206,7 @@ pub fn home() -> Html {
       <Avatar
         size={AvatarSize::Type(AvatarSizeType::Small)}
         shape={AvatarShape::Square}
+        icon={SvgType::Twitter}
       />
       </div>
     };
