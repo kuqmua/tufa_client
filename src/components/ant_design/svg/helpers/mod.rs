@@ -4,3 +4,4 @@ pub mod svg_props;
 pub mod svg_wrapper;
 pub mod svg_wrapper_props;
 pub mod theme;
+pub mod svg_type;
