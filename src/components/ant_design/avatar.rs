@@ -1,4 +1,4 @@
-use yew::{function_component, html, Callback, Html, Properties};
+use yew::{function_component, html, Callback, Properties};
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq, Clone)]
@@ -80,10 +80,13 @@ pub fn avatar(props: &AvatarProps) -> Html {
             <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
             </span>
         },
-        Some(svg_type) => html!{
-            <i aria-label="icon: user" class="anticon anticon-user">
-              {svg_type.get_html(None, None, None, None, None, None)}
-              </i>
+        Some(svg_type) => {
+            let class = format!("anticon {}", svg_type.get_class());
+            html!{
+                <i aria-label="icon: user" class={class}>
+                  {svg_type.get_html(None, None, None, None, None, None)}
+                  </i>
+            }
         },
     };
     let style = format!("{}", size_style);
