@@ -1,6 +1,6 @@
 use yew::{function_component, html, Callback, Html, Properties};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum AvatarShape {
     Circle,
     Square,
@@ -63,8 +63,15 @@ pub fn avatar(props: &AvatarProps) -> Html {
             },
         },
     };
+    let shape_class = match props.shape.clone() {
+        None => String::from("ant-avatar-circle"),
+        Some(shape_type) => match shape_type {
+          AvatarShape::Circle => String::from("ant-avatar-circle"),
+          AvatarShape::Square => String::from("ant-avatar-square"),
+        },
+    };
     let style = format!("{}", size_style);
-    let class = format!("ant-avatar ant-avatar-circle {}", size_class);
+    let class = format!("ant-avatar {} {}", shape_class, size_class);
     html! {
         <span class={class} style={style}>
           <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">

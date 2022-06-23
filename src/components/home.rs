@@ -45,6 +45,7 @@ use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 
+use super::ant_design::avatar::AvatarShape;
 use super::ant_design::avatar::AvatarSize;
 use super::ant_design::avatar::AvatarSizeType;
 
@@ -203,6 +204,7 @@ pub fn home() -> Html {
       />
       <Avatar
         size={AvatarSize::Type(AvatarSizeType::Small)}
+        shape={AvatarShape::Square}
       />
       </div>
     };
