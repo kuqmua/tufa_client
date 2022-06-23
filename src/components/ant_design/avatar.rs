@@ -89,6 +89,10 @@ pub fn avatar(props: &AvatarProps) -> Html {
             }
         },
     };
+    let src_class = match props.src.clone() {
+        None => String::from(""),
+        Some(_) => String::from("ant-avatar-image"),
+    };
     let style = format!("{}", size_style);
     let class = format!("ant-avatar {} {} {}", shape_class, size_class, icon_class);
     html! {
