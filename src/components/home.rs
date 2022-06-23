@@ -204,7 +204,7 @@ pub fn home() -> Html {
         })}
       />
       <Avatar
-        size={AvatarSize::Type(AvatarSizeType::Small)}
+        size={AvatarSize::Type(AvatarSizeType::Large)}
         shape={AvatarShape::Square}
         icon={SvgType::Twitter}
       />
