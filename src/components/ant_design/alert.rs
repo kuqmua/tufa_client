@@ -1,5 +1,5 @@
 use crate::components::ant_design::icon::Icon;
-use crate::components::ant_design::svg::check_circle::CheckCircle;
+// use crate::components::ant_design::svg::check_circle::CheckCircle;
 use crate::components::ant_design::svg::close::Close;
 use crate::components::ant_design::svg::close_circle::CloseCircle;
 use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
@@ -9,6 +9,7 @@ use crate::components::ant_design::svg::info_circle::InfoCircle;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback, Html, Properties};
+use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum AlertType {
@@ -36,7 +37,7 @@ pub struct AlertProps {
     pub closable: Option<()>,
     pub close_text: Option<String>,  //Html
     pub description: Option<String>, //Html
-    pub icon: Option<Html>,
+    pub icon: Option<SvgType>,
     pub message: Option<String>,
     pub show_icon: Option<()>,
     pub type_handle: Option<AlertType>,
@@ -113,18 +114,19 @@ pub fn alert(props: &AlertProps) -> Html {
             if let Some(on_close) = on_close_clone.clone() {
                 on_close.emit(());
             };
-            alert_changing_style_cloned.set(AlertChangingStyleState::Closed); //AlertChangingStyleState::Closing
-                                                                              // let after_close_clone_clone = after_close_clone.clone();
-                                                                              // gloo::timers::callback::Timeout::new(300, move || {
-                                                                              //     //0.3second from antd.css
-                                                                              //     // let after_close_clone_clone_clone = after_close_clone_clone.clone();
-                                                                              //     // if let Some(after_close) = after_close_clone_clone_clone {
-                                                                              //     //     after_close.emit(());
-                                                                              //     // };
-                                                                              //     let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
-                                                                              //     alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
-                                                                              // })
-                                                                              // .forget();
+            alert_changing_style_cloned.set(AlertChangingStyleState::Closed); 
+            //AlertChangingStyleState::Closing
+            // let after_close_clone_clone = after_close_clone.clone();
+            // gloo::timers::callback::Timeout::new(300, move || {
+            //     //0.3second from antd.css
+            //     // let after_close_clone_clone_clone = after_close_clone_clone.clone();
+            //     // if let Some(after_close) = after_close_clone_clone_clone {
+            //     //     after_close.emit(());
+            //     // };
+            //     let alert_changing_style_cloned_cloned = alert_changing_style_cloned.clone();
+            //     alert_changing_style_cloned_cloned.set(AlertChangingStyleState::Closed);
+            // })
+            // .forget();
         })
     };
     let message = match props.message.clone() {
@@ -188,8 +190,9 @@ pub fn alert(props: &AlertProps) -> Html {
             };
             match type_handle {
                 AlertType::Success => {
+                    let svg_type = SvgType::CheckCircle;
                     let check_circle =
-                        html! {<CheckCircle fill={FillWith::CurrentColor} theme={theme}/>};
+                        html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
                     html! {<Icon inner_html={check_circle} additional_class={String::from("anticon-check-circle ant-alert-icon")}/>}
                 }
                 AlertType::Info => {
