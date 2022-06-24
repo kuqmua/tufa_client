@@ -20,11 +20,11 @@ pub enum AvatarSize {
     Type(AvatarSizeType),
 }
 
-// #[derive(Debug, PartialEq, Clone)]
-// pub enum AvatarContent {
-//     Icon(SvgType),
-//     Image(String),
-// }
+#[derive(Debug, PartialEq, Clone)]
+pub enum AvatarContent {
+    Icon(SvgType),
+    Image(AvatarImage),
+}
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct AvatarImage {
@@ -34,10 +34,12 @@ pub struct AvatarImage {
 
 #[derive(Properties, PartialEq)]
 pub struct AvatarProps {
-    pub icon: Option<SvgType>,
+    // pub icon: Option<SvgType>,
+    // pub image: Option<AvatarImage>,
+    pub content: Option<AvatarContent>,
     pub shape: Option<AvatarShape>,
     pub size: Option<AvatarSize>,
-    pub image: Option<AvatarImage>,
+    
     // pub src: Option<String>,
     // pub src_set	a list of sources to use for different screen resolutions	string	-	3.11.0 //no examples for it yet in antd docs
     // pub alt: Option<String>,
@@ -84,35 +86,38 @@ pub fn avatar(props: &AvatarProps) -> Html {
           AvatarShape::Square => String::from("ant-avatar-square"),
         },
     };
-    let icon_class = match props.icon.clone() {
+    let content_class = match props.content.clone() {
         None => String::from(""),
-        Some(_) => String::from("ant-avatar-icon"),
-    };
-    let inner_content = match props.image.clone() {
-        None => match props.icon.clone() {
-            None => html!{
-                <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
-                </span>
-            },
-            Some(svg_type) => {
-                let class = format!("anticon {}", svg_type.get_class());
-                html!{
-                    <i aria-label="icon: user" class={class}>
-                      {svg_type.get_html(None, None, None, None, None, None)}
-                      </i>
-                }
-            },
-        },
-        Some(avatar_image) => html!{
-            <img src={avatar_image.src} alt={avatar_image.alt}/>
+        Some(avatar_content) => match avatar_content {
+           AvatarContent::Icon(_) => String::from("ant-avatar-icon"),
+           AvatarContent::Image(_) => String::from("ant-avatar-image"),
         },
     };
-    let image_class = match props.image.clone() {
-        None => String::from(""),
-        Some(_) => String::from("ant-avatar-image"),
-    };
+    let inner_content = match props.content.clone() {
+    Some(content_type) => match content_type {
+    AvatarContent::Icon(svg_type) => {
+        let class = format!("anticon {}", svg_type.get_class());
+        html!{
+            <i aria-label="icon: user" class={class}>
+              {svg_type.get_html(None, None, None, None, None, None)}
+              </i>
+        }
+    },
+    AvatarContent::Image(avatar_image) => html!{
+        <img src={avatar_image.src} alt={avatar_image.alt}/>
+    },
+},
+    None => html!{
+        <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
+        </span>
+    },
+};
+    // let image_class = match props.image.clone() {
+    //     None => String::from(""),
+    //     Some(_) => String::from(""),
+    // };
     let style = format!("{}", size_style);
-    let class = format!("ant-avatar {} {} {} {}", shape_class, size_class, icon_class, image_class);
+    let class = format!("ant-avatar {} {} {}", shape_class, size_class, content_class);
     html! {
         <span class={class} style={style}>
           {inner_content}
