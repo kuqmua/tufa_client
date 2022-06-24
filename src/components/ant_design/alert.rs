@@ -1,5 +1,4 @@
 use crate::components::ant_design::icon::Icon;
-// use crate::components::ant_design::svg::check_circle::CheckCircle;
 use crate::components::ant_design::svg::close::Close;
 use crate::components::ant_design::svg::close_circle::CloseCircle;
 use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
@@ -8,7 +7,7 @@ use crate::components::ant_design::svg::helpers::theme::Theme;
 use crate::components::ant_design::svg::info_circle::InfoCircle;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
-use yew::{function_component, html, use_state, Callback, Html, Properties};
+use yew::{function_component, html, use_state, Callback, Properties};
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq, Clone)]

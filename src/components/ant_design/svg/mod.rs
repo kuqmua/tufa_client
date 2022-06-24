@@ -1,4 +1,4 @@
-pub mod check_circle;
+pub(in crate::components::ant_design::svg) mod check_circle;
 pub mod close;
 pub mod close_circle;
 pub mod cloud;
