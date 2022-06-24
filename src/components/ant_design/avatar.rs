@@ -1,4 +1,5 @@
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
+use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 
 #[derive(Debug, PartialEq, Clone)]
@@ -30,7 +31,7 @@ pub enum AvatarContent {
 pub struct AvatarImage {
     pub src: String,
     pub alt: String,
-    pub on_error: Option<Callback<()>>,
+    pub on_error: Option<Callback<yew::Event>>,
 }
 
 #[derive(Properties, PartialEq)]
@@ -109,7 +110,7 @@ pub fn avatar(props: &AvatarProps) -> Html {
                 }
             }
             AvatarContent::Image(avatar_image) => html! {
-                <img src={avatar_image.src} alt={avatar_image.alt}/>
+                <img src={avatar_image.src} alt={avatar_image.alt} onerror={avatar_image.on_error} />
             },
         },
     };

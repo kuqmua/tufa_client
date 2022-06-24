@@ -208,9 +208,9 @@ pub fn home() -> Html {
         size={AvatarSize::Type(AvatarSizeType::Large)}
         shape={AvatarShape::Square}
         content={AvatarContent::Image(AvatarImage{
-          src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
+          src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583cb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
           alt: String::from("avatar"),
-          on_error: Some(Callback::from(|_| {
+          on_error: Some(Callback::from(|_: yew::Event| {
             log!("on_error");
           }))
         })}
