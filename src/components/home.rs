@@ -12,12 +12,7 @@ use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::paragraph::Paragraph;
-use crate::components::ant_design::svg::down::Down;
-use crate::components::ant_design::svg::github::Github;
-use crate::components::ant_design::svg::heart::Heart;
 use crate::components::ant_design::svg::helpers::theme::Theme;
-use crate::components::ant_design::svg::loading::Loading;
-use crate::components::ant_design::svg::up::Up;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -147,16 +142,19 @@ pub fn home() -> Html {
     // <PureMaterialCheckbox/>
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
-    let loading = html! {<Loading spin={Some(())} />};
+    // let svg_type = ;
+    let loading = html! {{SvgType::Loading.get_html(None, None, None, Some(()), None, None)}};
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     // let rotate = Rotate::new(60).unwrap();
     let f = html! {
-    <Up
-      fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))}
-      // spin={Some(())}
-      // rotate={Some(rotate)}
-      theme={Theme::TwoTone}
-    />};
+    {SvgType::Up.get_html(None, None, Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))), None, None, Some(Theme::TwoTone))}
+    // <Up
+    //   fill={}
+    //   // spin={Some(())}
+    //   // rotate={Some(rotate)}
+    //   theme={Theme::TwoTone}
+    // />
+  };
     let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
       <div

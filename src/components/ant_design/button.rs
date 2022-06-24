@@ -1,6 +1,6 @@
 use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-use crate::components::ant_design::svg::loading::Loading;
+use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use crate::constants::WHITE_HSL;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
@@ -120,13 +120,7 @@ pub fn button(props: &ButtonProps) -> Html {
             Some(icon) => html! {{icon.clone()}},
         },
         Some(_) => {
-            let loading = html! {
-              <Loading
-                height={String::from("1em")}
-                width={String::from("1em")}
-                fill={FillWith::Hsl(WHITE_HSL.clone())}
-              />
-            };
+            let loading = html! {{SvgType::Loading.get_html(None, None, Some(FillWith::Hsl(WHITE_HSL.clone())), None, None, None)}};
             html! {<Icon inner_html={loading}/>}
         }
     };
