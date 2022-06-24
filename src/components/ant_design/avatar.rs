@@ -26,14 +26,21 @@ pub enum AvatarSize {
 //     Image(String),
 // }
 
+#[derive(Debug, PartialEq, Clone)]
+pub struct AvatarImage {
+    pub src: String,
+    pub alt: String,
+}
+
 #[derive(Properties, PartialEq)]
 pub struct AvatarProps {
     pub icon: Option<SvgType>,
     pub shape: Option<AvatarShape>,
     pub size: Option<AvatarSize>,
-    pub src: Option<String>,
+    pub image: Option<AvatarImage>,
+    // pub src: Option<String>,
     // pub src_set	a list of sources to use for different screen resolutions	string	-	3.11.0 //no examples for it yet in antd docs
-    pub alt: Option<String>,
+    // pub alt: Option<String>,
     pub on_error: Option<Callback<()>>,
 }
 
@@ -81,7 +88,7 @@ pub fn avatar(props: &AvatarProps) -> Html {
         None => String::from(""),
         Some(_) => String::from("ant-avatar-icon"),
     };
-    let inner_content = match props.src.clone() {
+    let inner_content = match props.image.clone() {
         None => match props.icon.clone() {
             None => html!{
                 <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
@@ -96,16 +103,16 @@ pub fn avatar(props: &AvatarProps) -> Html {
                 }
             },
         },
-        Some(src) => html!{
-            <img src={src}/>
+        Some(avatar_image) => html!{
+            <img src={avatar_image.src} alt={avatar_image.alt}/>
         },
     };
-    let src_class = match props.src.clone() {
+    let image_class = match props.image.clone() {
         None => String::from(""),
         Some(_) => String::from("ant-avatar-image"),
     };
     let style = format!("{}", size_style);
-    let class = format!("ant-avatar {} {} {} {}", shape_class, size_class, icon_class, src_class);
+    let class = format!("ant-avatar {} {} {} {}", shape_class, size_class, icon_class, image_class);
     html! {
         <span class={class} style={style}>
           {inner_content}
