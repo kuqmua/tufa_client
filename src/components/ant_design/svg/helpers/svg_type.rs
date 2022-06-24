@@ -2,7 +2,6 @@ use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use crate::components::ant_design::svg::helpers::theme::Theme;
 use yew::html;
 use yew::Html;
-
 use crate::components::ant_design::svg::check_circle::CheckCircle;
 use crate::components::ant_design::svg::close::Close;
 use crate::components::ant_design::svg::close_circle::CloseCircle;
@@ -23,6 +22,7 @@ use crate::components::ant_design::svg::share_alt::ShareAlt;
 use crate::components::ant_design::svg::sync::Sync;
 use crate::components::ant_design::svg::twitter::Twitter;
 use crate::components::ant_design::svg::up::Up;
+use crate::components::ant_design::svg::user::User;
 use crate::components::ant_design::svg::youtube::Youtube;
 use crate::helpers::rotate::Rotate;
 
@@ -48,6 +48,7 @@ pub enum SvgType {
     Sync,
     Twitter,
     Up,
+    User,
     Youtube,
 }
 
@@ -92,6 +93,7 @@ impl SvgType {
             SvgType::Sync => html! {<Sync {height} {width} {fill} {spin} {rotate} {theme}/>},
             SvgType::Twitter => html! {<Twitter {height} {width} {fill} {spin} {rotate} {theme}/>},
             SvgType::Up => html! {<Up {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::User => html! {<User {height} {width} {fill} {spin} {rotate} {theme}/>},
             SvgType::Youtube => html! {<Youtube {height} {width} {fill} {spin} {rotate} {theme}/>},
         }
     }
@@ -117,7 +119,8 @@ impl SvgType {
             SvgType::Sync => String::from("anticon-sync"),
             SvgType::Twitter => String::from("anticon-twitter"),
             SvgType::Up => String::from("anticon-up"),
-            SvgType::Youtube => String::from("anticon-"),
+            SvgType::User => String::from("anticon-user"),
+            SvgType::Youtube => String::from("anticon-youtube"),
         }
     }
 }
