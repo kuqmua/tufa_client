@@ -1,10 +1,10 @@
 use crate::components::ant_design::avatar::Avatar;
+use crate::components::ant_design::avatar::AvatarContent;
+use crate::components::ant_design::avatar::AvatarImage;
 use crate::components::ant_design::button::LoadingProp;
 use crate::components::ant_design::button::Shape;
 use crate::components::ant_design::button::Size;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-use crate::components::ant_design::avatar::AvatarImage;
-use crate::components::ant_design::avatar::AvatarContent;
 // use crate::components::alert::Alert;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
@@ -208,7 +208,7 @@ pub fn home() -> Html {
       <Avatar
         size={AvatarSize::Type(AvatarSizeType::Large)}
         shape={AvatarShape::Square}
-        content={AvatarContent::Image(AvatarImage{ 
+        content={AvatarContent::Image(AvatarImage{
           src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
           alt: String::from("avatar")
         })}

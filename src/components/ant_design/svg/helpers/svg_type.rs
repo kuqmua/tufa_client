@@ -1,11 +1,11 @@
-use yew::html;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use crate::components::ant_design::svg::helpers::theme::Theme;
+use yew::html;
 use yew::Html;
 
 use crate::components::ant_design::svg::check_circle::CheckCircle;
-use crate::components::ant_design::svg::close_circle::CloseCircle;
 use crate::components::ant_design::svg::close::Close;
+use crate::components::ant_design::svg::close_circle::CloseCircle;
 use crate::components::ant_design::svg::cloud::Cloud;
 use crate::components::ant_design::svg::copy::Copy;
 use crate::components::ant_design::svg::dislike::Dislike;
@@ -48,7 +48,7 @@ pub enum SvgType {
     Sync,
     Twitter,
     Up,
-    Youtube
+    Youtube,
 }
 
 impl SvgType {
@@ -62,30 +62,40 @@ impl SvgType {
         theme: Option<Theme>,
     ) -> Html {
         match *self {
-            SvgType::CheckCircle => html!{<CheckCircle {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::CloseCircle => html!{<CloseCircle {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Close => html!{<Close {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Cloud => html!{<Cloud {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Copy => html!{<Copy {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Dislike => html!{<Dislike {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Down => html!{<Down {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::ExclamationCircle => html!{<ExclamationCircle {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Github => html!{<Github {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Heart => html!{<Heart {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::InfoCircle => html!{<InfoCircle {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Like => html!{<Like {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Loading => html!{<Loading {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Login => html!{<Login {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Logout => html!{<Logout {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Reddit => html!{<Reddit {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::ShareAlt => html!{<ShareAlt {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Sync => html!{<Sync {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Twitter => html!{<Twitter {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Up => html!{<Up {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Youtube => html!{<Youtube {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::CheckCircle => {
+                html! {<CheckCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            }
+            SvgType::CloseCircle => {
+                html! {<CloseCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            }
+            SvgType::Close => html! {<Close {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Cloud => html! {<Cloud {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Copy => html! {<Copy {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Dislike => html! {<Dislike {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Down => html! {<Down {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::ExclamationCircle => {
+                html! {<ExclamationCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            }
+            SvgType::Github => html! {<Github {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Heart => html! {<Heart {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::InfoCircle => {
+                html! {<InfoCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            }
+            SvgType::Like => html! {<Like {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Loading => html! {<Loading {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Login => html! {<Login {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Logout => html! {<Logout {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Reddit => html! {<Reddit {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::ShareAlt => {
+                html! {<ShareAlt {height} {width} {fill} {spin} {rotate} {theme}/>}
+            }
+            SvgType::Sync => html! {<Sync {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Twitter => html! {<Twitter {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Up => html! {<Up {height} {width} {fill} {spin} {rotate} {theme}/>},
+            SvgType::Youtube => html! {<Youtube {height} {width} {fill} {spin} {rotate} {theme}/>},
         }
     }
-    pub fn get_class(&self) ->String {
+    pub fn get_class(&self) -> String {
         match *self {
             SvgType::CheckCircle => String::from("anticon-check-circle"),
             SvgType::CloseCircle => String::from("anticon-close-circle"),
@@ -97,7 +107,7 @@ impl SvgType {
             SvgType::ExclamationCircle => String::from("anticon-exclamation-circle"),
             SvgType::Github => String::from("anticon-github"),
             SvgType::Heart => String::from("anticon-heart"),
-            SvgType::InfoCircle =>String::from("anticon-info-circle"),
+            SvgType::InfoCircle => String::from("anticon-info-circle"),
             SvgType::Like => String::from("anticon-like"),
             SvgType::Loading => String::from("anticon-loading"),
             SvgType::Login => String::from("anticon-login"),
@@ -111,4 +121,3 @@ impl SvgType {
         }
     }
 }
-
