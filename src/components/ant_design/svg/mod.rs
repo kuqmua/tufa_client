@@ -20,3 +20,4 @@ pub mod sync;
 pub mod twitter;
 pub mod up;
 pub mod youtube;
+pub mod user;
