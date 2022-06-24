@@ -46,7 +46,6 @@ use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-
 use super::ant_design::avatar::AvatarShape;
 use super::ant_design::avatar::AvatarSize;
 use super::ant_design::avatar::AvatarSizeType;
@@ -210,7 +209,10 @@ pub fn home() -> Html {
         shape={AvatarShape::Square}
         content={AvatarContent::Image(AvatarImage{
           src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
-          alt: String::from("avatar")
+          alt: String::from("avatar"),
+          on_error: Some(Callback::from(|_| {
+            log!("on_error");
+          }))
         })}
         // icon={SvgType::Twitter}
         // image={}

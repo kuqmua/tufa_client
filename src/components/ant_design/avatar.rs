@@ -30,6 +30,7 @@ pub enum AvatarContent {
 pub struct AvatarImage {
     pub src: String,
     pub alt: String,
+    pub on_error: Option<Callback<()>>,
 }
 
 #[derive(Properties, PartialEq)]
@@ -43,7 +44,7 @@ pub struct AvatarProps {
     // pub src: Option<String>,
     // pub src_set	a list of sources to use for different screen resolutions	string	-	3.11.0 //no examples for it yet in antd docs
     // pub alt: Option<String>,
-    pub on_error: Option<Callback<()>>,
+    
 }
 
 #[function_component(Avatar)]
@@ -94,6 +95,10 @@ pub fn avatar(props: &AvatarProps) -> Html {
         },
     };
     let inner_content = match props.content.clone() {
+        None => html! {
+            <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
+            </span>
+        },
         Some(content_type) => match content_type {
             AvatarContent::Icon(svg_type) => {
                 let class = format!("anticon {}", svg_type.get_class());
@@ -106,10 +111,6 @@ pub fn avatar(props: &AvatarProps) -> Html {
             AvatarContent::Image(avatar_image) => html! {
                 <img src={avatar_image.src} alt={avatar_image.alt}/>
             },
-        },
-        None => html! {
-            <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
-            </span>
         },
     };
     // let image_class = match props.image.clone() {
