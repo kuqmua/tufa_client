@@ -207,6 +207,7 @@ pub fn home() -> Html {
         size={AvatarSize::Type(AvatarSizeType::Large)}
         shape={AvatarShape::Square}
         icon={SvgType::Twitter}
+        src={String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1")}
       />
       </div>
     };

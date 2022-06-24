@@ -20,6 +20,12 @@ pub enum AvatarSize {
     Type(AvatarSizeType),
 }
 
+// #[derive(Debug, PartialEq, Clone)]
+// pub enum AvatarContent {
+//     Icon(SvgType),
+//     Image(String),
+// }
+
 #[derive(Properties, PartialEq)]
 pub struct AvatarProps {
     pub icon: Option<SvgType>,
@@ -75,18 +81,23 @@ pub fn avatar(props: &AvatarProps) -> Html {
         None => String::from(""),
         Some(_) => String::from("ant-avatar-icon"),
     };
-    let inner_content = match props.icon.clone() {
-        None => html!{
-            <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
-            </span>
+    let inner_content = match props.src.clone() {
+        None => match props.icon.clone() {
+            None => html!{
+                <span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);">
+                </span>
+            },
+            Some(svg_type) => {
+                let class = format!("anticon {}", svg_type.get_class());
+                html!{
+                    <i aria-label="icon: user" class={class}>
+                      {svg_type.get_html(None, None, None, None, None, None)}
+                      </i>
+                }
+            },
         },
-        Some(svg_type) => {
-            let class = format!("anticon {}", svg_type.get_class());
-            html!{
-                <i aria-label="icon: user" class={class}>
-                  {svg_type.get_html(None, None, None, None, None, None)}
-                  </i>
-            }
+        Some(src) => html!{
+            <img src={src}/>
         },
     };
     let src_class = match props.src.clone() {
@@ -94,7 +105,7 @@ pub fn avatar(props: &AvatarProps) -> Html {
         Some(_) => String::from("ant-avatar-image"),
     };
     let style = format!("{}", size_style);
-    let class = format!("ant-avatar {} {} {}", shape_class, size_class, icon_class);
+    let class = format!("ant-avatar {} {} {} {}", shape_class, size_class, icon_class, src_class);
     html! {
         <span class={class} style={style}>
           {inner_content}
