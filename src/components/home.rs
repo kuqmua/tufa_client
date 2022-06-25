@@ -168,28 +168,28 @@ pub fn home() -> Html {
           padding: 10px;
         "
       >
-       <Button
-        //  placeholder={String::from("Button")}
-        //  disabled={Some(())}
-         button_type={ButtonType::Primary}
-        //  shape={Shape::Circle}
-        icon={Some(icon_inner_html.clone())}
-        size={Size::Large}
-        // ghost={Some(())}
-        // block={Some(())}
-        // loading={LoadingProp::Bool(true)}
-       />
-       <Button
-       //  placeholder={String::from("Button")}
-       //  disabled={Some(())}
-        button_type={ButtonType::Primary}
-       //  shape={Shape::Circle}
-       icon={Some(g.clone())}
-       size={Size::Large}
-       // ghost={Some(())}
-       // block={Some(())}
-       // loading={LoadingProp::Bool(true)}
-      />
+      //  <Button
+      //   //  placeholder={String::from("Button")}
+      //   //  disabled={Some(())}
+      //    button_type={ButtonType::Primary}
+      //   //  shape={Shape::Circle}
+      //   icon={Some(icon_inner_html.clone())}
+      //   size={Size::Large}
+      //   // ghost={Some(())}
+      //   // block={Some(())}
+      //   // loading={LoadingProp::Bool(true)}
+      //  />
+      //  <Button
+      //  //  placeholder={String::from("Button")}
+      //  //  disabled={Some(())}
+      //   button_type={ButtonType::Primary}
+      //  //  shape={Shape::Circle}
+      //  icon={Some(g.clone())}
+      //  size={Size::Large}
+      //  // ghost={Some(())}
+      //  // block={Some(())}
+      //  // loading={LoadingProp::Bool(true)}
+      // />
       <Paragraph/>
       <Alert
         message={String::from("Error")}
