@@ -19,5 +19,5 @@ pub(in crate::components::ant_design::svg) mod share_alt;
 pub(in crate::components::ant_design::svg) mod sync;
 pub(in crate::components::ant_design::svg) mod twitter;
 pub(in crate::components::ant_design::svg) mod up;
-pub(in crate::components::ant_design::svg) mod youtube;
 pub(in crate::components::ant_design::svg) mod user;
+pub(in crate::components::ant_design::svg) mod youtube;

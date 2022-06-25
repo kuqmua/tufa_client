@@ -1,7 +1,3 @@
-use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-use crate::components::ant_design::svg::helpers::theme::Theme;
-use yew::html;
-use yew::Html;
 use crate::components::ant_design::svg::check_circle::CheckCircle;
 use crate::components::ant_design::svg::close::Close;
 use crate::components::ant_design::svg::close_circle::CloseCircle;
@@ -12,6 +8,8 @@ use crate::components::ant_design::svg::down::Down;
 use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
 use crate::components::ant_design::svg::github::Github;
 use crate::components::ant_design::svg::heart::Heart;
+use crate::components::ant_design::svg::helpers::fill_with::FillWith;
+use crate::components::ant_design::svg::helpers::theme::Theme;
 use crate::components::ant_design::svg::info_circle::InfoCircle;
 use crate::components::ant_design::svg::like::Like;
 use crate::components::ant_design::svg::loading::Loading;
@@ -25,6 +23,8 @@ use crate::components::ant_design::svg::up::Up;
 use crate::components::ant_design::svg::user::User;
 use crate::components::ant_design::svg::youtube::Youtube;
 use crate::helpers::rotate::Rotate;
+use yew::html;
+use yew::Html;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SvgType {

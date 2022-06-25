@@ -6,6 +6,10 @@ use crate::components::ant_design::button::Shape;
 use crate::components::ant_design::button::Size;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 // use crate::components::alert::Alert;
+use super::ant_design::avatar::AvatarShape;
+use super::ant_design::avatar::AvatarSize;
+use super::ant_design::avatar::AvatarSizeType;
+use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
 use crate::components::ant_design::button::Button;
@@ -41,10 +45,6 @@ use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use super::ant_design::avatar::AvatarShape;
-use super::ant_design::avatar::AvatarSize;
-use super::ant_design::avatar::AvatarSizeType;
-use super::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -147,14 +147,14 @@ pub fn home() -> Html {
     let icon_inner_html = html! {<Icon inner_html={loading}/>};
     // let rotate = Rotate::new(60).unwrap();
     let f = html! {
-    {SvgType::Up.get_html(None, None, Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))), None, None, Some(Theme::TwoTone))}
-    // <Up
-    //   fill={}
-    //   // spin={Some(())}
-    //   // rotate={Some(rotate)}
-    //   theme={Theme::TwoTone}
-    // />
-  };
+      {SvgType::Up.get_html(None, None, Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))), None, None, Some(Theme::TwoTone))}
+      // <Up
+      //   fill={}
+      //   // spin={Some(())}
+      //   // rotate={Some(rotate)}
+      //   theme={Theme::TwoTone}
+      // />
+    };
     let g = html! {<Icon inner_html={f}/>};
     let inner_html_left = html! {
       <div

@@ -97,7 +97,7 @@ pub fn avatar(props: &AvatarProps) -> Html {
                   {svg_type.get_html(None, None, None, None, None, None)}
                 </i>
             }
-        },
+        }
         Some(content_type) => match content_type {
             AvatarContent::Icon(svg_type) => {
                 let class = format!("anticon {}", svg_type.get_class());

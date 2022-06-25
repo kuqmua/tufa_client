@@ -1,10 +1,10 @@
 use crate::components::ant_design::icon::Icon;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
+use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::svg::helpers::theme::Theme;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback, Properties};
-use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum AlertType {
@@ -109,7 +109,7 @@ pub fn alert(props: &AlertProps) -> Html {
             if let Some(on_close) = on_close_clone.clone() {
                 on_close.emit(());
             };
-            alert_changing_style_cloned.set(AlertChangingStyleState::Closed); 
+            alert_changing_style_cloned.set(AlertChangingStyleState::Closed);
             //AlertChangingStyleState::Closing
             // let after_close_clone_clone = after_close_clone.clone();
             // gloo::timers::callback::Timeout::new(300, move || {
@@ -162,8 +162,7 @@ pub fn alert(props: &AlertProps) -> Html {
         Some(_) => match props.close_text.clone() {
             None => {
                 let svg_type = SvgType::Close;
-                let close =
-                    html! {{svg_type.get_html(None, None, Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))), None, None, None)}};//<Close fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))}/>
+                let close = html! {{svg_type.get_html(None, None, Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))), None, None, None)}}; //<Close fill={FillWith::Hsl(Hsl::new(0.0, 100.0, 0.0, Some(1.0)))}/>
                 let icon_inner_html = html! {<Icon inner_html={close} additional_class={String::from("anticon-close")} />};
                 html! {
                   <button onclick={handle_close} type="button" class="ant-alert-close-icon" tabindex="0">// onclick={on_close}
@@ -187,26 +186,22 @@ pub fn alert(props: &AlertProps) -> Html {
             match type_handle {
                 AlertType::Success => {
                     let svg_type = SvgType::CheckCircle;
-                    let check_circle =
-                        html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
+                    let check_circle = html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
                     html! {<Icon inner_html={check_circle} additional_class={String::from("anticon-check-circle ant-alert-icon")}/>}
                 }
                 AlertType::Info => {
                     let svg_type = SvgType::InfoCircle;
-                    let info_circle =
-                        html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
+                    let info_circle = html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
                     html! {<Icon inner_html={info_circle} additional_class={String::from("anticon-info-circle ant-alert-icon")} />}
                 }
                 AlertType::Warning => {
                     let svg_type = SvgType::ExclamationCircle;
-                    let exclamation_circle =
-                        html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
+                    let exclamation_circle = html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
                     html! {<Icon inner_html={exclamation_circle} additional_class={String::from("anticon-exclamation-circle ant-alert-icon")} />}
                 }
                 AlertType::Error => {
                     let svg_type = SvgType::CloseCircle;
-                    let close_circle =
-                        html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
+                    let close_circle = html! {{svg_type.get_html(None, None, Some(FillWith::CurrentColor), None, None, Some(theme))}};
                     html! {<Icon inner_html={close_circle} additional_class={String::from("anticon-close-circle ant-alert-icon")} />}
                 }
             }
