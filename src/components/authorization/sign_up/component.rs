@@ -7,8 +7,10 @@ use crate::{components::authorization::submit_button::SubmitButton, store::Yewdu
 use gloo::console::log;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
-use yew::prelude::*;
-use yew_router::prelude::*;
+use yew::{function_component, html, use_state, Event};
+use yew_router::history::History;
+use yew_router::prelude::use_history;
+use yew_router::prelude::Link;
 use yewdux::prelude::Dispatcher;
 use yewdux::prelude::PersistentStore;
 use yewdux_functional::use_store;
@@ -174,5 +176,10 @@ pub fn sign_up() -> Html {
         </div>
       </div>
     };
-    html! {<CenterFormWrapper inner_html={component}/>}
+    html! {
+        <div></div>
+      //   <CenterFormWrapper inner_html={
+      //   <div></div>
+      // }/>
+    }
 }

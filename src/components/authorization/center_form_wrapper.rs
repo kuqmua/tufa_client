@@ -1,8 +1,12 @@
-use yew::{function_component, html, Html, Properties};
+use yew::{
+    function_component, html, html_nested, virtual_dom::VChild, Children, Component, Context, Html,
+    Properties,
+};
 
 #[derive(Properties, PartialEq)]
 pub struct CenterFormWrapperProps {
-    pub inner_html: Html,
+    #[prop_or_default]
+    pub children: Children,
 }
 
 #[function_component(CenterFormWrapper)]
@@ -18,7 +22,8 @@ pub fn center_form_wrapper(props: &CenterFormWrapperProps) -> Html {
           align-items: center;
         "
       >
-        {props.inner_html.clone()}
+        // {props.inner_html.clone()}
+        { for props.children.clone().iter() }
       </div>
     }
 }

@@ -173,5 +173,13 @@ pub fn sign_in() -> Html {
         </div>
       </div>
     };
-    html! {<CenterFormWrapper inner_html={component}/>}
+    html! {<CenterFormWrapper
+    //   inner_html={
+    //   component
+    //     // <SvgIconWrapper/>
+    //   //   {html_nested! {
+    //   //     <SvgIconWrapper/>
+    //   // }}
+    // }
+    >{component}</CenterFormWrapper>}
 }
