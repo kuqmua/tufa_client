@@ -24,6 +24,7 @@ use crate::components::ant_design::svg::user::User;
 use crate::components::ant_design::svg::youtube::Youtube;
 use crate::helpers::rotate::Rotate;
 use yew::html;
+use yew::virtual_dom::AttrValue;
 use yew::Html;
 
 #[derive(Debug, PartialEq, Clone)]
@@ -55,8 +56,8 @@ pub enum SvgType {
 impl SvgType {
     pub fn get_html(
         &self,
-        height: Option<String>,
-        width: Option<String>,
+        height: Option<AttrValue>,
+        width: Option<AttrValue>,
         fill: Option<FillWith>,
         spin: Option<()>,
         rotate: Option<Rotate>,
@@ -97,30 +98,30 @@ impl SvgType {
             SvgType::Youtube => html! {<Youtube {height} {width} {fill} {spin} {rotate} {theme}/>},
         }
     }
-    pub fn get_class(&self) -> String {
+    pub fn get_class(&self) -> AttrValue {
         match *self {
-            SvgType::CheckCircle => String::from("anticon-check-circle"),
-            SvgType::CloseCircle => String::from("anticon-close-circle"),
-            SvgType::Close => String::from("anticon-close"),
-            SvgType::Cloud => String::from("anticon-cloud"),
-            SvgType::Copy => String::from("anticon-copy"),
-            SvgType::Dislike => String::from("anticon-dislike"),
-            SvgType::Down => String::from("anticon-down"),
-            SvgType::ExclamationCircle => String::from("anticon-exclamation-circle"),
-            SvgType::Github => String::from("anticon-github"),
-            SvgType::Heart => String::from("anticon-heart"),
-            SvgType::InfoCircle => String::from("anticon-info-circle"),
-            SvgType::Like => String::from("anticon-like"),
-            SvgType::Loading => String::from("anticon-loading"),
-            SvgType::Login => String::from("anticon-login"),
-            SvgType::Logout => String::from("anticon-logout"),
-            SvgType::Reddit => String::from("anticon-reddit"),
-            SvgType::ShareAlt => String::from("anticon-share-alt"),
-            SvgType::Sync => String::from("anticon-sync"),
-            SvgType::Twitter => String::from("anticon-twitter"),
-            SvgType::Up => String::from("anticon-up"),
-            SvgType::User => String::from("anticon-user"),
-            SvgType::Youtube => String::from("anticon-youtube"),
+            SvgType::CheckCircle => AttrValue::Static("anticon-check-circle"),
+            SvgType::CloseCircle => AttrValue::Static("anticon-close-circle"),
+            SvgType::Close => AttrValue::Static("anticon-close"),
+            SvgType::Cloud => AttrValue::Static("anticon-cloud"),
+            SvgType::Copy => AttrValue::Static("anticon-copy"),
+            SvgType::Dislike => AttrValue::Static("anticon-dislike"),
+            SvgType::Down => AttrValue::Static("anticon-down"),
+            SvgType::ExclamationCircle => AttrValue::Static("anticon-exclamation-circle"),
+            SvgType::Github => AttrValue::Static("anticon-github"),
+            SvgType::Heart => AttrValue::Static("anticon-heart"),
+            SvgType::InfoCircle => AttrValue::Static("anticon-info-circle"),
+            SvgType::Like => AttrValue::Static("anticon-like"),
+            SvgType::Loading => AttrValue::Static("anticon-loading"),
+            SvgType::Login => AttrValue::Static("anticon-login"),
+            SvgType::Logout => AttrValue::Static("anticon-logout"),
+            SvgType::Reddit => AttrValue::Static("anticon-reddit"),
+            SvgType::ShareAlt => AttrValue::Static("anticon-share-alt"),
+            SvgType::Sync => AttrValue::Static("anticon-sync"),
+            SvgType::Twitter => AttrValue::Static("anticon-twitter"),
+            SvgType::Up => AttrValue::Static("anticon-up"),
+            SvgType::User => AttrValue::Static("anticon-user"),
+            SvgType::Youtube => AttrValue::Static("anticon-youtube"),
         }
     }
 }
