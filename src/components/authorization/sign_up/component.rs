@@ -20,8 +20,8 @@ pub fn sign_up() -> Html {
     let store = use_store::<PersistentStore<YewduxStore>>();
     let username = use_state(|| String::from(""));
     let password = use_state(|| String::from(""));
-    let username_cloned = username.clone();
-    let password_cloned = password.clone();
+    let username_cloned = username;
+    let password_cloned = password;
     let header_name = "Sign up";
     let history = use_history().unwrap();
     let handle_form_submit = store.dispatch().reduce_callback(move |state| {
@@ -176,10 +176,5 @@ pub fn sign_up() -> Html {
         </div>
       </div>
     };
-    html! {
-        <div></div>
-      //   <CenterFormWrapper inner_html={
-      //   <div></div>
-      // }/>
-    }
+    html! {<CenterFormWrapper>{component}</CenterFormWrapper>}
 }
