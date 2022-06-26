@@ -51,75 +51,230 @@ pub enum SvgType {
     Youtube(SvgProps),
 }
 
+//todo: make it a proc macro
 impl SvgType {
     pub fn get_html(&self) -> Html {
         match self {
-            SvgType::CheckCircle(svg_props) => {
-                html! {<CheckCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::CloseCircle(svg_props) => {
-                html! {<CloseCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Close(svg_props) => {
-                html! {<Close height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Cloud(svg_props) => {
-                html! {<Cloud height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Copy(svg_props) => {
-                html! {<Copy height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Dislike(svg_props) => {
-                html! {<Dislike height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Down(svg_props) => {
-                html! {<Down height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::ExclamationCircle(svg_props) => {
-                html! {<ExclamationCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Github(svg_props) => {
-                html! {<Github height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Heart(svg_props) => {
-                html! {<Heart height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::InfoCircle(svg_props) => {
-                html! {<InfoCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Like(svg_props) => {
-                html! {<Like height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Loading(svg_props) => {
-                html! {<Loading height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Login(svg_props) => {
-                html! {<Login height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Logout(svg_props) => {
-                html! {<Logout height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Reddit(svg_props) => {
-                html! {<Reddit height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::ShareAlt(svg_props) => {
-                html! {<ShareAlt height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Sync(svg_props) => {
-                html! {<Sync height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Twitter(svg_props) => {
-                html! {<Twitter height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Up(svg_props) => {
-                html! {<Up height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::User(svg_props) => {
-                html! {<User height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
-            SvgType::Youtube(svg_props) => {
-                html! {<Youtube height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
-            }
+            SvgType::CheckCircle(svg_props) => html! {
+              <CheckCircle
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+              />
+            },
+            SvgType::CloseCircle(svg_props) => html! {
+              <CloseCircle
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Close(svg_props) => html! {
+              <Close
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Cloud(svg_props) => html! {
+              <Cloud
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Copy(svg_props) => html! {
+              <Copy
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Dislike(svg_props) => html! {
+              <Dislike
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Down(svg_props) => html! {
+              <Down
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::ExclamationCircle(svg_props) => html! {
+              <ExclamationCircle
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Github(svg_props) => html! {
+              <Github
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Heart(svg_props) => html! {
+              <Heart
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::InfoCircle(svg_props) => html! {
+              <InfoCircle
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Like(svg_props) => html! {
+              <Like
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Loading(svg_props) => html! {
+              <Loading
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Login(svg_props) => html! {
+              <Login
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Logout(svg_props) => html! {
+              <Logout
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Reddit(svg_props) => html! {
+              <Reddit
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::ShareAlt(svg_props) => html! {
+              <ShareAlt
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Sync(svg_props) => html! {
+              <Sync
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Twitter(svg_props) => html! {
+              <Twitter
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Up(svg_props) => html! {
+              <Up
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::User(svg_props) => html! {
+              <User
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
+            SvgType::Youtube(svg_props) => html! {
+              <Youtube
+                height={svg_props.height.clone()}
+                width={svg_props.width.clone()}
+                fill={svg_props.fill.clone()}
+                spin={svg_props.spin}
+                rotate={svg_props.rotate.clone()}
+                theme={svg_props.theme.clone()}
+             />
+            },
         }
     }
     pub fn get_class(&self) -> AttrValue {
