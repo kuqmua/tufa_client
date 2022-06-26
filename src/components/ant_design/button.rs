@@ -4,6 +4,7 @@ use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use crate::constants::WHITE_HSL;
 use web_sys::MouseEvent;
+use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Html, Properties};
 
 #[derive(PartialEq)]
@@ -37,63 +38,63 @@ pub enum Size {
 pub struct ButtonProps {
     pub disabled: Option<()>, //or maybe explicit bool?
     pub ghost: Option<()>,
-    pub href: Option<String>,
-    pub html_type: Option<String>,
+    pub href: Option<AttrValue>,
+    pub html_type: Option<AttrValue>,
     pub icon: Option<Html>, //Icon Component
     pub loading: Option<LoadingProp>,
     pub shape: Option<Shape>,
     pub size: Option<Size>,
-    pub target: Option<String>,
+    pub target: Option<AttrValue>,
     pub button_type: Option<ButtonType>, //original "type"
     pub on_click: Option<Callback<MouseEvent>>,
     pub block: Option<()>,
-    pub placeholder: Option<String>,
+    pub placeholder: Option<AttrValue>,
 }
 
 #[function_component(Button)]
 pub fn button(props: &ButtonProps) -> Html {
     //todo: button group
     let block_class = match &props.block {
-        None => String::from(""),
-        Some(_) => String::from("ant-btn-block"),
+        None => AttrValue::Static(""),
+        Some(_) => AttrValue::Static("ant-btn-block"),
     };
     let loading_class = match &props.loading {
-        None => String::from(""),
-        Some(_) => String::from("ant-btn-loading"),
+        None => AttrValue::Static(""),
+        Some(_) => AttrValue::Static("ant-btn-loading"),
     };
     let ghost_class = match &props.ghost {
-        None => String::from(""),
-        Some(_) => String::from("ant-btn-background-ghost"),
+        None => AttrValue::Static(""),
+        Some(_) => AttrValue::Static("ant-btn-background-ghost"),
     };
     let button_only_class = match &props.placeholder {
         None => match &props.icon {
-            None => String::from(""),
-            Some(_) => String::from("ant-btn-icon-only"),
+            None => AttrValue::Static(""),
+            Some(_) => AttrValue::Static("ant-btn-icon-only"),
         },
-        Some(_) => String::from(""),
+        Some(_) => AttrValue::Static(""),
     };
     let size_class = match &props.size {
-        None => String::from(""),
+        None => AttrValue::Static(""),
         Some(size) => match size {
-            Size::Small => String::from("ant-btn-sm"),
-            Size::Large => String::from("ant-btn-lg"),
+            Size::Small => AttrValue::Static("ant-btn-sm"),
+            Size::Large => AttrValue::Static("ant-btn-lg"),
         },
     };
     let shape_class = match &props.shape {
-        None => String::from(""),
+        None => AttrValue::Static(""),
         Some(shape) => match shape {
-            Shape::Circle => String::from("ant-btn-circle"),
-            Shape::Round => String::from("ant-btn-round"), //todo
+            Shape::Circle => AttrValue::Static("ant-btn-circle"),
+            Shape::Round => AttrValue::Static("ant-btn-round"), //todo
         },
     };
     let button_type_class = match &props.button_type {
-        None => String::from(""),
+        None => AttrValue::Static(""),
         Some(button_type) => match button_type {
-            ButtonType::Primary => String::from("ant-btn-primary"),
-            ButtonType::Ghost => String::from("ant-btn-ghost"),
-            ButtonType::Dashed => String::from("ant-btn-dashed"),
-            ButtonType::Danger => String::from("ant-btn-danger"),
-            ButtonType::Link => String::from("ant-btn-link"),
+            ButtonType::Primary => AttrValue::Static("ant-btn-primary"),
+            ButtonType::Ghost => AttrValue::Static("ant-btn-ghost"),
+            ButtonType::Dashed => AttrValue::Static("ant-btn-dashed"),
+            ButtonType::Danger => AttrValue::Static("ant-btn-danger"),
+            ButtonType::Link => AttrValue::Static("ant-btn-link"),
         },
     };
     let classes = format!(
