@@ -8,6 +8,7 @@ use crate::components::ant_design::svg::down::Down;
 use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
 use crate::components::ant_design::svg::github::Github;
 use crate::components::ant_design::svg::heart::Heart;
+use crate::components::ant_design::svg::helpers::svg_component_trait::SvgComponent;
 use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::info_circle::InfoCircle;
 use crate::components::ant_design::svg::like::Like;
