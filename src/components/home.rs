@@ -1,9 +1,9 @@
 use crate::components::ant_design::avatar::Avatar;
-use crate::components::ant_design::avatar::AvatarContent;
-use crate::components::ant_design::avatar::AvatarImage;
-use crate::components::ant_design::button::LoadingProp;
-use crate::components::ant_design::button::Shape;
-use crate::components::ant_design::button::Size;
+// use crate::components::ant_design::avatar::AvatarContent;
+// use crate::components::ant_design::avatar::AvatarImage;
+// use crate::components::ant_design::button::LoadingProp;
+// use crate::components::ant_design::button::Shape;
+// use crate::components::ant_design::button::Size;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 // use crate::components::alert::Alert;
 use super::ant_design::avatar::AvatarShape;
@@ -12,11 +12,15 @@ use super::ant_design::avatar::AvatarSizeType;
 use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
-use crate::components::ant_design::button::Button;
-use crate::components::ant_design::button::ButtonType;
+// use crate::components::ant_design::button::Button;
+// use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
 // use crate::components::ant_design::paragraph::Paragraph;
+// use crate::components::ant_design::svg::down::Down;
+// use crate::components::ant_design::svg::helpers::svg_type::List;
+use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::theme::Theme;
+// use crate::components::ant_design::svg::up::Up;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
 use crate::components::drawer::position::DrawerPosition;
@@ -26,21 +30,21 @@ use crate::components::feed::expander::expander_changing_style_state::ExpanderCh
 use crate::components::feed::expander::share_content::ShareContent;
 use crate::components::feed::posts_list::PostsList;
 use crate::components::header::component::Header;
-use crate::components::material::pure_material_button_contained::PureMaterialButtonContained;
-use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
-use crate::components::material::pure_material_button_text::PureMaterialButtonText;
-use crate::components::material::pure_material_checkbox::PureMaterialCheckbox;
-use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
-use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
-use crate::components::material::pure_material_radio::PureMaterialRadio;
-use crate::components::material::pure_material_slider::PureMaterialSlider;
-use crate::components::material::pure_material_switch::PureMaterialSwitch;
-use crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled;
-use crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined;
-use crate::components::material::pure_material_textfield_standard::PureMaterialTextfieldStandard;
+// use crate::components::material::pure_material_button_contained::PureMaterialButtonContained;
+// use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
+// use crate::components::material::pure_material_button_text::PureMaterialButtonText;
+// use crate::components::material::pure_material_checkbox::PureMaterialCheckbox;
+// use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
+// use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
+// use crate::components::material::pure_material_radio::PureMaterialRadio;
+// use crate::components::material::pure_material_slider::PureMaterialSlider;
+// use crate::components::material::pure_material_switch::PureMaterialSwitch;
+// use crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled;
+// use crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined;
+// use crate::components::material::pure_material_textfield_standard::PureMaterialTextfieldStandard;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
-use crate::helpers::rotate::Rotate;
+// use crate::helpers::rotate::Rotate;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
@@ -143,19 +147,39 @@ pub fn home() -> Html {
     // <PureMaterialTextfieldStandard/>
     // <PureMaterialSlider/>
     // let svg_type = ;
-    let loading = html! {{SvgType::Loading.get_html(None, None, None, Some(()), None, None)}};
-    let icon_inner_html = html! {<Icon inner_html={loading}/>};
-    // let rotate = Rotate::new(60).unwrap();
-    let f = html! {
-      {SvgType::Up.get_html(None, None, Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))), None, None, Some(Theme::TwoTone))}
-      // <Up
-      //   fill={}
-      //   // spin={Some(())}
-      //   // rotate={Some(rotate)}
-      //   theme={Theme::TwoTone}
-      // />
+    let icon_inner_html = html! {
+      <Icon
+        svg_type={
+          SvgType::Loading(
+            SvgProps{
+              height: None,
+              width: None,
+              fill: None,
+              spin: Some(()),
+              rotate: None,
+              theme: None,
+            }
+          )
+        }
+      />
     };
-    let g = html! {<Icon inner_html={f}/>};
+    // let rotate = Rotate::new(60).unwrap();
+    let g = html! {
+      <Icon
+        svg_type={
+          SvgType::Up(
+            SvgProps{
+              height: None,
+              width: None,
+              fill: Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))),
+              spin: Some(()),
+              rotate: None,
+              theme: Some(Theme::TwoTone),
+            }
+          )
+        }
+      />
+    };
     let inner_html_left = html! {
       <div
         style="
@@ -191,6 +215,10 @@ pub fn home() -> Html {
       //  // loading={LoadingProp::Bool(true)}
       // />
       // <Paragraph/>
+      // <List>
+      //   <Down/>
+      //   <Up/>
+      // </List>
       <Alert
         message={String::from("Error")}
         description={String::from("This is an error message about copywriting.")}

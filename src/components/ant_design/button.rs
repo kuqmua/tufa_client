@@ -1,6 +1,7 @@
 use crate::components::ant_design::icon::Icon;
 // use crate::components::ant_design::svg::close::Close;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
+use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use crate::constants::WHITE_HSL;
 use web_sys::MouseEvent;
@@ -122,8 +123,23 @@ pub fn button(props: &ButtonProps) -> Html {
             Some(icon) => html! {{icon.clone()}},
         },
         Some(_) => {
-            let loading = html! {{SvgType::Loading.get_html(None, None, Some(FillWith::Hsl(WHITE_HSL.clone())), None, None, None)}};
-            html! {<Icon inner_html={loading}/>}
+            html! {
+              <Icon
+                svg_type={
+                  SvgType::Loading(
+                    SvgProps{
+                      height: None,
+                      width: None,
+                      fill: Some(FillWith::Hsl(WHITE_HSL.clone())),
+                      spin: None,
+                      rotate: None,
+                      theme: None,
+                    }
+                  )
+                }
+                additional_class={String::from("anticon-close")}
+              />
+            }
         }
     };
     html! {

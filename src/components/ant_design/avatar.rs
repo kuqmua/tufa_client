@@ -1,3 +1,4 @@
+use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Properties};
@@ -91,11 +92,18 @@ pub fn avatar(props: &AvatarProps) -> Html {
     };
     let inner_content = match props.content.clone() {
         None => {
-            let svg_type = SvgType::User;
+            let svg_type = SvgType::User(SvgProps {
+                height: None,
+                width: None,
+                fill: None,
+                spin: None,
+                rotate: None,
+                theme: None,
+            });
             let class = format!("anticon {}", svg_type.get_class());
             html! {
                 <i aria-label="icon: user" class={class}>
-                  {svg_type.get_html(None, None, None, None, None, None)}
+                  {svg_type.get_html()}
                 </i>
             }
         }
@@ -104,7 +112,7 @@ pub fn avatar(props: &AvatarProps) -> Html {
                 let class = format!("anticon {}", svg_type.get_class());
                 html! {
                     <i aria-label="icon: user" class={class}>
-                      {svg_type.get_html(None, None, None, None, None, None)}
+                      {svg_type.get_html()}
                     </i>
                 }
             }

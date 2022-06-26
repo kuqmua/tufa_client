@@ -8,8 +8,7 @@ use crate::components::ant_design::svg::down::Down;
 use crate::components::ant_design::svg::exclamation_circle::ExclamationCircle;
 use crate::components::ant_design::svg::github::Github;
 use crate::components::ant_design::svg::heart::Heart;
-use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-use crate::components::ant_design::svg::helpers::theme::Theme;
+use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::info_circle::InfoCircle;
 use crate::components::ant_design::svg::like::Like;
 use crate::components::ant_design::svg::loading::Loading;
@@ -22,88 +21,104 @@ use crate::components::ant_design::svg::twitter::Twitter;
 use crate::components::ant_design::svg::up::Up;
 use crate::components::ant_design::svg::user::User;
 use crate::components::ant_design::svg::youtube::Youtube;
-use crate::helpers::rotate::Rotate;
 use yew::html;
 use yew::virtual_dom::AttrValue;
-use yew::virtual_dom::VChild;
 use yew::Html;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SvgType {
-    CheckCircle(VChild<CheckCircle>),
-    CloseCircle(VChild<CloseCircle>),
-    Close(VChild<Close>),
-    Cloud(VChild<Cloud>),
-    Copy(VChild<Copy>),
-    Dislike(VChild<Dislike>),
-    Down(VChild<Down>),
-    ExclamationCircle(VChild<ExclamationCircle>),
-    Github(VChild<Github>),
-    Heart(VChild<Heart>),
-    InfoCircle(VChild<InfoCircle>),
-    Like(VChild<Like>),
-    Loading(VChild<Loading>),
-    Login(VChild<Login>),
-    Logout(VChild<Logout>),
-    Reddit(VChild<Reddit>),
-    ShareAlt(VChild<ShareAlt>),
-    Sync(VChild<Sync>),
-    Twitter(VChild<Twitter>),
-    Up(VChild<Up>),
-    User(VChild<User>),
-    Youtube(VChild<Youtube>),
+    CheckCircle(SvgProps),
+    CloseCircle(SvgProps),
+    Close(SvgProps),
+    Cloud(SvgProps),
+    Copy(SvgProps),
+    Dislike(SvgProps),
+    Down(SvgProps),
+    ExclamationCircle(SvgProps),
+    Github(SvgProps),
+    Heart(SvgProps),
+    InfoCircle(SvgProps),
+    Like(SvgProps),
+    Loading(SvgProps),
+    Login(SvgProps),
+    Logout(SvgProps),
+    Reddit(SvgProps),
+    ShareAlt(SvgProps),
+    Sync(SvgProps),
+    Twitter(SvgProps),
+    Up(SvgProps),
+    User(SvgProps),
+    Youtube(SvgProps),
 }
 
 impl SvgType {
-    pub fn get_html(
-        &self,
-        height: Option<AttrValue>,
-        width: Option<AttrValue>,
-        fill: Option<FillWith>,
-        spin: Option<()>,
-        rotate: Option<Rotate>,
-        theme: Option<Theme>,
-    ) -> Html {
-        match *self {
-            SvgType::CheckCircle(_) => {
-                html! {<CheckCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+    pub fn get_html(&self) -> Html {
+        match self {
+            SvgType::CheckCircle(svg_props) => {
+                html! {<CheckCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::CloseCircle(_) => {
-                html! {<CloseCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::CloseCircle(svg_props) => {
+                html! {<CloseCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Close(_) => html! {<Close {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Cloud(_) => html! {<Cloud {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Copy(_) => html! {<Copy {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Dislike(_) => {
-                html! {<Dislike {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::Close(svg_props) => {
+                html! {<Close height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Down(_) => html! {<Down {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::ExclamationCircle(_) => {
-                html! {<ExclamationCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::Cloud(svg_props) => {
+                html! {<Cloud height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Github(_) => html! {<Github {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Heart(_) => html! {<Heart {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::InfoCircle(_) => {
-                html! {<InfoCircle {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::Copy(svg_props) => {
+                html! {<Copy height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Like(_) => html! {<Like {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Loading(_) => {
-                html! {<Loading {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::Dislike(svg_props) => {
+                html! {<Dislike height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Login(_) => html! {<Login {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Logout(_) => html! {<Logout {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Reddit(_) => html! {<Reddit {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::ShareAlt(_) => {
-                html! {<ShareAlt {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::Down(svg_props) => {
+                html! {<Down height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Sync(_) => html! {<Sync {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Twitter(_) => {
-                html! {<Twitter {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::ExclamationCircle(svg_props) => {
+                html! {<ExclamationCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
-            SvgType::Up(_) => html! {<Up {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::User(_) => html! {<User {height} {width} {fill} {spin} {rotate} {theme}/>},
-            SvgType::Youtube(_) => {
-                html! {<Youtube {height} {width} {fill} {spin} {rotate} {theme}/>}
+            SvgType::Github(svg_props) => {
+                html! {<Github height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Heart(svg_props) => {
+                html! {<Heart height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::InfoCircle(svg_props) => {
+                html! {<InfoCircle height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Like(svg_props) => {
+                html! {<Like height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Loading(svg_props) => {
+                html! {<Loading height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Login(svg_props) => {
+                html! {<Login height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Logout(svg_props) => {
+                html! {<Logout height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Reddit(svg_props) => {
+                html! {<Reddit height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::ShareAlt(svg_props) => {
+                html! {<ShareAlt height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Sync(svg_props) => {
+                html! {<Sync height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Twitter(svg_props) => {
+                html! {<Twitter height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Up(svg_props) => {
+                html! {<Up height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::User(svg_props) => {
+                html! {<User height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
+            }
+            SvgType::Youtube(svg_props) => {
+                html! {<Youtube height={svg_props.height.clone()} width={svg_props.width.clone()} fill={svg_props.fill.clone()} spin={svg_props.spin} rotate={svg_props.rotate.clone()} theme={svg_props.theme.clone()}/>}
             }
         }
     }
@@ -131,36 +146,6 @@ impl SvgType {
             SvgType::Up(_) => AttrValue::Static("anticon-up"),
             SvgType::User(_) => AttrValue::Static("anticon-user"),
             SvgType::Youtube(_) => AttrValue::Static("anticon-youtube"),
-        }
-    }
-}
-
-#[allow(clippy::from_over_into)]
-impl Into<Html> for SvgType {
-    fn into(self) -> Html {
-        match self {
-            SvgType::CheckCircle(child) => child.into(),
-            SvgType::CloseCircle(child) => child.into(),
-            SvgType::Close(child) => child.into(),
-            SvgType::Cloud(child) => child.into(),
-            SvgType::Copy(child) => child.into(),
-            SvgType::Dislike(child) => child.into(),
-            SvgType::Down(child) => child.into(),
-            SvgType::ExclamationCircle(child) => child.into(),
-            SvgType::Github(child) => child.into(),
-            SvgType::Heart(child) => child.into(),
-            SvgType::InfoCircle(child) => child.into(),
-            SvgType::Like(child) => child.into(),
-            SvgType::Loading(child) => child.into(),
-            SvgType::Login(child) => child.into(),
-            SvgType::Logout(child) => child.into(),
-            SvgType::Reddit(child) => child.into(),
-            SvgType::ShareAlt(child) => child.into(),
-            SvgType::Sync(child) => child.into(),
-            SvgType::Twitter(child) => child.into(),
-            SvgType::Up(child) => child.into(),
-            SvgType::User(child) => child.into(),
-            SvgType::Youtube(child) => child.into(),
         }
     }
 }

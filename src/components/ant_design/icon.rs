@@ -1,9 +1,14 @@
+use super::svg::helpers::svg_props::SvgProps;
+use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use yew::virtual_dom::AttrValue;
-use yew::{function_component, html, Html, Properties};
+use yew::{function_component, html, ChildrenWithProps, Html, Properties};
+use yew::{html::ChildrenRenderer, virtual_dom::VChild, Component, Context};
 
 #[derive(Properties, PartialEq)]
 pub struct IconProps {
-    pub inner_html: Html,         //svg icon type
+    pub svg_type: SvgType,
+    // #[prop_or_default]
+    // pub children: ChildrenWithProps<SvgProps>, //svg icon type
     pub style: Option<AttrValue>, //CSSProperties
     pub additional_class: Option<AttrValue>,
     // pub theme: Option<Theme>,//explicit svg styles
@@ -22,7 +27,9 @@ pub fn icon(props: &IconProps) -> Html {
     let class = format!("anticon {}", additional_class);
     html! {
         <i class={class}>//todo: aria-label="icon: home" (example)
-          {props.inner_html.clone()}
+          {props.svg_type.get_html()}
+        //   {props.inner_html.clone()}
+        //   { for props.children.iter() }
         </i>
     }
 }
