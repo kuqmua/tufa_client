@@ -4,6 +4,7 @@ use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::svg::helpers::theme::Theme;
 use colorsys::Hsl;
 use web_sys::MouseEvent;
+use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, use_state, Callback, Properties};
 
 #[derive(Debug, PartialEq, Clone)]
@@ -15,12 +16,12 @@ pub enum AlertType {
 }
 
 impl AlertType {
-    pub fn get_class(&self) -> String {
+    pub fn get_class(&self) -> AttrValue {
         match self {
-            AlertType::Success => String::from("ant-alert-success"),
-            AlertType::Info => String::from("ant-alert-info"),
-            AlertType::Warning => String::from("ant-alert-warning"),
-            AlertType::Error => String::from("ant-alert-error"),
+            AlertType::Success => AttrValue::Static("ant-alert-success"),
+            AlertType::Info => AttrValue::Static("ant-alert-info"),
+            AlertType::Warning => AttrValue::Static("ant-alert-warning"),
+            AlertType::Error => AttrValue::Static("ant-alert-error"),
         }
     }
 }
@@ -30,10 +31,10 @@ pub struct AlertProps {
     // pub after_close: Option<Callback<()>>,//animation not done yet, todo
     pub banner: Option<()>,
     pub closable: Option<()>,
-    pub close_text: Option<String>,  //Html
-    pub description: Option<String>, //Html
+    pub close_text: Option<AttrValue>,  //Html
+    pub description: Option<AttrValue>, //Html
     pub icon: Option<SvgType>,
-    pub message: Option<String>,
+    pub message: Option<AttrValue>,
     pub show_icon: Option<()>,
     pub type_handle: Option<AlertType>,
     pub on_close: Option<Callback<()>>,
@@ -47,29 +48,29 @@ pub enum AlertChangingStyleState {
 }
 
 impl AlertChangingStyleState {
-    pub fn get_class(&self) -> String {
+    pub fn get_class(&self) -> AttrValue {
         match *self {
-            AlertChangingStyleState::Opened => String::from("ant-alert-closable"),
-            AlertChangingStyleState::Closing => String::from("ant-alert-closing ant-alert-no-icon ant-alert-closable ant-alert-slide-up-leave ant-alert-slide-up-leave-active"),
-            AlertChangingStyleState::Closed => String::from(""),
+            AlertChangingStyleState::Opened => AttrValue::Static("ant-alert-closable"),
+            AlertChangingStyleState::Closing => AttrValue::Static("ant-alert-closing ant-alert-no-icon ant-alert-closable ant-alert-slide-up-leave ant-alert-slide-up-leave-active"),
+            AlertChangingStyleState::Closed => AttrValue::Static(""),
         }
     }
     pub fn get_value(&self) -> AlertChangingStyle {
         match *self {
             AlertChangingStyleState::Opened => AlertChangingStyle {
                 should_render: true,
-                height: String::from("100%"),
-                opacity: String::from(""),
+                height: AttrValue::Static("100%"),
+                opacity: AttrValue::Static(""),
             },
             AlertChangingStyleState::Closing => AlertChangingStyle {
                 should_render: true,
-                height: String::from("0%"),
-                opacity: String::from(""),
+                height: AttrValue::Static("0%"),
+                opacity: AttrValue::Static(""),
             },
             AlertChangingStyleState::Closed => AlertChangingStyle {
                 should_render: false,
-                height: String::from("0px"),
-                opacity: String::from("0.5"),
+                height: AttrValue::Static("0px"),
+                opacity: AttrValue::Static("0.5"),
             },
         }
     }
@@ -82,8 +83,8 @@ impl AlertChangingStyleState {
 #[derive(Debug, PartialEq)]
 pub struct AlertChangingStyle {
     pub should_render: bool,
-    pub height: String,
-    pub opacity: String,
+    pub height: AttrValue,
+    pub opacity: AttrValue,
 }
 
 #[function_component(Alert)]
@@ -125,11 +126,11 @@ pub fn alert(props: &AlertProps) -> Html {
         })
     };
     let message = match props.message.clone() {
-        None => String::from(""),
+        None => AttrValue::Static(""),
         Some(msg) => msg,
     };
     let description = match props.description.clone() {
-        None => String::from(""),
+        None => AttrValue::Static(""),
         Some(desc) => desc,
     };
     let type_handle = match props.type_handle.clone() {
@@ -137,12 +138,12 @@ pub fn alert(props: &AlertProps) -> Html {
         Some(alert_type) => alert_type,
     };
     let description_class = match props.description.clone() {
-        None => String::from(""),
-        Some(_) => String::from("ant-alert-with-description"),
+        None => AttrValue::Static(""),
+        Some(_) => AttrValue::Static("ant-alert-with-description"),
     };
     let show_icon_class = match props.show_icon {
-        None => String::from("ant-alert-no-icon"),
-        Some(_) => String::from(""),
+        None => AttrValue::Static("ant-alert-no-icon"),
+        Some(_) => AttrValue::Static(""),
     };
     let class = format!(
         "ant-alert {} {} {}", // {}
