@@ -15,7 +15,7 @@ use crate::components::ant_design::alert::AlertType;
 use crate::components::ant_design::button::Button;
 use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
-use crate::components::ant_design::paragraph::Paragraph;
+// use crate::components::ant_design::paragraph::Paragraph;
 use crate::components::ant_design::svg::helpers::theme::Theme;
 use crate::components::drawer::component::Drawer;
 use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
@@ -190,7 +190,7 @@ pub fn home() -> Html {
       //  // block={Some(())}
       //  // loading={LoadingProp::Bool(true)}
       // />
-      <Paragraph/>
+      // <Paragraph/>
       <Alert
         message={String::from("Error")}
         description={String::from("This is an error message about copywriting.")}
