@@ -1,4 +1,5 @@
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
+use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Properties};
 
 #[derive(Debug, PartialEq, Clone)]
@@ -28,9 +29,9 @@ pub enum AvatarContent {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct AvatarImage {
-    pub src: String,
+    pub src: AttrValue,
     // pub src_set	a list of sources to use for different screen resolutions	string	-	3.11.0 //no examples for it yet in antd docs
-    pub alt: String,
+    pub alt: AttrValue,
     pub on_error: Option<Callback<yew::Event>>,
 }
 
@@ -43,49 +44,49 @@ pub struct AvatarProps {
 
 #[function_component(Avatar)]
 pub fn avatar(props: &AvatarProps) -> Html {
-    let size_style: String;
-    let size_class: String;
+    let size_style: AttrValue;
+    let size_class: AttrValue;
     match props.size.clone() {
         None => {
-            size_style = String::from("");
-            size_class = String::from("");
+            size_style = AttrValue::Static("");
+            size_class = AttrValue::Static("");
         }
         Some(size_type) => match size_type {
             AvatarSize::Number(size) => {
-                size_style = format!(
+                size_style = AttrValue::Owned(format!(
                     "width: {}px; height: {}px; line-height: {}px; font-size: 18px;",
                     size, size, size
-                );
-                size_class = String::from("");
+                ));
+                size_class = AttrValue::Static("");
             }
             AvatarSize::Type(size_type) => match size_type {
                 AvatarSizeType::Large => {
-                    size_style = String::from("");
-                    size_class = String::from("ant-avatar-lg");
+                    size_style = AttrValue::Static("");
+                    size_class = AttrValue::Static("ant-avatar-lg");
                 }
                 AvatarSizeType::Small => {
-                    size_style = String::from("");
-                    size_class = String::from("ant-avatar-sm");
+                    size_style = AttrValue::Static("");
+                    size_class = AttrValue::Static("ant-avatar-sm");
                 }
                 AvatarSizeType::Default => {
-                    size_style = String::from("");
-                    size_class = String::from("");
+                    size_style = AttrValue::Static("");
+                    size_class = AttrValue::Static("");
                 }
             },
         },
     };
     let shape_class = match props.shape.clone() {
-        None => String::from("ant-avatar-circle"),
+        None => AttrValue::Static("ant-avatar-circle"),
         Some(shape_type) => match shape_type {
-            AvatarShape::Circle => String::from("ant-avatar-circle"),
-            AvatarShape::Square => String::from("ant-avatar-square"),
+            AvatarShape::Circle => AttrValue::Static("ant-avatar-circle"),
+            AvatarShape::Square => AttrValue::Static("ant-avatar-square"),
         },
     };
     let content_class = match props.content.clone() {
-        None => String::from("ant-avatar-icon"),
+        None => AttrValue::Static("ant-avatar-icon"),
         Some(avatar_content) => match avatar_content {
-            AvatarContent::Icon(_) => String::from("ant-avatar-icon"),
-            AvatarContent::Image(_) => String::from("ant-avatar-image"),
+            AvatarContent::Icon(_) => AttrValue::Static("ant-avatar-icon"),
+            AvatarContent::Image(_) => AttrValue::Static("ant-avatar-image"),
         },
     };
     let inner_content = match props.content.clone() {
