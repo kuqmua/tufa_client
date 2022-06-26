@@ -1,4 +1,4 @@
-use crate::components::authorization::sign_in::component::SignIn;
+use crate::components::authorization::sign_in::page::SignInPage;
 use crate::components::authorization::sign_up::component::SignUp;
 use crate::components::examples::counter::Counter;
 use crate::components::examples::example::Example;
@@ -30,7 +30,7 @@ pub fn switch_routes(routes: &Routes) -> Html {
         },
         Routes::SignIn => html! {
             // <WithDispatch<SignIn>/>
-            <SignIn/>
+            <SignInPage/>
         },
         Routes::Secure => html! {
             <Secure first="my_first_prop" color={Color::Ok} on_load={main_title_head} onsubmit={custom_from_submit}/>

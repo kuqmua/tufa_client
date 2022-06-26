@@ -3,12 +3,12 @@ use crate::components::authorization::sign_in::component::SignIn;
 use yew::{function_component, html, ChildrenWithProps, Properties};
 
 #[derive(Debug, Properties, PartialEq, Clone)]
-pub struct CenteredSignInProps {
+pub struct SignInPageProps {
     #[prop_or_default]
     children: ChildrenWithProps<SignIn>,
 }
 
-#[function_component(CenteredSignIn)]
-pub fn centered_sign_in(props: &CenteredSignInProps) -> Html {
+#[function_component(SignInPage)]
+pub fn sign_in_page(props: &SignInPageProps) -> Html {
     html! {<CenterFormWrapper>{ for props.children.iter() }</CenterFormWrapper>}
 }
