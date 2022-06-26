@@ -1,5 +1,5 @@
 use crate::components::authorization::sign_in::page::SignInPage;
-use crate::components::authorization::sign_up::component::SignUp;
+use crate::components::authorization::sign_up::page::SignUpPage;
 use crate::components::examples::counter::Counter;
 use crate::components::examples::example::Example;
 use crate::components::examples::markdown_like::MarkdownLike;
@@ -26,7 +26,7 @@ pub fn switch_routes(routes: &Routes) -> Html {
         },
         Routes::SignUp => html! {
             // <WithDispatch<SignUp>/>
-            <SignUp/>
+            <SignUpPage/>
         },
         Routes::SignIn => html! {
             // <WithDispatch<SignIn>/>

@@ -1,4 +1,3 @@
-use crate::components::authorization::center_form_wrapper::CenterFormWrapper;
 use crate::components::authorization::input_form::InputForm;
 use crate::components::authorization::svg_icon_wrapper::SvgIconWrapper;
 use crate::helpers::html_input_type::HtmlInputType;
@@ -51,7 +50,7 @@ pub fn sign_up() -> Html {
             state.password = password;
             log!("password", state.password.clone());
         });
-    let component = html! {
+    html! {
       <div
         style="
           display: block;
@@ -175,6 +174,5 @@ pub fn sign_up() -> Html {
           </div>
         </div>
       </div>
-    };
-    html! {<CenterFormWrapper>{component}</CenterFormWrapper>}
+    }
 }
