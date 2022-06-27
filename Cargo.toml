@@ -25,3 +25,7 @@ yew = "0.19"
 yew-router = "0.16.0" 
 yewdux = "0.7.0" 
 yewdux-functional = "0.1.0"
+#prod
+# svg_component = {path = "https://github.com/kuqmua/svg_component"}
+#dev
+svg_component = {path = "../proc_macros/svg_component"}
