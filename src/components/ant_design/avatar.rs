@@ -2,6 +2,7 @@ use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Properties};
+use crate::components::ant_design::svg::helpers::svg_component_trait::SvgComponent;
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum AvatarShape {
