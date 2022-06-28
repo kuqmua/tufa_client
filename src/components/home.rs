@@ -49,6 +49,7 @@ use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
+use crate::components::ant_design::badge::Badge;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -219,6 +220,7 @@ pub fn home() -> Html {
       //   <Down/>
       //   <Up/>
       // </List>
+      <Badge/>
       <Alert
         message={String::from("Error")}
         description={String::from("This is an error message about copywriting.")}
