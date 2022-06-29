@@ -245,7 +245,7 @@ pub fn home() -> Html {
         // content={AvatarContent::Icon(SvgType::User)}
       />
       <Badge
-        count={Some(2)}
+        count={Some(7)}
       />
       </div>
 
