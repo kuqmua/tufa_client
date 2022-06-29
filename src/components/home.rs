@@ -220,7 +220,7 @@ pub fn home() -> Html {
       //   <Down/>
       //   <Up/>
       // </List>
-      <Badge/>
+      
       <Alert
         message={String::from("Error")}
         description={String::from("This is an error message about copywriting.")}
@@ -244,7 +244,9 @@ pub fn home() -> Html {
         // })}
         // content={AvatarContent::Icon(SvgType::User)}
       />
+      <Badge/>
       </div>
+
     };
     let inner_html_right = html! {};
     let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
