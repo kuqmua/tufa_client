@@ -1,4 +1,5 @@
 use yew::{function_component, html, Properties};
+use colorsys::Hsl;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct BadgeOffset {
@@ -17,7 +18,7 @@ pub enum BadgeStatus {
 
 #[derive(Properties, PartialEq)]
 pub struct BadgeProps {
-    pub color: Option<String>,// Customize Badge dot color	string	-	3.16.0
+    pub color: Option<Hsl>,// Customize Badge dot color	string	-	3.16.0
     pub count: Option<i32>,//	Number to show in badge	ReactNode		
     pub dot: Option<bool>,// Whether to display a red dot instead of count	boolean	false	
     pub offset: Option<BadgeOffset>,//	set offset of the badge dot, like[x, y]	[number, number]	-	
