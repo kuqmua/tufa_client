@@ -76,18 +76,7 @@ pub fn badge(props: &BadgeProps) -> Html {
             '7' => {seven_class = current;},
             '8' => {eight_class = current;},
             '9' => {nine_class = current;},
-            _ => {
-              zero_class = empty_string.clone();
-              one_class = empty_string.clone();
-              two_class = empty_string.clone();
-              three_class = empty_string.clone();
-              four_class = empty_string.clone();
-              five_class = empty_string.clone();
-              six_class = empty_string.clone();
-              seven_class = empty_string.clone();
-              eight_class = empty_string.clone();
-              nine_class = empty_string;
-            },//what sould i do in this case?
+            _ => (),
           };
           let numbers_to_scroll = html!{
             <>
@@ -136,18 +125,7 @@ pub fn badge(props: &BadgeProps) -> Html {
             '7' => {first_seven_class = current.clone();},
             '8' => {first_eight_class = current.clone();},
             '9' => {first_nine_class = current.clone();},
-            _ => {
-              first_zero_class = empty_string.clone();
-              first_one_class = empty_string.clone();
-              first_two_class = empty_string.clone();
-              first_three_class = empty_string.clone();
-              first_four_class = empty_string.clone();
-              first_five_class = empty_string.clone();
-              first_six_class = empty_string.clone();
-              first_seven_class = empty_string.clone();
-              first_eight_class = empty_string.clone();
-              first_nine_class = empty_string.clone();
-            },//what sould i do in this case?
+            _ => (),
           };
           let first_number_to_scroll = html!{
             <>
@@ -187,18 +165,7 @@ pub fn badge(props: &BadgeProps) -> Html {
             '7' => {second_seven_class = current;},
             '8' => {second_eight_class = current;},
             '9' => {second_nine_class = current;},
-            _ => {
-              second_zero_class = empty_string.clone();
-              second_one_class = empty_string.clone();
-              second_two_class = empty_string.clone();
-              second_three_class = empty_string.clone();
-              second_four_class = empty_string.clone();
-              second_five_class = empty_string.clone();
-              second_six_class = empty_string.clone();
-              second_seven_class = empty_string.clone();
-              second_eight_class = empty_string.clone();
-              second_nine_class = empty_string;
-            },//what sould i do in this case?
+            _ => (),
           };
           let second_number_to_scroll = html!{
             <>
