@@ -34,13 +34,7 @@ pub fn badge(props: &BadgeProps) -> Html {
   let sup = match props.count {
     None => html!{},
     Some(count) => {
-      let count_to_show: String;
-      if count > 99 {
-        count_to_show = String::from("99");
-      }
-      else {
-        count_to_show = count.to_string();
-      }
+      let count_to_show = count.to_string();
       let numbers = html!{
         <>
           <p class="ant-scroll-number-only-unit">{"0"}</p>
@@ -224,6 +218,7 @@ pub fn badge(props: &BadgeProps) -> Html {
           };
           html!{
             <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>
+            <div></div>
               <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", first_element)}>
                 {first_number_to_scroll}
               </span>
@@ -234,11 +229,7 @@ pub fn badge(props: &BadgeProps) -> Html {
           }
         },
         _ => html!{
-          <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count.clone().to_string()}>
-            <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count.to_string().chars().nth(0).unwrap().clone())}>
-              {"99+"}
-            </span>
-          </sup>
+          <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{"99+"}</sup>
         },
       };
       inner_html
