@@ -91,54 +91,37 @@ pub fn badge(props: &BadgeProps) -> Html {
         },//what sould i do in this case?
       };
       let p_class = String::from("ant-scroll-number-only-unit");
-      let inner_html = match count_to_show.to_string().len() {
+      let numbers_to_scroll = html!{
+        <>
+          {numbers.clone()}
+          <p class={format!("{} {}", p_class, zero_class)}>{"0"}</p>
+          <p class={format!("{} {}", p_class, one_class)}>{"1"}</p>
+          <p class={format!("{} {}", p_class, two_class)}>{"2"}</p>
+          <p class={format!("{} {}", p_class, three_class)}>{"3"}</p>
+          <p class={format!("{} {}", p_class, four_class)}>{"4"}</p>
+          <p class={format!("{} {}", p_class, five_class)}>{"5"}</p>
+          <p class={format!("{} {}", p_class, six_class)}>{"6"}</p>
+          <p class={format!("{} {}", p_class, seven_class)}>{"7"}</p>
+          <p class={format!("{} {}", p_class, eight_class)}>{"8"}</p>
+          <p class={format!("{} {}", p_class, nine_class)}>{"9"}</p>
+          {numbers}
+        </>
+      };
+      let inner_html = match count_to_show.len() {
         1 => html!{
-            <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count.clone().to_string()}>
-              <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count.to_string().chars().nth(0).unwrap().clone())}>
-                {numbers.clone()}
-                <p class={format!("{} {}", p_class, zero_class)}>{"0"}</p>
-                <p class={format!("{} {}", p_class, one_class)}>{"1"}</p>
-                <p class={format!("{} {}", p_class, two_class)}>{"2"}</p>
-                <p class={format!("{} {}", p_class, three_class)}>{"3"}</p>
-                <p class={format!("{} {}", p_class, four_class)}>{"4"}</p>
-                <p class={format!("{} {}", p_class, five_class)}>{"5"}</p>
-                <p class={format!("{} {}", p_class, six_class)}>{"6"}</p>
-                <p class={format!("{} {}", p_class, seven_class)}>{"7"}</p>
-                <p class={format!("{} {}", p_class, eight_class)}>{"8"}</p>
-                <p class={format!("{} {}", p_class, nine_class)}>{"9"}</p>
-                {numbers}
+            <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count_to_show.clone()}>
+              <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count_to_show.chars().nth(0).unwrap().clone())}>
+                {numbers_to_scroll}
               </span>
             </sup>
         },
         2 => html!{
-          <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count.clone().to_string()}>
-            <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count.to_string().chars().nth(0).unwrap().clone())}>
-              {numbers.clone()}
-              <p class={format!("{} {}", p_class, zero_class)}>{"0"}</p>
-              <p class={format!("{} {}", p_class, one_class)}>{"1"}</p>
-              <p class={format!("{} {}", p_class, two_class)}>{"2"}</p>
-              <p class={format!("{} {}", p_class, three_class)}>{"3"}</p>
-              <p class={format!("{} {}", p_class, four_class)}>{"4"}</p>
-              <p class={format!("{} {}", p_class, five_class)}>{"5"}</p>
-              <p class={format!("{} {}", p_class, six_class)}>{"6"}</p>
-              <p class={format!("{} {}", p_class, seven_class)}>{"7"}</p>
-              <p class={format!("{} {}", p_class, eight_class)}>{"8"}</p>
-              <p class={format!("{} {}", p_class, nine_class)}>{"9"}</p>
-              {numbers.clone()}
+          <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>
+            <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count_to_show.chars().nth(0).unwrap().clone())}>
+              {numbers_to_scroll.clone()}
             </span>
-            <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count.to_string().chars().nth(1).unwrap().clone())}>
-              {numbers.clone()}
-              <p class={format!("{} {}", p_class, zero_class)}>{"0"}</p>
-              <p class={format!("{} {}", p_class, one_class)}>{"1"}</p>
-              <p class={format!("{} {}", p_class, two_class)}>{"2"}</p>
-              <p class={format!("{} {}", p_class, three_class)}>{"3"}</p>
-              <p class={format!("{} {}", p_class, four_class)}>{"4"}</p>
-              <p class={format!("{} {}", p_class, five_class)}>{"5"}</p>
-              <p class={format!("{} {}", p_class, six_class)}>{"6"}</p>
-              <p class={format!("{} {}", p_class, seven_class)}>{"7"}</p>
-              <p class={format!("{} {}", p_class, eight_class)}>{"8"}</p>
-              <p class={format!("{} {}", p_class, nine_class)}>{"9"}</p>
-              {numbers}
+            <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", count_to_show.chars().nth(1).unwrap().clone())}>
+              {numbers_to_scroll}
             </span>
           </sup>
         },
@@ -155,7 +138,7 @@ pub fn badge(props: &BadgeProps) -> Html {
   };
   html! {
     <span class="ant-badge">
-      <a href="#" class="head-example">
+      <a href="" class="head-example">
       </a>
       {sup}
     </span>
