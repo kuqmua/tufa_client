@@ -218,7 +218,6 @@ pub fn badge(props: &BadgeProps) -> Html {
           };
           html!{
             <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>
-            <div></div>
               <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", first_element)}>
                 {first_number_to_scroll}
               </span>
