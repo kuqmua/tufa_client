@@ -64,7 +64,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                     let mut six_class = empty_string.clone();
                     let mut seven_class = empty_string.clone();
                     let mut eight_class = empty_string.clone();
-                    let mut nine_class = empty_string.clone();
+                    let mut nine_class = empty_string;
                     match first_element {
                         '0' => {
                             zero_class = current;
@@ -193,7 +193,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                     let mut second_six_class = empty_string.clone();
                     let mut second_seven_class = empty_string.clone();
                     let mut second_eight_class = empty_string.clone();
-                    let mut second_nine_class = empty_string.clone();
+                    let mut second_nine_class = empty_string;
                     match second_element {
                         '0' => {
                             second_zero_class = current;
