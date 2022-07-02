@@ -1,5 +1,6 @@
 use colorsys::Hsl;
-use yew::{function_component, html, Properties};
+use gloo::console::log;
+use yew::{function_component, html, Html, Properties};
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct BadgeOffset {
@@ -19,10 +20,10 @@ pub enum BadgeStatus {
 #[derive(Properties, PartialEq)]
 pub struct BadgeProps {
     pub color: Option<Hsl>,          // Customize Badge dot color	string	-	3.16.0
-    pub count: Option<i64>,          //	Number to show in badge	ReactNode
+    pub count: Option<u64>,          //	Number to show in badge	ReactNode
     pub dot: Option<bool>,           // Whether to display a red dot instead of count	boolean	false
     pub offset: Option<BadgeOffset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
-    // pub overflow_count: Option<i64>,//dont think it would be usefull//	Max count to show	number	99
+    // pub overflow_count: Option<u64>,//dont think it would be usefull//	Max count to show	number	99
     pub show_zero: Option<bool>, //	Whether to show badge when count is zero	boolean	false
     pub status: Option<BadgeStatus>, //	Set Badge as a status dot	success | processing | default | error | warning	''
     pub text: Option<String>, //	If status is set, text sets the display text of the status dot	string	''
@@ -49,9 +50,19 @@ pub fn badge(props: &BadgeProps) -> Html {
                 <p class="ant-scroll-number-only-unit">{"9"}</p>
               </>
             };
-            let empty_string = String::from("");
             let current = String::from("current");
             let p_class = String::from("ant-scroll-number-only-unit");
+            let f = count_to_show
+                .chars()
+                // .iter()
+                .map(|char| {
+                    html! {
+                    //   <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", first_element)}>
+                    //     {first_number_to_scroll}
+                    //    </span>
+                    }
+                })
+                .collect::<Vec<Html>>();
             let inner_html = match count_to_show.len() {
                 1 => {
                     let first_element = count_to_show.chars().nth(0).unwrap();
