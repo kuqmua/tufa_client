@@ -246,6 +246,7 @@ pub fn home() -> Html {
       />
       <Badge
         count={Some(777)}
+        overflow_count={Some(123)}
       />
       </div>
 

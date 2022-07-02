@@ -24,8 +24,8 @@ pub struct BadgeProps {
     pub count: Option<u64>,          //	Number to show in badge	ReactNode
     pub dot: Option<bool>,           // Whether to display a red dot instead of count	boolean	false
     pub offset: Option<BadgeOffset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
-    // pub overflow_count: Option<u64>,//dont think it would be usefull//	Max count to show	number	99
-    pub show_zero: Option<bool>, //	Whether to show badge when count is zero	boolean	false
+    pub overflow_count: Option<u64>, //dont think it would be usefull//	Max count to show	number	99
+    pub show_zero: Option<bool>,     //	Whether to show badge when count is zero	boolean	false
     pub status: Option<BadgeStatus>, //	Set Badge as a status dot	success | processing | default | error | warning	''
     pub text: Option<String>, //	If status is set, text sets the display text of the status dot	string	''
     pub title: Option<String>, //	Text to show when hovering over the badge	string	count
@@ -36,10 +36,11 @@ pub fn badge(props: &BadgeProps) -> Html {
     let sup = match props.count {
         None => html! {},
         Some(count) => {
+            let max_count_number = props.overflow_count.unwrap_or(99);
             let count_to_show = count.to_string();
-            match count > 99 {
+            match count > max_count_number {
                 true => html! {
-                  <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{"99+"}</sup>
+                  <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{format!("{}+", max_count_number)}</sup>
                 },
                 false => {
                     let numbers = count_to_show
