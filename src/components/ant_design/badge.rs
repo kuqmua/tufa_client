@@ -34,43 +34,48 @@ pub struct BadgeProps {
 #[function_component(Badge)]
 pub fn badge(props: &BadgeProps) -> Html {
     let sup = match props.count {
-        None => {
-            let style = match &props.color {
-                None => String::from(""),
-                Some(color) => format!("background: {};", color.to_css_string()),
-            };
-            html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={style}></sup>
-            }
-        }
-        Some(count) => {
-            let max_count_number = props.overflow_count.unwrap_or(99);
-            let count_to_show = count.to_string();
-            match count > max_count_number {
-                true => html! {
-                  <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{format!("{}+", max_count_number)}</sup>
-                },
-                false => {
-                    let numbers = count_to_show
-                        .chars()
-                        .map(|char| match Numeric::try_from(char) {
-                            Err(char) => {
-                                error!("badge component char is not a numeric: ", char.to_string());
-                                html! {}
-                            }
-                            Ok(numeric) => html! {
-                                <BadgeNumbers numeric={numeric}/>
-                            },
-                        })
-                        .collect::<Vec<Html>>();
-                    html! {
-                      <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count_to_show.clone()}>
-                        {for numbers}
-                      </sup>
+        None => match &props.color {
+            None => html! {},
+            Some(color) => html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+            },
+        },
+        Some(count) => match &props.color {
+            None => {
+                let max_count_number = props.overflow_count.unwrap_or(99);
+                let count_to_show = count.to_string();
+                match count > max_count_number {
+                    true => html! {
+                      <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{format!("{}+", max_count_number)}</sup>
+                    },
+                    false => {
+                        let numbers = count_to_show
+                            .chars()
+                            .map(|char| match Numeric::try_from(char) {
+                                Err(char) => {
+                                    error!(
+                                        "badge component char is not a numeric: ",
+                                        char.to_string()
+                                    );
+                                    html! {}
+                                }
+                                Ok(numeric) => html! {
+                                    <BadgeNumbers numeric={numeric}/>
+                                },
+                            })
+                            .collect::<Vec<Html>>();
+                        html! {
+                          <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count_to_show.clone()}>
+                            {for numbers}
+                          </sup>
+                        }
                     }
                 }
             }
-        }
+            Some(color) => html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+            },
+        },
     };
     html! {
       <span class="ant-badge">
