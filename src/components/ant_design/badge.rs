@@ -22,10 +22,10 @@ pub enum BadgeStatus {
 pub struct BadgeProps {
     pub color: Option<Hsl>,          // Customize Badge dot color	string	-	3.16.0
     pub count: Option<u64>,          //	Number to show in badge	ReactNode
-    pub dot: Option<bool>,           // Whether to display a red dot instead of count	boolean	false
+    pub dot: Option<()>,             // Whether to display a red dot instead of count	boolean	false
     pub offset: Option<BadgeOffset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
     pub overflow_count: Option<u64>, //dont think it would be usefull//	Max count to show	number	99
-    pub show_zero: Option<bool>,     //	Whether to show badge when count is zero	boolean	false
+    pub show_zero: Option<()>,       //	Whether to show badge when count is zero	boolean	false
     pub status: Option<BadgeStatus>, //	Set Badge as a status dot	success | processing | default | error | warning	''
     pub text: Option<String>, //	If status is set, text sets the display text of the status dot	string	''
     pub title: Option<String>, //	Text to show when hovering over the badge	string	count
@@ -34,14 +34,20 @@ pub struct BadgeProps {
 #[function_component(Badge)]
 pub fn badge(props: &BadgeProps) -> Html {
     let sup = match props.count {
-        None => match &props.color {
-            None => html! {},
-            Some(color) => html! {
+        None => match (&props.color, &props.dot) {
+            (None, None) => html! {},
+            (None, Some(_)) => html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
+            },
+            (Some(color), None) => html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+            },
+            (Some(color), Some(_)) => html! {
               <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
             },
         },
-        Some(count) => match &props.color {
-            None => {
+        Some(count) => match (&props.color, &props.dot) {
+            (None, None) => {
                 let max_count_number = props.overflow_count.unwrap_or(99);
                 let count_to_show = count.to_string();
                 match count > max_count_number {
@@ -72,7 +78,13 @@ pub fn badge(props: &BadgeProps) -> Html {
                     }
                 }
             }
-            Some(color) => html! {
+            (None, Some(_)) => html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
+            },
+            (Some(color), None) => html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+            },
+            (Some(color), Some(_)) => html! {
               <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
             },
         },

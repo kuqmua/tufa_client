@@ -246,8 +246,9 @@ pub fn home() -> Html {
       />
       <Badge
         count={Some(777)}
-        overflow_count={Some(123)}
+        // overflow_count={Some(123)}
         color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
+        dot={Some(())}
       />
       </div>
 
