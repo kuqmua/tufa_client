@@ -45,11 +45,11 @@ use crate::components::header::component::Header;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 // use crate::helpers::rotate::Rotate;
+use crate::components::ant_design::badge::Badge;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use crate::components::ant_design::badge::Badge;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -220,7 +220,7 @@ pub fn home() -> Html {
       //   <Down/>
       //   <Up/>
       // </List>
-      
+
       <Alert
         message={String::from("Error")}
         description={String::from("This is an error message about copywriting.")}
@@ -245,7 +245,7 @@ pub fn home() -> Html {
         // content={AvatarContent::Icon(SvgType::User)}
       />
       <Badge
-        count={Some(7)}
+        count={Some(777)}
       />
       </div>
 

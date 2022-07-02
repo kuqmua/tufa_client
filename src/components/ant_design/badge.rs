@@ -1,14 +1,15 @@
 use colorsys::Hsl;
-use gloo::console::log;
+use gloo::console::error;
+use tufa_common::helpers::numeric::Numeric;
 use yew::{function_component, html, Html, Properties};
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct BadgeOffset {
     pub x: i64,
     pub y: i64,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BadgeStatus {
     Success,
     Processing,
@@ -36,240 +37,30 @@ pub fn badge(props: &BadgeProps) -> Html {
         None => html! {},
         Some(count) => {
             let count_to_show = count.to_string();
-            let numbers = html! {
-              <>
-                <p class="ant-scroll-number-only-unit">{"0"}</p>
-                <p class="ant-scroll-number-only-unit">{"1"}</p>
-                <p class="ant-scroll-number-only-unit">{"2"}</p>
-                <p class="ant-scroll-number-only-unit">{"3"}</p>
-                <p class="ant-scroll-number-only-unit">{"4"}</p>
-                <p class="ant-scroll-number-only-unit">{"5"}</p>
-                <p class="ant-scroll-number-only-unit">{"6"}</p>
-                <p class="ant-scroll-number-only-unit">{"7"}</p>
-                <p class="ant-scroll-number-only-unit">{"8"}</p>
-                <p class="ant-scroll-number-only-unit">{"9"}</p>
-              </>
-            };
-            let current = String::from("current");
-            let p_class = String::from("ant-scroll-number-only-unit");
-            let f = count_to_show
-                .chars()
-                // .iter()
-                .map(|char| {
-                    html! {
-                    //   <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", first_element)}>
-                    //     {first_number_to_scroll}
-                    //    </span>
-                    }
-                })
-                .collect::<Vec<Html>>();
-            let inner_html = match count_to_show.len() {
-                1 => {
-                    let first_element = count_to_show.chars().nth(0).unwrap();
-                    let mut zero_class = p_class.clone();
-                    let mut one_class = p_class.clone();
-                    let mut two_class = p_class.clone();
-                    let mut three_class = p_class.clone();
-                    let mut four_class = p_class.clone();
-                    let mut five_class = p_class.clone();
-                    let mut six_class = p_class.clone();
-                    let mut seven_class = p_class.clone();
-                    let mut eight_class = p_class.clone();
-                    let mut nine_class = p_class.clone();
-                    match first_element {
-                        '0' => {
-                            zero_class = format!("{} {}", p_class, current);
-                        }
-                        '1' => {
-                            one_class = format!("{} {}", p_class, current);
-                        }
-                        '2' => {
-                            two_class = format!("{} {}", p_class, current);
-                        }
-                        '3' => {
-                            three_class = format!("{} {}", p_class, current);
-                        }
-                        '4' => {
-                            four_class = format!("{} {}", p_class, current);
-                        }
-                        '5' => {
-                            five_class = format!("{} {}", p_class, current);
-                        }
-                        '6' => {
-                            six_class = format!("{} {}", p_class, current);
-                        }
-                        '7' => {
-                            seven_class = format!("{} {}", p_class, current);
-                        }
-                        '8' => {
-                            eight_class = format!("{} {}", p_class, current);
-                        }
-                        '9' => {
-                            nine_class = format!("{} {}", p_class, current);
-                        }
-                        _ => (),
-                    };
-                    let numbers_to_scroll = html! {
-                      <>
-                        {numbers.clone()}
-                        <p class={zero_class}>{"0"}</p>
-                        <p class={one_class}>{"1"}</p>
-                        <p class={two_class}>{"2"}</p>
-                        <p class={three_class}>{"3"}</p>
-                        <p class={four_class}>{"4"}</p>
-                        <p class={five_class}>{"5"}</p>
-                        <p class={six_class}>{"6"}</p>
-                        <p class={seven_class}>{"7"}</p>
-                        <p class={eight_class}>{"8"}</p>
-                        <p class={nine_class}>{"9"}</p>
-                        {numbers}
-                      </>
-                    };
-                    html! {
-                      <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count_to_show.clone()}>
-                        <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", first_element.clone())}>
-                          {numbers_to_scroll}
-                        </span>
-                      </sup>
-                    }
-                }
-                2 => {
-                    let first_element = count_to_show.chars().nth(0).unwrap();
-                    let mut first_zero_class = p_class.clone();
-                    let mut first_one_class = p_class.clone();
-                    let mut first_two_class = p_class.clone();
-                    let mut first_three_class = p_class.clone();
-                    let mut first_four_class = p_class.clone();
-                    let mut first_five_class = p_class.clone();
-                    let mut first_six_class = p_class.clone();
-                    let mut first_seven_class = p_class.clone();
-                    let mut first_eight_class = p_class.clone();
-                    let mut first_nine_class = p_class.clone();
-                    match first_element {
-                        '0' => {
-                            first_zero_class = format!("{} {}", p_class, current);
-                        }
-                        '1' => {
-                            first_one_class = format!("{} {}", p_class, current);
-                        }
-                        '2' => {
-                            first_two_class = format!("{} {}", p_class, current);
-                        }
-                        '3' => {
-                            first_three_class = format!("{} {}", p_class, current);
-                        }
-                        '4' => {
-                            first_four_class = format!("{} {}", p_class, current);
-                        }
-                        '5' => {
-                            first_five_class = format!("{} {}", p_class, current);
-                        }
-                        '6' => {
-                            first_six_class = format!("{} {}", p_class, current);
-                        }
-                        '7' => {
-                            first_seven_class = format!("{} {}", p_class, current);
-                        }
-                        '8' => {
-                            first_eight_class = format!("{} {}", p_class, current);
-                        }
-                        '9' => {
-                            first_nine_class = format!("{} {}", p_class, current);
-                        }
-                        _ => (),
-                    };
-                    let first_number_to_scroll = html! {
-                      <>
-                        {numbers.clone()}
-                        <p class={first_zero_class}>{"0"}</p>
-                        <p class={first_one_class}>{"1"}</p>
-                        <p class={first_two_class}>{"2"}</p>
-                        <p class={first_three_class}>{"3"}</p>
-                        <p class={first_four_class}>{"4"}</p>
-                        <p class={first_five_class}>{"5"}</p>
-                        <p class={first_six_class}>{"6"}</p>
-                        <p class={first_seven_class}>{"7"}</p>
-                        <p class={first_eight_class}>{"8"}</p>
-                        <p class={first_nine_class}>{"9"}</p>
-                        {numbers.clone()}
-                      </>
-                    };
-                    let second_element = count_to_show.chars().nth(1).unwrap();
-                    let mut second_zero_class = p_class.clone();
-                    let mut second_one_class = p_class.clone();
-                    let mut second_two_class = p_class.clone();
-                    let mut second_three_class = p_class.clone();
-                    let mut second_four_class = p_class.clone();
-                    let mut second_five_class = p_class.clone();
-                    let mut second_six_class = p_class.clone();
-                    let mut second_seven_class = p_class.clone();
-                    let mut second_eight_class = p_class.clone();
-                    let mut second_nine_class = p_class.clone();
-                    match second_element {
-                        '0' => {
-                            second_zero_class = format!("{} {}", p_class, current);
-                        }
-                        '1' => {
-                            second_one_class = format!("{} {}", p_class, current);
-                        }
-                        '2' => {
-                            second_two_class = format!("{} {}", p_class, current);
-                        }
-                        '3' => {
-                            second_three_class = format!("{} {}", p_class, current);
-                        }
-                        '4' => {
-                            second_four_class = format!("{} {}", p_class, current);
-                        }
-                        '5' => {
-                            second_five_class = format!("{} {}", p_class, current);
-                        }
-                        '6' => {
-                            second_six_class = format!("{} {}", p_class, current);
-                        }
-                        '7' => {
-                            second_seven_class = format!("{} {}", p_class, current);
-                        }
-                        '8' => {
-                            second_eight_class = format!("{} {}", p_class, current);
-                        }
-                        '9' => {
-                            second_nine_class = format!("{} {}", p_class, current);
-                        }
-                        _ => (),
-                    };
-                    let second_number_to_scroll = html! {
-                      <>
-                        {numbers.clone()}
-                        <p class={second_zero_class}>{"0"}</p>
-                        <p class={second_one_class}>{"1"}</p>
-                        <p class={second_two_class}>{"2"}</p>
-                        <p class={second_three_class}>{"3"}</p>
-                        <p class={second_four_class}>{"4"}</p>
-                        <p class={second_five_class}>{"5"}</p>
-                        <p class={second_six_class}>{"6"}</p>
-                        <p class={second_seven_class}>{"7"}</p>
-                        <p class={second_eight_class}>{"8"}</p>
-                        <p class={second_nine_class}>{"9"}</p>
-                        {numbers}
-                      </>
-                    };
-                    html! {
-                      <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>
-                        <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", first_element)}>
-                          {first_number_to_scroll}
-                        </span>
-                        <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", second_element)}>
-                          {second_number_to_scroll}
-                        </span>
-                      </sup>
-                    }
-                }
-                _ => html! {
+            match count > 99 {
+                true => html! {
                   <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{"99+"}</sup>
                 },
-            };
-            inner_html
+                false => {
+                    let numbers = count_to_show
+                        .chars()
+                        .map(|char| match Numeric::try_from(char) {
+                            Err(char) => {
+                                error!("badge component char is not a numeric: ", char.to_string());
+                                html! {}
+                            }
+                            Ok(numeric) => html! {
+                                <BadgeNumbers numeric={numeric}/>
+                            },
+                        })
+                        .collect::<Vec<Html>>();
+                    html! {
+                      <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count_to_show.clone()}>
+                        {for numbers}
+                      </sup>
+                    }
+                }
+            }
         }
     };
     html! {
@@ -278,5 +69,88 @@ pub fn badge(props: &BadgeProps) -> Html {
         </a>
         {sup}
       </span>
+    }
+}
+
+#[derive(Properties, PartialEq, Eq)]
+pub struct BadgeNumbersProps {
+    pub numeric: Numeric,
+}
+
+#[function_component(BadgeNumbers)]
+pub fn badge_numbers(props: &BadgeNumbersProps) -> Html {
+    let numbers = html! {
+        <>
+          <p class="ant-scroll-number-only-unit">{"0"}</p>
+          <p class="ant-scroll-number-only-unit">{"1"}</p>
+          <p class="ant-scroll-number-only-unit">{"2"}</p>
+          <p class="ant-scroll-number-only-unit">{"3"}</p>
+          <p class="ant-scroll-number-only-unit">{"4"}</p>
+          <p class="ant-scroll-number-only-unit">{"5"}</p>
+          <p class="ant-scroll-number-only-unit">{"6"}</p>
+          <p class="ant-scroll-number-only-unit">{"7"}</p>
+          <p class="ant-scroll-number-only-unit">{"8"}</p>
+          <p class="ant-scroll-number-only-unit">{"9"}</p>
+        </>
+    };
+    let current = String::from("current");
+    let p_class = String::from("ant-scroll-number-only-unit");
+    let mut zero_class = p_class.clone();
+    let mut one_class = p_class.clone();
+    let mut two_class = p_class.clone();
+    let mut three_class = p_class.clone();
+    let mut four_class = p_class.clone();
+    let mut five_class = p_class.clone();
+    let mut six_class = p_class.clone();
+    let mut seven_class = p_class.clone();
+    let mut eight_class = p_class.clone();
+    let mut nine_class = p_class.clone();
+    match props.numeric.clone() {
+        Numeric::Zero => {
+            zero_class = format!("{} {}", p_class, current);
+        }
+        Numeric::One => {
+            one_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Two => {
+            two_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Three => {
+            three_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Four => {
+            four_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Five => {
+            five_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Six => {
+            six_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Seven => {
+            seven_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Eight => {
+            eight_class = format!("{} {}", p_class, current);
+        }
+        Numeric::Nine => {
+            nine_class = format!("{} {}", p_class, current);
+        }
+    };
+    html! {
+       <span class="ant-scroll-number-only" style={format!("transition: none 0s ease 0s; transform: translateY(-1{}00%);", props.numeric.clone())}>
+         {numbers.clone()}
+         <p class={zero_class}>{"0"}</p>
+         <p class={one_class}>{"1"}</p>
+         <p class={two_class}>{"2"}</p>
+         <p class={three_class}>{"3"}</p>
+         <p class={four_class}>{"4"}</p>
+         <p class={five_class}>{"5"}</p>
+         <p class={six_class}>{"6"}</p>
+         <p class={seven_class}>{"7"}</p>
+         <p class={eight_class}>{"8"}</p>
+         <p class={nine_class}>{"9"}</p>
+         {numbers.clone()}
+       </span>
     }
 }
