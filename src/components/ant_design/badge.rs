@@ -34,7 +34,15 @@ pub struct BadgeProps {
 #[function_component(Badge)]
 pub fn badge(props: &BadgeProps) -> Html {
     let sup = match props.count {
-        None => html! {},
+        None => {
+            let style = match &props.color {
+                None => String::from(""),
+                Some(color) => format!("background: {};", color.to_css_string()),
+            };
+            html! {
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={style}></sup>
+            }
+        }
         Some(count) => {
             let max_count_number = props.overflow_count.unwrap_or(99);
             let count_to_show = count.to_string();

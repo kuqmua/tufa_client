@@ -245,8 +245,9 @@ pub fn home() -> Html {
         // content={AvatarContent::Icon(SvgType::User)}
       />
       <Badge
-        count={Some(777)}
+        // count={Some(777)}
         overflow_count={Some(123)}
+        color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
       />
       </div>
 
