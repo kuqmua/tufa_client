@@ -124,122 +124,122 @@ pub fn badge(props: &BadgeProps) -> Html {
                 }
                 2 => {
                     let first_element = count_to_show.chars().nth(0).unwrap();
-                    let mut first_zero_class = empty_string.clone();
-                    let mut first_one_class = empty_string.clone();
-                    let mut first_two_class = empty_string.clone();
-                    let mut first_three_class = empty_string.clone();
-                    let mut first_four_class = empty_string.clone();
-                    let mut first_five_class = empty_string.clone();
-                    let mut first_six_class = empty_string.clone();
-                    let mut first_seven_class = empty_string.clone();
-                    let mut first_eight_class = empty_string.clone();
-                    let mut first_nine_class = empty_string.clone();
+                    let mut first_zero_class = p_class.clone();
+                    let mut first_one_class = p_class.clone();
+                    let mut first_two_class = p_class.clone();
+                    let mut first_three_class = p_class.clone();
+                    let mut first_four_class = p_class.clone();
+                    let mut first_five_class = p_class.clone();
+                    let mut first_six_class = p_class.clone();
+                    let mut first_seven_class = p_class.clone();
+                    let mut first_eight_class = p_class.clone();
+                    let mut first_nine_class = p_class.clone();
                     match first_element {
                         '0' => {
-                            first_zero_class = current.clone();
+                            first_zero_class = format!("{} {}", p_class, current);
                         }
                         '1' => {
-                            first_one_class = current.clone();
+                            first_one_class = format!("{} {}", p_class, current);
                         }
                         '2' => {
-                            first_two_class = current.clone();
+                            first_two_class = format!("{} {}", p_class, current);
                         }
                         '3' => {
-                            first_three_class = current.clone();
+                            first_three_class = format!("{} {}", p_class, current);
                         }
                         '4' => {
-                            first_four_class = current.clone();
+                            first_four_class = format!("{} {}", p_class, current);
                         }
                         '5' => {
-                            first_five_class = current.clone();
+                            first_five_class = format!("{} {}", p_class, current);
                         }
                         '6' => {
-                            first_six_class = current.clone();
+                            first_six_class = format!("{} {}", p_class, current);
                         }
                         '7' => {
-                            first_seven_class = current.clone();
+                            first_seven_class = format!("{} {}", p_class, current);
                         }
                         '8' => {
-                            first_eight_class = current.clone();
+                            first_eight_class = format!("{} {}", p_class, current);
                         }
                         '9' => {
-                            first_nine_class = current.clone();
+                            first_nine_class = format!("{} {}", p_class, current);
                         }
                         _ => (),
                     };
                     let first_number_to_scroll = html! {
                       <>
                         {numbers.clone()}
-                        <p class={format!("{} {}", p_class, first_zero_class)}>{"0"}</p>
-                        <p class={format!("{} {}", p_class, first_one_class)}>{"1"}</p>
-                        <p class={format!("{} {}", p_class, first_two_class)}>{"2"}</p>
-                        <p class={format!("{} {}", p_class, first_three_class)}>{"3"}</p>
-                        <p class={format!("{} {}", p_class, first_four_class)}>{"4"}</p>
-                        <p class={format!("{} {}", p_class, first_five_class)}>{"5"}</p>
-                        <p class={format!("{} {}", p_class, first_six_class)}>{"6"}</p>
-                        <p class={format!("{} {}", p_class, first_seven_class)}>{"7"}</p>
-                        <p class={format!("{} {}", p_class, first_eight_class)}>{"8"}</p>
-                        <p class={format!("{} {}", p_class, first_nine_class)}>{"9"}</p>
+                        <p class={first_zero_class}>{"0"}</p>
+                        <p class={first_one_class}>{"1"}</p>
+                        <p class={first_two_class}>{"2"}</p>
+                        <p class={first_three_class}>{"3"}</p>
+                        <p class={first_four_class}>{"4"}</p>
+                        <p class={first_five_class}>{"5"}</p>
+                        <p class={first_six_class}>{"6"}</p>
+                        <p class={first_seven_class}>{"7"}</p>
+                        <p class={first_eight_class}>{"8"}</p>
+                        <p class={first_nine_class}>{"9"}</p>
                         {numbers.clone()}
                       </>
                     };
                     let second_element = count_to_show.chars().nth(1).unwrap();
-                    let mut second_zero_class = empty_string.clone();
-                    let mut second_one_class = empty_string.clone();
-                    let mut second_two_class = empty_string.clone();
-                    let mut second_three_class = empty_string.clone();
-                    let mut second_four_class = empty_string.clone();
-                    let mut second_five_class = empty_string.clone();
-                    let mut second_six_class = empty_string.clone();
-                    let mut second_seven_class = empty_string.clone();
-                    let mut second_eight_class = empty_string.clone();
-                    let mut second_nine_class = empty_string;
+                    let mut second_zero_class = p_class.clone();
+                    let mut second_one_class = p_class.clone();
+                    let mut second_two_class = p_class.clone();
+                    let mut second_three_class = p_class.clone();
+                    let mut second_four_class = p_class.clone();
+                    let mut second_five_class = p_class.clone();
+                    let mut second_six_class = p_class.clone();
+                    let mut second_seven_class = p_class.clone();
+                    let mut second_eight_class = p_class.clone();
+                    let mut second_nine_class = p_class.clone();
                     match second_element {
                         '0' => {
-                            second_zero_class = current;
+                            second_zero_class = format!("{} {}", p_class, current);
                         }
                         '1' => {
-                            second_one_class = current;
+                            second_one_class = format!("{} {}", p_class, current);
                         }
                         '2' => {
-                            second_two_class = current;
+                            second_two_class = format!("{} {}", p_class, current);
                         }
                         '3' => {
-                            second_three_class = current;
+                            second_three_class = format!("{} {}", p_class, current);
                         }
                         '4' => {
-                            second_four_class = current;
+                            second_four_class = format!("{} {}", p_class, current);
                         }
                         '5' => {
-                            second_five_class = current;
+                            second_five_class = format!("{} {}", p_class, current);
                         }
                         '6' => {
-                            second_six_class = current;
+                            second_six_class = format!("{} {}", p_class, current);
                         }
                         '7' => {
-                            second_seven_class = current;
+                            second_seven_class = format!("{} {}", p_class, current);
                         }
                         '8' => {
-                            second_eight_class = current;
+                            second_eight_class = format!("{} {}", p_class, current);
                         }
                         '9' => {
-                            second_nine_class = current;
+                            second_nine_class = format!("{} {}", p_class, current);
                         }
                         _ => (),
                     };
                     let second_number_to_scroll = html! {
                       <>
                         {numbers.clone()}
-                        <p class={format!("{} {}", p_class, second_zero_class)}>{"0"}</p>
-                        <p class={format!("{} {}", p_class, second_one_class)}>{"1"}</p>
-                        <p class={format!("{} {}", p_class, second_two_class)}>{"2"}</p>
-                        <p class={format!("{} {}", p_class, second_three_class)}>{"3"}</p>
-                        <p class={format!("{} {}", p_class, second_four_class)}>{"4"}</p>
-                        <p class={format!("{} {}", p_class, second_five_class)}>{"5"}</p>
-                        <p class={format!("{} {}", p_class, second_six_class)}>{"6"}</p>
-                        <p class={format!("{} {}", p_class, second_seven_class)}>{"7"}</p>
-                        <p class={format!("{} {}", p_class, second_eight_class)}>{"8"}</p>
-                        <p class={format!("{} {}", p_class, second_nine_class)}>{"9"}</p>
+                        <p class={second_zero_class}>{"0"}</p>
+                        <p class={second_one_class}>{"1"}</p>
+                        <p class={second_two_class}>{"2"}</p>
+                        <p class={second_three_class}>{"3"}</p>
+                        <p class={second_four_class}>{"4"}</p>
+                        <p class={second_five_class}>{"5"}</p>
+                        <p class={second_six_class}>{"6"}</p>
+                        <p class={second_seven_class}>{"7"}</p>
+                        <p class={second_eight_class}>{"8"}</p>
+                        <p class={second_nine_class}>{"9"}</p>
                         {numbers}
                       </>
                     };
