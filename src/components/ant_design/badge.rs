@@ -1,7 +1,7 @@
 use colorsys::Hsl;
 use gloo::console::error;
 use tufa_common::helpers::numeric::Numeric;
-use yew::{function_component, html, Html, Properties};
+use yew::{function_component, html, Children, Html, Properties};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct BadgeOffset {
@@ -29,6 +29,8 @@ pub struct BadgeProps {
     pub status: Option<BadgeStatus>, //	Set Badge as a status dot	success | processing | default | error | warning	''
     pub text: Option<String>, //	If status is set, text sets the display text of the status dot	string	''
     pub title: Option<String>, //	Text to show when hovering over the badge	string	count
+    #[prop_or_default]
+    pub children: Children,
 }
 
 #[function_component(Badge)]
@@ -117,8 +119,7 @@ pub fn badge(props: &BadgeProps) -> Html {
     };
     html! {
       <span class="ant-badge">
-        <a href="" class="head-example">
-        </a>
+        { for props.children.iter() }
         {sup}
       </span>
     }

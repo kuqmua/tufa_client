@@ -250,8 +250,11 @@ pub fn home() -> Html {
         // overflow_count={Some(123)}
         color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
         dot={Some(())}
-        offset={Some(BadgeOffset{x:20, y:-20})}
-      />
+        // offset={Some(BadgeOffset{x:20, y:-20})}
+      >
+        <a href="" class="head-example">
+        </a>
+      </Badge>
       </div>
 
     };
