@@ -69,9 +69,11 @@ pub fn badge(props: &BadgeProps) -> Html {
         None => String::from(""),
         Some(_) => String::from("ant-badge-status"),
     };
-    let text_html = match &props.text {
-        None => html! {},
-        Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+    let text_html = match (&props.text, props.status.clone()) {
+        (None, None) => html! {},
+        (None, Some(_)) => html! {},
+        (Some(_), None) => html! {},
+        (Some(text), Some(_)) => html! {<span class="ant-badge-status-text">{text}</span>},
     };
     let title = match (props.title.clone(), props.count) {
         (None, None) => String::from(""),
