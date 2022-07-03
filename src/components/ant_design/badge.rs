@@ -33,17 +33,31 @@ pub struct BadgeProps {
 
 #[function_component(Badge)]
 pub fn badge(props: &BadgeProps) -> Html {
+    let offset_style = match props.offset.clone() {
+        None => String::from(""),
+        Some(badge_offset) => {
+            let right_or_left = match badge_offset.x.is_positive() {
+                true => format!("right: -{}px;", badge_offset.x),
+                false => format!("right: {}px;", badge_offset.x.abs()),
+            };
+            let margin_top_or_bottom = match badge_offset.y.is_positive() {
+                true => format!("margin-top: {}px;", badge_offset.y),
+                false => format!("margin-top: {}px;", badge_offset.y),
+            };
+            format!("{} {}", right_or_left, margin_top_or_bottom)
+        }
+    };
     let sup = match props.count {
         None => match (&props.color, &props.dot) {
             (None, None) => html! {},
             (None, Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup>
             },
             (Some(color), None) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
             },
             (Some(color), Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
             },
         },
         Some(count) => match (&props.color, &props.dot) {
@@ -52,7 +66,14 @@ pub fn badge(props: &BadgeProps) -> Html {
                 let count_to_show = count.to_string();
                 match count > max_count_number {
                     true => html! {
-                      <sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title={count_to_show.clone()}>{format!("{}+", max_count_number)}</sup>
+                      <sup
+                        data-show="true"
+                        class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
+                        title={count_to_show.clone()}
+                        style={offset_style}
+                      >
+                        {format!("{}+", max_count_number)}
+                      </sup>
                     },
                     false => {
                         let numbers = count_to_show
@@ -71,7 +92,12 @@ pub fn badge(props: &BadgeProps) -> Html {
                             })
                             .collect::<Vec<Html>>();
                         html! {
-                          <sup data-show="true" class="ant-scroll-number ant-badge-count" title={count_to_show.clone()}>
+                          <sup
+                            data-show="true"
+                            class="ant-scroll-number ant-badge-count"
+                            title={count_to_show.clone()}
+                            style={offset_style}
+                          >
                             {for numbers}
                           </sup>
                         }
@@ -79,13 +105,13 @@ pub fn badge(props: &BadgeProps) -> Html {
                 }
             }
             (None, Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup>
             },
             (Some(color), None) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
             },
             (Some(color), Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {};", color.to_css_string())}></sup>
+              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
             },
         },
     };

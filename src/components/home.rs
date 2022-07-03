@@ -12,6 +12,7 @@ use super::ant_design::avatar::AvatarSizeType;
 use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
+use crate::components::ant_design::badge::BadgeOffset;
 // use crate::components::ant_design::button::Button;
 // use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
@@ -249,6 +250,7 @@ pub fn home() -> Html {
         // overflow_count={Some(123)}
         color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
         dot={Some(())}
+        offset={Some(BadgeOffset{x:20, y:-20})}
       />
       </div>
 
