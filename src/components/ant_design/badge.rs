@@ -18,6 +18,18 @@ pub enum BadgeStatus {
     Warning,
 }
 
+impl BadgeStatus {
+    pub fn get_class(&self) -> String {
+        match self {
+            BadgeStatus::Success => String::from("ant-badge-status-success"),
+            BadgeStatus::Processing => String::from("ant-badge-status-processing"),
+            BadgeStatus::Default => String::from("ant-badge-status-default"),
+            BadgeStatus::Error => String::from("ant-badge-status-error"),
+            BadgeStatus::Warning => String::from("ant-badge-status-warning"),
+        }
+    }
+}
+
 #[derive(Properties, PartialEq)]
 pub struct BadgeProps {
     pub color: Option<Hsl>,          // Customize Badge dot color	string	-	3.16.0
@@ -48,6 +60,14 @@ pub fn badge(props: &BadgeProps) -> Html {
             };
             format!("{} {}", right_or_left, margin_top_or_bottom)
         }
+    };
+    let status_dot_style = match props.status.clone() {
+        None => String::from(""),
+        Some(status) => status.get_class(),
+    };
+    let status_class = match props.status.clone() {
+        None => String::from(""),
+        Some(status) => String::from("ant-badge-status"),
     };
     let sup = match props.count {
         None => match (&props.color, &props.dot) {
