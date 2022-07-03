@@ -250,7 +250,7 @@ pub fn home() -> Html {
         count={Some(2)}
         // overflow_count={Some(123)}
         // color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
-        dot={Some(())}
+        // dot={Some(())}
         // offset={Some(BadgeOffset{x:20, y:-20})}
         // show_zero={Some(())}
         // status={Some(BadgeStatus::Success)}
