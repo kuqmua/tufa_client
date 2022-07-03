@@ -69,6 +69,10 @@ pub fn badge(props: &BadgeProps) -> Html {
         None => String::from(""),
         Some(_) => String::from("ant-badge-status"),
     };
+    let text_html = match &props.text {
+        None => html! {},
+        Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+    };
     let sup = match props.count {
         None => match (&props.color, &props.dot, &props.status) {
             (None, None, None) => html! {},
@@ -213,6 +217,7 @@ pub fn badge(props: &BadgeProps) -> Html {
       <span class={format!("ant-badge {}", status_class)}>
         { for props.children.iter() }
         {sup}
+        {text_html}
       </span>
     }
 }
