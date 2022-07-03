@@ -61,26 +61,43 @@ pub fn badge(props: &BadgeProps) -> Html {
             format!("{} {}", right_or_left, margin_top_or_bottom)
         }
     };
-    let status_dot_style = match props.status.clone() {
+    let status_dot_class = match props.status.clone() {
         None => String::from(""),
         Some(status) => status.get_class(),
     };
     let status_class = match props.status.clone() {
         None => String::from(""),
-        Some(status) => String::from("ant-badge-status"),
+        Some(_) => String::from("ant-badge-status"),
     };
     let sup = match props.count {
-        None => match (&props.color, &props.dot) {
-            (None, None) => html! {},
-            (None, Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup>
+        None => match (&props.color, &props.dot, &props.status) {
+            (None, None, None) => html! {},
+            (None, None, Some(_)) => {
+                html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+            }
+            (None, Some(_), None) => {
+                html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup> }
+            }
+            (None, Some(_), Some(_)) => {
+                html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+            }
+            (Some(color), None, None) => {
+                html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup> }
+            }
+            (Some(color), None, Some(_)) => html! {
+               <sup
+                 data-show="true"
+                 class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)}
+                 style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+               >
+               </sup>
             },
-            (Some(color), None) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
-            },
-            (Some(color), Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
-            },
+            (Some(color), Some(_), None) => {
+                html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup> }
+            }
+            (Some(color), Some(_), Some(_)) => {
+                html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup> }
+            }
         },
         Some(count) => {
             let max_count_number = props.overflow_count.unwrap_or(99);
@@ -105,8 +122,8 @@ pub fn badge(props: &BadgeProps) -> Html {
                 })
                 .collect::<Vec<Html>>();
             let is_max_count_number_less = count > max_count_number;
-            match (&props.color, &props.dot) {
-                (None, None) => {
+            match (&props.color, &props.dot, &props.status) {
+                (None, None, None) => {
                     if is_max_count_number_less {
                         html! {
                           <sup
@@ -135,10 +152,16 @@ pub fn badge(props: &BadgeProps) -> Html {
                         }
                     }
                 }
-                (None, Some(_)) => html! {
-                  <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup>
-                },
-                (Some(color), None) => {
+                (None, None, Some(_)) => {
+                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+                }
+                (None, Some(_), None) => {
+                    html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup> }
+                }
+                (None, Some(_), Some(_)) => {
+                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+                }
+                (Some(color), None, None) => {
                     if count == 0 && props.show_zero.is_none() {
                         html! {}
                     } else if is_max_count_number_less {
@@ -169,14 +192,25 @@ pub fn badge(props: &BadgeProps) -> Html {
                         }
                     }
                 }
-                (Some(color), Some(_)) => html! {
-                  <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
+                (Some(color), None, Some(_)) => html! {
+                   <sup
+                     data-show="true"
+                     class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)}
+                     style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+                   >
+                   </sup>
+                },
+                (Some(color), Some(_), None) => html! {
+                    <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
+                },
+                (Some(color), Some(_), Some(_)) => html! {
+                    <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
                 },
             }
         }
     };
     html! {
-      <span class="ant-badge">
+      <span class={format!("ant-badge {}", status_class)}>
         { for props.children.iter() }
         {sup}
       </span>
