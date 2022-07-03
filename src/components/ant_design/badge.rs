@@ -74,38 +74,50 @@ pub fn badge(props: &BadgeProps) -> Html {
         Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
     };
     let sup = match props.count {
-        None => match (&props.color, &props.dot, &props.status) {
-            (None, None, None) => html! {},
-            (None, None, Some(_)) => {
-                html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+        None => {
+            let title = props.title.clone().unwrap_or_else(|| String::from(""));
+            match (&props.color, &props.dot, &props.status) {
+                (None, None, None) => html! {},
+                (None, None, Some(_)) => {
+                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style} title={title}></sup> }
+                }
+                (None, Some(_), None) => {
+                    html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style} title={title}></sup> }
+                }
+                (None, Some(_), Some(_)) => {
+                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style} title={title}></sup> }
+                }
+                (Some(color), None, None) => {
+                    html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)} title={title}></sup> }
+                }
+                (Some(color), None, Some(_)) => html! {
+                   <sup
+                     data-show="true"
+                     class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)}
+                     style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+                     title={title}
+                   >
+                   </sup>
+                },
+                (Some(color), Some(_), None) => {
+                    html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)} title={title}></sup> }
+                }
+                (Some(color), Some(_), Some(_)) => {
+                    html! {
+                    <sup
+                      data-show="true"
+                      class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)}
+                      style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+                      title={title}
+                    >
+                    </sup> }
+                }
             }
-            (None, Some(_), None) => {
-                html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup> }
-            }
-            (None, Some(_), Some(_)) => {
-                html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
-            }
-            (Some(color), None, None) => {
-                html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup> }
-            }
-            (Some(color), None, Some(_)) => html! {
-               <sup
-                 data-show="true"
-                 class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)}
-                 style={format!("background: {}; {}", color.to_css_string(), offset_style)}
-               >
-               </sup>
-            },
-            (Some(color), Some(_), None) => {
-                html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup> }
-            }
-            (Some(color), Some(_), Some(_)) => {
-                html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup> }
-            }
-        },
+        }
         Some(count) => {
             let max_count_number = props.overflow_count.unwrap_or(99);
             let count_to_show = count.to_string();
+            let title = props.title.clone().unwrap_or_else(|| count_to_show.clone());
             let max_count_number_text = format!("{}+", max_count_number);
             let should_render = match (count == 0, props.show_zero) {
                 (true, None) => false,
@@ -133,7 +145,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                           <sup
                             data-show="true"
                             class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
-                            title={count_to_show.clone()}
+                            title={title}
                             style={offset_style}
                           >
                             {max_count_number_text}
@@ -146,7 +158,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                               <sup
                                 data-show="true"
                                 class="ant-scroll-number ant-badge-count"
-                                title={count_to_show.clone()}
+                                title={title}
                                 style={offset_style}
                               >
                                 {for numbers}
@@ -157,13 +169,13 @@ pub fn badge(props: &BadgeProps) -> Html {
                     }
                 }
                 (None, None, Some(_)) => {
-                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style} title={title}></sup> }
                 }
                 (None, Some(_), None) => {
-                    html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup> }
+                    html! { <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style} title={title}></sup> }
                 }
                 (None, Some(_), Some(_)) => {
-                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style}></sup> }
+                    html! { <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={offset_style} title={title}></sup> }
                 }
                 (Some(color), None, None) => {
                     if count == 0 && props.show_zero.is_none() {
@@ -173,7 +185,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                           <sup
                             data-show="true"
                             class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
-                            title={count_to_show.clone()}
+                            title={title}
                             style={format!("background: {}; {}", color.to_css_string(), offset_style)}
                           >
                             {max_count_number_text}
@@ -186,7 +198,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                               <sup
                                 data-show="true"
                                 class="ant-scroll-number ant-badge-count"
-                                title={count_to_show.clone()}
+                                title={title}
                                 style={format!("background: {}; {}", color.to_css_string(), offset_style)}
                               >
                                 {for numbers}
@@ -201,14 +213,15 @@ pub fn badge(props: &BadgeProps) -> Html {
                      data-show="true"
                      class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)}
                      style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+                     title={title}
                    >
                    </sup>
                 },
                 (Some(color), Some(_), None) => html! {
-                    <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
+                    <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)} title={title}></sup>
                 },
                 (Some(color), Some(_), Some(_)) => html! {
-                    <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
+                    <sup data-show="true" class={format!("ant-scroll-number ant-badge-dot {}", status_dot_class)} style={format!("background: {}; {}", color.to_css_string(), offset_style)} title={title}></sup>
                 },
             }
         }
