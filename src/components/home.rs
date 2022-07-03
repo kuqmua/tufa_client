@@ -246,11 +246,12 @@ pub fn home() -> Html {
         // content={AvatarContent::Icon(SvgType::User)}
       />
       <Badge
-        count={Some(777)}
+        count={Some(0)}
         // overflow_count={Some(123)}
         color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
         dot={Some(())}
         // offset={Some(BadgeOffset{x:20, y:-20})}
+        // show_zero={Some(())}
       >
         <a href="" class="head-example">
         </a>

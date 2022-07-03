@@ -62,60 +62,98 @@ pub fn badge(props: &BadgeProps) -> Html {
               <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
             },
         },
-        Some(count) => match (&props.color, &props.dot) {
-            (None, None) => {
-                let max_count_number = props.overflow_count.unwrap_or(99);
-                let count_to_show = count.to_string();
-                match count > max_count_number {
-                    true => html! {
-                      <sup
-                        data-show="true"
-                        class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
-                        title={count_to_show.clone()}
-                        style={offset_style}
-                      >
-                        {format!("{}+", max_count_number)}
-                      </sup>
+        Some(count) => {
+            let max_count_number = props.overflow_count.unwrap_or(99);
+            let count_to_show = count.to_string();
+            let max_count_number_text = format!("{}+", max_count_number);
+            let should_render = match (count == 0, props.show_zero) {
+                (true, None) => false,
+                (true, Some(_)) => false,
+                (false, None) => true,
+                (false, Some(_)) => true,
+            };
+            let numbers = count_to_show
+                .chars()
+                .map(|char| match Numeric::try_from(char) {
+                    Err(char) => {
+                        error!("badge component char is not a numeric: ", char.to_string());
+                        html! {}
+                    }
+                    Ok(numeric) => html! {
+                        <BadgeNumbers numeric={numeric}/>
                     },
-                    false => {
-                        let numbers = count_to_show
-                            .chars()
-                            .map(|char| match Numeric::try_from(char) {
-                                Err(char) => {
-                                    error!(
-                                        "badge component char is not a numeric: ",
-                                        char.to_string()
-                                    );
-                                    html! {}
-                                }
-                                Ok(numeric) => html! {
-                                    <BadgeNumbers numeric={numeric}/>
-                                },
-                            })
-                            .collect::<Vec<Html>>();
+                })
+                .collect::<Vec<Html>>();
+            let is_max_count_number_less = count > max_count_number;
+            match (&props.color, &props.dot) {
+                (None, None) => {
+                    if is_max_count_number_less {
                         html! {
                           <sup
                             data-show="true"
-                            class="ant-scroll-number ant-badge-count"
+                            class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
                             title={count_to_show.clone()}
                             style={offset_style}
                           >
-                            {for numbers}
+                            {max_count_number_text}
                           </sup>
+                        }
+                    } else {
+                        html! {
+                          <>
+                            if should_render {
+                              <sup
+                                data-show="true"
+                                class="ant-scroll-number ant-badge-count"
+                                title={count_to_show.clone()}
+                                style={offset_style}
+                              >
+                                {for numbers}
+                              </sup>
+                            }
+                          </>
                         }
                     }
                 }
+                (None, Some(_)) => html! {
+                  <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup>
+                },
+                (Some(color), None) => {
+                    if count == 0 && props.show_zero.is_none() {
+                        html! {}
+                    } else if is_max_count_number_less {
+                        html! {
+                          <sup
+                            data-show="true"
+                            class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
+                            title={count_to_show.clone()}
+                            style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+                          >
+                            {max_count_number_text}
+                          </sup>
+                        }
+                    } else {
+                        html! {
+                          <>
+                            if should_render {
+                              <sup
+                                data-show="true"
+                                class="ant-scroll-number ant-badge-count"
+                                title={count_to_show.clone()}
+                                style={format!("background: {}; {}", color.to_css_string(), offset_style)}
+                              >
+                                {for numbers}
+                              </sup>
+                            }
+                          </>
+                        }
+                    }
+                }
+                (Some(color), Some(_)) => html! {
+                  <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
+                },
             }
-            (None, Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={offset_style}></sup>
-            },
-            (Some(color), None) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
-            },
-            (Some(color), Some(_)) => html! {
-              <sup data-show="true" class="ant-scroll-number ant-badge-dot" style={format!("background: {}; {}", color.to_css_string(), offset_style)}></sup>
-            },
-        },
+        }
     };
     html! {
       <span class="ant-badge">
