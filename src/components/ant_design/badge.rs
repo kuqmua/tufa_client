@@ -116,10 +116,48 @@ pub fn badge(props: &BadgeProps) -> Html {
             (Some(_), true, Some(_)) => String::from(""),
             (Some(_), false, None) => String::from(""),
             (Some(_), false, Some(_)) => String::from(""),
-},
+        },
     };
-    let sup_class = format!("ant-badge-dot {} {} {}", status_sup_class, count_class, scroll_class); //ant-scroll-number ant-badge-count ant-badge-multiple-words
-    let span_class = format!("ant-badge {}", status_span_class);
+    let dot_class = match props.dot.clone() {
+        None => String::from(""),
+        Some(_) => String::from("ant-badge-dot"),
+    };
+    let multiple_words_class = match props.dot.clone() {
+        None => String::from(""),
+        Some(dot) => String::from(""),
+        
+        // match dot.status.clone() {
+        //     None => String::from(""),
+        //     Some(status) => match status {
+        //         BadgeStatus::Success(badge_status_text) => match badge_status_text.text {
+        //             None => String::from(""),
+        //             Some(_) => String::from("ant-badge-multiple-words"),
+        //         },
+        //         BadgeStatus::Processing(badge_status_text) => match badge_status_text.text {
+        //             None => String::from(""),
+        //             Some(_) => String::from("ant-badge-multiple-words"),
+        //         },
+        //         BadgeStatus::Default(badge_status_text) => match badge_status_text.text {
+        //             None => String::from(""),
+        //             Some(_) => String::from("ant-badge-multiple-words"),
+        //         },
+        //         BadgeStatus::Error(badge_status_text) => match badge_status_text.text {
+        //             None => String::from(""),
+        //             Some(_) => String::from("ant-badge-multiple-words"),
+        //         },
+        //         BadgeStatus::Warning(badge_status_text) => match badge_status_text.text {
+        //             None => String::from(""),
+        //             Some(_) => String::from("ant-badge-multiple-words"),
+        //         },
+        //     },
+        // },
+    };
+    let not_a_wrapper_class = match props.children.len() {
+        0 => String::from("ant-badge-not-a-wrapper"),
+        _ => String::from(""),
+    };
+    let sup_class = format!("{} {} {} {} {}", dot_class, status_sup_class, count_class, scroll_class, multiple_words_class);
+    let span_class = format!("ant-badge {} {}", status_span_class,not_a_wrapper_class);
     let dot = match &props.dot {
         None => html! {},
         Some(dot) => match dot.status.clone() {
@@ -131,31 +169,56 @@ pub fn badge(props: &BadgeProps) -> Html {
                     None => {
                         html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
                     }
-                    Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+                    Some(text) => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text">{text}</span>
+                        </>
+                    },
                 },
                 BadgeStatus::Processing(status_text) => match status_text.text {
                     None => {
                         html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
                     }
-                    Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+                    Some(text) => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text">{text}</span>
+                        </>
+                    },
                 },
                 BadgeStatus::Default(status_text) => match status_text.text {
                     None => {
                         html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
                     }
-                    Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+                    Some(text) => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text">{text}</span>
+                        </>
+                    },
                 },
                 BadgeStatus::Error(status_text) => match status_text.text {
                     None => {
                         html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
                     }
-                    Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+                    Some(text) => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text">{text}</span>
+                        </>
+                    },
                 },
                 BadgeStatus::Warning(status_text) => match status_text.text {
                     None => {
                         html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
                     }
-                    Some(text) => html! {<span class="ant-badge-status-text">{text}</span>},
+                    Some(text) => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text">{text}</span>
+                        </>
+                    },
                 },
             },
         },
