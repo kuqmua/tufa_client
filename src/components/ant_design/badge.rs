@@ -11,16 +11,11 @@ pub struct BadgeOffset {
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BadgeStatus {
-    Success(BadgeStatusText),
-    Processing(BadgeStatusText),
-    Default(BadgeStatusText),
-    Error(BadgeStatusText),
-    Warning(BadgeStatusText),
-}
-
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct BadgeStatusText {
-    pub text: Option<String>,
+    Success(Option<String>),
+    Processing(Option<String>),
+    Default(Option<String>),
+    Error(Option<String>),
+    Warning(Option<String>),
 }
 
 impl BadgeStatus {
@@ -36,18 +31,16 @@ impl BadgeStatus {
     pub fn get_span_class(&self) -> String {
         String::from("ant-badge-status")
     }
-}
-
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct BadgeDot {
-    pub status: Option<BadgeStatus>,
+    pub fn get_class(&self) -> String {
+        String::from("ant-badge-status-dot")
+    }
 }
 
 #[derive(Properties, PartialEq)]
 pub struct BadgeProps {
     pub color: Option<Hsl>,          // Customize Badge dot color	string	-	3.16.0
     pub count: Option<u64>,          //	Number to show in badge	ReactNode
-    pub dot: Option<BadgeDot>,       // Whether to display a red dot instead of count	boolean	false
+    pub dot: Option<Option<BadgeStatus>>,       // Whether to display a red dot instead of count	boolean	false
     pub offset: Option<BadgeOffset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
     pub overflow_count: Option<u64>, //dont think it would be usefull//	Max count to show	number	99
     pub show_zero: Option<()>,       //	Whether to show badge when count is zero	boolean	false
@@ -113,9 +106,9 @@ pub fn badge(props: &BadgeProps) -> Html {
     };
     let (status_sup_class, status_span_class, dot_class) = match props.dot.clone() {
         None => (String::from(""), String::from(""), String::from("")),
-        Some(dot) => match dot.status.clone() {
+        Some(option_badge_status) => match option_badge_status {
             None => (String::from(""), String::from(""),  String::from("ant-badge-dot")),
-            Some(status) => (status.get_sup_class(), status.get_span_class(), String::from("ant-badge-status-dot")),
+            Some(status) => (status.get_sup_class(), status.get_span_class(), status.get_class()),
         },
     };
     let multiple_words_class = match props.count.clone() {
@@ -133,12 +126,12 @@ pub fn badge(props: &BadgeProps) -> Html {
     let span_class = format!("ant-badge {} {}", status_span_class,not_a_wrapper_class);
     let dot = match &props.dot {
         None => html! {},
-        Some(dot) => match dot.status.clone() {
+        Some(option_badge_status) => match option_badge_status {
             None => {
                 html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
             }
             Some(status) => match status {
-                BadgeStatus::Success(status_text) => match status_text.text {
+                BadgeStatus::Success(option_text) => match option_text {
                     None => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -152,7 +145,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                         </>
                     },
                 },
-                BadgeStatus::Processing(status_text) => match status_text.text {
+                BadgeStatus::Processing(option_text) => match option_text {
                     None => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -166,7 +159,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                         </>
                     },
                 },
-                BadgeStatus::Default(status_text) => match status_text.text {
+                BadgeStatus::Default(option_text) => match option_text {
                     None => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -180,7 +173,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                         </>
                     },
                 },
-                BadgeStatus::Error(status_text) => match status_text.text {
+                BadgeStatus::Error(option_text) => match option_text {
                     None => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -194,7 +187,7 @@ pub fn badge(props: &BadgeProps) -> Html {
                         </>
                     },
                 },
-                BadgeStatus::Warning(status_text) => match status_text.text {
+                BadgeStatus::Warning(option_text) => match option_text {
                     None => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>

@@ -9,8 +9,6 @@ use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use super::ant_design::avatar::AvatarShape;
 use super::ant_design::avatar::AvatarSize;
 use super::ant_design::avatar::AvatarSizeType;
-use super::ant_design::badge::BadgeDot;
-use super::ant_design::badge::BadgeStatusText;
 use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
@@ -248,24 +246,11 @@ pub fn home() -> Html {
       //   // })}
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
-      <div>
       <Badge
         count={Some(2)}
         // overflow_count={Some(123)}
         // color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
-        // dot={
-        //   Some(
-        //     BadgeDot{ 
-        //       status: Some(
-        //         BadgeStatus::Success(
-        //           BadgeStatusText{
-        //             text: Some(String::from("kekw"))
-        //           }
-        //         )
-        //       )
-        //     }
-        //   )
-        // }
+        dot={Some(Some(BadgeStatus::Success(Some(String::from("kekw")))))}
         // offset={Some(BadgeOffset{x:20, y:-20})}
         // show_zero={Some(())}
         // status={Some(BadgeStatus::Success)}
@@ -274,7 +259,6 @@ pub fn home() -> Html {
         // <a href="" class="head-example">
         // </a>
       </Badge>
-      </div>
       </div>
 
     };
