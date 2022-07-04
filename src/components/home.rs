@@ -250,22 +250,22 @@ pub fn home() -> Html {
       // />
       <div>
       <Badge
-        // count={Some(2)}
+        count={Some(2)}
         // overflow_count={Some(123)}
         // color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
-        dot={
-          Some(
-            BadgeDot{ 
-              status: Some(
-                BadgeStatus::Success(
-                  BadgeStatusText{
-                    text: Some(String::from("kekw"))
-                  }
-                )
-              )
-            }
-          )
-        }
+        // dot={
+        //   Some(
+        //     BadgeDot{ 
+        //       status: Some(
+        //         BadgeStatus::Success(
+        //           BadgeStatusText{
+        //             text: Some(String::from("kekw"))
+        //           }
+        //         )
+        //       )
+        //     }
+        //   )
+        // }
         // offset={Some(BadgeOffset{x:20, y:-20})}
         // show_zero={Some(())}
         // status={Some(BadgeStatus::Success)}

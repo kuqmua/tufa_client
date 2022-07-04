@@ -105,7 +105,7 @@ pub fn badge(props: &BadgeProps) -> Html {
             (Some(_), false, Some(_)) => String::from(""),
 },
     };
-    let scroll_class = match props.count {
+    let scroll_class = match props.count {//ant-scroll-number-only 
         None => String::from(""),
         Some(count) => match (props.dot.clone(), count == 0, props.show_zero.clone()) {
             (None, true, None) => String::from(""),
@@ -131,35 +131,12 @@ pub fn badge(props: &BadgeProps) -> Html {
             },
         },
     };
-    let multiple_words_class = match props.dot.clone() {
+    let multiple_words_class = match props.count.clone() {
         None => String::from(""),
-        Some(dot) => String::from(""),
-        
-        // match dot.status.clone() {
-        //     None => String::from(""),
-        //     Some(status) => match status {
-        //         BadgeStatus::Success(badge_status_text) => match badge_status_text.text {
-        //             None => String::from(""),
-        //             Some(_) => String::from("ant-badge-multiple-words"),
-        //         },
-        //         BadgeStatus::Processing(badge_status_text) => match badge_status_text.text {
-        //             None => String::from(""),
-        //             Some(_) => String::from("ant-badge-multiple-words"),
-        //         },
-        //         BadgeStatus::Default(badge_status_text) => match badge_status_text.text {
-        //             None => String::from(""),
-        //             Some(_) => String::from("ant-badge-multiple-words"),
-        //         },
-        //         BadgeStatus::Error(badge_status_text) => match badge_status_text.text {
-        //             None => String::from(""),
-        //             Some(_) => String::from("ant-badge-multiple-words"),
-        //         },
-        //         BadgeStatus::Warning(badge_status_text) => match badge_status_text.text {
-        //             None => String::from(""),
-        //             Some(_) => String::from("ant-badge-multiple-words"),
-        //         },
-        //     },
-        // },
+        Some(count) => match count.to_string().len() > 1 {
+            false => String::from(""),
+            true => String::from("ant-badge-multiple-words"),
+        },
     };
     let not_a_wrapper_class = match props.children.len() {
         0 => String::from("ant-badge-not-a-wrapper"),
