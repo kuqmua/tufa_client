@@ -74,13 +74,6 @@ pub fn badge(props: &BadgeProps) -> Html {
             format!("{} {}", right_or_left, margin_top_or_bottom)
         }
     };
-    let (status_sup_class, status_span_class) = match props.dot.clone() {
-        None => (String::from(""), String::from("")),
-        Some(dot) => match dot.status.clone() {
-            None => (String::from(""), String::from("")),
-            Some(status) => (status.get_sup_class(), status.get_span_class()),
-        },
-    };
     let title = match (props.title.clone(), props.count) {
         (None, None) => String::from(""),
         (None, Some(count)) => count.to_string(),
@@ -103,9 +96,9 @@ pub fn badge(props: &BadgeProps) -> Html {
             (Some(_), true, Some(_)) => String::from(""),
             (Some(_), false, None) => String::from(""),
             (Some(_), false, Some(_)) => String::from(""),
-},
+        },
     };
-    let scroll_class = match props.count {//ant-scroll-number-only 
+    let scroll_class = match props.count {
         None => String::from(""),
         Some(count) => match (props.dot.clone(), count == 0, props.show_zero.clone()) {
             (None, true, None) => String::from(""),
@@ -118,17 +111,11 @@ pub fn badge(props: &BadgeProps) -> Html {
             (Some(_), false, Some(_)) => String::from(""),
         },
     };
-    let dot_class = match props.dot.clone() {
-        None => String::from(""),
+    let (status_sup_class, status_span_class, dot_class) = match props.dot.clone() {
+        None => (String::from(""), String::from(""), String::from("")),
         Some(dot) => match dot.status.clone() {
-            None => String::from("ant-badge-dot"),
-            Some(status) => match status {
-                BadgeStatus::Success(_) => String::from("ant-badge-status-dot"),
-                BadgeStatus::Processing(_) => String::from("ant-badge-status-dot"),
-                BadgeStatus::Default(_) => String::from("ant-badge-status-dot"),
-                BadgeStatus::Error(_) => String::from("ant-badge-status-dot"),
-                BadgeStatus::Warning(_) => String::from("ant-badge-status-dot"),
-            },
+            None => (String::from(""), String::from(""),  String::from("ant-badge-dot")),
+            Some(status) => (status.get_sup_class(), status.get_span_class(), String::from("ant-badge-status-dot")),
         },
     };
     let multiple_words_class = match props.count.clone() {
