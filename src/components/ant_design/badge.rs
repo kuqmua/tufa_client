@@ -166,9 +166,12 @@ pub fn badge(props: &BadgeProps) -> Html {
             }
             Some(status) => match status {
                 BadgeStatus::Success(status_text) => match status_text.text {
-                    None => {
-                        html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
-                    }
+                    None => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text"></span>
+                        </>
+                    },
                     Some(text) => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -177,9 +180,12 @@ pub fn badge(props: &BadgeProps) -> Html {
                     },
                 },
                 BadgeStatus::Processing(status_text) => match status_text.text {
-                    None => {
-                        html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
-                    }
+                    None => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text"></span>
+                        </>
+                    },
                     Some(text) => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -188,9 +194,12 @@ pub fn badge(props: &BadgeProps) -> Html {
                     },
                 },
                 BadgeStatus::Default(status_text) => match status_text.text {
-                    None => {
-                        html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
-                    }
+                    None => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text"></span>
+                        </>
+                    },
                     Some(text) => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -199,9 +208,12 @@ pub fn badge(props: &BadgeProps) -> Html {
                     },
                 },
                 BadgeStatus::Error(status_text) => match status_text.text {
-                    None => {
-                        html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
-                    }
+                    None => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text"></span>
+                        </>
+                    },
                     Some(text) => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
@@ -210,9 +222,12 @@ pub fn badge(props: &BadgeProps) -> Html {
                     },
                 },
                 BadgeStatus::Warning(status_text) => match status_text.text {
-                    None => {
-                        html! { <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup> }
-                    }
+                    None => html! {
+                        <>
+                          <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
+                          <span class="ant-badge-status-text"></span>
+                        </>
+                    },
                     Some(text) => html! {
                         <>
                           <sup data-show="true" class={sup_class.clone()} style={sup_style.clone()} title={title.clone()}></sup>
