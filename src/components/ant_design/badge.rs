@@ -120,7 +120,16 @@ pub fn badge(props: &BadgeProps) -> Html {
     };
     let dot_class = match props.dot.clone() {
         None => String::from(""),
-        Some(_) => String::from("ant-badge-dot"),
+        Some(dot) => match dot.status.clone() {
+            None => String::from("ant-badge-dot"),
+            Some(status) => match status {
+                BadgeStatus::Success(_) => String::from("ant-badge-status-dot"),
+                BadgeStatus::Processing(_) => String::from("ant-badge-status-dot"),
+                BadgeStatus::Default(_) => String::from("ant-badge-status-dot"),
+                BadgeStatus::Error(_) => String::from("ant-badge-status-dot"),
+                BadgeStatus::Warning(_) => String::from("ant-badge-status-dot"),
+            },
+        },
     };
     let multiple_words_class = match props.dot.clone() {
         None => String::from(""),
