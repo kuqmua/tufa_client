@@ -11,6 +11,10 @@
 // import scrollTo from '../_util/scrollTo';
 // import { throttleByAnimationFrame } from '../_util/throttleByAnimationFrame';
 
+use colorsys::Hsl;
+use gloo::console::error;
+use tufa_common::helpers::numeric::Numeric;
+use yew::{function_component, html, Children, Html, Properties, MouseEvent, Callback};
 // export interface BackTopProps {
 //   visibilityHeight?: number;
 //   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -22,6 +26,18 @@
 //   duration?: number;
 //   visible?: boolean; // Only for test. Don't use it.
 // }
+#[derive(Properties, PartialEq)]
+pub struct BackTopProps {
+    pub visibility_height: Option<u32>,
+    pub on_click: Option<Callback<MouseEvent>>,
+    // pub target?: () => HTMLElement | Window | Document;
+    pub prefix_cls: Option<String>,
+    pub children: Children,
+    pub class_name: Option<String>,
+    pub style: Option<String>,
+    pub duration: Option<u32>,
+    pub visible: Option<()>, // Only for test. Don't use it.
+}
 
 // const BackTop: React.FC<BackTopProps> = props => {
 //   const [visible, setVisible] = useMergedState(false, {
