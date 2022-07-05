@@ -4,7 +4,7 @@ use tufa_common::helpers::numeric::Numeric;
 use yew::{function_component, html, Children, Html, Properties};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
-pub struct BadgeOffset {
+pub struct Offset {
     pub x: i64,
     pub y: i64,
 }
@@ -41,7 +41,7 @@ pub struct BadgeProps {
     pub color: Option<Hsl>,          // Customize Badge dot color	string	-	3.16.0
     pub count: Option<u64>,          //	Number to show in badge	ReactNode
     pub dot: Option<Option<BadgeStatus>>,       // Whether to display a red dot instead of count	boolean	false
-    pub offset: Option<BadgeOffset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
+    pub offset: Option<Offset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
     pub overflow_count: Option<u64>, //dont think it would be usefull//	Max count to show	number	99
     pub show_zero: Option<()>,       //	Whether to show badge when count is zero	boolean	false
     // pub status: Option<BadgeStatus>, //	Set Badge as a status dot	success | processing | default | error | warning	''
