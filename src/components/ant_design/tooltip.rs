@@ -47,9 +47,20 @@ pub enum TooltipPlacement {
 //   | 'rightBottom';
 
 #[derive(Debug, PartialEq, Eq, Clone)]
+pub struct Overflow {
+    pub adjust_x: bool,
+    pub adjust_y: bool,
+}
+
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct TooltipAlignConfig {
     pub points: Option<(String, String)>,
     pub offset: Option<Offset>,
+    pub target_offset: Option<Offset>,
+    pub overflow: Option<Overflow>,
+    pub use_css_right: Option<()>,
+    pub use_css_bottom: Option<()>,
+    pub use_css_transform: Option<()>,
 }
 
 // // https://github.com/react-component/tooltip
