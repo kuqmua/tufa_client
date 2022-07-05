@@ -39,6 +39,11 @@ pub struct BackTopProps {
     pub visible: Option<()>, // Only for test. Don't use it.
 }
 
+#[function_component(BackTop)]
+pub fn back_top(props: &BackTopProps) -> Html {
+    
+    html!{}
+}
 // const BackTop: React.FC<BackTopProps> = props => {
 //   const [visible, setVisible] = useMergedState(false, {
 //     value: props.visible,
