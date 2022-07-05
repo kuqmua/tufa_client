@@ -28,15 +28,15 @@ use yew::{function_component, html, Children, Html, Properties, MouseEvent, Call
 // }
 #[derive(Properties, PartialEq)]
 pub struct BackTopProps {
-    pub visibility_height: Option<u32>,
-    pub on_click: Option<Callback<MouseEvent>>,
-    // pub target?: () => HTMLElement | Window | Document;
-    pub prefix_cls: Option<String>,
-    pub children: Children,
-    pub class_name: Option<String>,
-    pub style: Option<String>,
-    pub duration: Option<u32>,
-    pub visible: Option<()>, // Only for test. Don't use it.
+    // pub visibility_height: Option<u32>,
+    // pub on_click: Option<Callback<MouseEvent>>,
+    // // pub target?: () => HTMLElement | Window | Document;
+    // pub prefix_cls: Option<String>,
+    // pub children: Children,
+    // pub class_name: Option<String>,
+    // pub style: Option<String>,
+    // pub duration: Option<u32>,
+    // pub visible: Option<()>, // Only for test. Don't use it.
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -46,29 +46,29 @@ pub struct SetVisible {
 
 #[function_component(BackTop)]
 pub fn back_top(props: &BackTopProps) -> Html {
-    let visibility_height =  props.visibility_height.unwrap_or(400);
+    // let visibility_height =  props.visibility_height.unwrap_or(400);
 
-    let visible = use_state(|| false);
-    let setVisible = use_state(|| SetVisible { value: props.visible.is_some().clone()});
+    // let visible = use_state(|| false);
+    // let setVisible = use_state(|| SetVisible { value: props.visible.is_some().clone()});
     
-    let render_children = |prefix_cls_handle: String, root_prefix_cls_handle: String| {
-        let default_element = html!{
-          <div className={format!("{}-content", prefix_cls_handle)}>
-            <div className={format!("{}-icon", root_prefix_cls_handle)}>
-            //   <VerticalAlignTopOutlined />
-            </div>
-          </div>
-        };
-        html!{
-        //   <CSSMotion visible={visible} motionName={`${rootPrefixCls}-fade`}>
-        //     {({ className: motionClassName }) =>
-        //       cloneElement(children || defaultElement, ({ className }) => ({
-        //         className: classNames(motionClassName, className),
-        //       }))
-        //     }
-        //   </CSSMotion>
-        }
-    };
+    // let render_children = |prefix_cls_handle: String, root_prefix_cls_handle: String| {
+    //     let default_element = html!{
+    //       <div className={format!("{}-content", prefix_cls_handle)}>
+    //         <div className={format!("{}-icon", root_prefix_cls_handle)}>
+    //         //   <VerticalAlignTopOutlined />
+    //         </div>
+    //       </div>
+    //     };
+    //     html!{
+    //     //   <CSSMotion visible={visible} motionName={`${rootPrefixCls}-fade`}>
+    //     //     {({ className: motionClassName }) =>
+    //     //       cloneElement(children || defaultElement, ({ className }) => ({
+    //     //         className: classNames(motionClassName, className),
+    //     //       }))
+    //     //     }
+    //     //   </CSSMotion>
+    //     }
+    // };
     // let divProps = omit(props, [
     //     'prefixCls',
     //     'className',
@@ -81,14 +81,19 @@ pub fn back_top(props: &BackTopProps) -> Html {
     // pub duration: Option<u32>,
 
     html!{
-      <div 
-        style={props.style.clone().unwrap_or(String::from(""))} 
-        // pub on_click: Option<Callback<MouseEvent>>,
-        // pub duration: Option<u32>,
-        // class={classString} 
-        // onclick={scrollToTop} ref={ref}
-      >
-        // {render_children(prefix_cls.clone(), root_prefix_cls.clone())}
+    //   <div 
+    //     style={props.style.clone().unwrap_or(String::from(""))} 
+    //     // pub on_click: Option<Callback<MouseEvent>>,
+    //     // pub duration: Option<u32>,
+    //     // class={classString} 
+    //     // onclick={scrollToTop} ref={ref}
+    //   >
+    //     // {render_children(prefix_cls.clone(), root_prefix_cls.clone())}
+    //   </div>
+      <div class="ant-back-top">
+        <div class="ant-back-top-content">
+          <div class="ant-back-top-icon"></div>
+        </div>
       </div>
     }
 }

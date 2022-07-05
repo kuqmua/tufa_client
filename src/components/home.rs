@@ -52,6 +52,7 @@ use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
+use crate::components::ant_design::back_top::BackTop;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -259,6 +260,8 @@ pub fn home() -> Html {
         // <a href="" class="head-example">
         // </a>
       </Badge>
+      <BackTop></BackTop>
+      <div style="background-color: red; width: 300px; height: 2500px;"/>
       </div>
 
     };
