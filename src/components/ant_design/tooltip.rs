@@ -14,6 +14,22 @@
 
 // export { AdjustOverflow, PlacementsConfig };
 
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum TooltipPlacement {
+    Top,
+    Left,
+    Right,
+    Bottom,
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
+    LeftTop,
+    LeftBottom,
+    RightTop,
+    RightBottom,
+}
+
 // export type TooltipPlacement =
 //   | 'top'
 //   | 'left'

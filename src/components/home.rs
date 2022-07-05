@@ -260,8 +260,8 @@ pub fn home() -> Html {
         // <a href="" class="head-example">
         // </a>
       </Badge>
-      <BackTop></BackTop>
-      <div style="background-color: red; width: 300px; height: 2500px;"/>
+      // <BackTop></BackTop>
+      // <div style="background-color: red; width: 300px; height: 2500px;"/>
       </div>
 
     };
