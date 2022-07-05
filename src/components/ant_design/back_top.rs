@@ -91,6 +91,32 @@ pub struct BackTopProps {
 //     }
 //   };
 
+#[derive(Properties, PartialEq)]
+pub struct RenderBackTopChildrenProps {
+    pub prefix_cls: String,
+    pub root_prefix_cls: String,
+}
+
+#[function_component(RenderBackTopChildren)]
+pub fn render_back_top_children(props: &RenderBackTopChildrenProps) -> Html {
+    let default_element = html!{
+      <div className={format!("{}-content", props.prefix_cls)}>
+        <div className={format!("{}-icon", props.prefix_cls)}>
+        //   <VerticalAlignTopOutlined />
+        </div>
+      </div>
+    };
+    html!{
+    //   <CSSMotion visible={visible} motionName={`${rootPrefixCls}-fade`}>
+    //     {({ className: motionClassName }) =>
+    //       cloneElement(children || defaultElement, ({ className }) => ({
+    //         className: classNames(motionClassName, className),
+    //       }))
+    //     }
+    //   </CSSMotion>
+    }
+}
+
 //   const renderChildren = ({
 //     prefixCls,
 //     rootPrefixCls,
