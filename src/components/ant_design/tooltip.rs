@@ -14,6 +14,8 @@
 
 // export { AdjustOverflow, PlacementsConfig };
 
+use crate::components::ant_design::helpers::offset::Offset;
+
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum TooltipPlacement {
     Top,
@@ -43,6 +45,12 @@ pub enum TooltipPlacement {
 //   | 'leftBottom'
 //   | 'rightTop'
 //   | 'rightBottom';
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct TooltipAlignConfig {
+    pub points: Option<(String, String)>,
+    pub offset: Option<Offset>,
+}
 
 // // https://github.com/react-component/tooltip
 // // https://github.com/yiminghe/dom-align

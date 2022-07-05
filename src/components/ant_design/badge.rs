@@ -2,12 +2,8 @@ use colorsys::Hsl;
 use gloo::console::error;
 use tufa_common::helpers::numeric::Numeric;
 use yew::{function_component, html, Children, Html, Properties};
+use crate::components::ant_design::helpers::offset::Offset;
 
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct Offset {
-    pub x: i64,
-    pub y: i64,
-}
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BadgeStatus {

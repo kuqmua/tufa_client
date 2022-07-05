@@ -12,7 +12,7 @@ use super::ant_design::avatar::AvatarSizeType;
 use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
-use crate::components::ant_design::badge::Offset;
+use crate::components::ant_design::helpers::offset::Offset;
 use crate::components::ant_design::badge::BadgeStatus;
 // use crate::components::ant_design::button::Button;
 // use crate::components::ant_design::button::ButtonType;
