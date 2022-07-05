@@ -14,7 +14,7 @@
 use colorsys::Hsl;
 use gloo::console::error;
 use tufa_common::helpers::numeric::Numeric;
-use yew::{function_component, html, Children, Html, Properties, MouseEvent, Callback};
+use yew::{function_component, html, Children, Html, Properties, MouseEvent, Callback, use_state};
 // export interface BackTopProps {
 //   visibilityHeight?: number;
 //   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -39,9 +39,15 @@ pub struct BackTopProps {
     pub visible: Option<()>, // Only for test. Don't use it.
 }
 
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct SetVisible {
+    pub value: bool,
+}
+
 #[function_component(BackTop)]
 pub fn back_top(props: &BackTopProps) -> Html {
-    
+    let visible = use_state(|| false);
+    let setVisible = use_state(|| SetVisible { value: props.visible.is_some().clone()});
     html!{}
 }
 // const BackTop: React.FC<BackTopProps> = props => {
