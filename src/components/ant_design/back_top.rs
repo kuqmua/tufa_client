@@ -48,6 +48,25 @@ pub struct SetVisible {
 pub fn back_top(props: &BackTopProps) -> Html {
     let visible = use_state(|| false);
     let setVisible = use_state(|| SetVisible { value: props.visible.is_some().clone()});
+    
+    let render_back_top_children = |prefix_cls_handle: String, root_prefix_cls_handle: String| {
+        let default_element = html!{
+          <div className={format!("{}-content", prefix_cls_handle)}>
+            <div className={format!("{}-icon", root_prefix_cls_handle)}>
+            //   <VerticalAlignTopOutlined />
+            </div>
+          </div>
+        };
+        html!{
+        //   <CSSMotion visible={visible} motionName={`${rootPrefixCls}-fade`}>
+        //     {({ className: motionClassName }) =>
+        //       cloneElement(children || defaultElement, ({ className }) => ({
+        //         className: classNames(motionClassName, className),
+        //       }))
+        //     }
+        //   </CSSMotion>
+        }
+    };
     html!{}
 }
 // const BackTop: React.FC<BackTopProps> = props => {
@@ -101,32 +120,6 @@ pub fn back_top(props: &BackTopProps) -> Html {
 //       onClick(e);
 //     }
 //   };
-
-#[derive(Properties, PartialEq)]
-pub struct RenderBackTopChildrenProps {
-    pub prefix_cls: String,
-    pub root_prefix_cls: String,
-}
-
-#[function_component(RenderBackTopChildren)]
-pub fn render_back_top_children(props: &RenderBackTopChildrenProps) -> Html {
-    let default_element = html!{
-      <div className={format!("{}-content", props.prefix_cls)}>
-        <div className={format!("{}-icon", props.prefix_cls)}>
-        //   <VerticalAlignTopOutlined />
-        </div>
-      </div>
-    };
-    html!{
-    //   <CSSMotion visible={visible} motionName={`${rootPrefixCls}-fade`}>
-    //     {({ className: motionClassName }) =>
-    //       cloneElement(children || defaultElement, ({ className }) => ({
-    //         className: classNames(motionClassName, className),
-    //       }))
-    //     }
-    //   </CSSMotion>
-    }
-}
 
 //   const renderChildren = ({
 //     prefixCls,
