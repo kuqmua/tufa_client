@@ -46,10 +46,12 @@ pub struct SetVisible {
 
 #[function_component(BackTop)]
 pub fn back_top(props: &BackTopProps) -> Html {
+    let visibility_height =  props.visibility_height.unwrap_or(400);
+
     let visible = use_state(|| false);
     let setVisible = use_state(|| SetVisible { value: props.visible.is_some().clone()});
     
-    let render_back_top_children = |prefix_cls_handle: String, root_prefix_cls_handle: String| {
+    let render_children = |prefix_cls_handle: String, root_prefix_cls_handle: String| {
         let default_element = html!{
           <div className={format!("{}-content", prefix_cls_handle)}>
             <div className={format!("{}-icon", root_prefix_cls_handle)}>
@@ -67,7 +69,28 @@ pub fn back_top(props: &BackTopProps) -> Html {
         //   </CSSMotion>
         }
     };
-    html!{}
+    // let divProps = omit(props, [
+    //     'prefixCls',
+    //     'className',
+    //     'children',
+    //     'visibilityHeight',
+    //     'target',
+    //     'visible',
+    // ]);
+    // pub on_click: Option<Callback<MouseEvent>>,
+    // pub duration: Option<u32>,
+
+    html!{
+      <div 
+        style={props.style.clone().unwrap_or(String::from(""))} 
+        // pub on_click: Option<Callback<MouseEvent>>,
+        // pub duration: Option<u32>,
+        // class={classString} 
+        // onclick={scrollToTop} ref={ref}
+      >
+        // {render_children(prefix_cls.clone(), root_prefix_cls.clone())}
+      </div>
+    }
 }
 // const BackTop: React.FC<BackTopProps> = props => {
 //   const [visible, setVisible] = useMergedState(false, {
