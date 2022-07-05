@@ -51,6 +51,7 @@ pub struct BadgeProps {
     pub children: Children,
 }
 
+//todo ScrollNumber and animation
 #[function_component(Badge)]
 pub fn badge(props: &BadgeProps) -> Html {
     let offset_style = match props.offset.clone() {
