@@ -15,6 +15,7 @@
 // export { AdjustOverflow, PlacementsConfig };
 
 use crate::components::ant_design::helpers::offset::Offset;
+use yew::{function_component, html, Children, Html, Properties};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum TooltipPlacement {
@@ -74,6 +75,21 @@ pub struct TooltipAlignConfig {
 //   useCssBottom?: boolean;
 //   useCssTransform?: boolean;
 // }
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct AbstractTooltipProps {
+    //not full
+    pub style: Option<String>,// React.CSSProperties;
+    pub class_name: Option<String>,
+    pub color: Option<()>, // LiteralUnion<PresetColorType, string>;
+    pub placement: Option<()>, // TooltipPlacement;
+    pub builtin_placements: Option<()>, // typeof Placements;
+    pub open_class_name: Option<String>,
+    pub arrow_point_at_center: Option<()>,
+    pub auto_adjust_overflow: Option<()>,// boolean | AdjustOverflow;
+    pub get_popup_container: Option<Callback<()>>,// (triggerNode: HTMLElement) => HTMLElement;
+    pub children: Children,
+}
 
 // export interface AbstractTooltipProps extends Partial<Omit<RcTooltipProps, 'children'>> {
 //   style?: React.CSSProperties;
