@@ -8,7 +8,7 @@ use web_sys::MouseEvent;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Html, Properties};
 
-#[derive(PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum ButtonType {
     Primary,
     Ghost,
@@ -17,25 +17,25 @@ pub enum ButtonType {
     Link,
 }
 
-#[derive(PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum LoadingProp {
     Bool(bool),
     Delay { delay: u32 },
 }
 
-#[derive(PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Shape {
     Circle,
     Round,
 }
 
-#[derive(PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Size {
     Small,
     Large,
 }
 
-#[derive(Properties, PartialEq)]
+#[derive(Debug, Properties, PartialEq, Clone)]
 pub struct ButtonProps {
     pub disabled: Option<()>, //or maybe explicit bool?
     pub ghost: Option<()>,
@@ -50,6 +50,8 @@ pub struct ButtonProps {
     pub on_click: Option<Callback<MouseEvent>>,
     pub block: Option<()>,
     pub placeholder: Option<AttrValue>,
+
+    pub style: Option<String>, //tooltip required it
 }
 
 #[function_component(Button)]

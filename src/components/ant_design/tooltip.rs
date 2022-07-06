@@ -180,6 +180,115 @@ pub enum TooltipProps {
 // };
 // const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
+use crate::components::ant_design::button::ButtonProps;
+use crate::components::ant_design::button::LoadingProp;
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct SwitchProps {
+    pub disabled: Option<()>,         //dont know actually yet
+    pub loading: Option<LoadingProp>, //dont know actually yet
+    pub block: Option<()>,            //dont know actually yet
+
+    pub style: Option<String>,
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum ElementType {
+    Button(ButtonProps),
+    Switch(SwitchProps),
+    OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps),
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct OtherDisabledCompatibleChildrenProps {
+    pub block: Option<()>,
+    pub style: Option<String>,
+}
+
+#[function_component(OtherDisabledCompatibleChildren)]
+pub fn other_disabled_compatible_children() -> Html {
+    html! {}
+}
+
+pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String) -> ElementType {
+    let should_return_something_else = match element.clone() {
+        ElementType::Button(props) => match props.disabled {
+            None => false,
+            Some(_) => true,
+        },
+        ElementType::Switch(props) => match (props.disabled, props.loading) {
+            (None, None) => false,
+            (None, Some(_)) => true,
+            (Some(_), None) => true,
+            (Some(_), Some(_)) => true,
+        },
+        ElementType::OtherDisabledCompatibleChildren(_) => false,
+    };
+    match should_return_something_else {
+        false => element,
+        true => {
+            let block = match element {
+                ElementType::Button(props) => props.block,
+                ElementType::Switch(props) => props.block,
+                ElementType::OtherDisabledCompatibleChildren(props) => props.block,
+            };
+            let width = match block {
+                None => String::from("null"),
+                Some(_) => String::from("100%"),
+            };
+            // Pick some layout related style properties up to span
+            // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
+            // const { picked, omitted } = splitObject(element.props.style, [
+            //   'position',
+            //   'left',
+            //   'right',
+            //   'top',
+            //   'bottom',
+            //   'float',
+            //   'display',
+            //   'zIndex',
+            // ]);
+            //
+            // const splitObject = (obj: any, keys: string[]) => {
+            //   const picked: any = {};
+            //   const omitted: any = { ...obj };
+            //   keys.forEach(key => {
+            //     if (obj && key in obj) {
+            //       picked[key] = obj[key];
+            //       delete omitted[key];
+            //     }
+            //   });
+            //   return { picked, omitted };
+            // };
+            //
+            let span_style = format!(
+                "display: \'inline-block\', 
+      ...picked,
+      cursor: \'not-allowed\',
+      width: {}",
+                width
+            );
+            // const buttonStyle = {
+            //   ...omitted,
+            //   pointerEvents: 'none',
+            // };
+            // const child = cloneElement(element, {
+            //   style: buttonStyle,
+            //   className: null,
+            // });
+            // return (
+            //   <span
+            //     style={spanStyle}
+            //     className={classNames(element.props.className, `${prefixCls}-disabled-compatible-wrapper`)}
+            //   >
+            //     {child}
+            //   </span>
+            // );
+            todo!()
+        }
+    }
+}
+
 // // Fix Tooltip won't hide at disabled button
 // // mouse events don't trigger at disabled button in Chrome
 // // https://github.com/react-component/tooltip/issues/18
