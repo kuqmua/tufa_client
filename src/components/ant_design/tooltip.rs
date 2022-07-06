@@ -104,17 +104,66 @@ pub struct AbstractTooltipProps {
 //   children?: React.ReactNode;
 // }
 
+pub type RenderFunction = fn() -> Html;
 // export type RenderFunction = () => React.ReactNode;
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct AbstractTooltipPropsContent {
+    ReactNode(Html),
+    RenderFunction(RenderFunction),
+}
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct TooltipPropsWithOverlay {
+    //not full
+    pub style: Option<String>,// React.CSSProperties;
+    pub class_name: Option<String>,
+    pub color: Option<()>, // LiteralUnion<PresetColorType, string>;
+    pub placement: Option<()>, // TooltipPlacement;
+    pub builtin_placements: Option<()>, // typeof Placements;
+    pub open_class_name: Option<String>,
+    pub arrow_point_at_center: Option<()>,
+    pub auto_adjust_overflow: Option<()>,// boolean | AdjustOverflow;
+    pub get_popup_container: Option<Callback<()>>,// (triggerNode: HTMLElement) => HTMLElement;
+    pub children: Children,
+    
+    pub title: Option<AbstractTooltipPropsContent>,
+    pub overlay: AbstractTooltipPropsContent,
+}
 
 // export interface TooltipPropsWithOverlay extends AbstractTooltipProps {
 //   title?: React.ReactNode | RenderFunction;
 //   overlay: React.ReactNode | RenderFunction;
 // }
 
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct TooltipPropsWithTitle {
+    //not full
+    pub style: Option<String>,// React.CSSProperties;
+    pub class_name: Option<String>,
+    pub color: Option<()>, // LiteralUnion<PresetColorType, string>;
+    pub placement: Option<()>, // TooltipPlacement;
+    pub builtin_placements: Option<()>, // typeof Placements;
+    pub open_class_name: Option<String>,
+    pub arrow_point_at_center: Option<()>,
+    pub auto_adjust_overflow: Option<()>,// boolean | AdjustOverflow;
+    pub get_popup_container: Option<Callback<()>>,// (triggerNode: HTMLElement) => HTMLElement;
+    pub children: Children,
+    
+    pub title: AbstractTooltipPropsContent,
+    pub overlay: Option<AbstractTooltipPropsContent>,
+}
+
 // export interface TooltipPropsWithTitle extends AbstractTooltipProps {
 //   title: React.ReactNode | RenderFunction;
 //   overlay?: React.ReactNode | RenderFunction;
 // }
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct TooltipProps {
+    WithTitle(TooltipPropsWithTitle),
+    WithOverlay(TooltipPropsWithOverlay),
+}
 
 // export declare type TooltipProps = TooltipPropsWithTitle | TooltipPropsWithOverlay;
 
