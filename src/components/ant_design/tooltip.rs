@@ -15,7 +15,7 @@
 // export { AdjustOverflow, PlacementsConfig };
 
 use crate::components::ant_design::helpers::offset::Offset;
-use yew::{function_component, html, Children, Html, Properties};
+use yew::{function_component, html, Callback, Children, Html, Properties};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum TooltipPlacement {
@@ -76,18 +76,18 @@ pub struct TooltipAlignConfig {
 //   useCssTransform?: boolean;
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct AbstractTooltipProps {
     //not full
-    pub style: Option<String>,// React.CSSProperties;
+    pub style: Option<String>, // React.CSSProperties;
     pub class_name: Option<String>,
-    pub color: Option<()>, // LiteralUnion<PresetColorType, string>;
+    pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<()>, // TooltipPlacement;
     pub builtin_placements: Option<()>, // typeof Placements;
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<()>,// boolean | AdjustOverflow;
-    pub get_popup_container: Option<Callback<()>>,// (triggerNode: HTMLElement) => HTMLElement;
+    pub auto_adjust_overflow: Option<()>, // boolean | AdjustOverflow;
+    pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
 }
 
@@ -107,26 +107,26 @@ pub struct AbstractTooltipProps {
 pub type RenderFunction = fn() -> Html;
 // export type RenderFunction = () => React.ReactNode;
 
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct AbstractTooltipPropsContent {
+#[derive(Debug, PartialEq, Clone)]
+pub enum AbstractTooltipPropsContent {
     ReactNode(Html),
     RenderFunction(RenderFunction),
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct TooltipPropsWithOverlay {
     //not full
-    pub style: Option<String>,// React.CSSProperties;
+    pub style: Option<String>, // React.CSSProperties;
     pub class_name: Option<String>,
-    pub color: Option<()>, // LiteralUnion<PresetColorType, string>;
+    pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<()>, // TooltipPlacement;
     pub builtin_placements: Option<()>, // typeof Placements;
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<()>,// boolean | AdjustOverflow;
-    pub get_popup_container: Option<Callback<()>>,// (triggerNode: HTMLElement) => HTMLElement;
+    pub auto_adjust_overflow: Option<()>, // boolean | AdjustOverflow;
+    pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
-    
+
     pub title: Option<AbstractTooltipPropsContent>,
     pub overlay: AbstractTooltipPropsContent,
 }
@@ -136,20 +136,20 @@ pub struct TooltipPropsWithOverlay {
 //   overlay: React.ReactNode | RenderFunction;
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct TooltipPropsWithTitle {
     //not full
-    pub style: Option<String>,// React.CSSProperties;
+    pub style: Option<String>, // React.CSSProperties;
     pub class_name: Option<String>,
-    pub color: Option<()>, // LiteralUnion<PresetColorType, string>;
+    pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<()>, // TooltipPlacement;
     pub builtin_placements: Option<()>, // typeof Placements;
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<()>,// boolean | AdjustOverflow;
-    pub get_popup_container: Option<Callback<()>>,// (triggerNode: HTMLElement) => HTMLElement;
+    pub auto_adjust_overflow: Option<()>, // boolean | AdjustOverflow;
+    pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
-    
+
     pub title: AbstractTooltipPropsContent,
     pub overlay: Option<AbstractTooltipPropsContent>,
 }
@@ -159,8 +159,8 @@ pub struct TooltipPropsWithTitle {
 //   overlay?: React.ReactNode | RenderFunction;
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct TooltipProps {
+#[derive(Debug, PartialEq, Clone)]
+pub enum TooltipProps {
     WithTitle(TooltipPropsWithTitle),
     WithOverlay(TooltipPropsWithOverlay),
 }
