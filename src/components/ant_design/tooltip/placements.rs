@@ -1,12 +1,18 @@
 // import { placements as rcPlacements } from 'rc-tooltip/lib/placements';
 
 #[derive(Debug, PartialEq, Clone)]
+pub struct AutoAdjustOverflowHandle {
+    pub adjust_x: u8,
+    pub adjust_y: u8,
+}
+
+#[derive(Debug, PartialEq, Clone)]
 pub struct AutoAdjustOverflowEnabled {
     adjust_x: u8,
     adjust_y: u8,
 }
 impl AutoAdjustOverflowEnabled {
-    pub fn new(&self) -> Self {
+    pub fn new() -> Self {
         AutoAdjustOverflowEnabled {
             adjust_x: 1,
             adjust_y: 1,
@@ -25,7 +31,7 @@ pub struct AutoAdjustOverflowDisabled {
     adjust_y: u8,
 }
 impl AutoAdjustOverflowDisabled {
-    pub fn new(&self) -> Self {
+    pub fn new() -> Self {
         AutoAdjustOverflowDisabled {
             adjust_x: 0,
             adjust_y: 0,
@@ -46,6 +52,15 @@ static TARGET_OFFSET: &'static [i32]= &[0, 0];
 pub enum ZeroOrOne {
     Zero,
     One,
+}
+
+impl ZeroOrOne {
+    pub fn get_value(&self) -> u8 {
+        match *self {
+            ZeroOrOne::Zero => 0,
+            ZeroOrOne::One => 1,
+        }
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -81,6 +96,42 @@ pub struct PlacementsConfig {
 //   arrowPointAtCenter?: boolean;
 //   autoAdjustOverflow?: boolean | AdjustOverflow;
 // }
+
+pub fn get_overflow_options(auto_adjust_overflow: AdjustOverflowOrBool) -> AutoAdjustOverflowHandle {
+  match auto_adjust_overflow {
+    AdjustOverflowOrBool::Boolean(bool_value) => match bool_value {
+        true => {
+            let enabled = AutoAdjustOverflowEnabled::new();
+            AutoAdjustOverflowHandle {
+                adjust_x: enabled.adjust_x,
+                adjust_y: enabled.adjust_y,
+            }
+        },
+        false => {
+            let disabled = AutoAdjustOverflowDisabled::new();
+            AutoAdjustOverflowHandle {
+                adjust_x: disabled.adjust_x,
+                adjust_y: disabled.adjust_y,
+            }
+        },
+    },
+    AdjustOverflowOrBool::AdjustOverflow(adjust_overflow) => {
+        let disabled = AutoAdjustOverflowDisabled::new();
+        let x = match adjust_overflow.adjust_x {
+            Some(handle) => handle.get_value(),
+            None => disabled.adjust_x,
+        };
+        let y = match adjust_overflow.adjust_y {
+            Some(handle) => handle.get_value(),
+            None => disabled.adjust_y,
+        };
+        AutoAdjustOverflowHandle {
+            adjust_x: x,
+            adjust_y: y,
+        }
+    },
+  }
+}
 
 // export function getOverflowOptions(autoAdjustOverflow: boolean | AdjustOverflow) {
 //   if (typeof autoAdjustOverflow === 'boolean') {
