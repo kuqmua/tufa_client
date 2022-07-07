@@ -199,10 +199,30 @@ pub enum ElementType {
     OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps),
 }
 
+impl ElementType {
+    pub fn get_html(&self) -> Html {
+        html!{}
+    }
+}
+
 #[derive(Debug, PartialEq, Clone)]
 pub struct OtherDisabledCompatibleChildrenProps {
     pub block: Option<()>,
     pub style: Option<String>,
+}
+
+impl OtherDisabledCompatibleChildrenProps {
+    pub fn get_html(&self, style: String, class: String, children: Html) -> Html {
+        html!{
+          <span
+            style={style.clone()}
+            class={class.clone()}
+                // classNames(element.props.className, `${prefixCls}-disabled-compatible-wrapper`)}
+          >
+            {children}//{child}
+          </span>
+        }
+    }
 }
 
 #[function_component(OtherDisabledCompatibleChildren)]
@@ -262,16 +282,16 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             // };
             //
             let span_style = format!(
-                "display: \'inline-block\', 
-      ...picked,
-      cursor: \'not-allowed\',
-      width: {}",
+                "display: inline-block; cursor: not-allowed; width: {}",
                 width
+                // ...picked,
             );
+            let button_style = format!("pointerEvents: none; {}", String::from(""));//...omitted
             // const buttonStyle = {
             //   ...omitted,
             //   pointerEvents: 'none',
             // };
+
             // const child = cloneElement(element, {
             //   style: buttonStyle,
             //   className: null,
@@ -284,7 +304,10 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             //     {child}
             //   </span>
             // );
-            todo!()
+            ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
+                block: None,
+                style: None,
+            })
         }
     }
 }
