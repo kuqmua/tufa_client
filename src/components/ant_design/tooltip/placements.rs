@@ -46,7 +46,7 @@ impl AutoAdjustOverflowDisabled {
 //   adjustY: 0,
 // };
 
-static TARGET_OFFSET: &'static [i32]= &[0, 0];
+static TARGET_OFFSET: &'static [i32; 2]= &[0, 0];
 
 // const targetOffset = [0, 0];
 
@@ -149,6 +149,9 @@ pub fn get_overflow_options(auto_adjust_overflow: AdjustOverflowOrBool) -> AutoA
 pub struct PointsOffset {
     pub points: [PointsValue; 2],
     pub offset: [i32; 2],
+    pub overflow: Option<AutoAdjustOverflowHandle>,
+    pub target_offset: Option<[i32; 2]>,
+    pub ignore_shake: Option<bool>,
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -213,7 +216,7 @@ impl PositionType {
     }
 }
 
-pub fn get_placements(config_option: Option<PlacementsConfig>) {
+pub fn get_placements(config_option: Option<PlacementsConfig>) -> HashMap::<String, PointsOffset> {
     let config = config_option.unwrap_or(PlacementsConfig {
         arrow_width: None,
         horizontal_arrow_shift: None,
@@ -233,60 +236,120 @@ pub fn get_placements(config_option: Option<PlacementsConfig>) {
         Some(value) => value,
         None => 12,
     };
-    let auto_adjust_overflow = match config.auto_adjust_overflow {
+    let auto_adjust_overflow = match config.auto_adjust_overflow.clone() {
         Some(value) => value,
         None => AdjustOverflowOrBool::Boolean(true),
     };
-    let vikings = HashMap::from([
+    let placement_map = HashMap::from([
         (PositionType::Left.get_string(), PointsOffset {
             points: [PointsValue::Cr, PointsValue::Cl],
             offset: [-4, 0],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::Right.get_string(), PointsOffset {
             points: [PointsValue::Cl, PointsValue::Cr],
             offset: [4, 0],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::Top.get_string(), PointsOffset {
             points: [PointsValue::Bc, PointsValue::Tc],
             offset: [0, -4],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::Bottom.get_string(), PointsOffset {
             points: [PointsValue::Tc, PointsValue::Bc],
             offset: [0, 4],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::TopLeft.get_string(), PointsOffset {
             points: [PointsValue::Bl, PointsValue::Tc],
             offset: [-(horizontal_arrow_shift + arrow_width), -4],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::LeftTop.get_string(), PointsOffset {
             points: [PointsValue::Tr, PointsValue::Cl],
             offset: [-4, -(vertical_arrow_shift + arrow_width)],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::TopRight.get_string(), PointsOffset {
             points: [PointsValue::Br, PointsValue::Tc],
             offset: [horizontal_arrow_shift + arrow_width, -4],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::RightTop.get_string(), PointsOffset {
             points: [PointsValue::Tl, PointsValue::Cr],
             offset: [4, -(vertical_arrow_shift + arrow_width)],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::BottomRight.get_string(), PointsOffset {
             points: [PointsValue::Tr, PointsValue::Bc],
             offset: [horizontal_arrow_shift + arrow_width, 4],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::RightBottom.get_string(), PointsOffset {
             points: [PointsValue::Bl, PointsValue::Cr],
             offset: [4, vertical_arrow_shift + arrow_width],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::BottomLeft.get_string(), PointsOffset {
             points: [PointsValue::Tl, PointsValue::Bc],
             offset: [-(horizontal_arrow_shift + arrow_width), 4],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         }),
         (PositionType::LeftBottom.get_string(), PointsOffset {
             points: [PointsValue::Br, PointsValue::Cl],
             offset: [-4, vertical_arrow_shift + arrow_width],
+            overflow: None,
+            target_offset: None,
+            ignore_shake: None,
         })
     ]);
+    let mut second_placement_map = HashMap::<String, PointsOffset>::with_capacity(placement_map.len());
+    for (key, value) in placement_map {
+        match config.arrow_point_at_center {
+            Some(_) => {
+                second_placement_map.insert(key, PointsOffset {
+                    points: value.points,
+                    offset: value.offset,
+                    overflow: Some(get_overflow_options(auto_adjust_overflow.clone())),
+                    target_offset: Some(*TARGET_OFFSET),
+                    ignore_shake: Some(true),
+                });
+            },
+            None => {
+                second_placement_map.insert(key, PointsOffset {
+                    points: value.points,
+                    offset: value.offset,
+                    overflow: Some(get_overflow_options(auto_adjust_overflow.clone())),
+                    target_offset: value.target_offset,
+                    ignore_shake: Some(true),
+                });
+            },
+        }
+    }
+    second_placement_map
 }
 
 // export default function getPlacements(config: PlacementsConfig = {}) {
