@@ -1,5 +1,7 @@
 // import { placements as rcPlacements } from 'rc-tooltip/lib/placements';
 
+use std::collections::HashMap;
+
 #[derive(Debug, PartialEq, Clone)]
 pub struct AutoAdjustOverflowHandle {
     pub adjust_x: u8,
@@ -82,9 +84,9 @@ pub enum AdjustOverflowOrBool {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct PlacementsConfig {
-    arrow_width: Option<u32>,
-    horizontal_arrow_shift: Option<u32>,
-    vertical_arrow_shift: Option<u32>,
+    arrow_width: Option<i32>,
+    horizontal_arrow_shift: Option<i32>,
+    vertical_arrow_shift: Option<i32>,
     arrow_point_at_center: Option<bool>,
     auto_adjust_overflow: Option<AdjustOverflowOrBool>,
 }
@@ -143,10 +145,10 @@ pub fn get_overflow_options(auto_adjust_overflow: AdjustOverflowOrBool) -> AutoA
 //   };
 // }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct PointsOffset {
     pub points: [PointsValue; 2],
-    pub offset: [i32],
+    pub offset: [i32; 2],
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -176,6 +178,41 @@ impl PointsValue {
     }
 }
 
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum PositionType {
+    Left,
+    Right,
+    Top,
+    Bottom,
+    TopLeft,
+    LeftTop,
+    TopRight,
+    RightTop,
+    BottomRight,
+    RightBottom,
+    BottomLeft,
+    LeftBottom,
+}
+
+impl PositionType {
+    pub fn get_string(&self) -> String {
+        match *self {
+            PositionType::Left => String::from("left"),
+            PositionType::Right => String::from("right"),
+            PositionType::Top => String::from("top"),
+            PositionType::Bottom => String::from("bottom"),
+            PositionType::TopLeft => String::from("topLeft"),
+            PositionType::LeftTop => String::from("leftTop"),
+            PositionType::TopRight => String::from("topRight"),
+            PositionType::RightTop => String::from("rightTop"),
+            PositionType::BottomRight => String::from("bottomRight"),
+            PositionType::RightBottom => String::from("rightBottom"),
+            PositionType::BottomLeft => String::from("bottomLeft"),
+            PositionType::LeftBottom => String::from("leftBottom"),
+        }
+    }
+}
+
 pub fn get_placements(config_option: Option<PlacementsConfig>) {
     let config = config_option.unwrap_or(PlacementsConfig {
         arrow_width: None,
@@ -184,7 +221,7 @@ pub fn get_placements(config_option: Option<PlacementsConfig>) {
         arrow_point_at_center: None,
         auto_adjust_overflow: None,
     });
-    let arrowWidth = match config.arrow_width {
+    let arrow_width = match config.arrow_width {
         Some(value) => value,
         None => 5,
     };
@@ -200,63 +237,56 @@ pub fn get_placements(config_option: Option<PlacementsConfig>) {
         Some(value) => value,
         None => AdjustOverflowOrBool::Boolean(true),
     };
-    // let vikings = HashMap::from([
-    //     ("Norway", 25),
-    //     ("Denmark", 24),
-    //     ("Iceland", 12),
-
-
-
-
-    //         left: {
-    //   points: ['cr', 'cl'],
-    //   offset: [-4, 0],
-    // },
-    // right: {
-    //   points: ['cl', 'cr'],
-    //   offset: [4, 0],
-    // },
-    // top: {
-    //   points: ['bc', 'tc'],
-    //   offset: [0, -4],
-    // },
-    // bottom: {
-    //   points: ['tc', 'bc'],
-    //   offset: [0, 4],
-    // },
-    // topLeft: {
-    //   points: ['bl', 'tc'],
-    //   offset: [-(horizontalArrowShift + arrowWidth), -4],
-    // },
-    // leftTop: {
-    //   points: ['tr', 'cl'],
-    //   offset: [-4, -(verticalArrowShift + arrowWidth)],
-    // },
-    // topRight: {
-    //   points: ['br', 'tc'],
-    //   offset: [horizontalArrowShift + arrowWidth, -4],
-    // },
-    // rightTop: {
-    //   points: ['tl', 'cr'],
-    //   offset: [4, -(verticalArrowShift + arrowWidth)],
-    // },
-    // bottomRight: {
-    //   points: ['tr', 'bc'],
-    //   offset: [horizontalArrowShift + arrowWidth, 4],
-    // },
-    // rightBottom: {
-    //   points: ['bl', 'cr'],
-    //   offset: [4, verticalArrowShift + arrowWidth],
-    // },
-    // bottomLeft: {
-    //   points: ['tl', 'bc'],
-    //   offset: [-(horizontalArrowShift + arrowWidth), 4],
-    // },
-    // leftBottom: {
-    //   points: ['br', 'cl'],
-    //   offset: [-4, verticalArrowShift + arrowWidth],
-    // },
-    // ]);
+    let vikings = HashMap::from([
+        (PositionType::Left.get_string(), PointsOffset {
+            points: [PointsValue::Cr, PointsValue::Cl],
+            offset: [-4, 0],
+        }),
+        (PositionType::Right.get_string(), PointsOffset {
+            points: [PointsValue::Cl, PointsValue::Cr],
+            offset: [4, 0],
+        }),
+        (PositionType::Top.get_string(), PointsOffset {
+            points: [PointsValue::Bc, PointsValue::Tc],
+            offset: [0, -4],
+        }),
+        (PositionType::Bottom.get_string(), PointsOffset {
+            points: [PointsValue::Tc, PointsValue::Bc],
+            offset: [0, 4],
+        }),
+        (PositionType::TopLeft.get_string(), PointsOffset {
+            points: [PointsValue::Bl, PointsValue::Tc],
+            offset: [-(horizontal_arrow_shift + arrow_width), -4],
+        }),
+        (PositionType::LeftTop.get_string(), PointsOffset {
+            points: [PointsValue::Tr, PointsValue::Cl],
+            offset: [-4, -(vertical_arrow_shift + arrow_width)],
+        }),
+        (PositionType::TopRight.get_string(), PointsOffset {
+            points: [PointsValue::Br, PointsValue::Tc],
+            offset: [horizontal_arrow_shift + arrow_width, -4],
+        }),
+        (PositionType::RightTop.get_string(), PointsOffset {
+            points: [PointsValue::Tl, PointsValue::Cr],
+            offset: [4, -(vertical_arrow_shift + arrow_width)],
+        }),
+        (PositionType::BottomRight.get_string(), PointsOffset {
+            points: [PointsValue::Tr, PointsValue::Bc],
+            offset: [horizontal_arrow_shift + arrow_width, 4],
+        }),
+        (PositionType::RightBottom.get_string(), PointsOffset {
+            points: [PointsValue::Bl, PointsValue::Cr],
+            offset: [4, vertical_arrow_shift + arrow_width],
+        }),
+        (PositionType::BottomLeft.get_string(), PointsOffset {
+            points: [PointsValue::Tl, PointsValue::Bc],
+            offset: [-(horizontal_arrow_shift + arrow_width), 4],
+        }),
+        (PositionType::LeftBottom.get_string(), PointsOffset {
+            points: [PointsValue::Br, PointsValue::Cl],
+            offset: [-4, vertical_arrow_shift + arrow_width],
+        })
+    ]);
 }
 
 // export default function getPlacements(config: PlacementsConfig = {}) {
