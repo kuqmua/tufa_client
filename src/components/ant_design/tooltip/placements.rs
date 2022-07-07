@@ -143,6 +143,122 @@ pub fn get_overflow_options(auto_adjust_overflow: AdjustOverflowOrBool) -> AutoA
 //   };
 // }
 
+#[derive(Debug, PartialEq)]
+pub struct PointsOffset {
+    pub points: [PointsValue; 2],
+    pub offset: [i32],
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum PointsValue {
+    Cr, 
+    Cl,
+    Bc,
+    Tc, 
+    Bl,
+    Tr, 
+    Br,
+    Tl, 
+}
+
+impl PointsValue {
+    pub fn get_string(&self) -> String {
+        match self {
+            PointsValue::Cr => String::from("cr"),
+            PointsValue::Cl => String::from("cl"),
+            PointsValue::Bc => String::from("bc"),
+            PointsValue::Tc => String::from("tc"),
+            PointsValue::Bl => String::from("bl"),
+            PointsValue::Tr => String::from("tr"),
+            PointsValue::Br => String::from("br"),
+            PointsValue::Tl => String::from("tl"),
+        }
+    }
+}
+
+pub fn get_placements(config_option: Option<PlacementsConfig>) {
+    let config = config_option.unwrap_or(PlacementsConfig {
+        arrow_width: None,
+        horizontal_arrow_shift: None,
+        vertical_arrow_shift: None,
+        arrow_point_at_center: None,
+        auto_adjust_overflow: None,
+    });
+    let arrowWidth = match config.arrow_width {
+        Some(value) => value,
+        None => 5,
+    };
+    let horizontal_arrow_shift = match config.horizontal_arrow_shift {
+        Some(value) => value,
+        None => 16,
+    };
+    let vertical_arrow_shift = match config.vertical_arrow_shift {
+        Some(value) => value,
+        None => 12,
+    };
+    let auto_adjust_overflow = match config.auto_adjust_overflow {
+        Some(value) => value,
+        None => AdjustOverflowOrBool::Boolean(true),
+    };
+    // let vikings = HashMap::from([
+    //     ("Norway", 25),
+    //     ("Denmark", 24),
+    //     ("Iceland", 12),
+
+
+
+
+    //         left: {
+    //   points: ['cr', 'cl'],
+    //   offset: [-4, 0],
+    // },
+    // right: {
+    //   points: ['cl', 'cr'],
+    //   offset: [4, 0],
+    // },
+    // top: {
+    //   points: ['bc', 'tc'],
+    //   offset: [0, -4],
+    // },
+    // bottom: {
+    //   points: ['tc', 'bc'],
+    //   offset: [0, 4],
+    // },
+    // topLeft: {
+    //   points: ['bl', 'tc'],
+    //   offset: [-(horizontalArrowShift + arrowWidth), -4],
+    // },
+    // leftTop: {
+    //   points: ['tr', 'cl'],
+    //   offset: [-4, -(verticalArrowShift + arrowWidth)],
+    // },
+    // topRight: {
+    //   points: ['br', 'tc'],
+    //   offset: [horizontalArrowShift + arrowWidth, -4],
+    // },
+    // rightTop: {
+    //   points: ['tl', 'cr'],
+    //   offset: [4, -(verticalArrowShift + arrowWidth)],
+    // },
+    // bottomRight: {
+    //   points: ['tr', 'bc'],
+    //   offset: [horizontalArrowShift + arrowWidth, 4],
+    // },
+    // rightBottom: {
+    //   points: ['bl', 'cr'],
+    //   offset: [4, verticalArrowShift + arrowWidth],
+    // },
+    // bottomLeft: {
+    //   points: ['tl', 'bc'],
+    //   offset: [-(horizontalArrowShift + arrowWidth), 4],
+    // },
+    // leftBottom: {
+    //   points: ['br', 'cl'],
+    //   offset: [-4, verticalArrowShift + arrowWidth],
+    // },
+    // ]);
+}
+
 // export default function getPlacements(config: PlacementsConfig = {}) {
 //   const {
 //     arrowWidth = 5,
