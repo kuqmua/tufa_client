@@ -321,7 +321,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             //   'zIndex',
             // ]);
             
-            let splitted_object = split_object(element, omitted_str_array);
+            let splitted_object = split_object(element.clone(), omitted_str_array);
 
             // const splitObject = (obj: any, keys: string[]) => {
             //   const picked: any = {};
@@ -345,7 +345,34 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             //   ...omitted,
             //   pointerEvents: 'none',
             // };
-
+            let child = match element.clone() {
+                ElementType::Button(props) => ElementType::Button(ButtonProps{
+                    disabled: props.disabled,
+                    ghost: props.ghost,
+                    href: props.href,
+                    html_type: props.html_type,
+                    icon: props.icon,
+                    loading: props.loading,
+                    shape: props.shape,
+                    size: props.size,
+                    target: props.target,
+                    button_type: props.button_type,
+                    on_click: props.on_click,
+                    block: props.block,
+                    placeholder: props.placeholder,
+                    style: props.style,
+                }),
+                ElementType::Switch(props) => ElementType::Switch(SwitchProps{
+                    disabled: props.disabled,
+                    loading: props.loading,
+                    block: props.block,
+                    style: props.style,
+                }),
+                ElementType::OtherDisabledCompatibleChildren(props) => ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
+                    block: props.block,
+                    style: props.style,
+                }),
+            };
             // const child = cloneElement(element, {
             //   style: buttonStyle,
             //   className: null,
