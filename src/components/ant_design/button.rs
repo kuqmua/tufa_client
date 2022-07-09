@@ -9,6 +9,7 @@ use crate::constants::WHITE_HSL;
 use web_sys::MouseEvent;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Html, Properties};
+use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum ButtonType {
@@ -53,7 +54,7 @@ pub struct ButtonProps {
     pub block: Option<()>,
     pub placeholder: Option<AttrValue>,
 
-    pub style: Option<HashMap<String, String>>, //tooltip required it
+    pub style: Option<PseudoCssWrapper>, //tooltip required it
 }
 
 #[function_component(Button)]

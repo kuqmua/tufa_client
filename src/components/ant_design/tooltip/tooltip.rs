@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
 
 // import * as React from 'react';
 // import { polyfill } from 'react-lifecycles-compat';
@@ -177,8 +178,8 @@ pub fn split_object (element: ElementType, omitted_keys_array: Vec<&str>) -> Spl
     let mut omitted = HashMap::<String, String>::new();
     match element.clone().get_style_option() {
         None => (),
-        Some(style) => {
-          for (style_key, style_value) in style.clone() {
+        Some(pseudo_css_wraper) => {
+          for (style_key, style_value) in pseudo_css_wraper.style.clone() {
             for ommited_key in &omitted_keys_array {
                 let k = style_key.clone();
                 let v = style_value.clone();
@@ -218,7 +219,7 @@ pub struct SwitchProps {
     pub loading: Option<LoadingProp>, //dont know actually yet
     pub block: Option<()>,            //dont know actually yet
 
-    pub style: Option<HashMap<String, String>>
+    pub style: Option<PseudoCssWrapper>
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -232,7 +233,7 @@ impl ElementType {
     pub fn get_html(&self) -> Html {
         html!{}
     }
-    pub fn get_style_option(&self) -> Option<HashMap<String, String>> {
+    pub fn get_style_option(&self) -> Option<PseudoCssWrapper> {
         match self {
             ElementType::Button(props) => props.style.clone(),
             ElementType::Switch(props) => props.style.clone(),
@@ -244,7 +245,7 @@ impl ElementType {
 #[derive(Debug, PartialEq, Clone)]
 pub struct OtherDisabledCompatibleChildrenProps {
     pub block: Option<()>,
-    pub style: Option<HashMap<String, String>>
+    pub style: Option<PseudoCssWrapper>
 }
 
 impl OtherDisabledCompatibleChildrenProps {
@@ -317,7 +318,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             // ]);
             
             let splitted_object = split_object(element, omitted_str_array);
-            
+
             // const splitObject = (obj: any, keys: string[]) => {
             //   const picked: any = {};
             //   const omitted: any = { ...obj };
