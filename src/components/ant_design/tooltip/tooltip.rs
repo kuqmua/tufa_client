@@ -280,45 +280,36 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             let float = String::from("float");
             let display = String::from("display");
             let z_index = String::from("zIndex");
-            let (picked, omitted) = match element.clone() {
-                ElementType::Button(button_props) => {
-                    let mut picked = HashMap::<String, String>::new();
-                    let mut omitted = HashMap::<String, String>::new();
-                    match button_props.style.clone() {
-                        None => (),
-                        Some(style) => {
-                            for (style_key, style_value) in style.clone() {
-                                let k = style_key.clone();
-                                let v = style_value.clone();
-                                match style_key {
-                                    position => {omitted.insert(k, v);},
-                                    left => {omitted.insert(k, v);},
-                                    right => {omitted.insert(k, v);},
-                                    top => {omitted.insert(k, v);},
-                                    bottom => {omitted.insert(k, v);},
-                                    float => {omitted.insert(k, v);},
-                                    display => {omitted.insert(k, v);},
-                                    z_index => {omitted.insert(k, v);},
-                                    _ => {picked.insert(k, v);},
-                                };
-                            };
-                        },
-                    }
-                    (picked, omitted)
-                },
-                ElementType::Switch(button_props) => {
-                    let mut picked = HashMap::<String, String>::new();
-                    let mut omitted = HashMap::<String, String>::new();
-
-                    (picked, omitted)
-                },
-                ElementType::OtherDisabledCompatibleChildren(button_props) => {
-                    let mut picked = HashMap::<String, String>::new();
-                    let mut omitted = HashMap::<String, String>::new();
-
-                    (picked, omitted)
-                },
+            let (picked, omitted) = {
+                let mut picked = HashMap::<String, String>::new();
+                let mut omitted = HashMap::<String, String>::new();
+                match element.clone().get_style_option() {
+                    None => (),
+                    Some(style) => {
+                      for (style_key, style_value) in style.clone() {
+                        let k = style_key.clone();
+                        let v = style_value.clone();
+                        match style_key {
+                            position => {omitted.insert(k, v);},
+                            left => {omitted.insert(k, v);},
+                            right => {omitted.insert(k, v);},
+                            top => {omitted.insert(k, v);},
+                            bottom => {omitted.insert(k, v);},
+                            float => {omitted.insert(k, v);},
+                            display => {omitted.insert(k, v);},
+                            z_index => {omitted.insert(k, v);},
+                            _ => {picked.insert(k, v);},
+                        };
+                    };
+                    },
+                    
+                }
+                (picked, omitted)
             };
+
+
+
+
             // Pick some layout related style properties up to span
             // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
             // const { picked, omitted } = splitObject(element.props.style, [
