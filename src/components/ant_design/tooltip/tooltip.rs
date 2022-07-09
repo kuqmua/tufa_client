@@ -202,7 +202,13 @@ impl ElementType {
     pub fn get_html(&self) -> Html {
         html!{}
     }
-    
+    pub fn get_style_option(&self) -> Option<HashMap<String, String>> {
+        match self {
+            ElementType::Button(props) => props.style.clone(),
+            ElementType::Switch(props) => props.style.clone(),
+            ElementType::OtherDisabledCompatibleChildren(props) => props.style.clone(),
+        }
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]
