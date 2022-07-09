@@ -302,7 +302,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                   "display",
                   "zIndex",
             ];
-            let splitted_object = split_object(element, omitted_str_array);
+            
             // Pick some layout related style properties up to span
             // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
             // const { picked, omitted } = splitObject(element.props.style, [
@@ -315,7 +315,9 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             //   'display',
             //   'zIndex',
             // ]);
-            //
+            
+            let splitted_object = split_object(element, omitted_str_array);
+            
             // const splitObject = (obj: any, keys: string[]) => {
             //   const picked: any = {};
             //   const omitted: any = { ...obj };
