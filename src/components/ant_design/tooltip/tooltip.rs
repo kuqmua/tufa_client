@@ -1,16 +1,12 @@
-// import classNames from 'classnames';
-// import RcTooltip from 'rc-tooltip';
-// import type { placements as Placements } from 'rc-tooltip/lib/placements';
-// import type { TooltipProps as RcTooltipProps } from 'rc-tooltip/lib/Tooltip';
-// import useMergedState from 'rc-util/lib/hooks/useMergedState';
 // import * as React from 'react';
-// import { ConfigContext } from '../config-provider';
-// import type { PresetColorType } from '../_util/colors';
-// import { PresetColorTypes } from '../_util/colors';
-// import { getTransitionName } from '../_util/motion';
-// import getPlacements, { AdjustOverflow, PlacementsConfig } from '../_util/placements';
-// import { cloneElement, isValidElement } from '../_util/reactNode';
-// import type { LiteralUnion } from '../_util/type';
+// import { polyfill } from 'react-lifecycles-compat';
+// import RcTooltip from 'rc-tooltip';
+// import classNames from 'classnames';
+// import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
+use crate::components::ant_design::tooltip::placements::get_placements;
+use crate::components::ant_design::tooltip::placements::AdjustOverflow;
+use crate::components::ant_design::tooltip::placements::PlacementsConfig;
+// import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 // export { AdjustOverflow, PlacementsConfig };
 
