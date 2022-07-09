@@ -169,13 +169,17 @@ pub enum TooltipProps {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct SplittedObject {
-    pub picked: HashMap::<String, String>,
-    pub omitted: HashMap::<String, String>,
+    pub picked: PseudoCssWrapper,
+    pub omitted: PseudoCssWrapper,
 }
 
-pub fn split_object (element: ElementType, omitted_keys_array: Vec<&str>) -> SplittedObject {
-    let mut picked = HashMap::<String, String>::new();
-    let mut omitted = HashMap::<String, String>::new();
+pub fn split_object(element: ElementType, omitted_keys_array: Vec<&str>) -> SplittedObject {
+    let mut picked = PseudoCssWrapper {
+        style: HashMap::<String, String>::new(),
+    };
+    let mut omitted = PseudoCssWrapper {
+        style: HashMap::<String, String>::new(),
+    };
     match element.clone().get_style_option() {
         None => (),
         Some(pseudo_css_wraper) => {
@@ -184,8 +188,8 @@ pub fn split_object (element: ElementType, omitted_keys_array: Vec<&str>) -> Spl
                 let k = style_key.clone();
                 let v = style_value.clone();
                 match style_key == ommited_key.to_string() {
-                    true => {omitted.insert(k, v);},
-                    false => {picked.insert(k, v);},
+                    true => {omitted.style.insert(k, v);},
+                    false => {picked.style.insert(k, v);},
                 }
             }
           };
@@ -332,9 +336,9 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             // };
             //
             let span_style = format!(
-                "display: inline-block; cursor: not-allowed; width: {}",
-                width
-                // ...picked,
+                "display: inline-block; cursor: not-allowed; width: {}; {}",
+                width,
+                splitted_object.picked.to_string()
             );
             let button_style = format!("pointerEvents: none; {}", String::from(""));//...omitted
             // const buttonStyle = {
