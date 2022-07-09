@@ -335,12 +335,13 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             //   return { picked, omitted };
             // };
             //
-            let span_style = format!(
-                "display: inline-block; cursor: not-allowed; width: {}; {}",
-                width,
-                splitted_object.picked.to_string()
-            );
-            let button_style = format!("pointerEvents: none; {}", splitted_object.omitted.to_string());
+            let mut span_style = splitted_object.picked;
+            span_style.style.insert(String::from("display"), String::from("inline-block"));
+            span_style.style.insert(String::from("cursor"), String::from("not-allowed"));
+            span_style.style.insert(String::from("width"), width.to_string());
+
+            let mut button_style = splitted_object.omitted;
+            button_style.style.insert(String::from("pointerEvents"), String::from("none"));
             // const buttonStyle = {
             //   ...omitted,
             //   pointerEvents: 'none',
@@ -360,17 +361,17 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                     on_click: props.on_click,
                     block: props.block,
                     placeholder: props.placeholder,
-                    style: props.style,
+                    style: Some(button_style),
                 }),
                 ElementType::Switch(props) => ElementType::Switch(SwitchProps{
                     disabled: props.disabled,
                     loading: props.loading,
                     block: props.block,
-                    style: props.style,
+                    style: Some(button_style),
                 }),
                 ElementType::OtherDisabledCompatibleChildren(props) => ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
                     block: props.block,
-                    style: props.style,
+                    style: Some(button_style),
                 }),
             };
             // const child = cloneElement(element, {
