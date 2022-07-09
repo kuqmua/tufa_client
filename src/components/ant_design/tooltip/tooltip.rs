@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 // import * as React from 'react';
 // import { polyfill } from 'react-lifecycles-compat';
 // import RcTooltip from 'rc-tooltip';
@@ -5,6 +7,7 @@
 // import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
 use crate::components::ant_design::tooltip::placements::get_placements;
 use crate::components::ant_design::tooltip::placements::AdjustOverflow;
+use crate::components::ant_design::tooltip::placements::AdjustOverflowOrBool;
 use crate::components::ant_design::tooltip::placements::PlacementsConfig;
 // import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
@@ -82,7 +85,7 @@ pub struct AbstractTooltipProps {
     pub builtin_placements: Option<()>, // typeof Placements;
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<()>, // boolean | AdjustOverflow;
+    pub auto_adjust_overflow: Option<AdjustOverflowOrBool>, // boolean | AdjustOverflow;
     pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
 }
@@ -185,7 +188,7 @@ pub struct SwitchProps {
     pub loading: Option<LoadingProp>, //dont know actually yet
     pub block: Option<()>,            //dont know actually yet
 
-    pub style: Option<String>,
+    pub style: Option<HashMap<String, String>>
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -199,12 +202,13 @@ impl ElementType {
     pub fn get_html(&self) -> Html {
         html!{}
     }
+    
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct OtherDisabledCompatibleChildrenProps {
     pub block: Option<()>,
-    pub style: Option<String>,
+    pub style: Option<HashMap<String, String>>
 }
 
 impl OtherDisabledCompatibleChildrenProps {
@@ -243,7 +247,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
     match should_return_something_else {
         false => element,
         true => {
-            let block = match element {
+            let block = match element.clone() {
                 ElementType::Button(props) => props.block,
                 ElementType::Switch(props) => props.block,
                 ElementType::OtherDisabledCompatibleChildren(props) => props.block,
@@ -251,6 +255,63 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             let width = match block {
                 None => String::from("null"),
                 Some(_) => String::from("100%"),
+            };
+            // let omitted_str_array = [
+            //       "position",
+            //       "left",
+            //       "right",
+            //       "top",
+            //       "bottom",
+            //       "float",
+            //       "display",
+            //       "zIndex",
+            // ];
+            let position = String::from("position");
+            let left = String::from("left");
+            let right = String::from("right");
+            let top = String::from("top");
+            let bottom = String::from("bottom");
+            let float = String::from("float");
+            let display = String::from("display");
+            let z_index = String::from("zIndex");
+            let (picked, omitted) = match element.clone() {
+                ElementType::Button(button_props) => {
+                    let mut picked = HashMap::<String, String>::new();
+                    let mut omitted = HashMap::<String, String>::new();
+                    match button_props.style.clone() {
+                        None => (),
+                        Some(style) => {
+                            for (style_key, style_value) in style.clone() {
+                                let k = style_key.clone();
+                                let v = style_value.clone();
+                                match style_key {
+                                    position => {omitted.insert(k, v);},
+                                    left => {omitted.insert(k, v);},
+                                    right => {omitted.insert(k, v);},
+                                    top => {omitted.insert(k, v);},
+                                    bottom => {omitted.insert(k, v);},
+                                    float => {omitted.insert(k, v);},
+                                    display => {omitted.insert(k, v);},
+                                    z_index => {omitted.insert(k, v);},
+                                    _ => {picked.insert(k, v);},
+                                };
+                            };
+                        },
+                    }
+                    (picked, omitted)
+                },
+                ElementType::Switch(button_props) => {
+                    let mut picked = HashMap::<String, String>::new();
+                    let mut omitted = HashMap::<String, String>::new();
+
+                    (picked, omitted)
+                },
+                ElementType::OtherDisabledCompatibleChildren(button_props) => {
+                    let mut picked = HashMap::<String, String>::new();
+                    let mut omitted = HashMap::<String, String>::new();
+
+                    (picked, omitted)
+                },
             };
             // Pick some layout related style properties up to span
             // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254

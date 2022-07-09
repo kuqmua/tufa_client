@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::components::ant_design::icon::Icon;
 // use crate::components::ant_design::svg::close::Close;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
@@ -51,7 +53,7 @@ pub struct ButtonProps {
     pub block: Option<()>,
     pub placeholder: Option<AttrValue>,
 
-    pub style: Option<String>, //tooltip required it
+    pub style: Option<HashMap<String, String>>, //tooltip required it
 }
 
 #[function_component(Button)]
