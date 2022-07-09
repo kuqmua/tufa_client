@@ -262,16 +262,16 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                 None => String::from("null"),
                 Some(_) => String::from("100%"),
             };
-            // let omitted_str_array = [
-            //       "position",
-            //       "left",
-            //       "right",
-            //       "top",
-            //       "bottom",
-            //       "float",
-            //       "display",
-            //       "zIndex",
-            // ];
+            let omitted_str_array = [
+                  "position",
+                  "left",
+                  "right",
+                  "top",
+                  "bottom",
+                  "float",
+                  "display",
+                  "zIndex",
+            ];
             let position = String::from("position");
             let left = String::from("left");
             let right = String::from("right");
@@ -287,20 +287,15 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                     None => (),
                     Some(style) => {
                       for (style_key, style_value) in style.clone() {
-                        let k = style_key.clone();
-                        let v = style_value.clone();
-                        match style_key {
-                            position => {omitted.insert(k, v);},
-                            left => {omitted.insert(k, v);},
-                            right => {omitted.insert(k, v);},
-                            top => {omitted.insert(k, v);},
-                            bottom => {omitted.insert(k, v);},
-                            float => {omitted.insert(k, v);},
-                            display => {omitted.insert(k, v);},
-                            z_index => {omitted.insert(k, v);},
-                            _ => {picked.insert(k, v);},
-                        };
-                    };
+                        for ommited_key in omitted_str_array {
+                            let k = style_key.clone();
+                            let v = style_value.clone();
+                            match style_key == ommited_key {
+                                true => {omitted.insert(k, v);},
+                                false => {picked.insert(k, v);},
+                            }
+                        }
+                      };
                     },
                     
                 }
