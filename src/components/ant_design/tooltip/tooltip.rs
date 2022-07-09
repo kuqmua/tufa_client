@@ -166,6 +166,36 @@ pub enum TooltipProps {
 
 // export declare type TooltipProps = TooltipPropsWithTitle | TooltipPropsWithOverlay;
 
+#[derive(Debug, PartialEq, Clone)]
+pub struct SplittedObject {
+    pub picked: HashMap::<String, String>,
+    pub omitted: HashMap::<String, String>,
+}
+
+pub fn split_object (element: ElementType, omitted_keys_array: Vec<&str>) -> SplittedObject {
+    let mut picked = HashMap::<String, String>::new();
+    let mut omitted = HashMap::<String, String>::new();
+    match element.clone().get_style_option() {
+        None => (),
+        Some(style) => {
+          for (style_key, style_value) in style.clone() {
+            for ommited_key in &omitted_keys_array {
+                let k = style_key.clone();
+                let v = style_value.clone();
+                match style_key == ommited_key.to_string() {
+                    true => {omitted.insert(k, v);},
+                    false => {picked.insert(k, v);},
+                }
+            }
+          };
+        },
+    }
+    SplittedObject {
+        picked, 
+        omitted,
+    }
+}
+
 // const splitObject = (obj: any, keys: string[]) => {
 //   const picked: any = {};
 //   const omitted: any = { ...obj };
@@ -262,7 +292,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                 None => String::from("null"),
                 Some(_) => String::from("100%"),
             };
-            let omitted_str_array = [
+            let omitted_str_array = vec![
                   "position",
                   "left",
                   "right",
@@ -272,39 +302,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                   "display",
                   "zIndex",
             ];
-            let position = String::from("position");
-            let left = String::from("left");
-            let right = String::from("right");
-            let top = String::from("top");
-            let bottom = String::from("bottom");
-            let float = String::from("float");
-            let display = String::from("display");
-            let z_index = String::from("zIndex");
-            let (picked, omitted) = {
-                let mut picked = HashMap::<String, String>::new();
-                let mut omitted = HashMap::<String, String>::new();
-                match element.clone().get_style_option() {
-                    None => (),
-                    Some(style) => {
-                      for (style_key, style_value) in style.clone() {
-                        for ommited_key in omitted_str_array {
-                            let k = style_key.clone();
-                            let v = style_value.clone();
-                            match style_key == ommited_key {
-                                true => {omitted.insert(k, v);},
-                                false => {picked.insert(k, v);},
-                            }
-                        }
-                      };
-                    },
-                    
-                }
-                (picked, omitted)
-            };
-
-
-
-
+            let splitted_object = split_object(element, omitted_str_array);
             // Pick some layout related style properties up to span
             // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
             // const { picked, omitted } = splitObject(element.props.style, [
