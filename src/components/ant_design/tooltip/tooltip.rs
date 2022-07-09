@@ -340,7 +340,7 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                 width,
                 splitted_object.picked.to_string()
             );
-            let button_style = format!("pointerEvents: none; {}", String::from(""));//...omitted
+            let button_style = format!("pointerEvents: none; {}", splitted_object.omitted.to_string());
             // const buttonStyle = {
             //   ...omitted,
             //   pointerEvents: 'none',
