@@ -16,6 +16,7 @@ use crate::components::ant_design::tooltip::placements::PlacementsConfig;
 // export { AdjustOverflow, PlacementsConfig };
 
 use crate::components::ant_design::helpers::offset::Offset;
+use yew::use_state;
 use yew::{function_component, html, Callback, Children, Html, Properties};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -130,6 +131,8 @@ pub struct TooltipPropsWithOverlay {
 
     pub title: Option<AbstractTooltipPropsContent>,
     pub overlay: AbstractTooltipPropsContent,
+    pub visible: Option<()>,
+    pub on_visible_change: Option<fn(bool)>,
 }
 
 // export interface TooltipPropsWithOverlay extends AbstractTooltipProps {
@@ -153,6 +156,8 @@ pub struct TooltipPropsWithTitle {
 
     pub title: AbstractTooltipPropsContent,
     pub overlay: Option<AbstractTooltipPropsContent>,
+    pub visible: Option<()>,
+    pub on_visible_change: Option<fn(bool)>,
 }
 
 // export interface TooltipPropsWithTitle extends AbstractTooltipProps {
@@ -424,6 +429,19 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
         let default_arrowPointAtCenter = false;
         let default_autoAdjustOverflow = true;
        
+        let visible_state = use_state(|| false);
+        let visible_state_cloned_first = visible_state.clone();
+        //todo props.defaultVisible
+        match props.tooltip_props.clone() {
+          TooltipProps::WithTitle(with_title) => match with_title.visible {
+            Some(_) => visible_state_cloned_first.set(true),
+            None => visible_state_cloned_first.set(false),
+          },
+          TooltipProps::WithOverlay(with_overlay) => match with_overlay.visible {
+            Some(_) => visible_state_cloned_first.set(true),
+            None => visible_state_cloned_first.set(false),
+          },
+        };
         //did not understand why this function here. its not used anythere../ ignored for now
     //     static getDerivedStateFromProps(nextProps: TooltipProps) {
     //       if ('visible' in nextProps) {
@@ -441,7 +459,34 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     //         visible: !!props.visible || !!props.defaultVisible,
     //       };
     //     }
-      
+    let visible_prop = match props.tooltip_props.clone() {
+        TooltipProps::WithTitle(props) => props.visible.clone(),
+        TooltipProps::WithOverlay(props) => props.visible.clone(),
+    };
+    let on_visible_change_option_prop = match props.tooltip_props.clone() {
+      TooltipProps::WithTitle(props) => props.on_visible_change.clone(),
+      TooltipProps::WithOverlay(props) => props.on_visible_change.clone(),
+    };
+    let on_visible_change = |visible: bool| {
+        if let None = visible_prop {
+            // this.setState({ visible: this.isNoTitle() ? false : visible });
+        }
+        let f = false;
+        match (on_visible_change_option_prop, f) {//&& this.isNoTitle()
+          (None, true) => (),
+          (None, false) => (),
+          (Some(_), true) => (),
+          (Some(on_visible_change), false) => on_visible_change(visible),
+        }
+        //   if (!('visible' in this.props)) {
+        //     this.setState({ visible: this.isNoTitle() ? false : visible });
+        //   }
+        //   const { onVisibleChange } = this.props;
+        //   if (onVisibleChange && !this.isNoTitle()) {
+        //     onVisibleChange(visible);
+        //   }
+    };
+
     //     onVisibleChange = (visible: boolean) => {
     //       const { onVisibleChange } = this.props;
     //       if (!('visible' in this.props)) {
