@@ -1,23 +1,22 @@
 use std::collections::HashMap;
 use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
 use crate::components::ant_design::button::Button;
+use crate::components::ant_design::tooltip::placements::get_placements;
+use crate::components::ant_design::tooltip::placements::AdjustOverflow;
+use crate::components::ant_design::tooltip::placements::AdjustOverflowOrBool;
+use crate::components::ant_design::tooltip::placements::PlacementsConfig;
+use crate::components::ant_design::helpers::offset::Offset;
+use yew::use_state;
+use yew::{function_component, html, Callback, Children, Html, Properties};
 
 // import * as React from 'react';
 // import { polyfill } from 'react-lifecycles-compat';
 // import RcTooltip from 'rc-tooltip';
 // import classNames from 'classnames';
 // import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
-use crate::components::ant_design::tooltip::placements::get_placements;
-use crate::components::ant_design::tooltip::placements::AdjustOverflow;
-use crate::components::ant_design::tooltip::placements::AdjustOverflowOrBool;
-use crate::components::ant_design::tooltip::placements::PlacementsConfig;
 // import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 // export { AdjustOverflow, PlacementsConfig };
-
-use crate::components::ant_design::helpers::offset::Offset;
-use yew::use_state;
-use yew::{function_component, html, Callback, Children, Html, Properties};
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum TooltipPlacement {
@@ -88,7 +87,7 @@ pub struct AbstractTooltipProps {
     pub builtin_placements: Option<()>, // typeof Placements;
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<AdjustOverflowOrBool>, // boolean | AdjustOverflow;
+    pub auto_adjust_overflow: Option<AdjustOverflowOrBool>,
     pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
 }
@@ -122,17 +121,17 @@ pub struct TooltipPropsWithOverlay {
     pub class_name: Option<String>,
     pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<TooltipPlacement>,
-    pub builtin_placements: Option<()>, // typeof Placements;
+    pub builtin_placements: Option<()>, // typeof Placements;//object
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<()>, // boolean | AdjustOverflow;
+    pub auto_adjust_overflow: Option<AdjustOverflowOrBool>,
     pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
 
     pub title: Option<AbstractTooltipPropsContent>,
     pub overlay: AbstractTooltipPropsContent,
     pub visible: Option<()>,
-    pub on_visible_change: Option<fn(bool)>,
+    pub on_visible_change: Option<fn(bool)>,//Callback<bool>
 }
 
 // export interface TooltipPropsWithOverlay extends AbstractTooltipProps {
@@ -147,17 +146,17 @@ pub struct TooltipPropsWithTitle {
     pub class_name: Option<String>,
     pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<TooltipPlacement>,
-    pub builtin_placements: Option<()>, // typeof Placements;
+    pub builtin_placements: Option<()>, // typeof Placements;//object
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
-    pub auto_adjust_overflow: Option<()>, // boolean | AdjustOverflow;
+    pub auto_adjust_overflow: Option<AdjustOverflowOrBool>,
     pub get_popup_container: Option<Callback<()>>, // (triggerNode: HTMLElement) => HTMLElement;
     pub children: Children,
 
     pub title: AbstractTooltipPropsContent,
     pub overlay: Option<AbstractTooltipPropsContent>,
     pub visible: Option<()>,
-    pub on_visible_change: Option<fn(bool)>,
+    pub on_visible_change: Option<fn(bool)>,//Callback<bool>
 }
 
 // export interface TooltipPropsWithTitle extends AbstractTooltipProps {
@@ -419,6 +418,13 @@ pub struct TooltipPropsStruct {
     pub tooltip_props: TooltipProps,
 }
 
+#[derive(Debug, PartialEq, Clone)]
+pub enum GetPlacementsTooltipValue {
+    BuiltinPlacements,//todo here some object
+    GetPlacements
+}
+
+
 #[function_component(Tooltip)]
 pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     // class Tooltip extends React.Component<TooltipProps, any> {
@@ -478,13 +484,6 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
           (Some(_), true) => (),
           (Some(on_visible_change), false) => on_visible_change(visible),
         }
-        //   if (!('visible' in this.props)) {
-        //     this.setState({ visible: this.isNoTitle() ? false : visible });
-        //   }
-        //   const { onVisibleChange } = this.props;
-        //   if (onVisibleChange && !this.isNoTitle()) {
-        //     onVisibleChange(visible);
-        //   }
     };
 
     //     onVisibleChange = (visible: boolean) => {
@@ -500,7 +499,32 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     //     getPopupDomNode() {
     //       return this.tooltip.getPopupDomNode();
     //     }
-      
+    let builtin_placements = match props.tooltip_props.clone() {
+        TooltipProps::WithTitle(props) => props.builtin_placements.clone(),
+        TooltipProps::WithOverlay(props) => props.builtin_placements.clone(),
+      };
+    let arrow_point_at_center = match props.tooltip_props.clone() {
+      TooltipProps::WithTitle(props) => props.arrow_point_at_center.clone(),
+      TooltipProps::WithOverlay(props) => props.arrow_point_at_center.clone(),
+    };
+    let auto_adjust_overflow = match props.tooltip_props.clone() {
+      TooltipProps::WithTitle(props) => props.auto_adjust_overflow.clone(),
+      TooltipProps::WithOverlay(props) => props.auto_adjust_overflow.clone(),
+    };
+    let get_placements_tooltip = || -> GetPlacementsTooltipValue {
+        match builtin_placements {
+          Some(_) => GetPlacementsTooltipValue::BuiltinPlacements,
+          None => {
+            todo!();
+            // getPlacements({
+            //     arrowPointAtCenter,
+            //     verticalArrowShift: 8,
+            //     autoAdjustOverflow,
+            //   })
+          },
+        }
+    };
+
     //     getPlacements() {
     //       const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = this.props;
     //       return (
