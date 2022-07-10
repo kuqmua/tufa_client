@@ -216,239 +216,149 @@ pub fn split_object(element: ElementType, omitted_keys_array: Vec<&str>) -> Spli
 // const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
 use crate::components::ant_design::button::ButtonProps;
-use crate::components::ant_design::button::LoadingProp;
-
-#[derive(Debug, Properties, PartialEq, Clone)]
-pub struct SwitchProps {
-    pub disabled: Option<()>,         //dont know actually yet
-    pub loading: Option<LoadingProp>, //dont know actually yet
-    pub block: Option<()>,            //dont know actually yet
-
-    pub style: Option<PseudoCssWrapper>
-}
-
-//todo
-#[function_component(Switch)]
-pub fn switch(props: &SwitchProps) -> Html {
-    html! {}
-}
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum ElementType {
     Button(ButtonProps),
-    Switch(SwitchProps),
-    OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps),
+    // Switch(SwitchProps),
+    // Checkbox(ChechboxProps),
+    OtherDisabledCompatibleChildren(Html),
 }
 
 impl ElementType {
-    pub fn get_html(&self) -> Html {
-        match self {
-            ElementType::Button(props) => html!{
-                <Button
-                  disabled={props.disabled}
-                  ghost={props.ghost}
-                  href={props.href.clone()}
-                  html_type={props.html_type.clone()}
-                  icon={props.icon.clone()}
-                  loading={props.loading.clone()}
-                  shape={props.shape.clone()}
-                  size={props.size.clone()}
-                  target={props.target.clone()}
-                  button_type={props.button_type.clone()} 
-                  on_click={props.on_click.clone()}
-                  block={props.block.clone()}
-                  placeholder={props.placeholder.clone()}
-                  style={props.style.clone()}
-                />
-            },
-            ElementType::Switch(props) => html!{
-                <Switch
-                  disabled={props.disabled}         //dont know actually yet
-                  loading={props.loading.clone()}  
-                  block={props.block.clone()}  
-                  style={props.style.clone()}  
-                />
-            },
-            ElementType::OtherDisabledCompatibleChildren(props) => html!{
-
-            },
-        }
-    }
     pub fn get_style_option(&self) -> Option<PseudoCssWrapper> {
         match self {
             ElementType::Button(props) => props.style.clone(),
-            ElementType::Switch(props) => props.style.clone(),
-            ElementType::OtherDisabledCompatibleChildren(props) => props.style.clone(),
+            // ElementType::Switch(props) => props.style.clone(),
+            // ElementType::Checkbox(props) => props.style.clone(),
+            ElementType::OtherDisabledCompatibleChildren(_) => None,//todo //props.style.clone()
         }
     }
 }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
-pub struct OtherDisabledCompatibleChildrenProps {
-    pub block: Option<()>,
-    pub style: Option<PseudoCssWrapper>,
-    // pub class: Option<String>,
-    // pub children: Children,
-}
-
-impl OtherDisabledCompatibleChildrenProps {
-    pub fn get_html(&self, style: String, class: String, children: Html) -> Html {
-        html!{
-          <span
-            style={style.clone()}
-            class={class.clone()}
-          >
-            {children}//{child}
-          </span>
-        }
-    }
-}
-
-#[function_component(OtherDisabledCompatibleChildren)]
-pub fn other_disabled_compatible_children(
-    // props: &OtherDisabledCompatibleChildrenProps
-) -> Html {
-    // let style = match props.style {
-    //     None => String::from(""),
-    //     Some(pseudo_css_wrapper) => pseudo_css_wrapper.to_string(),
-    // };
-    html! {
-        // <span
-        //   style={style}
-        //   class={props.class.clone()}
-        // >
-        // { for props.children.iter() }
-        // </span>
-    }
-}
-
-pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String) -> ElementType  {//Html
-    let should_return_something_else = match element.clone() {
+pub fn get_disabled_compatible_children(element_type: ElementType, prefix_cls: String) -> Html  {//Html //ElementType
+    match element_type.clone() {
         ElementType::Button(props) => match props.disabled {
-            None => false,
-            Some(_) => true,
+            None => html!{
+              <Button
+                disabled={props.disabled}
+                ghost={props.ghost}
+                href={props.href.clone()}
+                html_type={props.html_type.clone()}
+                icon={props.icon.clone()}
+                loading={props.loading.clone()}
+                shape={props.shape.clone()}
+                size={props.size.clone()}
+                target={props.target.clone()}
+                button_type={props.button_type.clone()} 
+                on_click={props.on_click.clone()}
+                block={props.block.clone()}
+                placeholder={props.placeholder.clone()}
+                style={props.style.clone()}
+              />
+            },
+            Some(_) => {
+                let overrided_props = props.clone();
+                let block = overrided_props.block;
+                let width = match block {
+                    None => String::from("null"),
+                    Some(_) => String::from("100%"),
+                };
+                let omitted_str_array = vec![
+                      "position",
+                      "left",
+                      "right",
+                      "top",
+                      "bottom",
+                      "float",
+                      "display",
+                      "zIndex",
+                ];
+                // Pick some layout related style properties up to span
+                // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
+                // const { picked, omitted } = splitObject(element.props.style, [
+                //   'position',
+                //   'left',
+                //   'right',
+                //   'top',
+                //   'bottom',
+                //   'float',
+                //   'display',
+                //   'zIndex',
+                // ]);
+                let splitted_object = split_object(ElementType::Button(overrided_props.clone()), omitted_str_array);
+                // const splitObject = (obj: any, keys: string[]) => {
+                //   const picked: any = {};
+                //   const omitted: any = { ...obj };
+                //   keys.forEach(key => {
+                //     if (obj && key in obj) {
+                //       picked[key] = obj[key];
+                //       delete omitted[key];
+                //     }
+                //   });
+                //   return { picked, omitted };
+                // };
+                let mut span_style = splitted_object.picked;
+                span_style.style.insert(String::from("display"), String::from("inline-block"));
+                span_style.style.insert(String::from("cursor"), String::from("not-allowed"));
+                span_style.style.insert(String::from("width"), width.to_string());
+                let mut button_style = splitted_object.omitted;
+                button_style.style.insert(String::from("pointerEvents"), String::from("none"));
+                // const buttonStyle = {
+                //   ...omitted,
+                //   pointerEvents: 'none',
+                // };
+                let child = html!{
+                  <Button
+                    disabled={props.disabled}
+                    ghost={props.ghost}
+                    href={props.href.clone()}
+                    html_type={props.html_type.clone()}
+                    icon={props.icon.clone()}
+                    loading={props.loading.clone()}
+                    shape={props.shape.clone()}
+                    size={props.size.clone()}
+                    target={props.target.clone()}
+                    button_type={props.button_type.clone()} 
+                    on_click={props.on_click.clone()}
+                    block={props.block.clone()}
+                    placeholder={props.placeholder.clone()}
+                    style={Some(button_style)}
+                    //className: null,
+                  />
+                };
+                let class = format!("{}-disabled-compatible-wrapper", prefix_cls);//todo //classNames(element.props.className, `${prefixCls}-disabled-compatible-wrapper`)
+                let style = match overrided_props.style {
+                    None => String::from(""),
+                    Some(pseudo_css_wrapper) => pseudo_css_wrapper.to_string(),
+                };
+                html! {
+                    <span
+                      style={style}
+                      class={class}
+                    >
+                      {child}
+                    </span>
+                }
+            },
         },
-        ElementType::Switch(props) => match (props.disabled, props.loading) {
-            (None, None) => false,
-            (None, Some(_)) => true,
-            (Some(_), None) => true,
-            (Some(_), Some(_)) => true,
-        },
-        ElementType::OtherDisabledCompatibleChildren(_) => false,
-    };
-    match should_return_something_else {
-        false => element,
-        true => {
-            let block = match element.clone() {
-                ElementType::Button(props) => props.block,
-                ElementType::Switch(props) => props.block,
-                ElementType::OtherDisabledCompatibleChildren(props) => props.block,
-            };
-            let width = match block {
-                None => String::from("null"),
-                Some(_) => String::from("100%"),
-            };
-            let omitted_str_array = vec![
-                  "position",
-                  "left",
-                  "right",
-                  "top",
-                  "bottom",
-                  "float",
-                  "display",
-                  "zIndex",
-            ];
-            
-            // Pick some layout related style properties up to span
-            // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
-            // const { picked, omitted } = splitObject(element.props.style, [
-            //   'position',
-            //   'left',
-            //   'right',
-            //   'top',
-            //   'bottom',
-            //   'float',
-            //   'display',
-            //   'zIndex',
-            // ]);
-            
-            let splitted_object = split_object(element.clone(), omitted_str_array);
+        // ElementType::Switch(props) => match props.disabled {
+        //     None => false,
+        //     Some(_) => html!{
+        //         <Switch
 
-            // const splitObject = (obj: any, keys: string[]) => {
-            //   const picked: any = {};
-            //   const omitted: any = { ...obj };
-            //   keys.forEach(key => {
-            //     if (obj && key in obj) {
-            //       picked[key] = obj[key];
-            //       delete omitted[key];
-            //     }
-            //   });
-            //   return { picked, omitted };
-            // };
-            //
-            let mut span_style = splitted_object.picked;
-            span_style.style.insert(String::from("display"), String::from("inline-block"));
-            span_style.style.insert(String::from("cursor"), String::from("not-allowed"));
-            span_style.style.insert(String::from("width"), width.to_string());
+        //         />
+        //       },
+        // },
+        // ElementType::Checkbox(props) => match props.disabled {
+        //     None => false,
+        //     Some(_) => html!{
+        //         <Checkbox
 
-            let mut button_style = splitted_object.omitted;
-            button_style.style.insert(String::from("pointerEvents"), String::from("none"));
-            // const buttonStyle = {
-            //   ...omitted,
-            //   pointerEvents: 'none',
-            // };
-            let child = match element.clone() {
-                ElementType::Button(props) => ElementType::Button(ButtonProps{
-                    disabled: props.disabled,
-                    ghost: props.ghost,
-                    href: props.href,
-                    html_type: props.html_type,
-                    icon: props.icon,
-                    loading: props.loading,
-                    shape: props.shape,
-                    size: props.size,
-                    target: props.target,
-                    button_type: props.button_type,
-                    on_click: props.on_click,
-                    block: props.block,
-                    placeholder: props.placeholder,
-                    style: Some(button_style),
-                }),
-                ElementType::Switch(props) => ElementType::Switch(SwitchProps{
-                    disabled: props.disabled,
-                    loading: props.loading,
-                    block: props.block,
-                    style: Some(button_style),
-                }),
-                ElementType::OtherDisabledCompatibleChildren(props) => ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
-                    block: props.block,
-                    style: Some(button_style),
-                    // class: String::from(""), //todo
-                    // children: 
-                }),
-            };
-            // const child = cloneElement(element, {
-            //   style: buttonStyle,
-            //   className: null,
-            // });
-            // return (
-            //   <span
-            //     style={spanStyle}
-            //     className={classNames(element.props.className, `${prefixCls}-disabled-compatible-wrapper`)}
-            //   >
-            //     {child}
-            //   </span>
-            // );
-            // let other = 
-            ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
-                block: None,
-                style: Some(span_style),
-            })
-            // let other_html = other.get_html(span_style, format!("{}-disabled-compatible-wrapper", prefix_cls));
-            // html!{
-            //     {other_html}//element.props.className
-            // }
-        }
+        //         />
+        //       },
+        // },
+        ElementType::OtherDisabledCompatibleChildren(html) => html,
     }
 }
 
