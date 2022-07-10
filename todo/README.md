@@ -18,3 +18,4 @@ let msg = format!("roots: {:?}\nroots colors: {:?}", roots_serialized, roots_col
 web_console::log_1(&msg.into()); </br>
 instead of gloo console log </br>
 * maybe should try https://github.com/material-components/material-components-web
+* maybe write this first before ant design https://github.com/orgs/react-component/repositories?q=&type=public&language=typescript&sort=
