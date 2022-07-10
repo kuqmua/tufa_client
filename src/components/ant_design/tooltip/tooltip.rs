@@ -121,7 +121,7 @@ pub struct TooltipPropsWithOverlay {
     pub class_name: Option<String>,
     pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<TooltipPlacement>,
-    pub builtin_placements: Option<()>, // typeof Placements;//object
+    pub builtin_placements: Option<HashMap::<String, PointsOffset>>, // typeof Placements;//object
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
     pub auto_adjust_overflow: Option<AdjustOverflowOrBool>,
@@ -146,7 +146,7 @@ pub struct TooltipPropsWithTitle {
     pub class_name: Option<String>,
     pub color: Option<()>,     // LiteralUnion<PresetColorType, string>;
     pub placement: Option<TooltipPlacement>,
-    pub builtin_placements: Option<()>, // typeof Placements;//object
+    pub builtin_placements: Option<HashMap::<String, PointsOffset>>, // typeof Placements;//object
     pub open_class_name: Option<String>,
     pub arrow_point_at_center: Option<()>,
     pub auto_adjust_overflow: Option<AdjustOverflowOrBool>,
@@ -422,7 +422,7 @@ pub struct TooltipPropsStruct {
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum GetPlacementsTooltipValue {
-    BuiltinPlacements,//todo here some object
+    BuiltinPlacements(HashMap::<String, PointsOffset>),//todo here some object
     GetPlacements(HashMap::<String, PointsOffset>),
 }
 
@@ -515,7 +515,7 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     };
     let get_placements_tooltip = || -> GetPlacementsTooltipValue {
         match builtin_placements {
-          Some(_) => GetPlacementsTooltipValue::BuiltinPlacements,
+          Some(hs) => GetPlacementsTooltipValue::BuiltinPlacements(hs),
           None => GetPlacementsTooltipValue::GetPlacements(get_placements(Some(PlacementsConfig {
             arrow_width: None,
             horizontal_arrow_shift: None,
@@ -542,8 +542,21 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     //       this.tooltip = node;
     //     };
       
-    let on_popup_align = |dom_node: Html| {//, align: any
+    let on_popup_align = |dom_node: Html, align: PointsOffset| {//, align: any
         let placements =  get_placements_tooltip();
+        let points_placements_hashmap = match placements {
+          GetPlacementsTooltipValue::BuiltinPlacements(hs) => hs,
+          GetPlacementsTooltipValue::GetPlacements(hs) => hs,
+        };
+        let mut placement: Option<PointsOffset> = None;
+        for (key, value) in points_placements_hashmap {
+            if align.points[0] == value.points[0] && align.points[1] == value.points[1] {
+                placement = Some(value);
+            }
+        }
+        if let None = placement {
+            return;
+        }
         //   const placement = Object.keys(placements).filter(
         //     key =>
         //       placements[key].points[0] === align.points[0] &&
@@ -554,6 +567,8 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
         //   }
         //   // 根据当前坐标设置动画点
         //   const rect = domNode.getBoundingClientRect();
+        let transform_origin_top = "50%";
+        let transform_origin_left = "50%";
         //   const transformOrigin = {
         //     top: '50%',
         //     left: '50%',
