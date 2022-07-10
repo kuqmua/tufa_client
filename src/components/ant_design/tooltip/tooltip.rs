@@ -409,6 +409,159 @@ pub fn get_disabled_compatible_children(element_type: ElementType, prefix_cls: S
 //   return element;
 // }
 
+#[derive(Debug, Properties, PartialEq, Clone)]
+pub struct TooltipPropsStruct {
+    pub tooltip_props: TooltipProps,
+}
+
+#[function_component(Tooltip)]
+pub fn tooltip(props: &TooltipPropsStruct) -> Html {
+// const Tooltip = React.forwardRef<unknown, TooltipProps>((props, ref) => {
+//   const {
+//     getPopupContainer: getContextPopupContainer,
+//     getPrefixCls,
+//     direction,
+//   } = React.useContext(ConfigContext);
+
+//   const [visible, setVisible] = useMergedState(false, {
+//     value: props.visible,
+//     defaultValue: props.defaultVisible,
+//   });
+
+//   const isNoTitle = () => {
+//     const { title, overlay } = props;
+//     return !title && !overlay && title !== 0; // overlay for old version compatibility
+//   };
+
+//   const onVisibleChange = (vis: boolean) => {
+//     setVisible(isNoTitle() ? false : vis);
+
+//     if (!isNoTitle()) {
+//       props.onVisibleChange?.(vis);
+//     }
+//   };
+
+//   const getTooltipPlacements = () => {
+//     const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = props;
+//     return (
+//       builtinPlacements ||
+//       getPlacements({
+//         arrowPointAtCenter,
+//         autoAdjustOverflow,
+//       })
+//     );
+//   };
+
+//   // 动态设置动画点
+//   const onPopupAlign = (domNode: HTMLElement, align: any) => {
+//     const placements: any = getTooltipPlacements();
+//     // 当前返回的位置
+//     const placement = Object.keys(placements).find(
+//       key =>
+//         placements[key].points[0] === align.points[0] &&
+//         placements[key].points[1] === align.points[1],
+//     );
+//     if (!placement) {
+//       return;
+//     }
+//     // 根据当前坐标设置动画点
+//     const rect = domNode.getBoundingClientRect();
+//     const transformOrigin = {
+//       top: '50%',
+//       left: '50%',
+//     };
+//     if (placement.indexOf('top') >= 0 || placement.indexOf('Bottom') >= 0) {
+//       transformOrigin.top = `${rect.height - align.offset[1]}px`;
+//     } else if (placement.indexOf('Top') >= 0 || placement.indexOf('bottom') >= 0) {
+//       transformOrigin.top = `${-align.offset[1]}px`;
+//     }
+//     if (placement.indexOf('left') >= 0 || placement.indexOf('Right') >= 0) {
+//       transformOrigin.left = `${rect.width - align.offset[0]}px`;
+//     } else if (placement.indexOf('right') >= 0 || placement.indexOf('Left') >= 0) {
+//       transformOrigin.left = `${-align.offset[0]}px`;
+//     }
+//     domNode.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`;
+//   };
+
+//   const getOverlay = () => {
+//     const { title, overlay } = props;
+//     if (title === 0) {
+//       return title;
+//     }
+//     return overlay || title || '';
+//   };
+
+//   const { getPopupContainer, ...otherProps } = props;
+
+//   const {
+//     prefixCls: customizePrefixCls,
+//     openClassName,
+//     getTooltipContainer,
+//     overlayClassName,
+//     color,
+//     overlayInnerStyle,
+//     children,
+//   } = props;
+//   const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
+//   const rootPrefixCls = getPrefixCls();
+
+//   let tempVisible = visible;
+//   // Hide tooltip when there is no title
+//   if (!('visible' in props) && isNoTitle()) {
+//     tempVisible = false;
+//   }
+
+//   const child = getDisabledCompatibleChildren(
+//     isValidElement(children) ? children : <span>{children}</span>,
+//     prefixCls,
+//   );
+//   const childProps = child.props;
+//   const childCls = classNames(childProps.className, {
+//     [openClassName || `${prefixCls}-open`]: true,
+//   });
+
+//   const customOverlayClassName = classNames(overlayClassName, {
+//     [`${prefixCls}-rtl`]: direction === 'rtl',
+//     [`${prefixCls}-${color}`]: color && PresetColorRegex.test(color),
+//   });
+
+//   let formattedOverlayInnerStyle = overlayInnerStyle;
+//   let arrowContentStyle;
+//   if (color && !PresetColorRegex.test(color)) {
+//     formattedOverlayInnerStyle = { ...overlayInnerStyle, background: color };
+//     // @ts-ignore
+//     arrowContentStyle = { '--antd-arrow-background-color': color };
+//   }
+
+//   return (
+//     <RcTooltip
+//       {...otherProps}
+//       prefixCls={prefixCls}
+//       overlayClassName={customOverlayClassName}
+//       getTooltipContainer={getPopupContainer || getTooltipContainer || getContextPopupContainer}
+//       ref={ref}
+//       builtinPlacements={getTooltipPlacements()}
+//       overlay={getOverlay()}
+//       visible={tempVisible}
+//       onVisibleChange={onVisibleChange}
+//       onPopupAlign={onPopupAlign}
+//       overlayInnerStyle={formattedOverlayInnerStyle}
+//       arrowContent={<span className={`${prefixCls}-arrow-content`} style={arrowContentStyle} />}
+//       motion={{
+//         motionName: getTransitionName(rootPrefixCls, 'zoom-big-fast', props.transitionName),
+//         motionDeadline: 1000,
+//       }}
+//     >
+//       {tempVisible ? cloneElement(child, { className: childCls }) : child}
+//     </RcTooltip>
+//   );
+// });
+  html!{}
+}
+
+
+////////////////////////////////////////
+
 // const Tooltip = React.forwardRef<unknown, TooltipProps>((props, ref) => {
 //   const {
 //     getPopupContainer: getContextPopupContainer,
