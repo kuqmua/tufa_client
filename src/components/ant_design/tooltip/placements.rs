@@ -84,11 +84,11 @@ pub enum AdjustOverflowOrBool {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct PlacementsConfig {
-    arrow_width: Option<i32>,
-    horizontal_arrow_shift: Option<i32>,
-    vertical_arrow_shift: Option<i32>,
-    arrow_point_at_center: Option<bool>,
-    auto_adjust_overflow: Option<AdjustOverflowOrBool>,
+    pub arrow_width: Option<i32>,
+    pub horizontal_arrow_shift: Option<i32>,
+    pub vertical_arrow_shift: Option<i32>,
+    pub arrow_point_at_center: Option<bool>,
+    pub auto_adjust_overflow: Option<AdjustOverflowOrBool>,
 }
 
 // export interface PlacementsConfig {

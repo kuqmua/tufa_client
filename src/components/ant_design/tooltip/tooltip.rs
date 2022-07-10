@@ -221,6 +221,8 @@ pub fn split_object(element: ElementType, omitted_keys_array: Vec<&str>) -> Spli
 
 use crate::components::ant_design::button::ButtonProps;
 
+use super::placements::PointsOffset;
+
 #[derive(Debug, PartialEq, Clone)]
 pub enum ElementType {
     Button(ButtonProps),
@@ -421,7 +423,7 @@ pub struct TooltipPropsStruct {
 #[derive(Debug, PartialEq, Clone)]
 pub enum GetPlacementsTooltipValue {
     BuiltinPlacements,//todo here some object
-    GetPlacements
+    GetPlacements(HashMap::<String, PointsOffset>),
 }
 
 
@@ -514,14 +516,13 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     let get_placements_tooltip = || -> GetPlacementsTooltipValue {
         match builtin_placements {
           Some(_) => GetPlacementsTooltipValue::BuiltinPlacements,
-          None => {
-            todo!();
-            // getPlacements({
-            //     arrowPointAtCenter,
-            //     verticalArrowShift: 8,
-            //     autoAdjustOverflow,
-            //   })
-          },
+          None => GetPlacementsTooltipValue::GetPlacements(get_placements(Some(PlacementsConfig {
+            arrow_width: None,
+            horizontal_arrow_shift: None,
+            vertical_arrow_shift: Some(8),
+            arrow_point_at_center: Some(arrow_point_at_center.is_some()),
+            auto_adjust_overflow: auto_adjust_overflow,
+          })))
         }
     };
 
