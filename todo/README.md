@@ -17,3 +17,4 @@ web_sys::console::log() </br>
 let msg = format!("roots: {:?}\nroots colors: {:?}", roots_serialized, roots_colors_serialized); </br>
 web_console::log_1(&msg.into()); </br>
 instead of gloo console log </br>
+* maybe should try https://github.com/material-components/material-components-web
