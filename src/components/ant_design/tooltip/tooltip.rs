@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
+use crate::components::ant_design::button::Button;
 
 // import * as React from 'react';
 // import { polyfill } from 'react-lifecycles-compat';
@@ -217,13 +218,19 @@ pub fn split_object(element: ElementType, omitted_keys_array: Vec<&str>) -> Spli
 use crate::components::ant_design::button::ButtonProps;
 use crate::components::ant_design::button::LoadingProp;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, Properties, PartialEq, Clone)]
 pub struct SwitchProps {
     pub disabled: Option<()>,         //dont know actually yet
     pub loading: Option<LoadingProp>, //dont know actually yet
     pub block: Option<()>,            //dont know actually yet
 
     pub style: Option<PseudoCssWrapper>
+}
+
+//todo
+#[function_component(Switch)]
+pub fn switch(props: &SwitchProps) -> Html {
+    html! {}
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -235,7 +242,37 @@ pub enum ElementType {
 
 impl ElementType {
     pub fn get_html(&self) -> Html {
-        html!{}
+        match self {
+            ElementType::Button(props) => html!{
+                <Button
+                  disabled={props.disabled}
+                  ghost={props.ghost}
+                  href={props.href.clone()}
+                  html_type={props.html_type.clone()}
+                  icon={props.icon.clone()}
+                  loading={props.loading.clone()}
+                  shape={props.shape.clone()}
+                  size={props.size.clone()}
+                  target={props.target.clone()}
+                  button_type={props.button_type.clone()} 
+                  on_click={props.on_click.clone()}
+                  block={props.block.clone()}
+                  placeholder={props.placeholder.clone()}
+                  style={props.style.clone()}
+                />
+            },
+            ElementType::Switch(props) => html!{
+                <Switch
+                  disabled={props.disabled}         //dont know actually yet
+                  loading={props.loading.clone()}  
+                  block={props.block.clone()}  
+                  style={props.style.clone()}  
+                />
+            },
+            ElementType::OtherDisabledCompatibleChildren(props) => html!{
+
+            },
+        }
     }
     pub fn get_style_option(&self) -> Option<PseudoCssWrapper> {
         match self {
@@ -246,10 +283,12 @@ impl ElementType {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, Properties, PartialEq, Clone)]
 pub struct OtherDisabledCompatibleChildrenProps {
     pub block: Option<()>,
-    pub style: Option<PseudoCssWrapper>
+    pub style: Option<PseudoCssWrapper>,
+    // pub class: Option<String>,
+    // pub children: Children,
 }
 
 impl OtherDisabledCompatibleChildrenProps {
@@ -258,7 +297,6 @@ impl OtherDisabledCompatibleChildrenProps {
           <span
             style={style.clone()}
             class={class.clone()}
-                // classNames(element.props.className, `${prefixCls}-disabled-compatible-wrapper`)}
           >
             {children}//{child}
           </span>
@@ -267,11 +305,24 @@ impl OtherDisabledCompatibleChildrenProps {
 }
 
 #[function_component(OtherDisabledCompatibleChildren)]
-pub fn other_disabled_compatible_children() -> Html {
-    html! {}
+pub fn other_disabled_compatible_children(
+    // props: &OtherDisabledCompatibleChildrenProps
+) -> Html {
+    // let style = match props.style {
+    //     None => String::from(""),
+    //     Some(pseudo_css_wrapper) => pseudo_css_wrapper.to_string(),
+    // };
+    html! {
+        // <span
+        //   style={style}
+        //   class={props.class.clone()}
+        // >
+        // { for props.children.iter() }
+        // </span>
+    }
 }
 
-pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String) -> ElementType {
+pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String) -> ElementType  {//Html
     let should_return_something_else = match element.clone() {
         ElementType::Button(props) => match props.disabled {
             None => false,
@@ -372,6 +423,8 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
                 ElementType::OtherDisabledCompatibleChildren(props) => ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
                     block: props.block,
                     style: Some(button_style),
+                    // class: String::from(""), //todo
+                    // children: 
                 }),
             };
             // const child = cloneElement(element, {
@@ -386,10 +439,15 @@ pub fn get_disabled_compatible_children(element: ElementType, prefix_cls: String
             //     {child}
             //   </span>
             // );
+            // let other = 
             ElementType::OtherDisabledCompatibleChildren(OtherDisabledCompatibleChildrenProps{
                 block: None,
-                style: None,
+                style: Some(span_style),
             })
+            // let other_html = other.get_html(span_style, format!("{}-disabled-compatible-wrapper", prefix_cls));
+            // html!{
+            //     {other_html}//element.props.className
+            // }
         }
     }
 }
