@@ -1,6 +1,8 @@
 use std::collections::HashMap;
 use convert_case::Case;
 use convert_case::Casing;
+use web_sys::window;
+// use web_sys::Window;
 
 // const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -46,7 +48,7 @@ pub fn get_vendor_prefixes(dom_support: bool, win: HashMap::<String, String>) ->
     animationend: make_prefix_map("Animation", "AnimationEnd"),
     transitionend: make_prefix_map("Transition", "TransitionEnd"),
   };
-  if dom_support {
+  if window().is_some() {
     if win.contains_key("AnimationEvent"){
         prefixes.animationend.remove("animation");
     }
