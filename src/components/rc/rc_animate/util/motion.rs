@@ -4,7 +4,7 @@ use convert_case::Casing;
 
 // const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
-pub fn make_prefix_map(style_prop: String, event_name: String) -> HashMap::<String, String> {
+pub fn make_prefix_map(style_prop: &str, event_name: &str) -> HashMap::<String, String> {
   let mut prefixes = HashMap::<String, String>::new();
   prefixes.insert(style_prop.to_case(Case::Lower), event_name.to_case(Case::Lower));
   prefixes.insert(format!("Webkit{}", style_prop), format!("webkit{}", event_name));
@@ -27,6 +27,35 @@ pub fn make_prefix_map(style_prop: String, event_name: String) -> HashMap::<Stri
 
 //   return prefixes;
 // }
+
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct Prefixes {
+    pub animationend: HashMap::<String, String>,
+    pub transitionend: HashMap::<String, String>
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct Win {
+    pub animationend: HashMap::<String, String>,
+    pub transitionend: HashMap::<String, String>
+}
+
+pub fn get_vendor_prefixes(dom_support: bool, win: HashMap::<String, String>) -> Prefixes {
+  let mut prefixes = Prefixes {
+    animationend: make_prefix_map("Animation", "AnimationEnd"),
+    transitionend: make_prefix_map("Transition", "TransitionEnd"),
+  };
+  if dom_support {
+    if win.contains_key("AnimationEvent"){
+        prefixes.animationend.remove("animation");
+    }
+    if win.contains_key("TransitionEvent"){
+        prefixes.animationend.remove("transition");
+    }
+  }
+  return prefixes;
+}
 
 // export function getVendorPrefixes(domSupport, win) {
 //   const prefixes = {
