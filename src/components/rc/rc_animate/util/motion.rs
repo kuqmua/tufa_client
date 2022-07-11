@@ -10,7 +10,7 @@ pub fn can_use_dom() -> bool {
         None => false,
         Some(window) => match window.document() {
             None => false,
-            Some(document) => match document.create_element("something_to_test_creation_method") {
+            Some(document) => match document.create_element("div") {//something to test creation dom method, no actual need in created element
                 Err(_) => false,
                 Ok(_) => true,
             },
@@ -93,10 +93,34 @@ pub fn get_vendor_prefixes(dom_support: bool, win: HashMap::<String, String>) ->
 // }
 
 lazy_static! {
-    pub static ref VENDOR_PREFIXES: Prefixes = get_vendor_prefixes(can_use_dom(), HashMap::new());//window()
+    pub static ref VENDOR_PREFIXES: Prefixes = get_vendor_prefixes(can_use_dom(), HashMap::new());//todo //window()
 }
 
 // const vendorPrefixes = getVendorPrefixes(canUseDOM, typeof window !== 'undefined' ? window : {});
+
+pub fn get_option_style() -> Option<bool> {
+    if can_use_dom() {
+        match window() {
+            None => None,
+            Some(window) => match window.document() {
+                None => None,
+                Some(document) => match document.create_element("div") {//something to test creation dom method, no actual need in created element
+                    Err(_) => None,
+                    Ok(element) => {
+                        // let style_sheet = document.style_sheets();
+                        None
+                    },
+                },
+            },
+        }
+    }
+    else {
+        None
+    }
+}
+lazy_static! {
+    pub static ref STYLE: Option<bool> = get_option_style();
+}
 
 // let style = {};
 
