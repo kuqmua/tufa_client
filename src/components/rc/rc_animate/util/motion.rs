@@ -2,7 +2,21 @@ use std::collections::HashMap;
 use convert_case::Case;
 use convert_case::Casing;
 use web_sys::window;
+use lazy_static::lazy_static;
 // use web_sys::Window;
+
+pub fn can_use_dom() -> bool {
+    match window() {
+        None => false,
+        Some(window) => match window.document() {
+            None => false,
+            Some(document) => match document.create_element("something_to_test_creation_method") {
+                Err(_) => false,
+                Ok(_) => true,
+            },
+        },
+    }
+}
 
 // const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -48,7 +62,7 @@ pub fn get_vendor_prefixes(dom_support: bool, win: HashMap::<String, String>) ->
     animationend: make_prefix_map("Animation", "AnimationEnd"),
     transitionend: make_prefix_map("Transition", "TransitionEnd"),
   };
-  if window().is_some() {
+  if dom_support {
     if win.contains_key("AnimationEvent"){
         prefixes.animationend.remove("animation");
     }
@@ -77,6 +91,10 @@ pub fn get_vendor_prefixes(dom_support: bool, win: HashMap::<String, String>) ->
 
 //   return prefixes;
 // }
+
+lazy_static! {
+    pub static ref VENDOR_PREFIXES: Prefixes = get_vendor_prefixes(can_use_dom(), HashMap::new());//window()
+}
 
 // const vendorPrefixes = getVendorPrefixes(canUseDOM, typeof window !== 'undefined' ? window : {});
 
