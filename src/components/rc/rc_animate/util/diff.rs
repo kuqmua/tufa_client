@@ -47,6 +47,14 @@ key_obj
 //   };
 // }
 
+pub fn parse_keys(keys: Vec<ObjectOrString>) -> Vec<HashMap<String, String>>{
+  let mut vec = Vec::new(); 
+  for key in keys {
+    vec.push(wrap_key_to_object(key));
+  }
+  vec
+}
+
 // export function parseKeys(keys = []) {
 //   return keys.map(wrapKeyToObject);
 // }
