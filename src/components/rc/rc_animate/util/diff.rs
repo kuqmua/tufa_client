@@ -1,3 +1,8 @@
+pub const STATUS_ADD: &str = "add";
+pub const STATUS_KEEP: &str = "keep";
+pub const STATUS_REMOVE: &str = "remove";
+pub const STATUS_REMOVED: &str = "removed";
+
 // export const STATUS_ADD = 'add';
 // export const STATUS_KEEP = 'keep';
 // export const STATUS_REMOVE = 'remove';
