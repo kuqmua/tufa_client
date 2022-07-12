@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub const STATUS_ADD: &str = "add";
 pub const STATUS_KEEP: &str = "keep";
 pub const STATUS_REMOVE: &str = "remove";
@@ -7,6 +9,37 @@ pub const STATUS_REMOVED: &str = "removed";
 // export const STATUS_KEEP = 'keep';
 // export const STATUS_REMOVE = 'remove';
 // export const STATUS_REMOVED = 'removed';
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum ObjectOrString {
+    Object(HashMap<String, String>),
+    String(String),
+}
+
+// pub fn wrap_key_to_object(key: ObjectOrString) {
+//   let key_obj: HashMap<String, String>;
+//   match key {
+//     ObjectOrString::Object(hs) => {
+//         if hs.contains_key("key") {
+//             key_obj = hs;
+//         }
+//         else {
+
+//         }
+
+//     },
+//     ObjectOrString::String(s) => todo!(),
+// }
+//   if (key && typeof key === 'object' && 'key' in key) {
+//     key_obj = key;
+//   } else {
+//     key_obj = { key };
+//   }
+//   return {
+//     ...keyObj,
+//     key: String(keyObj.key),
+//   };
+// }
 
 // export function wrapKeyToObject(key) {
 //   let keyObj;
