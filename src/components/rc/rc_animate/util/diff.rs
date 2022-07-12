@@ -12,34 +12,27 @@ pub const STATUS_REMOVED: &str = "removed";
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum ObjectOrString {
-    Object(HashMap<String, String>),
+    Object(Object),
     String(String),
 }
 
-// pub fn wrap_key_to_object(key: ObjectOrString) {
-//   let key_obj: HashMap<String, String>;
-//   match key {
-//     ObjectOrString::Object(hs) => {
-//         if hs.contains_key("key") {
-//             key_obj = hs;
-//         }
-//         else {
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct Object {
+    pub key: String,
+}
 
-//         }
-
-//     },
-//     ObjectOrString::String(s) => todo!(),
-// }
-//   if (key && typeof key === 'object' && 'key' in key) {
-//     key_obj = key;
-//   } else {
-//     key_obj = { key };
-//   }
-//   return {
-//     ...keyObj,
-//     key: String(keyObj.key),
-//   };
-// }
+pub fn wrap_key_to_object(key: ObjectOrString) -> HashMap<String, String>{
+  let mut key_obj: HashMap<String, String> = HashMap::new();
+  match key {
+    ObjectOrString::Object(hs) => {
+        key_obj.insert(String::from("key"), hs.key);
+    },
+    ObjectOrString::String(s) => {
+        key_obj.insert(String::from("key"), s);
+    }
+}
+key_obj
+}
 
 // export function wrapKeyToObject(key) {
 //   let keyObj;
