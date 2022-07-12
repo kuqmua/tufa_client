@@ -53,6 +53,7 @@ use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
 use crate::components::ant_design::back_top::BackTop;
+use crate::components::rc::rc_animate::util::motion::get_option_style;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -112,6 +113,7 @@ pub fn home() -> Html {
     let drawer_style_right_cloned_on_open = drawer_style_right.clone();
     let expander_status_clone_drawer_on_open_right = expander_status.clone();
     let on_open_right = Callback::from(move |_| {
+        let _f = get_option_style();
         expander_status_clone_drawer_on_open_right.set(ExpanderStatus::Closed);
         drawer_style_right_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
         let drawer_style_right_cloned_first_another = drawer_style_right_cloned_on_open.clone();

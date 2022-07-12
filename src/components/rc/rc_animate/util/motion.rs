@@ -98,6 +98,8 @@ lazy_static! {
 
 // const vendorPrefixes = getVendorPrefixes(canUseDOM, typeof window !== 'undefined' ? window : {});
 
+use gloo::console::log;
+
 pub fn get_option_style() -> Option<bool> {
     if can_use_dom() {
         match window() {
@@ -107,7 +109,8 @@ pub fn get_option_style() -> Option<bool> {
                 Some(document) => match document.create_element("div") {//something to test creation dom method, no actual need in created element
                     Err(_) => None,
                     Ok(element) => {
-                        // let style_sheet = document.style_sheets();
+                        let style_sheet = document.style_sheets();
+                        log!(style_sheet);
                         None
                     },
                 },
