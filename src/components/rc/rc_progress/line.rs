@@ -14,6 +14,13 @@ pub fn line(props: &ProgressProps) -> Html {
     default_props.gap_position = None;
 //   // eslint-disable-next-line no-param-reassign
 //   delete restProps.gapPosition;
+let percent_list = match props.percent.clone() {
+    None => Vec::new(),
+    Some(percent_value) => match percent_value {
+    super::interface::Percent::Number(n) => vec![n],
+    super::interface::Percent::NumberVec(vec) => vec,
+},
+};
 //   const percentList = Array.isArray(percent) ? percent : [percent];
 //   const strokeColorList = Array.isArray(strokeColor) ? strokeColor : [strokeColor];
 
