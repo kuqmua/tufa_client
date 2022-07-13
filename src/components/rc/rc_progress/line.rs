@@ -1,4 +1,5 @@
-use yew::{function_component, html};
+use web_sys::MouseEvent;
+use yew::{function_component, html, Callback};
 
 use crate::components::rc::rc_progress::common::use_transition_duration;
 use crate::components::rc::rc_progress::interface::ProgressProps;
@@ -73,68 +74,81 @@ pub fn line(props: &ProgressProps) -> Html {
     let view_box_string = format!("0 0 100 {}", props.stroke_width.unwrap_or(1));//todo maybe make different default func
     //   const viewBoxString = `0 0 100 ${strokeWidth}`;
       let stack_ptg = 0;
-    html! {}
-    //   return (
-    //     <svg
-    //       className={classNames(`${prefixCls}-line`, className)}
-    //       viewBox={viewBoxString}
-    //       preserveAspectRatio="none"
-    //       style={style}
-    //       {...restProps}
-    //     >
-    //       <path
-    //         className={`${prefixCls}-line-trail`}
-    //         d={pathString}
-    //         strokeLinecap={strokeLinecap}
-    //         stroke={trailColor}
-    //         strokeWidth={trailWidth || strokeWidth}
-    //         fillOpacity="0"
-    //       />
-    //       {percentList.map((ptg, index) => {
-    //         let dashPercent = 1;
-    //         switch (strokeLinecap) {
-    //           case 'round':
-    //             dashPercent = 1 - strokeWidth / 100;
-    //             break;
-    //           case 'square':
-    //             dashPercent = 1 - strokeWidth / 2 / 100;
-    //             break;
-    //           default:
-    //             dashPercent = 1;
-    //             break;
-    //         }
-    //         const pathStyle = {
-    //           strokeDasharray: `${ptg * dashPercent}px, 100px`,
-    //           strokeDashoffset: `-${stackPtg}px`,
-    //           transition:
-    //             transition ||
-    //             'stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear',
-    //         };
-    //         const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];
-    //         stackPtg += ptg;
-    //         return (
-    //           <path
-    //             key={index}
-    //             className={`${prefixCls}-line-path`}
-    //             d={pathString}
-    //             strokeLinecap={strokeLinecap}
-    //             stroke={color as string}
-    //             strokeWidth={strokeWidth}
-    //             fillOpacity="0"
-    //             ref={(elem) => {
-    //               // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
-    //               // React will call the ref callback with the DOM element when the component mounts,
-    //               // and call it with `null` when it unmounts.
-    //               // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
 
-    //               paths[index] = elem;
-    //             }}
-    //             style={pathStyle}
-    //           />
-    //         );
-    //       })}
-    //     </svg>
-    //   );
+      let gap_position = match props.clone().gap_position {
+        None => String::from("bottom"),
+        Some(gp) => gp.get_value(),
+    };
+    let on_click = match props.clone().on_click {
+        None => Callback::from(|f: MouseEvent|{}),
+        Some(oc) => oc,
+    };
+    html! {
+        <svg
+          class={format!("{}-line", props.clone().prefix_cls.unwrap_or(String::from("rc-progress")))}//classNames(`${prefixCls}-line`, className)
+          viewBox={view_box_string}
+          preserve_aspect_ratio="none"
+          style={props.clone().style.unwrap_or(String::from(""))}
+        //   {...restProps}
+          id={props.clone().id}
+        //   gap_degree={props.clone().gap_degree}//todo
+          gap_position={gap_position}
+          onclick={on_click}
+        //   steps={props.clone().steps}//todo
+        >
+        //   <path
+        //     className={`${prefixCls}-line-trail`}
+        //     d={pathString}
+        //     strokeLinecap={strokeLinecap}
+        //     stroke={trailColor}
+        //     strokeWidth={trailWidth || strokeWidth}
+        //     fillOpacity="0"
+        //   />
+        //   {percentList.map((ptg, index) => {
+        //     let dashPercent = 1;
+        //     switch (strokeLinecap) {
+        //       case 'round':
+        //         dashPercent = 1 - strokeWidth / 100;
+        //         break;
+        //       case 'square':
+        //         dashPercent = 1 - strokeWidth / 2 / 100;
+        //         break;
+        //       default:
+        //         dashPercent = 1;
+        //         break;
+        //     }
+        //     const pathStyle = {
+        //       strokeDasharray: `${ptg * dashPercent}px, 100px`,
+        //       strokeDashoffset: `-${stackPtg}px`,
+        //       transition:
+        //         transition ||
+        //         'stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear',
+        //     };
+        //     const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];
+        //     stackPtg += ptg;
+        //     return (
+        //       <path
+        //         key={index}
+        //         className={`${prefixCls}-line-path`}
+        //         d={pathString}
+        //         strokeLinecap={strokeLinecap}
+        //         stroke={color as string}
+        //         strokeWidth={strokeWidth}
+        //         fillOpacity="0"
+        //         ref={(elem) => {
+        //           // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+        //           // React will call the ref callback with the DOM element when the component mounts,
+        //           // and call it with `null` when it unmounts.
+        //           // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
+
+        //           paths[index] = elem;
+        //         }}
+        //         style={pathStyle}
+        //       />
+        //     );
+        //   })}
+        </svg>
+    }
 }
 // const Line: React.FC<ProgressProps> = ({
 //   className,

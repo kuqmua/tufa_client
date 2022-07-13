@@ -127,6 +127,17 @@ pub enum GapPositionType {
     Left,
 }
 
+impl GapPositionType {
+    pub fn get_value(&self) -> String {
+        match self {
+            GapPositionType::Top => String::from("top"),
+            GapPositionType::Right => String::from("right"),
+            GapPositionType::Bottom => String::from("bottom"),
+            GapPositionType::Left => String::from("left"),
+        }
+    }
+}
+
 //   export type GapPositionType = 'top' | 'right' | 'bottom' | 'left';
 
 #[derive(Debug, PartialEq, Eq, Clone)]
