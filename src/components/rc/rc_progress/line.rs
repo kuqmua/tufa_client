@@ -41,14 +41,38 @@ pub fn line(props: &ProgressProps) -> Html {
     };
     //   const strokeColorList = Array.isArray(strokeColor) ? strokeColor : [strokeColor];
 
+    let paths = use_transition_duration();
     //   const paths = useTransitionDuration();
 
+    let center = props.stroke_width.unwrap_or(1) / 2;//todo maybe make different default func
+
     //   const center = strokeWidth / 2;
+
+    let right = 100 - props.stroke_width.unwrap_or(1) / 2;//todo maybe make different default func
     //   const right = 100 - strokeWidth / 2;
+
+    let first_part = match props.stroke_linecap.clone() {
+        None => String::from("0"),//not sure about what
+        Some(stroke_linecap_value) => match stroke_linecap_value {
+            super::interface::StrokeLinecapType::Round => String::from("center"),
+            super::interface::StrokeLinecapType::Butt => String::from("0"),
+            super::interface::StrokeLinecapType::Square => String::from("0"),
+        },
+    };
+    let second_part = match props.stroke_linecap.clone() {
+        None => String::from("100"),//not sure about what
+        Some(stroke_linecap_value) => match stroke_linecap_value {
+            super::interface::StrokeLinecapType::Round => String::from("right"),
+            super::interface::StrokeLinecapType::Butt => String::from("100"),
+            super::interface::StrokeLinecapType::Square => String::from("100"),
+        },
+    };
+    let path_string = format!("M {}{} L {}{}", first_part, center, second_part, center);
     //   const pathString = `M ${strokeLinecap === 'round' ? center : 0},${center}
     //          L ${strokeLinecap === 'round' ? right : 100},${center}`;
+    let view_box_string = format!("0 0 100 {}", props.stroke_width.unwrap_or(1));//todo maybe make different default func
     //   const viewBoxString = `0 0 100 ${strokeWidth}`;
-    //   let stackPtg = 0;
+      let stack_ptg = 0;
     html! {}
     //   return (
     //     <svg
