@@ -72,6 +72,7 @@ impl ExpanderStatus {
     }
 }
 
+
 #[function_component(Home)]
 pub fn home() -> Html {
     let padding_summary = HEADER_HEIGHT_PX + HEADER_BORDER_BOTTOM_PX;

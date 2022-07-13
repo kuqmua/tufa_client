@@ -1,5 +1,5 @@
 use web_sys::MouseEvent;
-use yew::Callback;
+use yew::{Callback, Properties};
 
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -19,27 +19,49 @@ pub enum Steps {
     CountSpace(CountSpace),
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Properties, Clone)]
 pub struct ProgressProps {
-    id: Option<String>,
-    stroke_width: Option<i32>,
-    trail_width: Option<i32>,
-    class_name: Option<String>,
-    percent: Option<Percent>,
-    stroke_color: Option<StrokeColorType>,
-    trail_color: Option<String>,
-    stroke_linecap: Option<StrokeLinecapType>,
-    prefix_cls: Option<String>,
-    style: Option<String>,//React.CSSProperties
-    gap_degree: Option<i32>,
-    gap_position: Option<GapPositionType>,
-    transition: Option<String>,
-    on_click: Option<Callback<MouseEvent>>,//React.MouseEventHandler
-    steps: Option<Steps>,
+    pub id: Option<String>,
+    pub stroke_width: Option<i32>,
+    pub trail_width: Option<i32>,
+    pub class_name: Option<String>,
+    pub percent: Option<Percent>,
+    pub stroke_color: Option<StrokeColorType>,
+    pub trail_color: Option<String>,
+    pub stroke_linecap: Option<StrokeLinecapType>,
+    pub prefix_cls: Option<String>,
+    pub style: Option<String>,//React.CSSProperties
+    pub gap_degree: Option<i32>,
+    pub gap_position: Option<GapPositionType>,
+    pub transition: Option<String>,
+    pub on_click: Option<Callback<MouseEvent>>,//React.MouseEventHandler
+    pub steps: Option<Steps>,
   }
 
 impl Default for ProgressProps {
     fn default() -> Self {
+        ProgressProps{
+            id: None,
+            stroke_width: Some(1),
+            trail_width: Some(1),
+            class_name: Some(String::from("")),
+            percent: Some(Percent::Number(0)),
+            stroke_color: Some(StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5")))),
+            trail_color: Some(String::from("#D9D9D9")),
+            stroke_linecap: Some(StrokeLinecapType::Round),
+            prefix_cls: Some(String::from("rc-progress")),
+            style: Some(String::from("")),//React.CSSProperties
+            gap_degree: None,
+            gap_position: Some(GapPositionType::Bottom),
+            transition: None,
+            on_click: None,//React.MouseEventHandler
+            steps: None,
+            }
+    }
+}
+
+impl ProgressProps {
+    pub fn default(&self) -> Self {
         ProgressProps{
             id: None,
             stroke_width: Some(1),
