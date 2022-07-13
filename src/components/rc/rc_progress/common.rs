@@ -1,17 +1,17 @@
-use crate::components::rc::rc_progress::interface::ProgressProps;
+use super::interface::GapPositionType;
+use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
 use crate::components::rc::rc_progress::interface::Percent;
+use crate::components::rc::rc_progress::interface::ProgressProps;
 use crate::components::rc::rc_progress::interface::StrokeColorType;
 use crate::components::rc::rc_progress::interface::StrokeLinecapType;
-use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
-use super::interface::GapPositionType;
-use lazy_static::lazy_static;
-use yew::{function_component, html, use_state, Callback, Html};
 use js_sys::Date;
+use lazy_static::lazy_static;
 use yew::functional::use_effect;
+use yew::{function_component, html, use_state, Callback, Html};
 // import { useRef, useEffect } from 'react';
 // import type { ProgressProps } from './interface';
 
-//implemented through trait Default 
+//implemented through trait Default
 
 // export const defaultProps: Partial<ProgressProps> = {
 //   className: '',
@@ -27,36 +27,36 @@ use yew::functional::use_effect;
 // };
 
 pub fn use_transition_duration() -> Vec<Html> {
-//   const pathsRef = useRef<SVGPathElement[]>([]);
-//   const prevTimeStamp = useRef(null);
+    //   const pathsRef = useRef<SVGPathElement[]>([]);
+    //   const prevTimeStamp = useRef(null);
 
-  use_effect(|| {
-    let now = Date::now();
-    // const now = Date.now();
-    let updated = false;
+    use_effect(|| {
+        let now = Date::now();
+        // const now = Date.now();
+        let updated = false;
 
-    // pathsRef.current.forEach((path) => {
-    //   if (!path) {
-    //     return;
-    //   }
+        // pathsRef.current.forEach((path) => {
+        //   if (!path) {
+        //     return;
+        //   }
 
-    //   updated = true;
-    //   const pathStyle = path.style;
-    //   pathStyle.transitionDuration = '.3s, .3s, .3s, .06s';
+        //   updated = true;
+        //   const pathStyle = path.style;
+        //   pathStyle.transitionDuration = '.3s, .3s, .3s, .06s';
 
-    //   if (prevTimeStamp.current && now - prevTimeStamp.current < 100) {
-    //     pathStyle.transitionDuration = '0s, 0s';
-    //   }
-    // });
+        //   if (prevTimeStamp.current && now - prevTimeStamp.current < 100) {
+        //     pathStyle.transitionDuration = '0s, 0s';
+        //   }
+        // });
 
-    // if (updated) {
-    //   prevTimeStamp.current = Date.now();
-    // }
-    || {}
-  });
+        // if (updated) {
+        //   prevTimeStamp.current = Date.now();
+        // }
+        || {}
+    });
 
-  vec![html!{}, html!{}]
-//   return pathsRef.current;
+    vec![html! {}, html! {}]
+    //   return pathsRef.current;
 }
 
 // export const useTransitionDuration = (): SVGPathElement[] => {

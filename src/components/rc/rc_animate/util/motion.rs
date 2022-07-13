@@ -1,8 +1,8 @@
-use std::collections::HashMap;
 use convert_case::Case;
 use convert_case::Casing;
-use web_sys::window;
 use lazy_static::lazy_static;
+use std::collections::HashMap;
+use web_sys::window;
 // use web_sys::Window;
 
 pub fn can_use_dom() -> bool {
@@ -10,7 +10,8 @@ pub fn can_use_dom() -> bool {
         None => false,
         Some(window) => match window.document() {
             None => false,
-            Some(document) => match document.create_element("div") {//something to test creation dom method, no actual need in created element
+            Some(document) => match document.create_element("div") {
+                //something to test creation dom method, no actual need in created element
                 Err(_) => false,
                 Ok(_) => true,
             },
@@ -20,14 +21,20 @@ pub fn can_use_dom() -> bool {
 
 // const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
-pub fn make_prefix_map(style_prop: &str, event_name: &str) -> HashMap::<String, String> {
-  let mut prefixes = HashMap::<String, String>::new();
-  prefixes.insert(style_prop.to_case(Case::Lower), event_name.to_case(Case::Lower));
-  prefixes.insert(format!("Webkit{}", style_prop), format!("webkit{}", event_name));
-  prefixes.insert(format!("Moz{}", style_prop), format!("moz{}", event_name));
-  prefixes.insert(format!("ms{}", style_prop), format!("MS{}", event_name));
-  prefixes.insert(format!("O{}", style_prop), format!("o{}", event_name));
-  return prefixes;
+pub fn make_prefix_map(style_prop: &str, event_name: &str) -> HashMap<String, String> {
+    let mut prefixes = HashMap::<String, String>::new();
+    prefixes.insert(
+        style_prop.to_case(Case::Lower),
+        event_name.to_case(Case::Lower),
+    );
+    prefixes.insert(
+        format!("Webkit{}", style_prop),
+        format!("webkit{}", event_name),
+    );
+    prefixes.insert(format!("Moz{}", style_prop), format!("moz{}", event_name));
+    prefixes.insert(format!("ms{}", style_prop), format!("MS{}", event_name));
+    prefixes.insert(format!("O{}", style_prop), format!("o{}", event_name));
+    return prefixes;
 }
 
 // // ================= Transition =================
@@ -44,33 +51,32 @@ pub fn make_prefix_map(style_prop: &str, event_name: &str) -> HashMap::<String, 
 //   return prefixes;
 // }
 
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct Prefixes {
-    pub animationend: HashMap::<String, String>,
-    pub transitionend: HashMap::<String, String>
+    pub animationend: HashMap<String, String>,
+    pub transitionend: HashMap<String, String>,
 }
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Win {
-    pub animationend: HashMap::<String, String>,
-    pub transitionend: HashMap::<String, String>
+    pub animationend: HashMap<String, String>,
+    pub transitionend: HashMap<String, String>,
 }
 
-pub fn get_vendor_prefixes(dom_support: bool, win: HashMap::<String, String>) -> Prefixes {
-  let mut prefixes = Prefixes {
-    animationend: make_prefix_map("Animation", "AnimationEnd"),
-    transitionend: make_prefix_map("Transition", "TransitionEnd"),
-  };
-  if dom_support {
-    if win.contains_key("AnimationEvent"){
-        prefixes.animationend.remove("animation");
+pub fn get_vendor_prefixes(dom_support: bool, win: HashMap<String, String>) -> Prefixes {
+    let mut prefixes = Prefixes {
+        animationend: make_prefix_map("Animation", "AnimationEnd"),
+        transitionend: make_prefix_map("Transition", "TransitionEnd"),
+    };
+    if dom_support {
+        if win.contains_key("AnimationEvent") {
+            prefixes.animationend.remove("animation");
+        }
+        if win.contains_key("TransitionEvent") {
+            prefixes.animationend.remove("transition");
+        }
     }
-    if win.contains_key("TransitionEvent"){
-        prefixes.animationend.remove("transition");
-    }
-  }
-  return prefixes;
+    return prefixes;
 }
 
 // export function getVendorPrefixes(domSupport, win) {
@@ -106,18 +112,18 @@ pub fn get_option_style() -> Option<bool> {
             None => None,
             Some(window) => match window.document() {
                 None => None,
-                Some(document) => match document.create_element("div") {//something to test creation dom method, no actual need in created element
+                Some(document) => match document.create_element("div") {
+                    //something to test creation dom method, no actual need in created element
                     Err(_) => None,
                     Ok(element) => {
                         let style_sheet = document.style_sheets();
                         log!(style_sheet);
                         None
-                    },
+                    }
                 },
             },
         }
-    }
-    else {
+    } else {
         None
     }
 }

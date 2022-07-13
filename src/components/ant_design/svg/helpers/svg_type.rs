@@ -1,9 +1,9 @@
 use crate::components::ant_design::svg::helpers::svg_component_trait::SvgComponent;
 use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
+use svg_component::SvgComponent;
 use yew::html;
 use yew::virtual_dom::AttrValue;
 use yew::Html;
-use svg_component::SvgComponent;
 
 #[derive(Debug, PartialEq, Clone, SvgComponent)]
 pub enum SvgType {

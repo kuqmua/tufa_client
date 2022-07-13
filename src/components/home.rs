@@ -12,8 +12,8 @@ use super::ant_design::avatar::AvatarSizeType;
 use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
-use crate::components::ant_design::helpers::offset::Offset;
 use crate::components::ant_design::badge::BadgeStatus;
+use crate::components::ant_design::helpers::offset::Offset;
 // use crate::components::ant_design::button::Button;
 // use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
@@ -47,13 +47,13 @@ use crate::components::header::component::Header;
 use crate::constants::HEADER_BORDER_BOTTOM_PX;
 use crate::constants::HEADER_HEIGHT_PX;
 // use crate::helpers::rotate::Rotate;
+use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
+use crate::components::rc::rc_animate::util::motion::get_option_style;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::{function_component, html, use_state, Callback};
-use crate::components::ant_design::back_top::BackTop;
-use crate::components::rc::rc_animate::util::motion::get_option_style;
 
 #[derive(Debug, PartialEq)]
 pub enum ExpanderStatus {
@@ -71,7 +71,6 @@ impl ExpanderStatus {
         }
     }
 }
-
 
 #[function_component(Home)]
 pub fn home() -> Html {

@@ -1,9 +1,8 @@
+use crate::components::ant_design::helpers::offset::Offset;
 use colorsys::Hsl;
 use gloo::console::error;
 use tufa_common::helpers::numeric::Numeric;
 use yew::{function_component, html, Children, Html, Properties};
-use crate::components::ant_design::helpers::offset::Offset;
-
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BadgeStatus {
@@ -34,10 +33,10 @@ impl BadgeStatus {
 
 #[derive(Properties, PartialEq)]
 pub struct BadgeProps {
-    pub color: Option<Hsl>,          // Customize Badge dot color	string	-	3.16.0
-    pub count: Option<u64>,          //	Number to show in badge	ReactNode
-    pub dot: Option<Option<BadgeStatus>>,       // Whether to display a red dot instead of count	boolean	false
-    pub offset: Option<Offset>, //	set offset of the badge dot, like[x, y]	[number, number]	-
+    pub color: Option<Hsl>,               // Customize Badge dot color	string	-	3.16.0
+    pub count: Option<u64>,               //	Number to show in badge	ReactNode
+    pub dot: Option<Option<BadgeStatus>>, // Whether to display a red dot instead of count	boolean	false
+    pub offset: Option<Offset>,           //	set offset of the badge dot, like[x, y]	[number, number]	-
     pub overflow_count: Option<u64>, //dont think it would be usefull//	Max count to show	number	99
     pub show_zero: Option<()>,       //	Whether to show badge when count is zero	boolean	false
     // pub status: Option<BadgeStatus>, //	Set Badge as a status dot	success | processing | default | error | warning	''
@@ -104,8 +103,16 @@ pub fn badge(props: &BadgeProps) -> Html {
     let (status_sup_class, status_span_class, dot_class) = match props.dot.clone() {
         None => (String::from(""), String::from(""), String::from("")),
         Some(option_badge_status) => match option_badge_status {
-            None => (String::from(""), String::from(""),  String::from("ant-badge-dot")),
-            Some(status) => (status.get_sup_class(), status.get_span_class(), status.get_class()),
+            None => (
+                String::from(""),
+                String::from(""),
+                String::from("ant-badge-dot"),
+            ),
+            Some(status) => (
+                status.get_sup_class(),
+                status.get_span_class(),
+                status.get_class(),
+            ),
         },
     };
     let multiple_words_class = match props.count.clone() {
@@ -119,8 +126,11 @@ pub fn badge(props: &BadgeProps) -> Html {
         0 => String::from("ant-badge-not-a-wrapper"),
         _ => String::from(""),
     };
-    let sup_class = format!("{} {} {} {} {}", dot_class, status_sup_class, count_class, scroll_class, multiple_words_class);
-    let span_class = format!("ant-badge {} {}", status_span_class,not_a_wrapper_class);
+    let sup_class = format!(
+        "{} {} {} {} {}",
+        dot_class, status_sup_class, count_class, scroll_class, multiple_words_class
+    );
+    let span_class = format!("ant-badge {} {}", status_span_class, not_a_wrapper_class);
     let dot = match &props.dot {
         None => html! {},
         Some(option_badge_status) => match option_badge_status {

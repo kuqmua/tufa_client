@@ -9,5 +9,5 @@ pub mod feed;
 pub mod header;
 pub mod home;
 pub mod material;
-pub mod ui;
 pub mod rc;
+pub mod ui;

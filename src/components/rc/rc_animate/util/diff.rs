@@ -21,17 +21,17 @@ pub struct Object {
     pub key: String,
 }
 
-pub fn wrap_key_to_object(key: ObjectOrString) -> HashMap<String, String>{
-  let mut key_obj: HashMap<String, String> = HashMap::new();
-  match key {
-    ObjectOrString::Object(hs) => {
-        key_obj.insert(String::from("key"), hs.key);
-    },
-    ObjectOrString::String(s) => {
-        key_obj.insert(String::from("key"), s);
+pub fn wrap_key_to_object(key: ObjectOrString) -> HashMap<String, String> {
+    let mut key_obj: HashMap<String, String> = HashMap::new();
+    match key {
+        ObjectOrString::Object(hs) => {
+            key_obj.insert(String::from("key"), hs.key);
+        }
+        ObjectOrString::String(s) => {
+            key_obj.insert(String::from("key"), s);
+        }
     }
-}
-key_obj
+    key_obj
 }
 
 // export function wrapKeyToObject(key) {
@@ -47,12 +47,12 @@ key_obj
 //   };
 // }
 
-pub fn parse_keys(keys: Vec<ObjectOrString>) -> Vec<HashMap<String, String>>{
-  let mut vec = Vec::new(); 
-  for key in keys {
-    vec.push(wrap_key_to_object(key));
-  }
-  vec
+pub fn parse_keys(keys: Vec<ObjectOrString>) -> Vec<HashMap<String, String>> {
+    let mut vec = Vec::new();
+    for key in keys {
+        vec.push(wrap_key_to_object(key));
+    }
+    vec
 }
 
 // export function parseKeys(keys = []) {

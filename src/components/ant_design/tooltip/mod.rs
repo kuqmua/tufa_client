@@ -1,2 +1,2 @@
-pub mod tooltip;
 pub mod placements;
+pub mod tooltip;

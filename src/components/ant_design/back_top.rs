@@ -14,7 +14,7 @@
 use colorsys::Hsl;
 use gloo::console::error;
 use tufa_common::helpers::numeric::Numeric;
-use yew::{function_component, html, Children, Html, Properties, MouseEvent, Callback, use_state};
+use yew::{function_component, html, use_state, Callback, Children, Html, MouseEvent, Properties};
 // export interface BackTopProps {
 //   visibilityHeight?: number;
 //   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -29,14 +29,14 @@ use yew::{function_component, html, Children, Html, Properties, MouseEvent, Call
 #[derive(Properties, PartialEq)]
 pub struct BackTopProps {
     // pub visibility_height: Option<u32>,
-    // pub on_click: Option<Callback<MouseEvent>>,
-    // // pub target?: () => HTMLElement | Window | Document;
-    // pub prefix_cls: Option<String>,
-    // pub children: Children,
-    // pub class_name: Option<String>,
-    // pub style: Option<String>,
-    // pub duration: Option<u32>,
-    // pub visible: Option<()>, // Only for test. Don't use it.
+// pub on_click: Option<Callback<MouseEvent>>,
+// // pub target?: () => HTMLElement | Window | Document;
+// pub prefix_cls: Option<String>,
+// pub children: Children,
+// pub class_name: Option<String>,
+// pub style: Option<String>,
+// pub duration: Option<u32>,
+// pub visible: Option<()>, // Only for test. Don't use it.
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -50,7 +50,7 @@ pub fn back_top(props: &BackTopProps) -> Html {
 
     // let visible = use_state(|| false);
     // let setVisible = use_state(|| SetVisible { value: props.visible.is_some().clone()});
-    
+
     // let render_children = |prefix_cls_handle: String, root_prefix_cls_handle: String| {
     //     let default_element = html!{
     //       <div className={format!("{}-content", prefix_cls_handle)}>
@@ -80,12 +80,12 @@ pub fn back_top(props: &BackTopProps) -> Html {
     // pub on_click: Option<Callback<MouseEvent>>,
     // pub duration: Option<u32>,
 
-    html!{
-    //   <div 
-    //     style={props.style.clone().unwrap_or(String::from(""))} 
+    html! {
+    //   <div
+    //     style={props.style.clone().unwrap_or(String::from(""))}
     //     // pub on_click: Option<Callback<MouseEvent>>,
     //     // pub duration: Option<u32>,
-    //     // class={classString} 
+    //     // class={classString}
     //     // onclick={scrollToTop} ref={ref}
     //   >
     //     // {render_children(prefix_cls.clone(), root_prefix_cls.clone())}

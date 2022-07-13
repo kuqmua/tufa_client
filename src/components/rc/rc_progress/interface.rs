@@ -1,7 +1,6 @@
 use web_sys::MouseEvent;
 use yew::{Callback, Properties};
 
-
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Percent {
     Number(i32),
@@ -30,55 +29,59 @@ pub struct ProgressProps {
     pub trail_color: Option<String>,
     pub stroke_linecap: Option<StrokeLinecapType>,
     pub prefix_cls: Option<String>,
-    pub style: Option<String>,//React.CSSProperties
+    pub style: Option<String>, //React.CSSProperties
     pub gap_degree: Option<i32>,
     pub gap_position: Option<GapPositionType>,
     pub transition: Option<String>,
-    pub on_click: Option<Callback<MouseEvent>>,//React.MouseEventHandler
+    pub on_click: Option<Callback<MouseEvent>>, //React.MouseEventHandler
     pub steps: Option<Steps>,
-  }
+}
 
 impl Default for ProgressProps {
     fn default() -> Self {
-        ProgressProps{
+        ProgressProps {
             id: None,
             stroke_width: Some(1),
             trail_width: Some(1),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0)),
-            stroke_color: Some(StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5")))),
+            stroke_color: Some(StrokeColorType::BaseStrokeColorType(
+                BaseStrokeColorType::String(String::from("#2db7f5")),
+            )),
             trail_color: Some(String::from("#D9D9D9")),
             stroke_linecap: Some(StrokeLinecapType::Round),
             prefix_cls: Some(String::from("rc-progress")),
-            style: Some(String::from("")),//React.CSSProperties
+            style: Some(String::from("")), //React.CSSProperties
             gap_degree: None,
             gap_position: Some(GapPositionType::Bottom),
             transition: None,
-            on_click: None,//React.MouseEventHandler
+            on_click: None, //React.MouseEventHandler
             steps: None,
-            }
+        }
     }
 }
 
 impl ProgressProps {
     pub fn default(&self) -> Self {
-        ProgressProps{
+        ProgressProps {
             id: None,
             stroke_width: Some(1),
             trail_width: Some(1),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0)),
-            stroke_color: Some(StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5")))),
+            stroke_color: Some(StrokeColorType::BaseStrokeColorType(
+                BaseStrokeColorType::String(String::from("#2db7f5")),
+            )),
             trail_color: Some(String::from("#D9D9D9")),
             stroke_linecap: Some(StrokeLinecapType::Round),
             prefix_cls: Some(String::from("rc-progress")),
-            style: Some(String::from("")),//React.CSSProperties
+            style: Some(String::from("")), //React.CSSProperties
             gap_degree: None,
             gap_position: Some(GapPositionType::Bottom),
             transition: None,
-            on_click: None,//React.MouseEventHandler
+            on_click: None, //React.MouseEventHandler
             steps: None,
-            }
+        }
     }
 }
 
@@ -99,7 +102,7 @@ impl ProgressProps {
 //     onClick?: React.MouseEventHandler;
 //     steps?: number | { count: number; space: number };
 //   }
-  
+
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BaseStrokeColorType {
     String(String),
@@ -107,7 +110,7 @@ pub enum BaseStrokeColorType {
 }
 
 //   export type BaseStrokeColorType = string | Record<string, string>;
-  
+
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum StrokeColorType {
     BaseStrokeColorType(BaseStrokeColorType),
@@ -115,7 +118,7 @@ pub enum StrokeColorType {
 }
 
 //   export type StrokeColorType = BaseStrokeColorType | BaseStrokeColorType[];
-  
+
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum GapPositionType {
     Top,
@@ -125,11 +128,11 @@ pub enum GapPositionType {
 }
 
 //   export type GapPositionType = 'top' | 'right' | 'bottom' | 'left';
-  
+
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum StrokeLinecapType {
-    Round, 
-    Butt, 
+    Round,
+    Butt,
     Square,
 }
 

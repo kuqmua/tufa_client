@@ -1,7 +1,7 @@
+use crate::components::ant_design::svg::helpers::svg_component_trait::SvgComponent;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Properties};
-use crate::components::ant_design::svg::helpers::svg_component_trait::SvgComponent;
 
 #[derive(Properties, PartialEq)]
 pub struct IconProps {

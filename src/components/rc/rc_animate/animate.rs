@@ -1,5 +1,5 @@
 use web_sys::MouseEvent;
-use yew::{function_component, html, Children, Html, Properties, Callback, use_state};
+use yew::{function_component, html, use_state, Callback, Children, Html, Properties};
 
 // /* eslint react/prop-types: 0 */
 // import React from 'react';
@@ -14,8 +14,7 @@ use yew::{function_component, html, Children, Html, Properties, Callback, use_st
 // import AnimateChild from './AnimateChild';
 // import animUtil from './util/animate';
 
-
-pub const DEFAULT_KEY: &str=  "rc_animate_87565785686786785685685685678657867";//${Date.now()}
+pub const DEFAULT_KEY: &str = "rc_animate_87565785686786785685685685678657867"; //${Date.now()}
 
 // const defaultKey = `rc_animate_${Date.now()}`;
 
@@ -41,39 +40,37 @@ pub struct AnimateProps {
 
 #[derive(Properties, PartialEq)]
 pub struct AnimateState {
-    pub children: Vec<()>,//toArrayChildren(getChildrenFromProps(props)),
+    pub children: Vec<()>, //toArrayChildren(getChildrenFromProps(props)),
 }
 
 #[function_component(Animate)]
 pub fn animate(props: &AnimateProps) -> Html {
     let is_animate = true;
-    let animation = ();// {},
+    let animation = (); // {},
     let component: &str = "span";
-    let component_props = ();// {},
+    let component_props = (); // {},
     let transition_enter = true;
     let transition_leave = true;
     let transition_appear = false;
-    let on_end: Callback<MouseEvent> = Callback::from(move |_| {
-    });//noop,
-    let on_enter: Callback<MouseEvent> = Callback::from(move |_| {
-    });//noop,
-    let on_leave: Callback<MouseEvent> = Callback::from(move |_| {
-    });//noop,
-    let on_appear: Callback<MouseEvent> = Callback::from(move |_| {
-    });//noop,
-    //   componentDidMount() {
-    let currently_animating_keys = ();//{};
+    let on_end: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+    let on_enter: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+    let on_leave: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+    let on_appear: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+                                                                       //   componentDidMount() {
+    let currently_animating_keys = (); //{};
     let keys_to_enter: Vec<String> = vec![];
     let keys_to_leave: Vec<String> = vec![];
-    let state = use_state(|| AnimateState{ children: Vec::new()});//children: toArrayChildren(getChildrenFromProps(props)),
+    let state = use_state(|| AnimateState {
+        children: Vec::new(),
+    }); //children: toArrayChildren(getChildrenFromProps(props)),
     let children_refs = {};
-    let  show_prop = props.show_prop.clone();
+    let show_prop = props.show_prop.clone();
     let state_cloned = state.clone();
     let children = state_cloned.children.clone();
     if show_prop {
-    //   children = children.filter((child) => {
-    //     return !!child.props[showProp];
-    //   });
+        //   children = children.filter((child) => {
+        //     return !!child.props[showProp];
+        //   });
     }
     // children.for_each(|child| {
     //   if (child) {
@@ -83,44 +80,43 @@ pub fn animate(props: &AnimateProps) -> Html {
     // }
     //   componentWillReceiveProps(nextProps) {
     let next_props = props.clone();
-    let next_children = Vec::<()>::new();//toArrayChildren(getChildrenFromProps(nextProps));
-//     const props = this.props;
-//     // exclusive needs immediate response
-//     if (props.exclusive) {
-//       Object.keys(this.currentlyAnimatingKeys).forEach((key) => {
-//         this.stop(key);
-//       });
-//     }
-//     const showProp = props.showProp;
-//     const currentlyAnimatingKeys = this.currentlyAnimatingKeys;
-//     // last props children if exclusive
-//     const currentChildren = props.exclusive ?
-//       toArrayChildren(getChildrenFromProps(props)) :
-//       this.state.children;
-//     // in case destroy in showProp mode
-//     let newChildren = [];
-    // }
+    let next_children = Vec::<()>::new(); //toArrayChildren(getChildrenFromProps(nextProps));
+                                          //     const props = this.props;
+                                          //     // exclusive needs immediate response
+                                          //     if (props.exclusive) {
+                                          //       Object.keys(this.currentlyAnimatingKeys).forEach((key) => {
+                                          //         this.stop(key);
+                                          //       });
+                                          //     }
+                                          //     const showProp = props.showProp;
+                                          //     const currentlyAnimatingKeys = this.currentlyAnimatingKeys;
+                                          //     // last props children if exclusive
+                                          //     const currentChildren = props.exclusive ?
+                                          //       toArrayChildren(getChildrenFromProps(props)) :
+                                          //       this.state.children;
+                                          //     // in case destroy in showProp mode
+                                          //     let newChildren = [];
+                                          // }
     html! {
-       //     this.nextProps = nextProps;
-//     const nextChildren = toArrayChildren(getChildrenFromProps(nextProps));
-//     const props = this.props;
-//     // exclusive needs immediate response
-//     if (props.exclusive) {
-//       Object.keys(this.currentlyAnimatingKeys).forEach((key) => {
-//         this.stop(key);
-//       });
-//     }
-//     const showProp = props.showProp;
-//     const currentlyAnimatingKeys = this.currentlyAnimatingKeys;
-//     // last props children if exclusive
-//     const currentChildren = props.exclusive ?
-//       toArrayChildren(getChildrenFromProps(props)) :
-//       this.state.children;
-//     // in case destroy in showProp mode
-//     let newChildren = [];
-    }
+           //     this.nextProps = nextProps;
+    //     const nextChildren = toArrayChildren(getChildrenFromProps(nextProps));
+    //     const props = this.props;
+    //     // exclusive needs immediate response
+    //     if (props.exclusive) {
+    //       Object.keys(this.currentlyAnimatingKeys).forEach((key) => {
+    //         this.stop(key);
+    //       });
+    //     }
+    //     const showProp = props.showProp;
+    //     const currentlyAnimatingKeys = this.currentlyAnimatingKeys;
+    //     // last props children if exclusive
+    //     const currentChildren = props.exclusive ?
+    //       toArrayChildren(getChildrenFromProps(props)) :
+    //       this.state.children;
+    //     // in case destroy in showProp mode
+    //     let newChildren = [];
+        }
 }
-
 
 // class Animate extends React.Component {
 //   static isAnimate = true; // eslint-disable-line
