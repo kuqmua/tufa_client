@@ -59,90 +59,90 @@ pub fn parse_keys(keys: Vec<ObjectOrString>) -> Vec<HashMap<String, String>>{
 //   return keys.map(wrapKeyToObject);
 // }
 
-pub fn diff_keys(prev_keys: Vec<ObjectOrString>, current_keys: Vec<ObjectOrString>) {
+// pub fn diff_keys(prev_keys: Vec<ObjectOrString>, current_keys: Vec<ObjectOrString>) {
 //   let list = [];
-  let mut current_undex = 0;
-  let current_len = current_keys.len();
-  let prev_key_objects = parse_keys(prev_keys);
-  let current_key_objects = parse_keys(current_keys);
-  // Check prev keys to insert or keep
-  prev_key_objects.iter().for_each(|key_obj| {
-    let hit = false;
-    // for (let i = current_index; i < current_len; i += 1) {
-    //   const current_key_obj = current_key_objects[i];
-    //   if (current_key_obj.key === key_obj.key) {
-    //     // New added keys should add before current key
-    //     if (currentIndex < i) {
-    //       list = list.concat(
-    //         current_key_objects.slice(current_index, i).map(obj => ({ ...obj, status: STATUS_ADD })),
-    //       );
-    //       current_index = i;
-    //     }
-    //     list.push({
-    //       ...current_key_obj,
-    //       status: STATUS_KEEP,
-    //     });
-    //     current_index += 1;
+//   let mut current_index = 0;
+//   let current_len = current_keys.len();
+//   let prev_key_objects = parse_keys(prev_keys);
+//   let current_key_objects = parse_keys(current_keys);
+//   // Check prev keys to insert or keep
+//   prev_key_objects.iter().for_each(|key_obj| {
+//     let hit = false;
+//     for i in 0..current_len {
+//       let current_key_obj = current_key_objects[i];
+//       if (current_key_obj[key] == key_obj[key]) {
+//         if current_index < i {
+//           list = list.concat(
+//             current_key_objects.slice(current_index, i).map(obj => ({ ...obj, status: STATUS_ADD })),
+//           );
+//           current_index = i;
+//         }
+//         list.push({
+//           ...current_key_obj,
+//           status: STATUS_KEEP,
+//         });
+//         current_index += 1;
 
-    //     hit = true;
-    //     break;
-    //   }
-    // for (let i = current_index; i < current_len; i += 1) {
-    //   const current_key_obj = current_key_objects[i];
-    //   if (current_key_obj.key === key_obj.key) {
-    //     // New added keys should add before current key
-    //     if (currentIndex < i) {
-    //       list = list.concat(
-    //         current_key_objects.slice(current_index, i).map(obj => ({ ...obj, status: STATUS_ADD })),
-    //       );
-    //       current_index = i;
-    //     }
-    //     list.push({
-    //       ...current_key_obj,
-    //       status: STATUS_KEEP,
-    //     });
-    //     current_index += 1;
-
-    //     hit = true;
-    //     break;
-    //   }
-    // }
-    // // If not hit, it means key is removed
-    // if (!hit) {
-    //   list.push({
-    //     ...key_obj,
-    //     status: STATUS_REMOVE,
-    //   });
-    // }
-  });
-//   // Add rest to the list
-//   if (currentIndex < currentLen) {
-//     list = list.concat(
-//       currentKeyObjects.slice(currentIndex).map(obj => ({ ...obj, status: STATUS_ADD })),
-//     );
-//   }
-//   /**
-//    * Merge same key when it remove and add again:
-//    *    [1 - add, 2 - keep, 1 - remove] -> [1 - keep, 2 - keep]
-//    */
-//   const keys = {};
-//   list.forEach(({ key }) => {
-//     keys[key] = (keys[key] || 0) + 1;
-//   });
-//   const duplicatedKeys = Object.keys(keys).filter(key => keys[key] > 1);
-//   duplicatedKeys.forEach(matchKey => {
-//     // Remove `STATUS_REMOVE` node.
-//     list = list.filter(({ key, status }) => key !== matchKey || status !== STATUS_REMOVE);
-//     // Update `STATUS_ADD` to `STATUS_KEEP`
-//     list.forEach(node => {
-//       if (node.key === matchKey) {
-//         node.status = STATUS_KEEP;
+//         hit = true;
+//         break;
 //       }
-//     });
-//   });
+//     }
+//     // for (let i = current_index; i < current_len; i += 1) {
+//     //   const current_key_obj = current_key_objects[i];
+//     //   if (current_key_obj.key === key_obj.key) {
+//     //     // New added keys should add before current key
+//     //     if (currentIndex < i) {
+//     //       list = list.concat(
+//     //         current_key_objects.slice(current_index, i).map(obj => ({ ...obj, status: STATUS_ADD })),
+//     //       );
+//     //       current_index = i;
+//     //     }
+//     //     list.push({
+//     //       ...current_key_obj,
+//     //       status: STATUS_KEEP,
+//     //     });
+//     //     current_index += 1;
 
-//   return list;
-}
+//     //     hit = true;
+//     //     break;
+//     //   }
+//     // }
+//     // // If not hit, it means key is removed
+//     // if (!hit) {
+//     //   list.push({
+//     //     ...key_obj,
+//     //     status: STATUS_REMOVE,
+//     //   });
+//     // }
+//   });
+// //   // Add rest to the list
+// //   if (currentIndex < currentLen) {
+// //     list = list.concat(
+// //       currentKeyObjects.slice(currentIndex).map(obj => ({ ...obj, status: STATUS_ADD })),
+// //     );
+// //   }
+// //   /**
+// //    * Merge same key when it remove and add again:
+// //    *    [1 - add, 2 - keep, 1 - remove] -> [1 - keep, 2 - keep]
+// //    */
+// //   const keys = {};
+// //   list.forEach(({ key }) => {
+// //     keys[key] = (keys[key] || 0) + 1;
+// //   });
+// //   const duplicatedKeys = Object.keys(keys).filter(key => keys[key] > 1);
+// //   duplicatedKeys.forEach(matchKey => {
+// //     // Remove `STATUS_REMOVE` node.
+// //     list = list.filter(({ key, status }) => key !== matchKey || status !== STATUS_REMOVE);
+// //     // Update `STATUS_ADD` to `STATUS_KEEP`
+// //     list.forEach(node => {
+// //       if (node.key === matchKey) {
+// //         node.status = STATUS_KEEP;
+// //       }
+// //     });
+// //   });
+
+// //   return list;
+// }
 
 // export function diffKeys(prevKeys = [], currentKeys = []) {
 //   let list = [];
