@@ -147,4 +147,14 @@ pub enum StrokeLinecapType {
     Square,
 }
 
+impl StrokeLinecapType {
+    pub fn get_value(&self) -> String {
+        match self {
+            StrokeLinecapType::Round => String::from("round"),
+            StrokeLinecapType::Butt => String::from("butt"),
+            StrokeLinecapType::Square => String::from("square"),
+        }
+    }
+}
+
 //   export type StrokeLinecapType = 'round' | 'butt' | 'square';

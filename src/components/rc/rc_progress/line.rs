@@ -83,6 +83,16 @@ pub fn line(props: &ProgressProps) -> Html {
         None => Callback::from(|f: MouseEvent|{}),
         Some(oc) => oc,
     };
+    let stroke_width = match (props.clone().trail_width, props.clone().stroke_width) {
+        (None, None) => String::from("1"),
+        (None, Some(s)) => s.to_string(),
+        (Some(t), None) => t.to_string(),
+        (Some(t), Some(_s)) => t.to_string(),//coz its first in ts code
+    };
+    let stroke_linecap = match props.clone().stroke_linecap {
+        None => String::from("round"),
+        Some(stroke_linecap_type) => stroke_linecap_type.get_value(),
+    };
     html! {
         <svg
           class={format!("{}-line", props.clone().prefix_cls.unwrap_or(String::from("rc-progress")))}//classNames(`${prefixCls}-line`, className)
@@ -96,14 +106,14 @@ pub fn line(props: &ProgressProps) -> Html {
           onclick={on_click}
         //   steps={props.clone().steps}//todo
         >
-        //   <path
-        //     className={`${prefixCls}-line-trail`}
-        //     d={pathString}
-        //     strokeLinecap={strokeLinecap}
-        //     stroke={trailColor}
-        //     strokeWidth={trailWidth || strokeWidth}
-        //     fillOpacity="0"
-        //   />
+          <path
+            class={format!("{}-line-trail", props.clone().prefix_cls.unwrap_or(String::from("rc-progress")))}
+            d={path_string}
+            stroke_linecap={stroke_linecap}
+            stroke={props.clone().trail_color.unwrap_or(String::from("#D9D9D9"))}
+            stroke_width={stroke_width}
+            fill_opacity="0"
+          />
         //   {percentList.map((ptg, index) => {
         //     let dashPercent = 1;
         //     switch (strokeLinecap) {
