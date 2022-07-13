@@ -106,7 +106,7 @@ impl ProgressProps {
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BaseStrokeColorType {
     String(String),
-    Record((String, String)),
+    // Record((String, String)),//todo later
 }
 
 //   export type BaseStrokeColorType = string | Record<string, string>;

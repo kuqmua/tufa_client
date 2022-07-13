@@ -22,6 +22,23 @@ pub fn line(props: &ProgressProps) -> Html {
         },
     };
     //   const percentList = Array.isArray(percent) ? percent : [percent];
+    let stroke_color_list = match props.stroke_color.clone() {
+        None => Vec::new(),
+        Some(stroke_color_value) => match stroke_color_value {
+            super::interface::StrokeColorType::BaseStrokeColorType(base_stroke_color_type) => match base_stroke_color_type {
+               super::interface::BaseStrokeColorType::String(s) => vec![s],
+            },
+            super::interface::StrokeColorType::BaseStrokeColorTypeVec(vec) => {
+                let mut v = vec![];
+                vec.into_iter().for_each(|s| {
+                    match s {
+                        super::interface::BaseStrokeColorType::String(string) => v.push(string),
+                    }
+                });
+                v
+            },
+        },
+    };
     //   const strokeColorList = Array.isArray(strokeColor) ? strokeColor : [strokeColor];
 
     //   const paths = useTransitionDuration();
