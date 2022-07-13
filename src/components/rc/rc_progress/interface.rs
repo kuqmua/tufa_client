@@ -38,6 +38,28 @@ pub struct ProgressProps {
     steps: Option<Steps>,
   }
 
+impl Default for ProgressProps {
+    fn default() -> Self {
+        ProgressProps{
+            id: None,
+            stroke_width: Some(1),
+            trail_width: Some(1),
+            class_name: Some(String::from("")),
+            percent: Some(Percent::Number(0)),
+            stroke_color: Some(StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5")))),
+            trail_color: Some(String::from("#D9D9D9")),
+            stroke_linecap: Some(StrokeLinecapType::Round),
+            prefix_cls: Some(String::from("rc-progress")),
+            style: Some(String::from("")),//React.CSSProperties
+            gap_degree: None,
+            gap_position: Some(GapPositionType::Bottom),
+            transition: None,
+            on_click: None,//React.MouseEventHandler
+            steps: None,
+            }
+    }
+}
+
 // export interface ProgressProps {
 //     id?: string;
 //     strokeWidth?: number;
