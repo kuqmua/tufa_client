@@ -93,7 +93,7 @@ pub fn line(props: &ProgressProps) -> Html {
         None => String::from("round"),
         Some(stroke_linecap_type) => stroke_linecap_type.get_value(),
     };
-    let percent_list_mapped = percent_list.into_iter().enumerate().map(|(index, number)| {
+    let percent_list_mapped = percent_list.into_iter().enumerate().map(|(index, ptg)| {
             let mut dash_percent = 1;
             match props.clone().stroke_linecap {
                 None => {
@@ -128,6 +128,12 @@ pub fn line(props: &ProgressProps) -> Html {
         //         dashPercent = 1;
         //         break;
         //     }
+        let stroke_dash_array =  format!("{}px, 100px", ptg * dash_percent);
+        let stroke_dash_offset = format!("-{}px", stack_ptg);
+        let transition = match props.transition.clone() {
+            None => String::from("stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear"),
+            Some(t) => t,
+        };
         //     const pathStyle = {
         //       strokeDasharray: `${ptg * dashPercent}px, 100px`,
         //       strokeDashoffset: `-${stackPtg}px`,
