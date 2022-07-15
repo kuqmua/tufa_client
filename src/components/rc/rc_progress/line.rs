@@ -73,9 +73,9 @@ pub fn line(props: &ProgressProps) -> Html {
     //          L ${strokeLinecap === 'round' ? right : 100},${center}`;
     let view_box_string = format!("0 0 100 {}", props.stroke_width.unwrap_or(1));//todo maybe make different default func
     //   const viewBoxString = `0 0 100 ${strokeWidth}`;
-      let stack_ptg = 0;
+    let mut stack_ptg = 0;
 
-      let gap_position = match props.clone().gap_position {
+    let gap_position = match props.clone().gap_position {
         None => String::from("bottom"),
         Some(gp) => gp.get_value(),
     };
@@ -141,7 +141,18 @@ pub fn line(props: &ProgressProps) -> Html {
         //         transition ||
         //         'stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear',
         //     };
+        let color = match stroke_color_list.get(index) {
+            None => match stroke_color_list.len() == 0 {
+                true => String::from("#2db7f5"),//default
+                false => match stroke_color_list.get(stroke_color_list.len() - 1) {
+                    None => String::from("#2db7f5"),//default
+                    Some(element) => element.to_string(),
+                },
+            },
+            Some(element) => element.to_string(),
+        };
         //     const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];
+        stack_ptg += ptg;
         //     stackPtg += ptg;
         //     return (
         //       <path
