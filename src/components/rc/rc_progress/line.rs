@@ -1,5 +1,5 @@
 use web_sys::MouseEvent;
-use yew::{function_component, html, Callback};
+use yew::{function_component, html, Callback, Html};
 
 use crate::components::rc::rc_progress::common::use_transition_duration;
 use crate::components::rc::rc_progress::interface::ProgressProps;
@@ -94,7 +94,7 @@ pub fn line(props: &ProgressProps) -> Html {
         Some(stroke_linecap_type) => stroke_linecap_type.get_value(),
     };
     let percent_list_mapped = percent_list.into_iter().enumerate().map(|(index, ptg)| {
-            let mut dash_percent = 1;
+        let mut dash_percent = 1;
             match props.clone().stroke_linecap {
                 None => {
                     dash_percent = 1;
@@ -134,6 +134,15 @@ pub fn line(props: &ProgressProps) -> Html {
             None => String::from("stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear"),
             Some(t) => t,
         };
+        let path_style = format!("
+            stroke_dash_array: {};
+            stroke_dash_offset: {};
+            transition: {};
+        ",
+          stroke_dash_array, 
+          stroke_dash_offset, 
+          transition
+        );
         //     const pathStyle = {
         //       strokeDasharray: `${ptg * dashPercent}px, 100px`,
         //       strokeDashoffset: `-${stackPtg}px`,
@@ -174,8 +183,27 @@ pub fn line(props: &ProgressProps) -> Html {
         //         style={pathStyle}
         //       />
         //     );
-        html!{}
-    });
+        html!{
+            <path
+                key={index}
+                class={format!("{}-line-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}//default
+                d={path_string.clone()}
+                stroke_linecap={stroke_linecap.clone()}
+                stroke={color.clone()}
+                stroke_width={stroke_width.clone()}
+                fill_opacity="0"
+                // ref={|elem} -> {
+                //   // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+                //   // React will call the ref callback with the DOM element when the component mounts,
+                //   // and call it with `null` when it unmounts.
+                //   // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
+
+                //   paths[index] = elem;
+                // }}
+                style={path_style.clone()}
+            />
+        }
+    }).collect::<Vec<Html>>();
     html! {
         <svg
           class={format!("{}-line", props.clone().prefix_cls.unwrap_or(String::from("rc-progress")))}//classNames(`${prefixCls}-line`, className)
@@ -197,6 +225,7 @@ pub fn line(props: &ProgressProps) -> Html {
             stroke_width={stroke_width}
             fill_opacity="0"
           />
+          {percent_list_mapped}
         //   {percentList.map((ptg, index) => {
         //     let dashPercent = 1;
         //     switch (strokeLinecap) {
