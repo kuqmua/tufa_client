@@ -35,6 +35,17 @@ pub enum GetCircleStyleStrokeColor {
     Record(HashMap<String, String>),
 }
 
+#[derive(Debug, PartialEq, Clone)]
+pub struct CircleStyle {
+    pub stroke: Option<String>,
+    pub stroke_dash_array: String,
+    pub stroke_dash_offset: f64,
+    pub transform: String,
+    pub transform_origin: String,
+    pub transition: String,
+    pub fill_opacity: f64,
+}
+
 pub fn get_circle_style (
   perimeter: f64,
   perimeter_without_gap: f64,
@@ -47,7 +58,7 @@ pub fn get_circle_style (
   stroke_linecap: Option<StrokeLinecapType>,
   stroke_width: f64,//uknown
   step_space: Option<f64>,
-) {
+) -> CircleStyle {
     let step_space = match step_space {
         None => 0.0,//f64::default() ??????
         Some(i) => i,
@@ -55,9 +66,8 @@ pub fn get_circle_style (
 
     let offset_deg = (offset / 100.0) * 360.0 * ((360.0 - gap_degree) / 360.0);
 //   const offsetDeg = (offset / 100) * 360 * ((360 - gapDegree) / 360);
-    let position_deg = match gap_degree {
-        0.0 => 0.0,
-        _ => match gap_position {
+    let position_deg = if gap_degree == 0.0 { 0.0 } else {
+        match gap_position {
             GapPositionType::Top => 0.0,
             GapPositionType::Right => 180.0,
             GapPositionType::Bottom => 90.0,
@@ -82,19 +92,12 @@ if let Some(stroke_linecap_type) = stroke_linecap {
     if let StrokeLinecapType::Round = stroke_linecap_type{
         if percent != 100.0 {
             stroke_dash_offset += stroke_width / 2.0;
-            if (stroke_dash_offset >= perimeter_without_gap) {
+            if stroke_dash_offset >= perimeter_without_gap {
                 stroke_dash_offset = perimeter_without_gap - 0.01;
               }
         }
     }
 }
-//   if (strokeLinecap === 'round' && percent !== 100) {
-//     strokeDashoffset += strokeWidth / 2;
-//     // when percent is small enough (<= 1%), keep smallest value to avoid it's disappearance
-//     if (strokeDashoffset >= perimeterWithoutGap) {
-//       strokeDashoffset = perimeterWithoutGap - 0.01;
-//     }
-//   }
 
 //   // Fix percent accuracy when strokeLinecap is round
 //   // https://github.com/ant-design/ant-design/issues/35009
@@ -105,7 +108,20 @@ if let Some(stroke_linecap_type) = stroke_linecap {
 //       strokeDashoffset = perimeterWithoutGap - 0.01;
 //     }
 //   }
+  let stroke = match stroke_color {
+    GetCircleStyleStrokeColor::String(s) => Some(s),
+    GetCircleStyleStrokeColor::Record(_) => None,
+};
 
+CircleStyle {
+    stroke: stroke,
+    stroke_dash_array: format!("{}px ${}", perimeter_without_gap, perimeter),
+    stroke_dash_offset: stroke_dash_offset + step_space,
+    transform: format!("rotate({}deg)", rotate_deg + offset_deg + position_deg),
+    transform_origin: String::from("50% 50%"),
+    transition: String::from("stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s"),
+    fill_opacity: 0.0
+}
 //   return {
 //     stroke: typeof strokeColor === 'string' ? strokeColor : undefined,
 //     strokeDasharray: `${perimeterWithoutGap}px ${perimeter}`,
