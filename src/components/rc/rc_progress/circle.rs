@@ -36,32 +36,32 @@ pub enum GetCircleStyleStrokeColor {
 }
 
 pub fn get_circle_style (
-  perimeter: i32,
-  perimeter_without_gap: i32,
-  offset: i32,
-  percent: i32,
-  rotate_deg: i32,
-  gap_degree: i32,//uknown
+  perimeter: f64,
+  perimeter_without_gap: f64,
+  offset: f64,
+  percent: f64,
+  rotate_deg: f64,
+  gap_degree: f64,//uknown
   gap_position: GapPositionType,//Option<GapPositionType>
   stroke_color: GetCircleStyleStrokeColor,
   stroke_linecap: Option<StrokeLinecapType>,
-  stroke_width: i32,//uknown
-  step_space: Option<i32>,
+  stroke_width: f64,//uknown
+  step_space: Option<f64>,
 ) {
     let step_space = match step_space {
-        None => 0,//i32::default() ??????
+        None => 0.0,//f64::default() ??????
         Some(i) => i,
     };
 
-    let offset_deg = (offset / 100) * 360 * ((360 - gap_degree) / 360);
+    let offset_deg = (offset / 100.0) * 360.0 * ((360.0 - gap_degree) / 360.0);
 //   const offsetDeg = (offset / 100) * 360 * ((360 - gapDegree) / 360);
     let position_deg = match gap_degree {
-        0 => 0,
+        0.0 => 0.0,
         _ => match gap_position {
-            GapPositionType::Top => 0,
-            GapPositionType::Right => 180,
-            GapPositionType::Bottom => 90,
-            GapPositionType::Left => -90,
+            GapPositionType::Top => 0.0,
+            GapPositionType::Right => 180.0,
+            GapPositionType::Bottom => 90.0,
+            GapPositionType::Left => -90.0,
         }
     };
 
@@ -75,7 +75,27 @@ pub fn get_circle_style (
 //           right: -90,
 //         }[gapPosition];
 
+let mut stroke_dash_offset = ((100.0 - percent) / 100.0) * perimeter_without_gap;
 //   let strokeDashoffset = ((100 - percent) / 100) * perimeterWithoutGap;
+
+if let Some(stroke_linecap_type) = stroke_linecap {
+    if let StrokeLinecapType::Round = stroke_linecap_type{
+        if percent != 100.0 {
+            stroke_dash_offset += stroke_width / 2.0;
+            if (stroke_dash_offset >= perimeter_without_gap) {
+                stroke_dash_offset = perimeter_without_gap - 0.01;
+              }
+        }
+    }
+}
+//   if (strokeLinecap === 'round' && percent !== 100) {
+//     strokeDashoffset += strokeWidth / 2;
+//     // when percent is small enough (<= 1%), keep smallest value to avoid it's disappearance
+//     if (strokeDashoffset >= perimeterWithoutGap) {
+//       strokeDashoffset = perimeterWithoutGap - 0.01;
+//     }
+//   }
+
 //   // Fix percent accuracy when strokeLinecap is round
 //   // https://github.com/ant-design/ant-design/issues/35009
 //   if (strokeLinecap === 'round' && percent !== 100) {
