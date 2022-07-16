@@ -1,7 +1,15 @@
 
+use std::collections::HashMap;
+use crate::components::rc::rc_progress::interface::GapPositionType;
+
+
 // import * as React from 'react';
 // import classNames from 'classnames';
+use crate::components::rc::rc_progress::common::use_transition_duration;  
 // import { defaultProps, useTransitionDuration } from './common';
+use crate::components::rc::rc_progress::interface::ProgressProps;
+
+use super::interface::StrokeLinecapType; 
 // import type { ProgressProps } from './interface';
 // import useId from './hooks/useId';
 
@@ -20,6 +28,75 @@ pub fn strip_percent_to_number(percent: String) -> String {
 
 pub const VIEW_BOX_SIZE: i32 = 100;
 // const VIEW_BOX_SIZE = 100;
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum GetCircleStyleStrokeColor {
+    String(String),
+    Record(HashMap<String, String>),
+}
+
+pub fn get_circle_style (
+  perimeter: i32,
+  perimeter_without_gap: i32,
+  offset: i32,
+  percent: i32,
+  rotate_deg: i32,
+  gap_degree: i32,//uknown
+  gap_position: GapPositionType,//Option<GapPositionType>
+  stroke_color: GetCircleStyleStrokeColor,
+  stroke_linecap: Option<StrokeLinecapType>,
+  stroke_width: i32,//uknown
+  step_space: Option<i32>,
+) {
+    let step_space = match step_space {
+        None => 0,//i32::default() ??????
+        Some(i) => i,
+    };
+
+    let offset_deg = (offset / 100) * 360 * ((360 - gap_degree) / 360);
+//   const offsetDeg = (offset / 100) * 360 * ((360 - gapDegree) / 360);
+    let position_deg = match gap_degree {
+        0 => 0,
+        _ => match gap_position {
+            GapPositionType::Top => 0,
+            GapPositionType::Right => 180,
+            GapPositionType::Bottom => 90,
+            GapPositionType::Left => -90,
+        }
+    };
+
+//   const positionDeg =
+//     gapDegree === 0
+//       ? 0
+//       : {
+//           bottom: 0,
+//           top: 180,
+//           left: 90,
+//           right: -90,
+//         }[gapPosition];
+
+//   let strokeDashoffset = ((100 - percent) / 100) * perimeterWithoutGap;
+//   // Fix percent accuracy when strokeLinecap is round
+//   // https://github.com/ant-design/ant-design/issues/35009
+//   if (strokeLinecap === 'round' && percent !== 100) {
+//     strokeDashoffset += strokeWidth / 2;
+//     // when percent is small enough (<= 1%), keep smallest value to avoid it's disappearance
+//     if (strokeDashoffset >= perimeterWithoutGap) {
+//       strokeDashoffset = perimeterWithoutGap - 0.01;
+//     }
+//   }
+
+//   return {
+//     stroke: typeof strokeColor === 'string' ? strokeColor : undefined,
+//     strokeDasharray: `${perimeterWithoutGap}px ${perimeter}`,
+//     strokeDashoffset: strokeDashoffset + stepSpace,
+//     transform: `rotate(${rotateDeg + offsetDeg + positionDeg}deg)`,
+//     transformOrigin: '50% 50%',
+//     transition:
+//       'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s',
+//     fillOpacity: 0,
+//   };
+}
 
 // const getCircleStyle = (
 //   perimeter: number,
