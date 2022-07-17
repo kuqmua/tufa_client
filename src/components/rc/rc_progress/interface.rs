@@ -9,8 +9,8 @@ pub enum Percent {
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct CountSpace {
-    count: i32,
-    space: i32,
+    pub count: i32,
+    pub space: i32,
 }
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Steps {

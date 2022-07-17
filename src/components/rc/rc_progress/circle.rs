@@ -210,8 +210,24 @@ let radius = VIEW_BOX_SIZE / 2.0 - props.stroke_width.unwrap_or(1.0) / 2.0;
 //   const radius = VIEW_BOX_SIZE / 2 - strokeWidth / 2;
 let perimeter = 3.14 * 2.0 * radius;
 //   const perimeter = Math.PI * 2 * radius;
+let gap_degree = match props.gap_degree {
+    None => 0,
+    Some(g) => g,
+};
+let rotate_deg = match gap_degree > 0  {
+    true => 90 + gap_degree / 2,
+    false => -90,
+};
 //   const rotateDeg = gapDegree > 0 ? 90 + gapDegree / 2 : -90;
+let perimeter_without_gap = perimeter * ((360.0 - gap_degree as f64) / 360.0);
 //   const perimeterWithoutGap = perimeter * ((360 - gapDegree) / 360);
+let (count, space) = match props.steps.clone() {
+    None => (0, 0),
+    Some(steps_type) => match steps_type {
+      super::interface::Steps::Number(n) => (n, 2),
+      super::interface::Steps::CountSpace(count_space) => (count_space.count, count_space.space),
+    },
+};
 //   const { count: stepCount, space: stepSpace } =
 //     typeof steps === 'object' ? steps : { count: steps, space: 2 };
 
