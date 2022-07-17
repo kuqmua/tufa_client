@@ -25,6 +25,15 @@ pub enum UUIDStruct {
     String(String),
 }
 
+impl UUIDStruct {
+  pub fn to_string(&self) -> String {
+    match self {
+        UUIDStruct::Number(n) => n.to_string(),
+        UUIDStruct::String(s) => s.clone(),
+    }
+  }
+}
+
 pub fn get_uuid() -> UUIDStruct {
   let ret_id: UUIDStruct;
   if *IS_BROWSER_CLIENT {
@@ -52,6 +61,23 @@ pub fn get_uuid() -> UUIDStruct {
 
 //   return retId;
 // }
+
+pub fn default(id: Option<String>) -> String {
+  let inner_id = String::from("");
+  // let set_inner_id = format!("rc_progress_{}", get_uuid().to_string());
+
+  
+  // Inner id for accessibility usage. Only work in client side
+  // const [innerId, setInnerId] = React.useState<string>();
+  // React.useEffect(() => {
+  //   setInnerId(`rc_progress_${getUUID()}`);
+  // }, []);
+  match id {
+    None => inner_id,
+    Some(s) => s,
+  }
+  // return id || innerId;
+}
 
 // export default (id?: string) => {
 //   // Inner id for accessibility usage. Only work in client side
