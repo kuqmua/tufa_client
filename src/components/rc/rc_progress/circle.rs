@@ -64,6 +64,28 @@ pub struct CircleStyle {
     pub fill_opacity: f64,
 }
 
+impl CircleStyle {
+    pub fn to_string(&self) -> String {
+        format!("
+          stroke: {};
+          stroke_dash_array: {};
+          stroke_dash_offset: {};
+          transform: {};
+          transform_origin: {};
+          transition: {};
+          fill_opacity: {};
+        ",
+        self.stroke.clone().unwrap_or(String::from("")),
+        self.stroke_dash_array,
+        self.stroke_dash_offset,
+        self.transform,
+        self.transform_origin,
+        self.transition,
+        self.fill_opacity,
+        )
+    }
+}
+
 pub fn get_circle_style (
   perimeter: f64,
   perimeter_without_gap: f64,
@@ -293,8 +315,8 @@ let paths = use_transition_duration();
 //   const paths = useTransitionDuration();
 
 let get_stoke_list = || {
-    let stack_ptg = 0;
-    percent_list.clone().iter().enumerate().map(|(index, ptg)|{
+    let mut stack_ptg = 0;
+    percent_list.clone().iter().enumerate().map(|(index, ptg)| {
         let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
             (None, None) => None,
             (None, Some(c)) => Some(c.clone()),
@@ -335,7 +357,34 @@ let get_stoke_list = || {
     //       strokeLinecap,
     //       strokeWidth,
     //     );
+    stack_ptg += ptg;
     //     stackPtg += ptg;
+    let opacity = match ptg {
+        0 => "0",
+        _ => "1",
+    };
+    html!{
+        <circle
+            key={index}
+            className={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+            r={radius.to_string()}
+            cx={(VIEW_BOX_SIZE / 2.0).to_string()}
+            cy={(VIEW_BOX_SIZE / 2.0).to_string()}
+            stroke={stroke}
+            strokeLinecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
+            strokeWidth={props.stroke_width.clone().unwrap_or(1.0).to_string()}
+            opacity={opacity}
+            style={circle_style_for_stack.to_string()}
+            // ref={(elem) => {
+            //   // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+            //   // React will call the ref callback with the DOM element when the component mounts,
+            //   // and call it with `null` when it unmounts.
+            //   // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
+
+            //   paths[index] = elem;
+            // }}
+        />
+    }
     //     return (
     //       <circle
     //         key={index}
@@ -360,7 +409,6 @@ let get_stoke_list = || {
     //     );
     //   })
     //   .reverse();
-        html!{}
     }).collect::<Vec<Html>>();
     
 };
