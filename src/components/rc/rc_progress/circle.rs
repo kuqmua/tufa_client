@@ -297,12 +297,32 @@ let get_stoke_list = || {
     percent_list.clone().iter().enumerate().map(|(index, ptg)|{
         let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
             (None, None) => None,
-            (None, Some(c)) => Some(c),
-            (Some(c), None) => Some(c),
-            (Some(c), Some(_)) => Some(c),
+            (None, Some(c)) => Some(c.clone()),
+            (Some(c), None) => Some(c.clone()),
+            (Some(c), Some(_)) => Some(c.clone()),
         };
                 // const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];
+        let stroke = match color.clone() {
+            None => None,
+            Some(color_type) => match color_type {
+                BaseStrokeColorType::String(_) => None,
+                BaseStrokeColorType::Record(_) => Some(format!("url(#{})", gradient_id)),
+            },
+        };
     //     const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
+        let circle_style_for_stack = get_circle_style(
+          perimeter,
+          perimeter_without_gap,
+          stack_ptg as f64,
+          *ptg as f64,
+          rotate_deg as f64,
+          gap_degree as f64,
+          props.gap_position.clone().unwrap_or(GapPositionType::Bottom),
+          GetCircleStyleStrokeColor::String(color.clone().unwrap_or(BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
+          props.stroke_linecap.clone(),
+          props.stroke_width.clone().unwrap_or(1.0),
+          None
+        );
     //     const circleStyleForStack = getCircleStyle(
     //       perimeter,
     //       perimeterWithoutGap,

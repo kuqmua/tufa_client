@@ -111,6 +111,15 @@ pub enum BaseStrokeColorType {
     Record(HashMap<String, String>),
 }
 
+impl BaseStrokeColorType {
+    pub fn to_string(&self) -> String {
+        match self {
+            BaseStrokeColorType::String(s) => s.clone(),
+            BaseStrokeColorType::Record(_) => String::from(""),//todo
+        }
+    }
+}
+
 //   export type BaseStrokeColorType = string | Record<string, string>;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
