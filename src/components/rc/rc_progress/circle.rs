@@ -275,17 +275,75 @@ let percent_list = percent_to_array(props.percent.clone().unwrap_or(Percent::Num
 //   const percentList = toArray(percent);
 let stroke_color_list = stroke_color_to_array(props.stroke_color.clone().unwrap_or(StrokeColorType::BaseStrokeColorTypeVec(vec![])));
 //   const strokeColorList = toArray(strokeColor);
-// let mut gradient = None;
-// for color in stroke_color_list {
-// match color {
-//     BaseStrokeColorType::String(_) => todo!(),
-// }
-// }
+let mut gradient = None;
+for color in stroke_color_list.clone() {
+match color {
+    BaseStrokeColorType::String(_) => (),
+    BaseStrokeColorType::Record(hm) => {
+        gradient = Some(hm);
+        break;
+    },
+}
+}
 
 //   const gradient = strokeColorList.find((color) => color && typeof color === 'object');
 
+let paths = use_transition_duration();
+
 //   const paths = useTransitionDuration();
 
+let get_stoke_list = || {
+    let stack_ptg = 0;
+    percent_list.clone().iter().enumerate().map(|(index, ptg)|{
+        let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
+            (None, None) => None,
+            (None, Some(c)) => Some(c),
+            (Some(c), None) => Some(c),
+            (Some(c), Some(_)) => Some(c),
+        };
+                // const color = strokeColorList[index] || strokeColorList[strokeColorList.length - 1];
+    //     const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
+    //     const circleStyleForStack = getCircleStyle(
+    //       perimeter,
+    //       perimeterWithoutGap,
+    //       stackPtg,
+    //       ptg,
+    //       rotateDeg,
+    //       gapDegree,
+    //       gapPosition,
+    //       color,
+    //       strokeLinecap,
+    //       strokeWidth,
+    //     );
+    //     stackPtg += ptg;
+    //     return (
+    //       <circle
+    //         key={index}
+    //         className={`${prefixCls}-circle-path`}
+    //         r={radius}
+    //         cx={VIEW_BOX_SIZE / 2}
+    //         cy={VIEW_BOX_SIZE / 2}
+    //         stroke={stroke}
+    //         strokeLinecap={strokeLinecap}
+    //         strokeWidth={strokeWidth}
+    //         opacity={ptg === 0 ? 0 : 1}
+    //         style={circleStyleForStack}
+    //         ref={(elem) => {
+    //           // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+    //           // React will call the ref callback with the DOM element when the component mounts,
+    //           // and call it with `null` when it unmounts.
+    //           // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
+
+    //           paths[index] = elem;
+    //         }}
+    //       />
+    //     );
+    //   })
+    //   .reverse();
+        html!{}
+    }).collect::<Vec<Html>>();
+    
+};
 //   const getStokeList = () => {
 //     let stackPtg = 0;
 //     return percentList
