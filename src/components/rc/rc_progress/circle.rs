@@ -231,6 +231,19 @@ let (count, space) = match props.steps.clone() {
 //   const { count: stepCount, space: stepSpace } =
 //     typeof steps === 'object' ? steps : { count: steps, space: 2 };
 
+let circle_style = get_circle_style(
+    perimeter,
+    perimeter_without_gap,
+    0.0,
+    100.0,
+    rotate_deg as f64,
+    gap_degree as f64,
+    props.gap_position.clone().unwrap_or(GapPositionType::Bottom),
+    GetCircleStyleStrokeColor::String(props.trail_color.clone().unwrap_or(String::from("#D9D9D9"))),
+    props.stroke_linecap.clone(),
+    props.stroke_width.unwrap_or(1.0),
+    None,
+);
 //   const circleStyle = getCircleStyle(
 //     perimeter,
 //     perimeterWithoutGap,
