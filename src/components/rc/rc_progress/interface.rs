@@ -21,7 +21,7 @@ pub enum Steps {
 #[derive(Debug, PartialEq, Properties, Clone)]
 pub struct ProgressProps {
     pub id: Option<String>,
-    pub stroke_width: Option<i32>,
+    pub stroke_width: Option<f64>,
     pub trail_width: Option<i32>,
     pub class_name: Option<String>,
     pub percent: Option<Percent>,
@@ -41,7 +41,7 @@ impl Default for ProgressProps {
     fn default() -> Self {
         ProgressProps {
             id: None,
-            stroke_width: Some(1),
+            stroke_width: Some(1.0),
             trail_width: Some(1),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0)),
@@ -65,7 +65,7 @@ impl ProgressProps {
     pub fn default(&self) -> Self {
         ProgressProps {
             id: None,
-            stroke_width: Some(1),
+            stroke_width: Some(1.0),
             trail_width: Some(1),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0)),

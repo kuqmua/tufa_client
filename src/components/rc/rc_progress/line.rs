@@ -45,11 +45,11 @@ pub fn line(props: &ProgressProps) -> Html {
     let paths = use_transition_duration();
     //   const paths = useTransitionDuration();
 
-    let center = props.stroke_width.unwrap_or(1) / 2;//todo maybe make different default func
+    let center = props.stroke_width.unwrap_or(1.0) / 2.0;//todo maybe make different default func
 
     //   const center = strokeWidth / 2;
 
-    let right = 100 - props.stroke_width.unwrap_or(1) / 2;//todo maybe make different default func
+    let right = 100.0 - props.stroke_width.unwrap_or(1.0) / 2.0;//todo maybe make different default func
     //   const right = 100 - strokeWidth / 2;
 
     let first_part = match props.stroke_linecap.clone() {
@@ -71,7 +71,7 @@ pub fn line(props: &ProgressProps) -> Html {
     let path_string = format!("M {}{} L {}{}", first_part, center, second_part, center);
     //   const pathString = `M ${strokeLinecap === 'round' ? center : 0},${center}
     //          L ${strokeLinecap === 'round' ? right : 100},${center}`;
-    let view_box_string = format!("0 0 100 {}", props.stroke_width.unwrap_or(1));//todo maybe make different default func
+    let view_box_string = format!("0 0 100 {}", props.stroke_width.unwrap_or(1.0));//todo maybe make different default func
     //   const viewBoxString = `0 0 100 ${strokeWidth}`;
     let mut stack_ptg = 0;
 
@@ -94,25 +94,25 @@ pub fn line(props: &ProgressProps) -> Html {
         Some(stroke_linecap_type) => stroke_linecap_type.get_value(),
     };
     let percent_list_mapped = percent_list.into_iter().enumerate().map(|(index, ptg)| {
-        let mut dash_percent = 1;
+        let mut dash_percent = 1.0;
             match props.clone().stroke_linecap {
                 None => {
-                    dash_percent = 1;
+                    dash_percent = 1.0;
                 },
                 Some(stroke_linecap_type) => {
                     let stroke_width = match props.clone().stroke_width {
-                        None => 1,//todo maybe make different default func
+                        None => 1.0,//todo maybe make different default func
                         Some(sw) => sw,
                     };
                     match stroke_linecap_type {
                         super::interface::StrokeLinecapType::Round => {
-                            dash_percent = 1 - stroke_width / 100;
+                            dash_percent = 1.0 - stroke_width / 100.0;
                         },
                         super::interface::StrokeLinecapType::Butt => {
-                            dash_percent = 1 - stroke_width / 100;
+                            dash_percent = 1.0 - stroke_width / 100.0;
                         },
                         super::interface::StrokeLinecapType::Square => {
-                            dash_percent = 1 - stroke_width / 100;
+                            dash_percent = 1.0 - stroke_width / 100.0;
                         },
                     }
                 },
@@ -128,7 +128,7 @@ pub fn line(props: &ProgressProps) -> Html {
         //         dashPercent = 1;
         //         break;
         //     }
-        let stroke_dash_array =  format!("{}px, 100px", ptg * dash_percent);
+        let stroke_dash_array =  format!("{}px, 100px", ptg as f64 * dash_percent);
         let stroke_dash_offset = format!("-{}px", stack_ptg);
         let transition = match props.transition.clone() {
             None => String::from("stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear"),

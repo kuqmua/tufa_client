@@ -10,6 +10,7 @@ use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::common::use_transition_duration;  
 // import { defaultProps, useTransitionDuration } from './common';
 use crate::components::rc::rc_progress::interface::ProgressProps;
+use crate::components::rc::rc_progress::hooks::use_id::use_id;
 
 use super::interface::StrokeLinecapType; 
 // import type { ProgressProps } from './interface';
@@ -28,7 +29,7 @@ pub fn strip_percent_to_number(percent: String) -> String {
 //   return Array.isArray(mergedValue) ? mergedValue : [mergedValue];
 // }
 
-pub const VIEW_BOX_SIZE: i32 = 100;
+pub const VIEW_BOX_SIZE: f64 = 100.0;
 // const VIEW_BOX_SIZE = 100;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -201,9 +202,13 @@ pub fn circle(props: &ProgressProps) -> Html {
     //     percent,
     //     ...restProps
     //   }) => {
+        let merged_id = use_id(props.id.clone());
 //   const mergedId = useId(id);
+let gradient_id = format!("{}-gradient", merged_id);
 //   const gradientId = `${mergedId}-gradient`;
+let radius = VIEW_BOX_SIZE / 2.0 - props.stroke_width.unwrap_or(1.0) / 2.0;
 //   const radius = VIEW_BOX_SIZE / 2 - strokeWidth / 2;
+let perimeter = 3.14 * 2.0 * radius;
 //   const perimeter = Math.PI * 2 * radius;
 //   const rotateDeg = gapDegree > 0 ? 90 + gapDegree / 2 : -90;
 //   const perimeterWithoutGap = perimeter * ((360 - gapDegree) / 360);
