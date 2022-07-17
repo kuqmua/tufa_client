@@ -28,12 +28,14 @@ pub fn line(props: &ProgressProps) -> Html {
         Some(stroke_color_value) => match stroke_color_value {
             super::interface::StrokeColorType::BaseStrokeColorType(base_stroke_color_type) => match base_stroke_color_type {
                super::interface::BaseStrokeColorType::String(s) => vec![s],
+               super::interface::BaseStrokeColorType::Record(_) => vec![],//todo!
             },
             super::interface::StrokeColorType::BaseStrokeColorTypeVec(vec) => {
                 let mut v = vec![];
                 vec.into_iter().for_each(|s| {
                     match s {
                         super::interface::BaseStrokeColorType::String(string) => v.push(string),
+                        super::interface::BaseStrokeColorType::Record(_) => (),//todo!
                     }
                 });
                 v

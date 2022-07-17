@@ -275,6 +275,13 @@ let percent_list = percent_to_array(props.percent.clone().unwrap_or(Percent::Num
 //   const percentList = toArray(percent);
 let stroke_color_list = stroke_color_to_array(props.stroke_color.clone().unwrap_or(StrokeColorType::BaseStrokeColorTypeVec(vec![])));
 //   const strokeColorList = toArray(strokeColor);
+// let mut gradient = None;
+// for color in stroke_color_list {
+// match color {
+//     BaseStrokeColorType::String(_) => todo!(),
+// }
+// }
+
 //   const gradient = strokeColorList.find((color) => color && typeof color === 'object');
 
 //   const paths = useTransitionDuration();

@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use web_sys::MouseEvent;
 use yew::{Callback, Properties};
 
@@ -106,7 +108,7 @@ impl ProgressProps {
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum BaseStrokeColorType {
     String(String),
-    // Record((String, String)),//todo later
+    Record(HashMap<String, String>),
 }
 
 //   export type BaseStrokeColorType = string | Record<string, string>;
