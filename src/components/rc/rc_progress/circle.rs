@@ -11,8 +11,9 @@ use crate::components::rc::rc_progress::common::use_transition_duration;
 // import { defaultProps, useTransitionDuration } from './common';
 use crate::components::rc::rc_progress::interface::ProgressProps;
 use crate::components::rc::rc_progress::hooks::use_id::use_id;
+use crate::components::rc::rc_progress::interface::Percent;
 
-use super::interface::StrokeLinecapType; 
+use super::interface::{StrokeLinecapType, StrokeColorType, BaseStrokeColorType}; 
 // import type { ProgressProps } from './interface';
 // import useId from './hooks/useId';
 
@@ -23,6 +24,20 @@ pub fn strip_percent_to_number(percent: String) -> String {
 // function stripPercentToNumber(percent: string) {
 //   return +percent.replace('%', '');
 // }
+
+pub fn percent_to_array(value: Percent) -> Vec<i32> {
+    match value {
+        Percent::Number(n) => vec![n],
+        Percent::NumberVec(vec) => vec,
+    }
+}
+
+pub fn stroke_color_to_array(value: StrokeColorType) -> Vec<BaseStrokeColorType> {
+    match value {
+        StrokeColorType::BaseStrokeColorType(n) => vec![n],
+        StrokeColorType::BaseStrokeColorTypeVec(vec) => vec,
+    }
+}
 
 // function toArray<T>(value: T | T[]): T[] {
 //   const mergedValue = value ?? [];
@@ -256,7 +271,9 @@ let circle_style = get_circle_style(
 //     strokeLinecap,
 //     strokeWidth,
 //   );
+let percent_list = percent_to_array(props.percent.clone().unwrap_or(Percent::NumberVec(vec![])));
 //   const percentList = toArray(percent);
+let stroke_color_list = stroke_color_to_array(props.stroke_color.clone().unwrap_or(StrokeColorType::BaseStrokeColorTypeVec(vec![])));
 //   const strokeColorList = toArray(strokeColor);
 //   const gradient = strokeColorList.find((color) => color && typeof color === 'object');
 
