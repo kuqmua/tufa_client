@@ -23,7 +23,7 @@ pub fn strip_percent_to_number(percent: String) -> String {
 //   return +percent.replace('%', '');
 // }
 
-pub fn percent_to_array(value: Percent) -> Vec<i32> {
+pub fn percent_to_array(value: Percent) -> Vec<f64> {
     match value {
         Percent::Number(n) => vec![n],
         Percent::NumberVec(vec) => vec,
@@ -260,9 +260,9 @@ pub fn circle(props: &ProgressProps) -> Html {
     let perimeter_without_gap = perimeter * ((360.0 - gap_degree as f64) / 360.0);
     //   const perimeterWithoutGap = perimeter * ((360 - gapDegree) / 360);
     let (step_count, step_space) = match props.steps.clone() {
-        None => (0, 0),
+        None => (0.0, 0.0),
         Some(steps_type) => match steps_type {
-            super::interface::Steps::Number(n) => (n, 2),
+            super::interface::Steps::Number(n) => (n, 2.0),
             super::interface::Steps::CountSpace(count_space) => {
                 (count_space.count, count_space.space)
             }
@@ -309,7 +309,7 @@ pub fn circle(props: &ProgressProps) -> Html {
     }
     let paths = use_transition_duration();
     let get_stoke_list = || {
-        let mut stack_ptg = 0;
+        let mut stack_ptg = 0.0;
         percent_list.clone().iter().enumerate().map(|(index, ptg)| {
         let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
             (None, None) => None,
@@ -339,7 +339,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         );
     stack_ptg += ptg;
     let opacity = match ptg {
-        0 => "0",
+        0.0 => "0",
         _ => "1",
     };
     html!{
@@ -374,45 +374,51 @@ pub fn circle(props: &ProgressProps) -> Html {
         let step_ptg = 100.0 / step_count;
         //     const stepPtg = 100 / stepCount;
         let stack_ptg = 0;
-        let html_vec: Vec<Html> = vec![html! {}; step_count];
-        html_vec.iter().enumerate().map(|(index, _element)| {
-            //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
-            //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
-            //       const circleStyleForStack = getCircleStyle(
-            //         perimeter,
-            //         perimeterWithoutGap,
-            //         stackPtg,
-            //         stepPtg,
-            //         rotateDeg,
-            //         gapDegree,
-            //         gapPosition,
-            //         color,
-            //         'butt',
-            //         strokeWidth,
-            //         stepSpace,
-            //       );
-            //       stackPtg +=
-            //         ((perimeterWithoutGap - circleStyleForStack.strokeDashoffset + stepSpace) * 100) /
-            //         perimeterWithoutGap;
+        let html_vec: Vec<Html> = vec![html! {}; step_count as usize];
+        let bbn = html_vec
+            .iter()
+            .enumerate()
+            .map(|(index, _element)| {
+                //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
+                //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
+                //       const circleStyleForStack = getCircleStyle(
+                //         perimeter,
+                //         perimeterWithoutGap,
+                //         stackPtg,
+                //         stepPtg,
+                //         rotateDeg,
+                //         gapDegree,
+                //         gapPosition,
+                //         color,
+                //         'butt',
+                //         strokeWidth,
+                //         stepSpace,
+                //       );
+                //       stackPtg +=
+                //         ((perimeterWithoutGap - circleStyleForStack.strokeDashoffset + stepSpace) * 100) /
+                //         perimeterWithoutGap;
 
-            //       return (
-            //         <circle
-            //           key={index}
-            //           className={`${prefixCls}-circle-path`}
-            //           r={radius}
-            //           cx={VIEW_BOX_SIZE / 2}
-            //           cy={VIEW_BOX_SIZE / 2}
-            //           stroke={stroke}
-            //           // strokeLinecap={strokeLinecap}
-            //           strokeWidth={strokeWidth}
-            //           opacity={1}
-            //           style={circleStyleForStack}
-            //           ref={(elem) => {
-            //             paths[index] = elem;
-            //           }}
-            //         />
-            //       );
-        })
+                //       return (
+                //         <circle
+                //           key={index}
+                //           className={`${prefixCls}-circle-path`}
+                //           r={radius}
+                //           cx={VIEW_BOX_SIZE / 2}
+                //           cy={VIEW_BOX_SIZE / 2}
+                //           stroke={stroke}
+                //           // strokeLinecap={strokeLinecap}
+                //           strokeWidth={strokeWidth}
+                //           opacity={1}
+                //           style={circleStyleForStack}
+                //           ref={(elem) => {
+                //             paths[index] = elem;
+                //           }}
+                //         />
+                //       );
+                html! {}
+            })
+            .collect::<Vec<Html>>()
+            .reverse();
         //     return new Array(stepCount).fill(null).map((_, index) => {
         //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
         //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;

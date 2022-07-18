@@ -3,20 +3,20 @@ use std::collections::HashMap;
 use web_sys::MouseEvent;
 use yew::{Callback, Properties};
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Percent {
-    Number(i32),
-    NumberVec(Vec<i32>),
+    Number(f64),
+    NumberVec(Vec<f64>),
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct CountSpace {
-    pub count: i32,
-    pub space: i32,
+    pub count: f64,
+    pub space: f64,
 }
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Steps {
-    Number(i32),
+    Number(f64),
     CountSpace(CountSpace),
 }
 
@@ -46,7 +46,7 @@ impl Default for ProgressProps {
             stroke_width: Some(1.0),
             trail_width: Some(1),
             class_name: Some(String::from("")),
-            percent: Some(Percent::Number(0)),
+            percent: Some(Percent::Number(0.0)),
             stroke_color: Some(StrokeColorType::BaseStrokeColorType(
                 BaseStrokeColorType::String(String::from("#2db7f5")),
             )),
@@ -70,7 +70,7 @@ impl ProgressProps {
             stroke_width: Some(1.0),
             trail_width: Some(1),
             class_name: Some(String::from("")),
-            percent: Some(Percent::Number(0)),
+            percent: Some(Percent::Number(0.0)),
             stroke_color: Some(StrokeColorType::BaseStrokeColorType(
                 BaseStrokeColorType::String(String::from("#2db7f5")),
             )),
@@ -115,7 +115,7 @@ impl BaseStrokeColorType {
     pub fn to_string(&self) -> String {
         match self {
             BaseStrokeColorType::String(s) => s.clone(),
-            BaseStrokeColorType::Record(_) => String::from(""),//todo
+            BaseStrokeColorType::Record(_) => String::from(""), //todo
         }
     }
 }
