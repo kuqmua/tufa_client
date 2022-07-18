@@ -379,6 +379,14 @@ pub fn circle(props: &ProgressProps) -> Html {
             .iter()
             .enumerate()
             .map(|(index, _element)| {
+                let index_as_f64 = index as f64;
+                let color = match index_as_f64 < current {
+                    true => match stroke_color_list[0].clone() {
+                        BaseStrokeColorType::String(s) => s.clone(),
+                        BaseStrokeColorType::Record(_) => String::from("#D9D9D9"), //todo
+                    },
+                    false => props.trail_color.clone().unwrap_or(String::from("#D9D9D9")),
+                };
                 //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
                 //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
                 //       const circleStyleForStack = getCircleStyle(
