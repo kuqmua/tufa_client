@@ -345,13 +345,13 @@ pub fn circle(props: &ProgressProps) -> Html {
     html!{
         <circle
             key={index}
-            className={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+            class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
             r={radius.to_string()}
             cx={(VIEW_BOX_SIZE / 2.0).to_string()}
             cy={(VIEW_BOX_SIZE / 2.0).to_string()}
             stroke={stroke}
-            strokeLinecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
-            strokeWidth={props.stroke_width.clone().unwrap_or(1.0).to_string()}
+            stroke_linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
+            stroke_width={props.stroke_width.clone().unwrap_or(1.0).to_string()}
             opacity={opacity}
             style={circle_style_for_stack.to_string()}
             // ref={(elem) => {
@@ -373,7 +373,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         //     const current = Math.round(stepCount * (percentList[0] / 100));
         let step_ptg = 100.0 / step_count;
         //     const stepPtg = 100 / stepCount;
-        let stack_ptg = 0;
+        let mut stack_ptg = 0.0;
         let html_vec: Vec<Html> = vec![html! {}; step_count as usize];
         let bbn = html_vec
             .iter()
@@ -381,111 +381,55 @@ pub fn circle(props: &ProgressProps) -> Html {
             .map(|(index, _element)| {
                 let index_as_f64 = index as f64;
                 let color = match index_as_f64 < current {
-                    true => match stroke_color_list[0].clone() {
-                        BaseStrokeColorType::String(s) => s.clone(),
-                        BaseStrokeColorType::Record(_) => String::from("#D9D9D9"), //todo
-                    },
-                    false => props.trail_color.clone().unwrap_or(String::from("#D9D9D9")),
+                    true => stroke_color_list[0].clone(),
+                    false => BaseStrokeColorType::String(
+                        props.trail_color.clone().unwrap_or(String::from("#D9D9D9")),
+                    ),
                 };
-                //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
-                //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
-                //       const circleStyleForStack = getCircleStyle(
-                //         perimeter,
-                //         perimeterWithoutGap,
-                //         stackPtg,
-                //         stepPtg,
-                //         rotateDeg,
-                //         gapDegree,
-                //         gapPosition,
-                //         color,
-                //         'butt',
-                //         strokeWidth,
-                //         stepSpace,
-                //       );
-                //       stackPtg +=
-                //         ((perimeterWithoutGap - circleStyleForStack.strokeDashoffset + stepSpace) * 100) /
-                //         perimeterWithoutGap;
-
-                //       return (
-                //         <circle
-                //           key={index}
-                //           className={`${prefixCls}-circle-path`}
-                //           r={radius}
-                //           cx={VIEW_BOX_SIZE / 2}
-                //           cy={VIEW_BOX_SIZE / 2}
-                //           stroke={stroke}
-                //           // strokeLinecap={strokeLinecap}
-                //           strokeWidth={strokeWidth}
-                //           opacity={1}
-                //           style={circleStyleForStack}
-                //           ref={(elem) => {
-                //             paths[index] = elem;
-                //           }}
-                //         />
-                //       );
-                html! {}
+                let stroke = match color {
+                    BaseStrokeColorType::String(_) => None,
+                    BaseStrokeColorType::Record(_) => Some(format!("url(#{})", gradient_id)),
+                };
+                let circle_style_for_stack = get_circle_style(
+                    perimeter,
+                    perimeter_without_gap,
+                    stack_ptg as f64,
+                    step_ptg as f64,
+                    rotate_deg as f64,
+                    gap_degree as f64,
+                    props
+                        .gap_position
+                        .clone()
+                        .unwrap_or(GapPositionType::Bottom),
+                    GetCircleStyleStrokeColor::String(color.to_string()),
+                    Some(StrokeLinecapType::Butt),
+                    props.stroke_width.clone().unwrap_or(1.0),
+                    Some(step_space),
+                );
+                stack_ptg += ((perimeter_without_gap - circle_style_for_stack.stroke_dash_offset
+                    + step_space)
+                    * 100.0)
+                    / perimeter_without_gap;
+                html! {
+                                            <circle
+                          key={index}
+                          class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+                          r={radius.to_string()}
+                          cx={(VIEW_BOX_SIZE / 2.0).to_string()}
+                          cy={(VIEW_BOX_SIZE / 2.0).to_string()}
+                          stroke={stroke}
+                          // strokeLinecap={strokeLinecap}
+                          stroke_width={props.stroke_width.clone().unwrap_or(1.0).to_string()}
+                          opacity={1}
+                          style={circle_style_for_stack.to_string()}
+                        //   ref={(elem) => {
+                        //     paths[index] = elem;
+                        //   }}
+                        />
+                }
             })
-            .collect::<Vec<Html>>()
-            .reverse();
-        //     return new Array(stepCount).fill(null).map((_, index) => {
-        //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
-        //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
-        //       const circleStyleForStack = getCircleStyle(
-        //         perimeter,
-        //         perimeterWithoutGap,
-        //         stackPtg,
-        //         stepPtg,
-        //         rotateDeg,
-        //         gapDegree,
-        //         gapPosition,
-        //         color,
-        //         'butt',
-        //         strokeWidth,
-        //         stepSpace,
-        //       );
-        //       stackPtg +=
-        //         ((perimeterWithoutGap - circleStyleForStack.strokeDashoffset + stepSpace) * 100) /
-        //         perimeterWithoutGap;
-
-        //       return (
-        //         <circle
-        //           key={index}
-        //           className={`${prefixCls}-circle-path`}
-        //           r={radius}
-        //           cx={VIEW_BOX_SIZE / 2}
-        //           cy={VIEW_BOX_SIZE / 2}
-        //           stroke={stroke}
-        //           // strokeLinecap={strokeLinecap}
-        //           strokeWidth={strokeWidth}
-        //           opacity={1}
-        //           style={circleStyleForStack}
-        //           ref={(elem) => {
-        //             paths[index] = elem;
-        //           }}
-        //         />
-        //       );
-        //     });
-
-        // return percent_list
-        //     .clone()
-        //     .iter()
-        //     .enumerate()
-        //     .map(|(index, ptg)| {
-        //         let color = match (
-        //             stroke_color_list.clone().get(index),
-        //             stroke_color_list.get(stroke_color_list.len() - 1),
-        //         ) {
-        //             (None, None) => None,
-        //             (None, Some(c)) => Some(c.clone()),
-        //             (Some(c), None) => Some(c.clone()),
-        //             (Some(c), Some(_)) => Some(c.clone()),
-        //         };
-
-        //         html! {}
-
-        //     })
-        //     .collect::<Vec<Html>>()
-        //     .reverse();
+            .collect::<Vec<Html>>();
+        bbn
     };
 
     //   const getStepStokeList = () => {
