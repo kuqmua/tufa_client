@@ -14,6 +14,7 @@ use crate::components::rc::rc_progress::interface::ProgressProps;
 use super::interface::{BaseStrokeColorType, StrokeColorType, StrokeLinecapType};
 // import type { ProgressProps } from './interface';
 // import useId from './hooks/useId';
+use yew::Callback;
 
 pub fn strip_percent_to_number(percent: String) -> String {
     percent.replace("%", "")
@@ -431,88 +432,80 @@ pub fn circle(props: &ProgressProps) -> Html {
             .collect::<Vec<Html>>();
         bbn
     };
-
-    //   const getStepStokeList = () => {
-    //     // only show the first percent when pass steps
-    //     const current = Math.round(stepCount * (percentList[0] / 100));
-    //     const stepPtg = 100 / stepCount;
-
-    //     let stackPtg = 0;
-    //     return new Array(stepCount).fill(null).map((_, index) => {
-    //       const color = index <= current - 1 ? strokeColorList[0] : trailColor;
-    //       const stroke = color && typeof color === 'object' ? `url(#${gradientId})` : undefined;
-    //       const circleStyleForStack = getCircleStyle(
-    //         perimeter,
-    //         perimeterWithoutGap,
-    //         stackPtg,
-    //         stepPtg,
-    //         rotateDeg,
-    //         gapDegree,
-    //         gapPosition,
-    //         color,
-    //         'butt',
-    //         strokeWidth,
-    //         stepSpace,
-    //       );
-    //       stackPtg +=
-    //         ((perimeterWithoutGap - circleStyleForStack.strokeDashoffset + stepSpace) * 100) /
-    //         perimeterWithoutGap;
-
-    //       return (
-    //         <circle
-    //           key={index}
-    //           className={`${prefixCls}-circle-path`}
-    //           r={radius}
-    //           cx={VIEW_BOX_SIZE / 2}
-    //           cy={VIEW_BOX_SIZE / 2}
-    //           stroke={stroke}
-    //           // strokeLinecap={strokeLinecap}
-    //           strokeWidth={strokeWidth}
-    //           opacity={1}
-    //           style={circleStyleForStack}
-    //           ref={(elem) => {
-    //             paths[index] = elem;
-    //           }}
-    //         />
-    //       );
-    //     });
-    //   };
-
-    //   return (
-    //     <svg
-    //       className={classNames(`${prefixCls}-circle`, className)}
-    //       viewBox={`0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`}
-    //       style={style}
-    //       id={id}
-    //       {...restProps}
-    //     >
-    //       {gradient && (
-    //         <defs>
-    //           <linearGradient id={gradientId} x1="100%" y1="0%" x2="0%" y2="0%">
-    //             {Object.keys(gradient)
-    //               .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
-    //               .map((key, index) => (
-    //                 <stop key={index} offset={key} stopColor={gradient[key]} />
-    //               ))}
-    //           </linearGradient>
-    //         </defs>
-    //       )}
-    //       {!stepCount && (
-    //         <circle
-    //           className={`${prefixCls}-circle-trail`}
-    //           r={radius}
-    //           cx={VIEW_BOX_SIZE / 2}
-    //           cy={VIEW_BOX_SIZE / 2}
-    //           stroke={trailColor}
-    //           strokeLinecap={strokeLinecap}
-    //           strokeWidth={trailWidth || strokeWidth}
-    //           style={circleStyle}
-    //         />
-    //       )}
-    //       {stepCount ? getStepStokeList() : getStokeList()}
-    //     </svg>
-    //   );
-    html! {}
+    let linear_gradient = match gradient {
+        None => html! {},
+        Some(g) => {
+            let inner_content = g
+                .iter()
+                .map(|(key, value)| (key.clone(), value.clone()))
+                .collect::<Vec<(String, String)>>()
+                // .sort_by(|a, b| strip_percent_to_number(a) - strip_percent_to_number(b))
+                .iter()
+                .enumerate()
+                .map(|(index, (key, value))| {
+                    html! {
+                      <stop
+                        key={index}
+                        offset={key.clone()}
+                        stop_color={value.clone()}
+                      />
+                    }
+                })
+                .collect::<Html>();
+            html! {
+                <defs>
+                  <linear_gradient
+                    id={gradient_id}
+                    x1={String::from("100%")}
+                    y1={String::from("0%")}
+                    x2={String::from("0%")}
+                    y2={String::from("0%")}
+                  >
+                    // {Object.keys(gradient)
+                    //   .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
+                    //   .map((key, index) => (
+                    //     <stop key={index} offset={key} stopColor={gradient[key]} />
+                    //   ))}
+                  </linear_gradient>
+                </defs>
+            }
+        }
+    };
+    html! {
+            <svg
+          class={format!("{}-circle {}", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")), props.class_name.clone().unwrap_or(String::from("")))}//classNames(`${prefixCls}-circle`, className)
+          view_box={format!("0 0 {} {}", VIEW_BOX_SIZE, VIEW_BOX_SIZE)}
+          style={props.style.clone()}
+          id={props.id.clone()}
+          transition={props.transition.clone()}
+          onclick={props.on_click.clone().unwrap_or(Callback::from(|_|{}))}
+        >
+        //   {gradient && (
+        //     <defs>
+        //       <linearGradient id={gradientId} x1="100%" y1="0%" x2="0%" y2="0%">
+        //         {Object.keys(gradient)
+        //           .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
+        //           .map((key, index) => (
+        //             <stop key={index} offset={key} stopColor={gradient[key]} />
+        //           ))}
+        //       </linearGradient>
+        //     </defs>
+        //   )}
+        //   {!stepCount && (
+        //     <circle
+        //       className={`${prefixCls}-circle-trail`}
+        //       r={radius}
+        //       cx={VIEW_BOX_SIZE / 2}
+        //       cy={VIEW_BOX_SIZE / 2}
+        //       stroke={trailColor}
+        //       strokeLinecap={strokeLinecap}
+        //       strokeWidth={trailWidth || strokeWidth}
+        //       style={circleStyle}
+        //     />
+        //   )}
+        //   {stepCount ? getStepStokeList() : getStokeList()}
+        </svg>
+    }
 }
 
 // const Circle: React.FC<ProgressProps> = ({
