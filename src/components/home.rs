@@ -271,7 +271,7 @@ pub fn home() -> Html {
       // <BackTop></BackTop>
       <Circle
         percent={Some(Percent::Number(10.0))}
-        stroke_width={4.0}
+        stroke_width={1.0}
         stroke_color={
           Some(StrokeColorType::BaseStrokeColorType(
                 BaseStrokeColorType::String(String::from("#D3D3D3")),

@@ -1,5 +1,5 @@
 use super::interface::{BaseStrokeColorType, StrokeColorType, StrokeLinecapType};
-use crate::components::rc::rc_progress::common::use_transition_duration;
+// use crate::components::rc::rc_progress::common::use_transition_duration;
 use crate::components::rc::rc_progress::hooks::use_id::use_id;
 use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
@@ -11,7 +11,7 @@ use yew::Html;
 use yew::{function_component, html};
 
 pub fn strip_percent_to_number(percent: String) -> String {
-    percent.replace("%", "")
+    percent.replace('%', "")
 }
 
 pub fn percent_to_array(value: Percent) -> Vec<f64> {
@@ -52,7 +52,7 @@ impl fmt::Display for CircleStyle {
         write!(
             f, 
             "stroke: {}; stroke-dasharray: {}; stroke-dashoffset: {}; transform: {}; transform-origin: {}; transition: {}; fill-opacity: {};",
-            self.stroke.clone().unwrap_or(String::from("")),
+            self.stroke.clone().unwrap_or_else(|| String::from("")),
             self.stroke_dash_array,
             self.stroke_dash_offset,
             self.transform,
@@ -63,6 +63,7 @@ impl fmt::Display for CircleStyle {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 pub fn get_circle_style(
     perimeter: f64,
     perimeter_without_gap: f64,
@@ -76,13 +77,8 @@ pub fn get_circle_style(
     stroke_width: f64, //uknown
     step_space: Option<f64>,
 ) -> CircleStyle {
-    let step_space = match step_space {
-        None => 0.0, //f64::default() ??????
-        Some(i) => i,
-    };
-
+    let step_space = step_space.unwrap_or(0.0);
     let offset_deg = (offset / 100.0) * 360.0 * ((360.0 - gap_degree) / 360.0);
-    //   const offsetDeg = (offset / 100) * 360 * ((360 - gapDegree) / 360);
     let position_deg = if gap_degree == 0.0 {
         0.0
     } else {
@@ -94,29 +90,27 @@ pub fn get_circle_style(
         }
     };
     let mut stroke_dash_offset = ((100.0 - percent) / 100.0) * perimeter_without_gap;
-    if let Some(stroke_linecap_type) = stroke_linecap {
-        if let StrokeLinecapType::Round = stroke_linecap_type {
+    if let Some(StrokeLinecapType::Round) = stroke_linecap {
             if percent != 100.0 {
                 stroke_dash_offset += stroke_width / 2.0;
                 if stroke_dash_offset >= perimeter_without_gap {
                     stroke_dash_offset = perimeter_without_gap - 0.01;
                 }
             }
-        }
     }
     let stroke = match stroke_color {
         GetCircleStyleStrokeColor::String(s) => Some(s),
         GetCircleStyleStrokeColor::Record(_) => None,
     };
     CircleStyle {
-    stroke: stroke,
-    stroke_dash_array: format!("{}px ${}", perimeter_without_gap, perimeter),
-    stroke_dash_offset: stroke_dash_offset + step_space,
-    transform: format!("rotate({}deg)", rotate_deg + offset_deg + position_deg),
-    transform_origin: String::from("50% 50%"),
-    transition: String::from("stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s"),
-    fill_opacity: 0.0
-}
+      stroke,
+      stroke_dash_array: format!("{}px ${}", perimeter_without_gap, perimeter),
+      stroke_dash_offset: stroke_dash_offset + step_space,
+      transform: format!("rotate({}deg)", rotate_deg + offset_deg + position_deg),
+      transform_origin: String::from("50% 50%"),
+      transition: String::from("stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s"),
+      fill_opacity: 0.0
+    }
 }
 
 #[function_component(Circle)]
@@ -125,10 +119,7 @@ pub fn circle(props: &ProgressProps) -> Html {
     let gradient_id = format!("{}-gradient", merged_id);
     let radius = VIEW_BOX_SIZE / 2.0 - props.stroke_width.unwrap_or(1.0) / 2.0;
     let perimeter = std::f64::consts::PI * 2.0 * radius;
-    let gap_degree = match props.gap_degree {
-        None => 0,
-        Some(g) => g,
-    };
+    let gap_degree = props.gap_degree.unwrap_or(0);
     let rotate_deg = match gap_degree > 0 {
         true => 90 + gap_degree / 2,
         false => -90,
@@ -155,13 +146,13 @@ pub fn circle(props: &ProgressProps) -> Html {
             .clone()
             .unwrap_or(GapPositionType::Bottom),
         GetCircleStyleStrokeColor::String(
-            props.trail_color.clone().unwrap_or(String::from("#D9D9D9")),
+            props.trail_color.clone().unwrap_or_else(|| String::from("#D9D9D9")),
         ),
         props.stroke_linecap.clone(),
         props.stroke_width.unwrap_or(1.0),
         None,
     );
-    let mut percent_list =
+    let percent_list =
         percent_to_array(props.percent.clone().unwrap_or(Percent::NumberVec(vec![])));
     let stroke_color_list = stroke_color_to_array(
         props
@@ -179,13 +170,13 @@ pub fn circle(props: &ProgressProps) -> Html {
             }
         }
     }
-    let paths = use_transition_duration();
+    // let paths = use_transition_duration();
     let get_stoke_list = || {
         let mut stack_ptg = 0.0;
         let mut percent_list_cloned = percent_list.clone();
         percent_list_cloned.reverse();
         let html_list = percent_list_cloned.clone().iter().enumerate().map(|(index, ptg)| {
-          let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
+          let color = match (stroke_color_list.clone().get(index), stroke_color_list.last()) {
             (None, None) => None,
             (None, Some(c)) => Some(c.clone()),
             (Some(c), None) => Some(c.clone()),
@@ -206,26 +197,28 @@ pub fn circle(props: &ProgressProps) -> Html {
             rotate_deg as f64,
             gap_degree as f64,
             props.gap_position.clone().unwrap_or(GapPositionType::Bottom),
-            GetCircleStyleStrokeColor::String(color.clone().unwrap_or(BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
+            GetCircleStyleStrokeColor::String(color.unwrap_or_else(|| BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
             props.stroke_linecap.clone(),
-            props.stroke_width.clone().unwrap_or(1.0),
+            props.stroke_width.unwrap_or(1.0),
             None
           );
           stack_ptg += ptg;
-          let opacity = match ptg {
-            0.0 => "0",
-            _ => "1",
+          let opacity = if *ptg == 0.0 {
+            "0"
+          } 
+          else {
+            "1"
           };
           html!{
             <circle
               key={index}
-              class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+              class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or_else(|| String::from("rc-progress")))}
               r={radius.to_string()}
               cx={(VIEW_BOX_SIZE / 2.0).to_string()}
               cy={(VIEW_BOX_SIZE / 2.0).to_string()}
               stroke={stroke}
               stroke-linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
-              stroke-width={props.stroke_width.clone().unwrap_or(1.0).to_string()}
+              stroke-width={props.stroke_width.unwrap_or(1.0).to_string()}
               opacity={opacity}
               style={circle_style_for_stack.to_string()}
               // ref={(elem) => {
@@ -244,7 +237,7 @@ pub fn circle(props: &ProgressProps) -> Html {
 
     let get_step_stoke_list = || {
         let percent_list_cloned = percent_list.clone();
-        let current = step_count.clone() * percent_list_cloned[0] / 100.0;
+        let current = step_count * percent_list_cloned[0] / 100.0;
         let step_ptg = 100.0 / step_count;
         let mut stack_ptg = 0.0;
         let html_vec: Vec<Html> = vec![html! {}; step_count as usize];
@@ -256,7 +249,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                 let color = match index_as_f64 < current {
                     true => stroke_color_list[0].clone(),
                     false => BaseStrokeColorType::String(
-                        props.trail_color.clone().unwrap_or(String::from("#D9D9D9")),
+                        props.trail_color.clone().unwrap_or_else(||String::from("#D9D9D9")),
                     ),
                 };
                 let stroke = match color {
@@ -276,7 +269,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                         .unwrap_or(GapPositionType::Bottom),
                     GetCircleStyleStrokeColor::String(color.to_string()),
                     Some(StrokeLinecapType::Butt),
-                    props.stroke_width.clone().unwrap_or(1.0),
+                    props.stroke_width.unwrap_or(1.0),
                     Some(step_space),
                 );
                 stack_ptg += ((perimeter_without_gap - circle_style_for_stack.stroke_dash_offset
@@ -286,13 +279,13 @@ pub fn circle(props: &ProgressProps) -> Html {
                 html! {
                     <circle
                       key={index}
-                      class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+                      class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or_else(|| String::from("rc-progress")))}
                       r={radius.to_string()}
                       cx={(VIEW_BOX_SIZE / 2.0).to_string()}
                       cy={(VIEW_BOX_SIZE / 2.0).to_string()}
                       stroke={stroke}
                       // strokeLinecap={strokeLinecap}
-                      stroke-width={props.stroke_width.clone().unwrap_or(1.0).to_string()}
+                      stroke-width={props.stroke_width.unwrap_or(1.0).to_string()}
                       opacity={1}
                       style={circle_style_for_stack.to_string()}
                       //   ref={(elem) => {
@@ -344,7 +337,7 @@ pub fn circle(props: &ProgressProps) -> Html {
             }
         }
     };
-    let stroke_width = match (props.trail_width.clone(), props.stroke_width.clone()) {
+    let stroke_width = match (props.trail_width, props.stroke_width) {
         (None, None) => 1.0,
         (None, Some(s)) => s,
         (Some(t), None) => t,
@@ -354,21 +347,21 @@ pub fn circle(props: &ProgressProps) -> Html {
     let step_stroke_list = get_step_stoke_list();
     html! {
         <svg
-          class={format!("{}-circle {}", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")), props.class_name.clone().unwrap_or(String::from("")))}//classNames(`${prefixCls}-circle`, className)
+          class={format!("{}-circle {}", props.prefix_cls.clone().unwrap_or_else(|| String::from("rc-progress")), props.class_name.clone().unwrap_or_else(|| String::from("")))}//classNames(`${prefixCls}-circle`, className)
           viewBox={format!("0 0 {} {}", VIEW_BOX_SIZE, VIEW_BOX_SIZE)}
           style={props.style.clone()}
           id={props.id.clone()}
           transition={props.transition.clone()}
-          onclick={props.on_click.clone().unwrap_or(Callback::from(|_|{}))}
+          onclick={props.on_click.clone().unwrap_or_else(|| Callback::from(|_|{}))}
         >
           {linear_gradient}
           if step_count == 0.0 {
             <circle
-              class={format!("{}-circle-trail", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+              class={format!("{}-circle-trail", props.prefix_cls.clone().unwrap_or_else(|| String::from("rc-progress")))}
               r={radius.to_string()}
               cx={(VIEW_BOX_SIZE / 2.0).to_string()}
               cy={(VIEW_BOX_SIZE / 2.0).to_string()}
-              stroke={props.trail_color.clone().unwrap_or(String::from("#D9D9D9"))}
+              stroke={props.trail_color.clone().unwrap_or_else(|| String::from("#D9D9D9"))}
               stroke-linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
               stroke-width={stroke_width.to_string()}
               style={circle_style.to_string()}
