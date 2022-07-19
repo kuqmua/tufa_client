@@ -50,6 +50,12 @@ use crate::constants::HEADER_HEIGHT_PX;
 use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
 use crate::components::rc::rc_animate::util::motion::get_option_style;
+use crate::components::rc::rc_progress::circle::Circle;
+use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
+use crate::components::rc::rc_progress::interface::Percent;
+use crate::components::rc::rc_progress::interface::StrokeColorType;
+use crate::components::rc::rc_progress::line::Line;
+
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
@@ -187,8 +193,8 @@ pub fn home() -> Html {
       />
     };
     let inner_html_left = html! {
-      <div
-        style="
+          <div
+            style="
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -197,76 +203,96 @@ pub fn home() -> Html {
           width: 100%;
           padding: 10px;
         "
-      >
-      //  <Button
-      //   //  placeholder={String::from("Button")}
-      //   //  disabled={Some(())}
-      //    button_type={ButtonType::Primary}
-      //   //  shape={Shape::Circle}
-      //   icon={Some(icon_inner_html.clone())}
-      //   size={Size::Large}
-      //   // ghost={Some(())}
-      //   // block={Some(())}
-      //   // loading={LoadingProp::Bool(true)}
-      //  />
-      //  <Button
-      //  //  placeholder={String::from("Button")}
-      //  //  disabled={Some(())}
-      //   button_type={ButtonType::Primary}
-      //  //  shape={Shape::Circle}
-      //  icon={Some(g.clone())}
-      //  size={Size::Large}
-      //  // ghost={Some(())}
-      //  // block={Some(())}
-      //  // loading={LoadingProp::Bool(true)}
-      // />
-      // <Paragraph/>
-      // <List>
-      //   <Down/>
-      //   <Up/>
-      // </List>
+          >
+          //  <Button
+          //   //  placeholder={String::from("Button")}
+          //   //  disabled={Some(())}
+          //    button_type={ButtonType::Primary}
+          //   //  shape={Shape::Circle}
+          //   icon={Some(icon_inner_html.clone())}
+          //   size={Size::Large}
+          //   // ghost={Some(())}
+          //   // block={Some(())}
+          //   // loading={LoadingProp::Bool(true)}
+          //  />
+          //  <Button
+          //  //  placeholder={String::from("Button")}
+          //  //  disabled={Some(())}
+          //   button_type={ButtonType::Primary}
+          //  //  shape={Shape::Circle}
+          //  icon={Some(g.clone())}
+          //  size={Size::Large}
+          //  // ghost={Some(())}
+          //  // block={Some(())}
+          //  // loading={LoadingProp::Bool(true)}
+          // />
+          // <Paragraph/>
+          // <List>
+          //   <Down/>
+          //   <Up/>
+          // </List>
 
-      // <Alert
-      //   message={String::from("Error")}
-      //   description={String::from("This is an error message about copywriting.")}
-      //   type_handle={AlertType::Success}
-      //   closable={Some(())}
-      //   close_text={String::from("close text")}
-      //   show_icon={Some(())}
-      //   on_close={Callback::from(|_|{
-      //     log!("onclose");
-      //   })}
-      // />
-      // <Avatar
-      //   size={AvatarSize::Type(AvatarSizeType::Large)}
-      //   shape={AvatarShape::Square}
-      //   // content={AvatarContent::Image(AvatarImage{
-      //   //   src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
-      //   //   alt: String::from("avatar"),
-      //   //   on_error: Some(Callback::from(|_: yew::Event| {
-      //   //     log!("on_error");
-      //   //   }))
-      //   // })}
-      //   // content={AvatarContent::Icon(SvgType::User)}
-      // />
-      <Badge
-        count={Some(2)}
-        // overflow_count={Some(123)}
-        // color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
-        dot={Some(Some(BadgeStatus::Success(Some(String::from("kekw")))))}
-        // offset={Some(Offset{x:20, y:-20})}
-        // show_zero={Some(())}
-        // status={Some(BadgeStatus::Success)}
-        // title={Some(String::from("tittle"))}
-      >
-        // <a href="" class="head-example">
-        // </a>
-      </Badge>
-      // <BackTop></BackTop>
-      // <div style="background-color: red; width: 300px; height: 2500px;"/>
-      </div>
+          // <Alert
+          //   message={String::from("Error")}
+          //   description={String::from("This is an error message about copywriting.")}
+          //   type_handle={AlertType::Success}
+          //   closable={Some(())}
+          //   close_text={String::from("close text")}
+          //   show_icon={Some(())}
+          //   on_close={Callback::from(|_|{
+          //     log!("onclose");
+          //   })}
+          // />
+          // <Avatar
+          //   size={AvatarSize::Type(AvatarSizeType::Large)}
+          //   shape={AvatarShape::Square}
+          //   // content={AvatarContent::Image(AvatarImage{
+          //   //   src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
+          //   //   alt: String::from("avatar"),
+          //   //   on_error: Some(Callback::from(|_: yew::Event| {
+          //   //     log!("on_error");
+          //   //   }))
+          //   // })}
+          //   // content={AvatarContent::Icon(SvgType::User)}
+          // />
+          <Badge
+            count={Some(2)}
+            // overflow_count={Some(123)}
+            // color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
+            dot={Some(Some(BadgeStatus::Success(Some(String::from("kekw")))))}
+            // offset={Some(Offset{x:20, y:-20})}
+            // show_zero={Some(())}
+            // status={Some(BadgeStatus::Success)}
+            // title={Some(String::from("tittle"))}
+          >
+            // <a href="" class="head-example">
+            // </a>
+          </Badge>
+          // <BackTop></BackTop>
+          <Circle
+            percent={Some(Percent::Number(10.0))}
+            stroke_width={4.0}
+            stroke_color={
+              Some(StrokeColorType::BaseStrokeColorType(
+                    BaseStrokeColorType::String(String::from("#D3D3D3")),
+                ))
+            }/>
 
-    };
+    <svg class="rc-progress-circle" viewBox="0 0 100 100"><circle class="rc-progress-circle-trail" r="48" cx="50" cy="50" stroke="#D9D9D9" stroke-linecap="round" stroke-width="1" style="stroke: rgb(217, 217, 217); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 0; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity 0.3s ease 0s; fill-opacity: 0;"></circle><circle class="rc-progress-circle-path" r="48" cx="50" cy="50" stroke-linecap="round" stroke-width="4" opacity="1" style="stroke: rgb(211, 211, 211); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 243.274; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity ease 0s; fill-opacity: 0;"></circle></svg>
+
+
+            //       <Line
+            // percent={Some(Percent::Number(10.0))}
+            // stroke_width={4.0}
+            // stroke_color={
+            //   Some(StrokeColorType::BaseStrokeColorType(
+            //         BaseStrokeColorType::String(String::from("#D3D3D3")),
+            //     ))
+            // }/>
+          // <div style="background-color: red; width: 300px; height: 2500px;"/>
+          </div>
+
+        };
     let inner_html_right = html! {};
     let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
     let expander_style_clone_open_expand_more = expander_style.clone();
