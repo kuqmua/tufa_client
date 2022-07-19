@@ -290,7 +290,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         props.stroke_width.unwrap_or(1.0),
         None,
     );
-    let percent_list =
+    let mut percent_list =
         percent_to_array(props.percent.clone().unwrap_or(Percent::NumberVec(vec![])));
     let stroke_color_list = stroke_color_to_array(
         props
@@ -311,66 +311,71 @@ pub fn circle(props: &ProgressProps) -> Html {
     let paths = use_transition_duration();
     let get_stoke_list = || {
         let mut stack_ptg = 0.0;
-        percent_list.clone().iter().enumerate().map(|(index, ptg)| {
-        let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
+        let mut percent_list_cloned = percent_list.clone();
+        percent_list_cloned.reverse();
+        let html_list = percent_list_cloned.clone().iter().enumerate().map(|(index, ptg)| {
+          let color = match (stroke_color_list.clone().get(index), stroke_color_list.get(stroke_color_list.len() - 1)) {
             (None, None) => None,
             (None, Some(c)) => Some(c.clone()),
             (Some(c), None) => Some(c.clone()),
             (Some(c), Some(_)) => Some(c.clone()),
-        };
-        let stroke = match color.clone() {
+          };
+          let stroke = match color.clone() {
             None => None,
             Some(color_type) => match color_type {
                 BaseStrokeColorType::String(_) => None,
                 BaseStrokeColorType::Record(_) => Some(format!("url(#{})", gradient_id)),
             },
-        };
-        let circle_style_for_stack = get_circle_style(
-          perimeter,
-          perimeter_without_gap,
-          stack_ptg as f64,
-          *ptg as f64,
-          rotate_deg as f64,
-          gap_degree as f64,
-          props.gap_position.clone().unwrap_or(GapPositionType::Bottom),
-          GetCircleStyleStrokeColor::String(color.clone().unwrap_or(BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
-          props.stroke_linecap.clone(),
-          props.stroke_width.clone().unwrap_or(1.0),
-          None
-        );
-    stack_ptg += ptg;
-    let opacity = match ptg {
-        0.0 => "0",
-        _ => "1",
-    };
-    html!{
-        <circle
-            key={index}
-            class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
-            r={radius.to_string()}
-            cx={(VIEW_BOX_SIZE / 2.0).to_string()}
-            cy={(VIEW_BOX_SIZE / 2.0).to_string()}
-            stroke={stroke}
-            stroke_linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
-            stroke_width={props.stroke_width.clone().unwrap_or(1.0).to_string()}
-            opacity={opacity}
-            style={circle_style_for_stack.to_string()}
-            // ref={(elem) => {
-            //   // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
-            //   // React will call the ref callback with the DOM element when the component mounts,
-            //   // and call it with `null` when it unmounts.
-            //   // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
+          };
+          let circle_style_for_stack = get_circle_style(
+            perimeter,
+            perimeter_without_gap,
+            stack_ptg as f64,
+            *ptg as f64,
+            rotate_deg as f64,
+            gap_degree as f64,
+            props.gap_position.clone().unwrap_or(GapPositionType::Bottom),
+            GetCircleStyleStrokeColor::String(color.clone().unwrap_or(BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
+            props.stroke_linecap.clone(),
+            props.stroke_width.clone().unwrap_or(1.0),
+            None
+          );
+          stack_ptg += ptg;
+          let opacity = match ptg {
+            0.0 => "0",
+            _ => "1",
+          };
+          html!{
+            <circle
+              key={index}
+              class={format!("{}-circle-path", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+              r={radius.to_string()}
+              cx={(VIEW_BOX_SIZE / 2.0).to_string()}
+              cy={(VIEW_BOX_SIZE / 2.0).to_string()}
+              stroke={stroke}
+              stroke_linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
+              stroke_width={props.stroke_width.clone().unwrap_or(1.0).to_string()}
+              opacity={opacity}
+              style={circle_style_for_stack.to_string()}
+              // ref={(elem) => {
+              //   // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
+              //   // React will call the ref callback with the DOM element when the component mounts,
+              //   // and call it with `null` when it unmounts.
+              //   // Refs are guaranteed to be up-to-date before componentDidMount or componentDidUpdate fires.
 
-            //   paths[index] = elem;
-            // }}
-        />
-    }
-    }).collect::<Vec<Html>>().reverse();
+              //   paths[index] = elem;
+              // }}
+            />
+          }
+        }).collect::<Vec<Html>>();
+        html_list
     };
+
     let get_step_stoke_list = || {
         // only show the first percent when pass steps
         // let percent_list_cloned = percent_list.get(0);
-        let current = step_count.clone() * percent_list[0] / 100.0;
+        let percent_list_cloned = percent_list.clone();
+        let current = step_count.clone() * percent_list_cloned[0] / 100.0;
         //     const current = Math.round(stepCount * (percentList[0] / 100));
         let step_ptg = 100.0 / step_count;
         //     const stepPtg = 100 / stepCount;
@@ -455,12 +460,13 @@ pub fn circle(props: &ProgressProps) -> Html {
             html! {
                 <defs>
                   <linear_gradient
-                    id={gradient_id}
+                    id={gradient_id.clone()}
                     x1={String::from("100%")}
                     y1={String::from("0%")}
                     x2={String::from("0%")}
                     y2={String::from("0%")}
                   >
+                  {inner_content}
                     // {Object.keys(gradient)
                     //   .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
                     //   .map((key, index) => (
@@ -471,8 +477,16 @@ pub fn circle(props: &ProgressProps) -> Html {
             }
         }
     };
+    let stroke_width = match (props.trail_width.clone(), props.stroke_width.clone()) {
+        (None, None) => 1.0,
+        (None, Some(s)) => s,
+        (Some(t), None) => t,
+        (Some(t), Some(_)) => t,
+    };
+    let stroke_list = get_stoke_list();
+    let step_stroke_list = get_step_stoke_list();
     html! {
-            <svg
+        <svg
           class={format!("{}-circle {}", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")), props.class_name.clone().unwrap_or(String::from("")))}//classNames(`${prefixCls}-circle`, className)
           view_box={format!("0 0 {} {}", VIEW_BOX_SIZE, VIEW_BOX_SIZE)}
           style={props.style.clone()}
@@ -480,17 +494,34 @@ pub fn circle(props: &ProgressProps) -> Html {
           transition={props.transition.clone()}
           onclick={props.on_click.clone().unwrap_or(Callback::from(|_|{}))}
         >
-        //   {gradient && (
-        //     <defs>
-        //       <linearGradient id={gradientId} x1="100%" y1="0%" x2="0%" y2="0%">
-        //         {Object.keys(gradient)
-        //           .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
-        //           .map((key, index) => (
-        //             <stop key={index} offset={key} stopColor={gradient[key]} />
-        //           ))}
-        //       </linearGradient>
-        //     </defs>
-        //   )}
+          {linear_gradient}
+          //   {gradient && (
+          //     <defs>
+          //       <linearGradient id={gradientId} x1="100%" y1="0%" x2="0%" y2="0%">
+          //         {Object.keys(gradient)
+          //           .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
+          //           .map((key, index) => (
+          //             <stop key={index} offset={key} stopColor={gradient[key]} />
+          //           ))}
+          //       </linearGradient>
+          //     </defs>
+          //   )}
+          if step_count == 0.0 {
+            <circle
+              class={format!("{}-circle-trail", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
+              r={radius.to_string()}
+              cx={(VIEW_BOX_SIZE / 2.0).to_string()}
+              cy={(VIEW_BOX_SIZE / 2.0).to_string()}
+              stroke={props.trail_color.clone().unwrap_or(String::from("#D9D9D9"))}
+              stroke_linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
+              stroke_width={stroke_width.to_string()}
+              style={circle_style.to_string()}
+            />
+            {stroke_list}
+          }
+          else{
+            {step_stroke_list}
+          }
         //   {!stepCount && (
         //     <circle
         //       className={`${prefixCls}-circle-trail`}

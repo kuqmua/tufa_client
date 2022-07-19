@@ -24,7 +24,7 @@ pub enum Steps {
 pub struct ProgressProps {
     pub id: Option<String>,
     pub stroke_width: Option<f64>,
-    pub trail_width: Option<i32>,
+    pub trail_width: Option<f64>,
     pub class_name: Option<String>,
     pub percent: Option<Percent>,
     pub stroke_color: Option<StrokeColorType>,
@@ -44,7 +44,7 @@ impl Default for ProgressProps {
         ProgressProps {
             id: None,
             stroke_width: Some(1.0),
-            trail_width: Some(1),
+            trail_width: Some(1.0),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0.0)),
             stroke_color: Some(StrokeColorType::BaseStrokeColorType(
@@ -68,7 +68,7 @@ impl ProgressProps {
         ProgressProps {
             id: None,
             stroke_width: Some(1.0),
-            trail_width: Some(1),
+            trail_width: Some(1.0),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0.0)),
             stroke_color: Some(StrokeColorType::BaseStrokeColorType(
