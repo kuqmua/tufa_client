@@ -104,7 +104,7 @@ pub fn get_circle_style(
     };
     CircleStyle {
       stroke,
-      stroke_dash_array: format!("{}px ${}", perimeter_without_gap, perimeter),
+      stroke_dash_array: format!("{}px {}", perimeter_without_gap, perimeter),
       stroke_dash_offset: stroke_dash_offset + step_space,
       transform: format!("rotate({}deg)", rotate_deg + offset_deg + position_deg),
       transform_origin: String::from("50% 50%"),

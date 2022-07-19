@@ -270,13 +270,15 @@ pub fn home() -> Html {
       </Badge>
       // <BackTop></BackTop>
       <Circle
-        percent={Some(Percent::Number(10.0))}
-        stroke_width={1.0}
+        percent={Some(Percent::Number(20.0))}
+        stroke_width={4.0}
         stroke_color={
           Some(StrokeColorType::BaseStrokeColorType(
                 BaseStrokeColorType::String(String::from("#D3D3D3")),
             ))
-        }/>
+        }
+        trail_color={Some(String::from("#D9D9D9"))}
+      />
 
       <svg class="rc-progress-circle" viewBox="0 0 100 100">
         <circle
