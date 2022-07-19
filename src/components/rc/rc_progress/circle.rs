@@ -1,28 +1,18 @@
-use crate::components::rc::rc_progress::interface::GapPositionType;
-use std::collections::HashMap;
-use yew::Html;
-use yew::{function_component, html};
-
-// import * as React from 'react';
-// import classNames from 'classnames';
+use super::interface::{BaseStrokeColorType, StrokeColorType, StrokeLinecapType};
 use crate::components::rc::rc_progress::common::use_transition_duration;
-// import { defaultProps, useTransitionDuration } from './common';
 use crate::components::rc::rc_progress::hooks::use_id::use_id;
+use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
-
-use super::interface::{BaseStrokeColorType, StrokeColorType, StrokeLinecapType};
-// import type { ProgressProps } from './interface';
-// import useId from './hooks/useId';
+use std::collections::HashMap;
+use std::fmt;
 use yew::Callback;
+use yew::Html;
+use yew::{function_component, html};
 
 pub fn strip_percent_to_number(percent: String) -> String {
     percent.replace("%", "")
 }
-
-// function stripPercentToNumber(percent: string) {
-//   return +percent.replace('%', '');
-// }
 
 pub fn percent_to_array(value: Percent) -> Vec<f64> {
     match value {
@@ -38,13 +28,7 @@ pub fn stroke_color_to_array(value: StrokeColorType) -> Vec<BaseStrokeColorType>
     }
 }
 
-// function toArray<T>(value: T | T[]): T[] {
-//   const mergedValue = value ?? [];
-//   return Array.isArray(mergedValue) ? mergedValue : [mergedValue];
-// }
-
 pub const VIEW_BOX_SIZE: f64 = 100.0;
-// const VIEW_BOX_SIZE = 100;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum GetCircleStyleStrokeColor {
@@ -63,18 +47,11 @@ pub struct CircleStyle {
     pub fill_opacity: f64,
 }
 
-impl CircleStyle {
-    pub fn to_string(&self) -> String {
-        format!(
-            "
-          stroke: {};
-          stroke-dasharray: {};
-          stroke-dashoffset: {};
-          transform: {};
-          transform-origin: {};
-          transition: {};
-          fill-opacity: {};
-        ",
+impl fmt::Display for CircleStyle {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f, 
+            "stroke: {}; stroke-dasharray: {}; stroke-dashoffset: {}; transform: {}; transform-origin: {}; transition: {}; fill-opacity: {};",
             self.stroke.clone().unwrap_or(String::from("")),
             self.stroke_dash_array,
             self.stroke_dash_offset,
@@ -116,20 +93,7 @@ pub fn get_circle_style(
             GapPositionType::Left => -90.0,
         }
     };
-
-    //   const positionDeg =
-    //     gapDegree === 0
-    //       ? 0
-    //       : {
-    //           bottom: 0,
-    //           top: 180,
-    //           left: 90,
-    //           right: -90,
-    //         }[gapPosition];
-
     let mut stroke_dash_offset = ((100.0 - percent) / 100.0) * perimeter_without_gap;
-    //   let strokeDashoffset = ((100 - percent) / 100) * perimeterWithoutGap;
-
     if let Some(stroke_linecap_type) = stroke_linecap {
         if let StrokeLinecapType::Round = stroke_linecap_type {
             if percent != 100.0 {
@@ -140,21 +104,10 @@ pub fn get_circle_style(
             }
         }
     }
-
-    //   // Fix percent accuracy when strokeLinecap is round
-    //   // https://github.com/ant-design/ant-design/issues/35009
-    //   if (strokeLinecap === 'round' && percent !== 100) {
-    //     strokeDashoffset += strokeWidth / 2;
-    //     // when percent is small enough (<= 1%), keep smallest value to avoid it's disappearance
-    //     if (strokeDashoffset >= perimeterWithoutGap) {
-    //       strokeDashoffset = perimeterWithoutGap - 0.01;
-    //     }
-    //   }
     let stroke = match stroke_color {
         GetCircleStyleStrokeColor::String(s) => Some(s),
         GetCircleStyleStrokeColor::Record(_) => None,
     };
-
     CircleStyle {
     stroke: stroke,
     stroke_dash_array: format!("{}px ${}", perimeter_without_gap, perimeter),
@@ -164,91 +117,14 @@ pub fn get_circle_style(
     transition: String::from("stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s"),
     fill_opacity: 0.0
 }
-    //   return {
-    //     stroke: typeof strokeColor === 'string' ? strokeColor : undefined,
-    //     strokeDasharray: `${perimeterWithoutGap}px ${perimeter}`,
-    //     strokeDashoffset: strokeDashoffset + stepSpace,
-    //     transform: `rotate(${rotateDeg + offsetDeg + positionDeg}deg)`,
-    //     transformOrigin: '50% 50%',
-    //     transition:
-    //       'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s',
-    //     fillOpacity: 0,
-    //   };
 }
-
-// const getCircleStyle = (
-//   perimeter: number,
-//   perimeterWithoutGap: number,
-//   offset: number,
-//   percent: number,
-//   rotateDeg: number,
-//   gapDegree,
-//   gapPosition: ProgressProps['gapPosition'] | undefined,
-//   strokeColor: string | Record<string, string>,
-//   strokeLinecap: ProgressProps['strokeLinecap'],
-//   strokeWidth,
-//   stepSpace = 0,
-// ) => {
-//   const offsetDeg = (offset / 100) * 360 * ((360 - gapDegree) / 360);
-//   const positionDeg =
-//     gapDegree === 0
-//       ? 0
-//       : {
-//           bottom: 0,
-//           top: 180,
-//           left: 90,
-//           right: -90,
-//         }[gapPosition];
-
-//   let strokeDashoffset = ((100 - percent) / 100) * perimeterWithoutGap;
-//   // Fix percent accuracy when strokeLinecap is round
-//   // https://github.com/ant-design/ant-design/issues/35009
-//   if (strokeLinecap === 'round' && percent !== 100) {
-//     strokeDashoffset += strokeWidth / 2;
-//     // when percent is small enough (<= 1%), keep smallest value to avoid it's disappearance
-//     if (strokeDashoffset >= perimeterWithoutGap) {
-//       strokeDashoffset = perimeterWithoutGap - 0.01;
-//     }
-//   }
-
-//   return {
-//     stroke: typeof strokeColor === 'string' ? strokeColor : undefined,
-//     strokeDasharray: `${perimeterWithoutGap}px ${perimeter}`,
-//     strokeDashoffset: strokeDashoffset + stepSpace,
-//     transform: `rotate(${rotateDeg + offsetDeg + positionDeg}deg)`,
-//     transformOrigin: '50% 50%',
-//     transition:
-//       'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s',
-//     fillOpacity: 0,
-//   };
-// };
 
 #[function_component(Circle)]
 pub fn circle(props: &ProgressProps) -> Html {
-    // ({
-    //     id,
-    //     prefixCls,
-    //     steps,
-    //     strokeWidth,
-    //     trailWidth,
-    //     gapDegree = 0,
-    //     gapPosition,
-    //     trailColor,
-    //     strokeLinecap,
-    //     style,
-    //     className,
-    //     strokeColor,
-    //     percent,
-    //     ...restProps
-    //   }) => {
     let merged_id = use_id(props.id.clone());
-    //   const mergedId = useId(id);
     let gradient_id = format!("{}-gradient", merged_id);
-    //   const gradientId = `${mergedId}-gradient`;
     let radius = VIEW_BOX_SIZE / 2.0 - props.stroke_width.unwrap_or(1.0) / 2.0;
-    //   const radius = VIEW_BOX_SIZE / 2 - strokeWidth / 2;
     let perimeter = std::f64::consts::PI * 2.0 * radius;
-    //   const perimeter = Math.PI * 2 * radius;
     let gap_degree = match props.gap_degree {
         None => 0,
         Some(g) => g,
@@ -257,9 +133,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         true => 90 + gap_degree / 2,
         false => -90,
     };
-    //   const rotateDeg = gapDegree > 0 ? 90 + gapDegree / 2 : -90;
     let perimeter_without_gap = perimeter * ((360.0 - gap_degree as f64) / 360.0);
-    //   const perimeterWithoutGap = perimeter * ((360 - gapDegree) / 360);
     let (step_count, step_space) = match props.steps.clone() {
         None => (0.0, 0.0),
         Some(steps_type) => match steps_type {
@@ -269,9 +143,6 @@ pub fn circle(props: &ProgressProps) -> Html {
             }
         },
     };
-    //   const { count: stepCount, space: stepSpace } =
-    //     typeof steps === 'object' ? steps : { count: steps, space: 2 };
-
     let circle_style = get_circle_style(
         perimeter,
         perimeter_without_gap,
@@ -372,13 +243,9 @@ pub fn circle(props: &ProgressProps) -> Html {
     };
 
     let get_step_stoke_list = || {
-        // only show the first percent when pass steps
-        // let percent_list_cloned = percent_list.get(0);
         let percent_list_cloned = percent_list.clone();
         let current = step_count.clone() * percent_list_cloned[0] / 100.0;
-        //     const current = Math.round(stepCount * (percentList[0] / 100));
         let step_ptg = 100.0 / step_count;
-        //     const stepPtg = 100 / stepCount;
         let mut stack_ptg = 0.0;
         let html_vec: Vec<Html> = vec![html! {}; step_count as usize];
         let bbn = html_vec
@@ -495,17 +362,6 @@ pub fn circle(props: &ProgressProps) -> Html {
           onclick={props.on_click.clone().unwrap_or(Callback::from(|_|{}))}
         >
           {linear_gradient}
-          //   {gradient && (
-          //     <defs>
-          //       <linearGradient id={gradientId} x1="100%" y1="0%" x2="0%" y2="0%">
-          //         {Object.keys(gradient)
-          //           .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
-          //           .map((key, index) => (
-          //             <stop key={index} offset={key} stopColor={gradient[key]} />
-          //           ))}
-          //       </linearGradient>
-          //     </defs>
-          //   )}
           if step_count == 0.0 {
             <circle
               class={format!("{}-circle-trail", props.prefix_cls.clone().unwrap_or(String::from("rc-progress")))}
@@ -522,19 +378,6 @@ pub fn circle(props: &ProgressProps) -> Html {
           else{
             {step_stroke_list}
           }
-        //   {!stepCount && (
-        //     <circle
-        //       className={`${prefixCls}-circle-trail`}
-        //       r={radius}
-        //       cx={VIEW_BOX_SIZE / 2}
-        //       cy={VIEW_BOX_SIZE / 2}
-        //       stroke={trailColor}
-        //       strokeLinecap={strokeLinecap}
-        //       strokeWidth={trailWidth || strokeWidth}
-        //       style={circleStyle}
-        //     />
-        //   )}
-        //   {stepCount ? getStepStokeList() : getStokeList()}
         </svg>
     }
 }
