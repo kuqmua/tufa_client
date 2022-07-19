@@ -270,7 +270,7 @@ pub fn home() -> Html {
       </Badge>
       // <BackTop></BackTop>
       <Circle
-        percent={Some(Percent::Number(20.0))}
+        percent={Some(Percent::Number(25.0))}
         stroke_width={4.0}
         stroke_color={
           Some(StrokeColorType::BaseStrokeColorType(
@@ -280,7 +280,10 @@ pub fn home() -> Html {
         trail_color={Some(String::from("#D9D9D9"))}
       />
 
-      <svg class="rc-progress-circle" viewBox="0 0 100 100">
+      <svg
+        class="rc-progress-circle"
+        viewBox="0 0 100 100"
+      >
         <circle
           class="rc-progress-circle-trail"
           r="48"
@@ -300,7 +303,7 @@ pub fn home() -> Html {
           stroke-linecap="round"
           stroke-width="4"
           opacity="1"
-          style="stroke: rgb(211, 211, 211); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 243.274; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity ease 0s; fill-opacity: 0;"
+          style="stroke: rgb(211, 211, 211); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 228.195; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity ease 0s; fill-opacity: 0;"
         >
         </circle>
       </svg>

@@ -363,7 +363,7 @@ pub fn circle(props: &ProgressProps) -> Html {
               cy={(VIEW_BOX_SIZE / 2.0).to_string()}
               stroke={props.trail_color.clone().unwrap_or_else(|| String::from("#D9D9D9"))}
               stroke-linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
-              stroke-width={stroke_width.to_string()}
+            //   stroke-width={stroke_width.to_string()}//something diferent here
               style={circle_style.to_string()}
             />
             {stroke_list}
