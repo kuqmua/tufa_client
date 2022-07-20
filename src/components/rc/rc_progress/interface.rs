@@ -1,4 +1,7 @@
-use std::collections::HashMap;
+use std::{
+    collections::HashMap,
+    fmt::{self, Display},
+};
 use web_sys::MouseEvent;
 use yew::{Callback, Properties};
 
@@ -110,11 +113,11 @@ pub enum BaseStrokeColorType {
     Record(HashMap<String, String>),
 }
 
-impl BaseStrokeColorType {
-    pub fn to_string(&self) -> String {
+impl Display for BaseStrokeColorType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            BaseStrokeColorType::String(s) => s.clone(),
-            BaseStrokeColorType::Record(_) => String::from(""), //todo
+            BaseStrokeColorType::String(s) => write!(f, "{}", s),
+            BaseStrokeColorType::Record(_r) => write!(f, ""), //todo
         }
     }
 }
