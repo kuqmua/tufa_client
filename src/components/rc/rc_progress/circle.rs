@@ -4,7 +4,6 @@ use crate::components::rc::rc_progress::hooks::use_id::use_id;
 use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
-use std::collections::HashMap;
 use std::fmt;
 use yew::Callback;
 use yew::Html;
