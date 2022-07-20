@@ -294,7 +294,6 @@ pub fn circle(props: &ProgressProps) -> Html {
                       cx={(VIEW_BOX_SIZE / 2.0).to_string()}
                       cy={(VIEW_BOX_SIZE / 2.0).to_string()}
                       stroke={stroke}
-                      // strokeLinecap={strokeLinecap}
                       stroke-width={stroke_width.to_string()}
                       opacity={1}
                       style={circle_style_for_stack.to_string()}
@@ -314,7 +313,8 @@ pub fn circle(props: &ProgressProps) -> Html {
                 .iter()
                 .map(|(key, value)| (key.clone(), value.clone()))
                 .collect::<Vec<(String, String)>>()
-                // .sort_by(|a, b| strip_percent_to_number(a) - strip_percent_to_number(b))
+                //todo
+                // .sort_by(|a, b| strip_percent_to_number(a) - strip_percent_to_number(b)) 
                 .iter()
                 .enumerate()
                 .map(|(index, (key, value))| {
@@ -337,11 +337,6 @@ pub fn circle(props: &ProgressProps) -> Html {
                     y2={String::from("0%")}
                   >
                   {inner_content}
-                    // {Object.keys(gradient)
-                    //   .sort((a, b) => stripPercentToNumber(a) - stripPercentToNumber(b))
-                    //   .map((key, index) => (
-                    //     <stop key={index} offset={key} stopColor={gradient[key]} />
-                    //   ))}
                   </linear_gradient>
                 </defs>
             }

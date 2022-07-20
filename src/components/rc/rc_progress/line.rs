@@ -65,14 +65,14 @@ pub fn line(props: &ProgressProps) -> Html {
     let center = stroke_width / 2.0;
     let right = 100.0 - stroke_width / 2.0;
     let first_part = match stroke_linecap {
-            super::interface::StrokeLinecapType::Round => String::from("center"),
-            super::interface::StrokeLinecapType::Butt => String::from("0"),
-            super::interface::StrokeLinecapType::Square => String::from("0"),
+            super::interface::StrokeLinecapType::Round => center,
+            super::interface::StrokeLinecapType::Butt => 0.0,
+            super::interface::StrokeLinecapType::Square => 0.0,
         };
     let second_part = match stroke_linecap {
-            super::interface::StrokeLinecapType::Round => String::from("right"),
-            super::interface::StrokeLinecapType::Butt => String::from("100"),
-            super::interface::StrokeLinecapType::Square => String::from("100"),
+            super::interface::StrokeLinecapType::Round => right,
+            super::interface::StrokeLinecapType::Butt => 100.0,
+            super::interface::StrokeLinecapType::Square => 100.0,
         };
     let path_string = format!("M {}{} L {}{}", first_part, center, second_part, center);
     let view_box_string = format!("0 0 100 {}", stroke_width);
