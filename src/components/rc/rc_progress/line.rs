@@ -100,7 +100,7 @@ pub fn line(props: &ProgressProps) -> Html {
                             1.0 - stroke_width / 100.0
                         },
                     };
-        let stroke_dash_array =  format!("{}px, 100px", ptg as f64 * dash_percent);
+        let stroke_dash_array =  format!("{}px, 100px", ptg * dash_percent);
         let stroke_dash_offset = format!("-{}px", stack_ptg);
         let transition = match props.transition.clone() {
             None => String::from("stroke-dashoffset 0.3s ease 0s, stroke-dasharray .3s ease 0s, stroke 0.3s linear"),

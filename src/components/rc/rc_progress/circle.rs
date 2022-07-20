@@ -148,7 +148,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         true => 90.0 + gap_degree / 2.0,
         false => -90.0,
     };
-    let perimeter_without_gap = perimeter * ((360.0 - gap_degree as f64) / 360.0);
+    let perimeter_without_gap = perimeter * (360.0 - gap_degree / 360.0);
     let (step_count, step_space) = match props.steps.clone() {
         None => (0.0, 0.0),
         Some(steps_type) => match steps_type {
@@ -163,8 +163,8 @@ pub fn circle(props: &ProgressProps) -> Html {
         perimeter_without_gap,
         0.0,
         100.0,
-        rotate_deg as f64,
-        gap_degree as f64,
+        rotate_deg,
+        gap_degree,
         gap_position.clone(),
         trail_color.clone(),
         stroke_linecap.clone(),
@@ -207,10 +207,10 @@ pub fn circle(props: &ProgressProps) -> Html {
           let circle_style_for_stack = get_circle_style(
             perimeter,
             perimeter_without_gap,
-            stack_ptg as f64,
-            *ptg as f64,
-            rotate_deg as f64,
-            gap_degree as f64,
+            stack_ptg,
+            *ptg,
+            rotate_deg,
+            gap_degree,
             gap_position.clone(),
             color_handle,
             stroke_linecap.clone(),
@@ -272,10 +272,10 @@ pub fn circle(props: &ProgressProps) -> Html {
                 let circle_style_for_stack = get_circle_style(
                     perimeter,
                     perimeter_without_gap,
-                    stack_ptg as f64,
-                    step_ptg as f64,
-                    rotate_deg as f64,
-                    gap_degree as f64,
+                    stack_ptg,
+                    step_ptg,
+                    rotate_deg,
+                    gap_degree,
                     gap_position.clone(),
                     trail_color.clone(),
                     StrokeLinecapType::Butt,
