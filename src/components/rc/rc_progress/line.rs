@@ -2,21 +2,50 @@ use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html};
 // use crate::components::rc::rc_progress::common::use_transition_duration;
 use crate::components::rc::rc_progress::interface::ProgressProps;
+use crate::components::rc::rc_progress::interface::StrokeColorType;
+use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
+use super::interface::Percent;
+use super::interface::StrokeLinecapType;
 
 #[function_component(Line)]
 pub fn line(props: &ProgressProps) -> Html {
+    let class_name = match props.class_name.clone() {
+      Some(cn) => cn,
+      None => String::from(""),
+    };
+    let percent = match props.percent.clone() {
+      Some(p) => p,
+      None => Percent::Number(0.0),
+    };
+    let prefix_cls = match props.prefix_cls.clone() {
+      Some(pc) => pc,
+      None => String::from("rc-progress"),
+    };
+    let stroke_color = match props.stroke_color.clone() {
+      Some(sc) => sc,
+      None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5"))),
+    };
+    let stroke_linecap = match props.stroke_linecap.clone() {
+      Some(sl) => sl,
+      None => StrokeLinecapType::Round,
+    };
+    let stroke_width = props.stroke_width.unwrap_or(1.0);
+    let style = match props.style.clone() {
+      Some(s) => s,
+      None => String::from(""),
+    };
+    let trail_color = match props.trail_color.clone() {
+      Some(tc) => tc,
+      None => String::from("#D9D9D9"),
+    };
+    let trail_width = props.trail_width.unwrap_or(1.0);
     let mut default_props = props.default();
     default_props.gap_position = None;
-    let percent_list = match props.percent.clone() {
-        None => Vec::new(),
-        Some(percent_value) => match percent_value {
+    let percent_list = match percent {
             super::interface::Percent::Number(n) => vec![n],
             super::interface::Percent::NumberVec(vec) => vec,
-        },
-    };
-    let stroke_color_list = match props.stroke_color.clone() {
-        None => Vec::new(),
-        Some(stroke_color_value) => match stroke_color_value {
+        };
+    let stroke_color_list = match stroke_color {
             super::interface::StrokeColorType::BaseStrokeColorType(base_stroke_color_type) => match base_stroke_color_type {
                super::interface::BaseStrokeColorType::String(s) => vec![s],
                super::interface::BaseStrokeColorType::Record(_) => vec![],//todo!
@@ -31,29 +60,22 @@ pub fn line(props: &ProgressProps) -> Html {
                 });
                 v
             },
-        },
-    };
+        };
     // let paths = use_transition_duration();
-    let center = props.stroke_width.unwrap_or(1.0) / 2.0;//todo maybe make different default func
-    // let right = 100.0 - props.stroke_width.unwrap_or(1.0) / 2.0;//todo maybe make different default func
-    let first_part = match props.stroke_linecap.clone() {
-        None => String::from("0"),//not sure about what
-        Some(stroke_linecap_value) => match stroke_linecap_value {
+    let center = stroke_width / 2.0;
+    let right = 100.0 - stroke_width / 2.0;
+    let first_part = match stroke_linecap {
             super::interface::StrokeLinecapType::Round => String::from("center"),
             super::interface::StrokeLinecapType::Butt => String::from("0"),
             super::interface::StrokeLinecapType::Square => String::from("0"),
-        },
-    };
-    let second_part = match props.stroke_linecap.clone() {
-        None => String::from("100"),//not sure about what
-        Some(stroke_linecap_value) => match stroke_linecap_value {
+        };
+    let second_part = match stroke_linecap {
             super::interface::StrokeLinecapType::Round => String::from("right"),
             super::interface::StrokeLinecapType::Butt => String::from("100"),
             super::interface::StrokeLinecapType::Square => String::from("100"),
-        },
-    };
+        };
     let path_string = format!("M {}{} L {}{}", first_part, center, second_part, center);
-    let view_box_string = format!("0 0 100 {}", props.stroke_width.unwrap_or(1.0));//todo maybe make different default func
+    let view_box_string = format!("0 0 100 {}", stroke_width);
     let mut stack_ptg = 0.0;
     let gap_position = match props.clone().gap_position {
         None => String::from("bottom"),
@@ -63,24 +85,11 @@ pub fn line(props: &ProgressProps) -> Html {
         None => Callback::from(|_: MouseEvent|{}),
         Some(oc) => oc,
     };
-    let stroke_width = match (props.clone().trail_width, props.clone().stroke_width) {
-        (None, None) => String::from("1"),
-        (None, Some(s)) => s.to_string(),
-        (Some(t), None) => t.to_string(),
-        (Some(t), Some(_s)) => t.to_string(),//coz its first in ts code
-    };
-    let stroke_linecap = match props.clone().stroke_linecap {
-        None => String::from("round"),
-        Some(stroke_linecap_type) => stroke_linecap_type.get_value(),
-    };
     let percent_list_mapped = percent_list.into_iter().enumerate().map(|(index, ptg)| {
-        let dash_percent = match props.clone().stroke_linecap {
-                None => {
-                    1.0
-                },
-                Some(stroke_linecap_type) => {
-                    let stroke_width = props.clone().stroke_width.unwrap_or(1.0);
-                    match stroke_linecap_type {
+        let stroke_width = props.clone().stroke_width.unwrap_or(1.0);
+        let dash_percent = 
+                    
+                    match stroke_linecap {
                         super::interface::StrokeLinecapType::Round => {
                             1.0 - stroke_width / 100.0
                         },
@@ -90,9 +99,7 @@ pub fn line(props: &ProgressProps) -> Html {
                         super::interface::StrokeLinecapType::Square => {
                             1.0 - stroke_width / 100.0
                         },
-                    }
-            },
-        };
+                    };
         let stroke_dash_array =  format!("{}px, 100px", ptg as f64 * dash_percent);
         let stroke_dash_offset = format!("-{}px", stack_ptg);
         let transition = match props.transition.clone() {
@@ -122,11 +129,11 @@ pub fn line(props: &ProgressProps) -> Html {
         html!{
             <path
                 key={index}
-                class={format!("{}-line-path", props.prefix_cls.clone().unwrap_or_else(|| String::from("rc-progress")))}//default
+                class={format!("{}-line-path", prefix_cls)}
                 d={path_string.clone()}
-                stroke_linecap={stroke_linecap.clone()}
+                stroke_linecap={stroke_linecap.clone().get_value()}
                 stroke={color.clone()}
-                stroke_width={stroke_width.clone()}
+                stroke_width={stroke_width.clone().to_string()}
                 fill_opacity="0"
                 // ref={|elem} -> {
                 //   // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
@@ -140,25 +147,37 @@ pub fn line(props: &ProgressProps) -> Html {
             />
         }
     }).collect::<Vec<Html>>();
+    let stroke_width_common = if trail_width == 0.0 && stroke_width == 0.0 {
+        String::from("0")
+    }
+    else if stroke_width == 0.0{
+        trail_width.to_string()
+    }
+    else if trail_width == 0.0 {
+        stroke_width.to_string()
+    }
+    else {
+        trail_width.to_string()
+    };
     html! {
         <svg
-          class={format!("{}-line", props.clone().prefix_cls.unwrap_or_else(|| String::from("rc-progress")))}//classNames(`${prefixCls}-line`, className)
+          class={format!("{}-line {}", prefix_cls, class_name)}
           viewBox={view_box_string}
-          preserve_aspect_ratio="none"
-          style={props.clone().style.unwrap_or_else(|| String::from(""))}
+          preserve-aspect-ratio="none"
+          style={style}
           id={props.clone().id}
         //   gap_degree={props.clone().gap_degree}//todo
-          gap_position={gap_position}
+          gap-position={gap_position}
           onclick={on_click}
         //   steps={props.clone().steps}//todo
         >
           <path
-            class={format!("{}-line-trail", props.clone().prefix_cls.unwrap_or_else(|| String::from("rc-progress")))}
+            class={format!("{}-line-trail", prefix_cls)}
             d={path_string}
-            stroke_linecap={stroke_linecap}
-            stroke={props.clone().trail_color.unwrap_or_else(|| String::from("#D9D9D9"))}
-            stroke_width={stroke_width}
-            fill_opacity="0"
+            stroke_linecap={stroke_linecap.clone().get_value()}
+            stroke={trail_color}
+            stroke-width={stroke_width_common}
+            fill-opacity="0"
           />
           {percent_list_mapped}
         </svg>
