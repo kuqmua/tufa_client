@@ -4,11 +4,11 @@ use crate::components::rc::rc_progress::hooks::use_id::use_id;
 use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
+use gloo::console::log;
 use std::fmt;
 use yew::Callback;
 use yew::Html;
 use yew::{function_component, html};
-use gloo::console::log;
 
 pub fn strip_percent_to_number(percent: String) -> String {
     percent.replace('%', "")
@@ -85,12 +85,12 @@ pub fn get_circle_style(
     };
     let mut stroke_dash_offset = ((100.0 - percent) / 100.0) * perimeter_without_gap;
     if let StrokeLinecapType::Round = stroke_linecap {
-            if percent != 100.0 {
-                stroke_dash_offset += stroke_width / 2.0;
-                if stroke_dash_offset >= perimeter_without_gap {
-                    stroke_dash_offset = perimeter_without_gap - 0.01;
-                }
+        if percent != 100.0 {
+            stroke_dash_offset += stroke_width / 2.0;
+            if stroke_dash_offset >= perimeter_without_gap {
+                stroke_dash_offset = perimeter_without_gap - 0.01;
             }
+        }
     }
     CircleStyle {
       stroke: Some(stroke_color),
@@ -106,39 +106,41 @@ pub fn get_circle_style(
 #[function_component(Circle)]
 pub fn circle(props: &ProgressProps) -> Html {
     let class_name = match props.class_name.clone() {
-      Some(cn) => cn,
-      None => String::from(""),
+        Some(cn) => cn,
+        None => String::from(""),
     };
     let percent = match props.percent.clone() {
-      Some(p) => p,
-      None => Percent::Number(0.0),
+        Some(p) => p,
+        None => Percent::Number(0.0),
     };
     let prefix_cls = match props.prefix_cls.clone() {
-      Some(pc) => pc,
-      None => String::from("rc-progress"),
+        Some(pc) => pc,
+        None => String::from("rc-progress"),
     };
     let stroke_color = match props.stroke_color.clone() {
-      Some(sc) => sc,
-      None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5"))),
+        Some(sc) => sc,
+        None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from(
+            "#2db7f5",
+        ))),
     };
     let stroke_linecap = match props.stroke_linecap.clone() {
-      Some(sl) => sl,
-      None => StrokeLinecapType::Round,
+        Some(sl) => sl,
+        None => StrokeLinecapType::Round,
     };
     let stroke_width = props.stroke_width.unwrap_or(1.0);
     let style = match props.style.clone() {
-      Some(s) => s,
-      None => String::from(""),
+        Some(s) => s,
+        None => String::from(""),
     };
     let trail_color = match props.trail_color.clone() {
-      Some(tc) => tc,
-      None => String::from("#D9D9D9"),
+        Some(tc) => tc,
+        None => String::from("#D9D9D9"),
     };
     let gap_degree = props.gap_degree.unwrap_or(0.0);
     let trail_width = props.trail_width.unwrap_or(1.0);
     let gap_position = match props.gap_position.clone() {
-      Some(gp) => gp,
-      None => GapPositionType::Bottom,
+        Some(gp) => gp,
+        None => GapPositionType::Bottom,
     };
     let merged_id = use_id(props.id.clone());
     let gradient_id = format!("{}-gradient", merged_id);
@@ -171,8 +173,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         stroke_width,
         None,
     );
-    let percent_list =
-        percent_to_array(percent);
+    let percent_list = percent_to_array(percent);
     let stroke_color_list = stroke_color_to_array(stroke_color);
     let mut gradient = None;
     for color in stroke_color_list.clone() {
@@ -314,7 +315,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                 .map(|(key, value)| (key.clone(), value.clone()))
                 .collect::<Vec<(String, String)>>()
                 //todo
-                // .sort_by(|a, b| strip_percent_to_number(a) - strip_percent_to_number(b)) 
+                // .sort_by(|a, b| strip_percent_to_number(a) - strip_percent_to_number(b))
                 .iter()
                 .enumerate()
                 .map(|(index, (key, value))| {
@@ -346,14 +347,11 @@ pub fn circle(props: &ProgressProps) -> Html {
     log!("props.stroke_width", props.stroke_width);
     let stroke_width_common = if trail_width == 0.0 && stroke_width == 0.0 {
         String::from("0")
-    }
-    else if stroke_width == 0.0{
+    } else if stroke_width == 0.0 {
         trail_width.to_string()
-    }
-    else if trail_width == 0.0 {
+    } else if trail_width == 0.0 {
         stroke_width.to_string()
-    }
-    else {
+    } else {
         trail_width.to_string()
     };
     let stroke_list = get_stoke_list();

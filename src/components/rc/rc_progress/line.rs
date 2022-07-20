@@ -1,79 +1,83 @@
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html};
 // use crate::components::rc::rc_progress::common::use_transition_duration;
-use crate::components::rc::rc_progress::interface::ProgressProps;
-use crate::components::rc::rc_progress::interface::StrokeColorType;
-use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
 use super::interface::Percent;
 use super::interface::StrokeLinecapType;
+use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
+use crate::components::rc::rc_progress::interface::ProgressProps;
+use crate::components::rc::rc_progress::interface::StrokeColorType;
 
 #[function_component(Line)]
 pub fn line(props: &ProgressProps) -> Html {
     let class_name = match props.class_name.clone() {
-      Some(cn) => cn,
-      None => String::from(""),
+        Some(cn) => cn,
+        None => String::from(""),
     };
     let percent = match props.percent.clone() {
-      Some(p) => p,
-      None => Percent::Number(0.0),
+        Some(p) => p,
+        None => Percent::Number(0.0),
     };
     let prefix_cls = match props.prefix_cls.clone() {
-      Some(pc) => pc,
-      None => String::from("rc-progress"),
+        Some(pc) => pc,
+        None => String::from("rc-progress"),
     };
     let stroke_color = match props.stroke_color.clone() {
-      Some(sc) => sc,
-      None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from("#2db7f5"))),
+        Some(sc) => sc,
+        None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from(
+            "#2db7f5",
+        ))),
     };
     let stroke_linecap = match props.stroke_linecap.clone() {
-      Some(sl) => sl,
-      None => StrokeLinecapType::Round,
+        Some(sl) => sl,
+        None => StrokeLinecapType::Round,
     };
     let stroke_width = props.stroke_width.unwrap_or(1.0);
     let style = match props.style.clone() {
-      Some(s) => s,
-      None => String::from(""),
+        Some(s) => s,
+        None => String::from(""),
     };
     let trail_color = match props.trail_color.clone() {
-      Some(tc) => tc,
-      None => String::from("#D9D9D9"),
+        Some(tc) => tc,
+        None => String::from("#D9D9D9"),
     };
     let trail_width = props.trail_width.unwrap_or(1.0);
     let mut default_props = props.default();
     default_props.gap_position = None;
     let percent_list = match percent {
-            super::interface::Percent::Number(n) => vec![n],
-            super::interface::Percent::NumberVec(vec) => vec,
-        };
+        super::interface::Percent::Number(n) => vec![n],
+        super::interface::Percent::NumberVec(vec) => vec,
+    };
     let stroke_color_list = match stroke_color {
-            super::interface::StrokeColorType::BaseStrokeColorType(base_stroke_color_type) => match base_stroke_color_type {
-               super::interface::BaseStrokeColorType::String(s) => vec![s],
-               super::interface::BaseStrokeColorType::Record(_) => vec![],//todo!
-            },
-            super::interface::StrokeColorType::BaseStrokeColorTypeVec(vec) => {
-                let mut v = vec![];
-                vec.into_iter().for_each(|s| {
-                    match s {
-                        super::interface::BaseStrokeColorType::String(string) => v.push(string),
-                        super::interface::BaseStrokeColorType::Record(_) => (),//todo!
-                    }
-                });
-                v
-            },
-        };
+        super::interface::StrokeColorType::BaseStrokeColorType(base_stroke_color_type) => {
+            match base_stroke_color_type {
+                super::interface::BaseStrokeColorType::String(s) => vec![s],
+                super::interface::BaseStrokeColorType::Record(_) => vec![], //todo!
+            }
+        }
+        super::interface::StrokeColorType::BaseStrokeColorTypeVec(vec) => {
+            let mut v = vec![];
+            vec.into_iter().for_each(|s| {
+                match s {
+                    super::interface::BaseStrokeColorType::String(string) => v.push(string),
+                    super::interface::BaseStrokeColorType::Record(_) => (), //todo!
+                }
+            });
+            v
+        }
+    };
     // let paths = use_transition_duration();
     let center = stroke_width / 2.0;
     let right = 100.0 - stroke_width / 2.0;
     let first_part = match stroke_linecap {
-            super::interface::StrokeLinecapType::Round => center,
-            super::interface::StrokeLinecapType::Butt => 0.0,
-            super::interface::StrokeLinecapType::Square => 0.0,
-        };
+        super::interface::StrokeLinecapType::Round => center,
+        super::interface::StrokeLinecapType::Butt => 0.0,
+        super::interface::StrokeLinecapType::Square => 0.0,
+    };
     let second_part = match stroke_linecap {
-            super::interface::StrokeLinecapType::Round => right,
-            super::interface::StrokeLinecapType::Butt => 100.0,
-            super::interface::StrokeLinecapType::Square => 100.0,
-        };
+        super::interface::StrokeLinecapType::Round => right,
+        super::interface::StrokeLinecapType::Butt => 100.0,
+        super::interface::StrokeLinecapType::Square => 100.0,
+    };
     let path_string = format!("M {}{} L {}{}", first_part, center, second_part, center);
     let view_box_string = format!("0 0 100 {}", stroke_width);
     let mut stack_ptg = 0.0;
@@ -82,7 +86,7 @@ pub fn line(props: &ProgressProps) -> Html {
         Some(gp) => gp.get_value(),
     };
     let on_click = match props.clone().on_click {
-        None => Callback::from(|_: MouseEvent|{}),
+        None => Callback::from(|_: MouseEvent| {}),
         Some(oc) => oc,
     };
     let percent_list_mapped = percent_list.into_iter().enumerate().map(|(index, ptg)| {
@@ -149,14 +153,11 @@ pub fn line(props: &ProgressProps) -> Html {
     }).collect::<Vec<Html>>();
     let stroke_width_common = if trail_width == 0.0 && stroke_width == 0.0 {
         String::from("0")
-    }
-    else if stroke_width == 0.0{
+    } else if stroke_width == 0.0 {
         trail_width.to_string()
-    }
-    else if trail_width == 0.0 {
+    } else if trail_width == 0.0 {
         stroke_width.to_string()
-    }
-    else {
+    } else {
         trail_width.to_string()
     };
     html! {

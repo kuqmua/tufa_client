@@ -29,14 +29,14 @@ use yew::{function_component, html, use_state, Callback, Children, Html, MouseEv
 #[derive(Properties, PartialEq)]
 pub struct BackTopProps {
     // pub visibility_height: Option<u32>,
-// pub on_click: Option<Callback<MouseEvent>>,
-// // pub target?: () => HTMLElement | Window | Document;
-// pub prefix_cls: Option<String>,
-// pub children: Children,
-// pub class_name: Option<String>,
-// pub style: Option<String>,
-// pub duration: Option<u32>,
-// pub visible: Option<()>, // Only for test. Don't use it.
+    // pub on_click: Option<Callback<MouseEvent>>,
+    // // pub target?: () => HTMLElement | Window | Document;
+    // pub prefix_cls: Option<String>,
+    // pub children: Children,
+    // pub class_name: Option<String>,
+    // pub style: Option<String>,
+    // pub duration: Option<u32>,
+    // pub visible: Option<()>, // Only for test. Don't use it.
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

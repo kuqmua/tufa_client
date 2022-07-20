@@ -1,5 +1,5 @@
-use lazy_static::lazy_static;
 use crate::components::rc::rc_animate::util::motion::can_use_dom;
+use lazy_static::lazy_static;
 use std::sync::Mutex;
 
 // import * as React from 'react';
@@ -26,24 +26,23 @@ pub enum UUIDStruct {
 }
 
 impl UUIDStruct {
-  pub fn to_string(&self) -> String {
-    match self {
-        UUIDStruct::Number(n) => n.to_string(),
-        UUIDStruct::String(s) => s.clone(),
+    pub fn to_string(&self) -> String {
+        match self {
+            UUIDStruct::Number(n) => n.to_string(),
+            UUIDStruct::String(s) => s.clone(),
+        }
     }
-  }
 }
 
 pub fn get_uuid() -> UUIDStruct {
-  let ret_id: UUIDStruct;
-  if *IS_BROWSER_CLIENT {
-    ret_id = UUIDStruct::Number(*UUID.lock().unwrap());
-    *UUID.lock().unwrap() += 1;
-  }
-  else {
-    ret_id = UUIDStruct::String(String::from("TEST_OR_SSR'"));
-  }
-  ret_id
+    let ret_id: UUIDStruct;
+    if *IS_BROWSER_CLIENT {
+        ret_id = UUIDStruct::Number(*UUID.lock().unwrap());
+        *UUID.lock().unwrap() += 1;
+    } else {
+        ret_id = UUIDStruct::String(String::from("TEST_OR_SSR'"));
+    }
+    ret_id
 }
 
 // /** Get unique id for accessibility usage */
@@ -63,21 +62,20 @@ pub fn get_uuid() -> UUIDStruct {
 // }
 
 pub fn use_id(id: Option<String>) -> String {
-  // let inner_id = String::from("");
-  let inner_id = String::from("");
-  // let set_inner_id = format!("rc_progress_{}", get_uuid().to_string());
+    // let inner_id = String::from("");
+    let inner_id = String::from("");
+    // let set_inner_id = format!("rc_progress_{}", get_uuid().to_string());
 
-
-  // Inner id for accessibility usage. Only work in client side
-  // const [innerId, setInnerId] = React.useState<string>();
-  // React.useEffect(() => {
-  //   setInnerId(`rc_progress_${getUUID()}`);
-  // }, []);
-  match id {
-    None => inner_id,
-    Some(s) => s,
-  }
-  // return id || innerId;
+    // Inner id for accessibility usage. Only work in client side
+    // const [innerId, setInnerId] = React.useState<string>();
+    // React.useEffect(() => {
+    //   setInnerId(`rc_progress_${getUUID()}`);
+    // }, []);
+    match id {
+        None => inner_id,
+        Some(s) => s,
+    }
+    // return id || innerId;
 }
 
 // export default (id?: string) => {
