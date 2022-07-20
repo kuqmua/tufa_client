@@ -68,7 +68,7 @@ pub fn get_circle_style(
     gap_degree: f64,               //uknown
     gap_position: GapPositionType, //Option<GapPositionType>
     stroke_color: String,
-    stroke_linecap: Option<StrokeLinecapType>,
+    stroke_linecap: StrokeLinecapType,
     stroke_width: f64, //uknown
     step_space: Option<f64>,
 ) -> CircleStyle {
@@ -85,7 +85,7 @@ pub fn get_circle_style(
         }
     };
     let mut stroke_dash_offset = ((100.0 - percent) / 100.0) * perimeter_without_gap;
-    if let Some(StrokeLinecapType::Round) = stroke_linecap {
+    if let StrokeLinecapType::Round = stroke_linecap {
             if percent != 100.0 {
                 stroke_dash_offset += stroke_width / 2.0;
                 if stroke_dash_offset >= perimeter_without_gap {
@@ -168,7 +168,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         gap_degree as f64,
         gap_position.clone(),
         trail_color.clone(),
-        props.stroke_linecap.clone(),
+        stroke_linecap.clone(),
         stroke_width,
         None,
     );
@@ -219,7 +219,7 @@ pub fn circle(props: &ProgressProps) -> Html {
             gap_degree as f64,
             gap_position.clone(),
             color_handle,
-            props.stroke_linecap.clone(),
+            stroke_linecap.clone(),
             stroke_width,
             None
           );
@@ -284,7 +284,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                     gap_degree as f64,
                     gap_position.clone(),
                     trail_color.clone(),
-                    Some(StrokeLinecapType::Butt),
+                    StrokeLinecapType::Butt,
                     stroke_width,
                     Some(step_space),
                 );
