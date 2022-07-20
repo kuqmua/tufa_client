@@ -126,7 +126,7 @@ pub fn circle(props: &ProgressProps) -> Html {
       Some(sl) => sl,
       None => StrokeLinecapType::Round,
     };
-    let stroke_width = props.stroke_width.clone().unwrap_or(1.0);
+    let stroke_width = props.stroke_width.unwrap_or(1.0);
     let style = match props.style.clone() {
       Some(s) => s,
       None => String::from(""),
@@ -136,7 +136,7 @@ pub fn circle(props: &ProgressProps) -> Html {
       None => String::from("#D9D9D9"),
     };
     let gap_degree = props.gap_degree.unwrap_or(0);
-    let trail_width = props.trail_width.clone().unwrap_or(1.0);
+    let trail_width = props.trail_width.unwrap_or(1.0);
     let gap_position = match props.gap_position.clone() {
       Some(gp) => gp,
       None => GapPositionType::Bottom,
@@ -173,13 +173,8 @@ pub fn circle(props: &ProgressProps) -> Html {
         None,
     );
     let percent_list =
-        percent_to_array(props.percent.clone().unwrap_or(Percent::NumberVec(vec![])));
-    let stroke_color_list = stroke_color_to_array(
-        props
-            .stroke_color
-            .clone()
-            .unwrap_or(StrokeColorType::BaseStrokeColorTypeVec(vec![])),
-    );
+        percent_to_array(percent);
+    let stroke_color_list = stroke_color_to_array(stroke_color);
     let mut gradient = None;
     for color in stroke_color_list.clone() {
         match color {
@@ -371,9 +366,9 @@ pub fn circle(props: &ProgressProps) -> Html {
     let step_stroke_list = get_step_stoke_list();
     html! {
         <svg
-          class={format!("{}-circle {}", prefix_cls, props.class_name.clone().unwrap_or_else(|| String::from("")))}//classNames(`${prefixCls}-circle`, className)
+          class={format!("{}-circle {}", prefix_cls, class_name)}
           viewBox={format!("0 0 {} {}", VIEW_BOX_SIZE, VIEW_BOX_SIZE)}
-          style={props.style.clone()}
+          style={style}
           id={props.id.clone()}
           transition={props.transition.clone()}
           onclick={props.on_click.clone().unwrap_or_else(|| Callback::from(|_|{}))}
