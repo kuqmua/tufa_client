@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-
 use web_sys::MouseEvent;
 use yew::{Callback, Properties};
 
@@ -32,7 +31,7 @@ pub struct ProgressProps {
     pub stroke_linecap: Option<StrokeLinecapType>,
     pub prefix_cls: Option<String>,
     pub style: Option<String>, //React.CSSProperties
-    pub gap_degree: Option<i32>,
+    pub gap_degree: Option<f64>,
     pub gap_position: Option<GapPositionType>,
     pub transition: Option<String>,
     pub on_click: Option<Callback<MouseEvent>>, //React.MouseEventHandler
@@ -120,15 +119,11 @@ impl BaseStrokeColorType {
     }
 }
 
-//   export type BaseStrokeColorType = string | Record<string, string>;
-
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum StrokeColorType {
     BaseStrokeColorType(BaseStrokeColorType),
     BaseStrokeColorTypeVec(Vec<BaseStrokeColorType>),
 }
-
-//   export type StrokeColorType = BaseStrokeColorType | BaseStrokeColorType[];
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum GapPositionType {
@@ -149,8 +144,6 @@ impl GapPositionType {
     }
 }
 
-//   export type GapPositionType = 'top' | 'right' | 'bottom' | 'left';
-
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum StrokeLinecapType {
     Round,
@@ -167,5 +160,3 @@ impl StrokeLinecapType {
         }
     }
 }
-
-//   export type StrokeLinecapType = 'round' | 'butt' | 'square';

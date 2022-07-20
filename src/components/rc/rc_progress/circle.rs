@@ -134,7 +134,7 @@ pub fn circle(props: &ProgressProps) -> Html {
       Some(tc) => tc,
       None => String::from("#D9D9D9"),
     };
-    let gap_degree = props.gap_degree.unwrap_or(0);
+    let gap_degree = props.gap_degree.unwrap_or(0.0);
     let trail_width = props.trail_width.unwrap_or(1.0);
     let gap_position = match props.gap_position.clone() {
       Some(gp) => gp,
@@ -144,9 +144,9 @@ pub fn circle(props: &ProgressProps) -> Html {
     let gradient_id = format!("{}-gradient", merged_id);
     let radius = VIEW_BOX_SIZE / 2.0 - stroke_width / 2.0;
     let perimeter = std::f64::consts::PI * 2.0 * radius;
-    let rotate_deg = match gap_degree > 0 {
-        true => 90 + gap_degree / 2,
-        false => -90,
+    let rotate_deg = match gap_degree > 0.0 {
+        true => 90.0 + gap_degree / 2.0,
+        false => -90.0,
     };
     let perimeter_without_gap = perimeter * ((360.0 - gap_degree as f64) / 360.0);
     let (step_count, step_space) = match props.steps.clone() {
