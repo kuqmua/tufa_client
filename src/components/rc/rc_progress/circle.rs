@@ -4,7 +4,6 @@ use crate::components::rc::rc_progress::hooks::use_id::use_id;
 use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
-use gloo::console::log;
 use std::fmt;
 use yew::Callback;
 use yew::Html;
@@ -150,7 +149,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         true => 90.0 + gap_degree / 2.0,
         false => -90.0,
     };
-    let perimeter_without_gap = perimeter * (360.0 - gap_degree / 360.0);
+    let perimeter_without_gap = perimeter * ((360.0 - gap_degree) / 360.0);
     let (step_count, step_space) = match props.steps.clone() {
         None => (0.0, 0.0),
         Some(steps_type) => match steps_type {
@@ -343,8 +342,6 @@ pub fn circle(props: &ProgressProps) -> Html {
             }
         }
     };
-    log!("trail_width", props.trail_width);
-    log!("props.stroke_width", props.stroke_width);
     let stroke_width_common = if trail_width == 0.0 && stroke_width == 0.0 {
         String::from("0")
     } else if stroke_width == 0.0 {
