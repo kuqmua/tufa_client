@@ -136,10 +136,7 @@ pub fn circle(props: &ProgressProps) -> Html {
       Some(sl) => sl,
       None => StrokeLinecapType::Round,
     };
-    let stroke_width = match props.stroke_width.clone() {
-      Some(sw) => sw,
-      None => 1.0,
-    };
+    let stroke_width = props.stroke_width.clone().unwrap_or(1.0);
     let style = match props.style.clone() {
       Some(s) => s,
       None => String::from(""),
@@ -148,20 +145,16 @@ pub fn circle(props: &ProgressProps) -> Html {
       Some(tc) => tc,
       None => String::from("#D9D9D9"),
     };
-    let trail_width = match props.trail_width.clone() {
-      Some(tw) => tw,
-      None => 1.0,
-    };
+    let gap_degree = props.gap_degree.unwrap_or(0);
+    let trail_width = props.trail_width.clone().unwrap_or(1.0);
     let gap_position = match props.gap_position.clone() {
       Some(gp) => gp,
       None => GapPositionType::Bottom,
     };
-
     let merged_id = use_id(props.id.clone());
     let gradient_id = format!("{}-gradient", merged_id);
     let radius = VIEW_BOX_SIZE / 2.0 - stroke_width / 2.0;
     let perimeter = std::f64::consts::PI * 2.0 * radius;
-    let gap_degree = props.gap_degree.unwrap_or(0);
     let rotate_deg = match gap_degree > 0 {
         true => 90 + gap_degree / 2,
         false => -90,
@@ -183,10 +176,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         100.0,
         rotate_deg as f64,
         gap_degree as f64,
-        props
-            .gap_position
-            .clone()
-            .unwrap_or(GapPositionType::Bottom),
+        gap_position.clone(),
         GetCircleStyleStrokeColor::String(
             props.trail_color.clone().unwrap_or_else(|| String::from("#D9D9D9")),
         ),
@@ -238,7 +228,7 @@ pub fn circle(props: &ProgressProps) -> Html {
             *ptg as f64,
             rotate_deg as f64,
             gap_degree as f64,
-            props.gap_position.clone().unwrap_or(GapPositionType::Bottom),
+            gap_position.clone(),
             GetCircleStyleStrokeColor::String(color.unwrap_or_else(|| BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
             props.stroke_linecap.clone(),
             stroke_width,
@@ -305,10 +295,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                     step_ptg as f64,
                     rotate_deg as f64,
                     gap_degree as f64,
-                    props
-                        .gap_position
-                        .clone()
-                        .unwrap_or(GapPositionType::Bottom),
+                    gap_position.clone(),
                     GetCircleStyleStrokeColor::String(color.to_string()),
                     Some(StrokeLinecapType::Butt),
                     stroke_width,
