@@ -31,12 +31,6 @@ pub fn stroke_color_to_array(value: StrokeColorType) -> Vec<BaseStrokeColorType>
 
 pub const VIEW_BOX_SIZE: f64 = 100.0;
 
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub enum GetCircleStyleStrokeColor {
-    String(String),
-    Record(HashMap<String, String>),
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct CircleStyle {
     pub stroke: Option<String>,
@@ -73,7 +67,7 @@ pub fn get_circle_style(
     rotate_deg: f64,
     gap_degree: f64,               //uknown
     gap_position: GapPositionType, //Option<GapPositionType>
-    stroke_color: GetCircleStyleStrokeColor,
+    stroke_color: String,
     stroke_linecap: Option<StrokeLinecapType>,
     stroke_width: f64, //uknown
     step_space: Option<f64>,
@@ -99,12 +93,8 @@ pub fn get_circle_style(
                 }
             }
     }
-    let stroke = match stroke_color {
-        GetCircleStyleStrokeColor::String(s) => Some(s),
-        GetCircleStyleStrokeColor::Record(_) => None,
-    };
     CircleStyle {
-      stroke,
+      stroke: Some(stroke_color),
       stroke_dash_array: format!("{}px {}", perimeter_without_gap, perimeter),
       stroke_dash_offset: stroke_dash_offset + step_space,
       transform: format!("rotate({}deg)", rotate_deg + offset_deg + position_deg),
@@ -177,9 +167,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         rotate_deg as f64,
         gap_degree as f64,
         gap_position.clone(),
-        GetCircleStyleStrokeColor::String(
-            props.trail_color.clone().unwrap_or_else(|| String::from("#D9D9D9")),
-        ),
+        trail_color.clone(),
         props.stroke_linecap.clone(),
         stroke_width,
         None,
@@ -221,6 +209,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                 BaseStrokeColorType::Record(_) => Some(format!("url(#{})", gradient_id)),
             },
           };
+          let color_handle = color.unwrap_or_else(|| BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string();
           let circle_style_for_stack = get_circle_style(
             perimeter,
             perimeter_without_gap,
@@ -229,7 +218,7 @@ pub fn circle(props: &ProgressProps) -> Html {
             rotate_deg as f64,
             gap_degree as f64,
             gap_position.clone(),
-            GetCircleStyleStrokeColor::String(color.unwrap_or_else(|| BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string()),
+            color_handle,
             props.stroke_linecap.clone(),
             stroke_width,
             None
@@ -280,9 +269,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                 let index_as_f64 = index as f64;
                 let color = match index_as_f64 < current {
                     true => stroke_color_list[0].clone(),
-                    false => BaseStrokeColorType::String(
-                        props.trail_color.clone().unwrap_or_else(||String::from("#D9D9D9")),
-                    ),
+                    false => BaseStrokeColorType::String(trail_color.clone()),
                 };
                 let stroke = match color {
                     BaseStrokeColorType::String(_) => None,
@@ -296,7 +283,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                     rotate_deg as f64,
                     gap_degree as f64,
                     gap_position.clone(),
-                    GetCircleStyleStrokeColor::String(color.to_string()),
+                    trail_color.clone(),
                     Some(StrokeLinecapType::Butt),
                     stroke_width,
                     Some(step_space),
@@ -398,7 +385,7 @@ pub fn circle(props: &ProgressProps) -> Html {
               r={radius.to_string()}
               cx={(VIEW_BOX_SIZE / 2.0).to_string()}
               cy={(VIEW_BOX_SIZE / 2.0).to_string()}
-              stroke={props.trail_color.clone().unwrap_or_else(|| String::from("#D9D9D9"))}
+              stroke={trail_color}
               stroke-linecap={props.stroke_linecap.clone().unwrap_or(StrokeLinecapType::Round).get_value()}
               stroke-width={stroke_width_common}
               style={circle_style.to_string()}
