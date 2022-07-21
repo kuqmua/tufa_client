@@ -2,7 +2,9 @@ use yew::Callback;
 use yew::Event;
 use yew::FocusEvent;
 use yew::MouseEvent;
+use yew::Properties;
 
+#[derive(Debug, PartialEq, Properties, Clone)]
 pub struct RcCheckBoxProps {
     pub prefix_cls: Option<String>,
     pub class_name: Option<String>,
