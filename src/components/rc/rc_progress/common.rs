@@ -1,8 +1,7 @@
 use super::interface::GapPositionType;
-use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
-use crate::components::rc::rc_progress::interface::StrokeColorType;
+use crate::components::rc::rc_progress::interface::StrokeColor;
 use crate::components::rc::rc_progress::interface::StrokeLinecapType;
 use js_sys::Date;
 use lazy_static::lazy_static;

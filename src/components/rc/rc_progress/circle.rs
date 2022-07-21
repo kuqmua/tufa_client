@@ -1,9 +1,10 @@
-use super::interface::{BaseStrokeColorType, StrokeColorType, StrokeLinecapType};
+use super::interface::{StrokeColor, StrokeLinecapType};
 // use crate::components::rc::rc_progress::common::use_transition_duration;
 use crate::components::rc::rc_progress::hooks::use_id::use_id;
 use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
+use std::collections::HashMap;
 use std::fmt;
 use yew::Callback;
 use yew::Html;
@@ -17,13 +18,6 @@ pub fn percent_to_array(value: Percent) -> Vec<f64> {
     match value {
         Percent::Number(n) => vec![n],
         Percent::NumberVec(vec) => vec,
-    }
-}
-
-pub fn stroke_color_to_array(value: StrokeColorType) -> Vec<BaseStrokeColorType> {
-    match value {
-        StrokeColorType::BaseStrokeColorType(n) => vec![n],
-        StrokeColorType::BaseStrokeColorTypeVec(vec) => vec,
     }
 }
 
@@ -63,11 +57,11 @@ pub fn get_circle_style(
     offset: f64,
     percent: f64,
     rotate_deg: f64,
-    gap_degree: f64,               //uknown
-    gap_position: GapPositionType, //Option<GapPositionType>
+    gap_degree: f64,
+    gap_position: GapPositionType,
     stroke_color: String,
     stroke_linecap: StrokeLinecapType,
-    stroke_width: f64, //uknown
+    stroke_width: f64,
     step_space: Option<f64>,
 ) -> CircleStyle {
     let step_space = step_space.unwrap_or(0.0);
@@ -118,9 +112,9 @@ pub fn circle(props: &ProgressProps) -> Html {
     };
     let stroke_color = match props.stroke_color.clone() {
         Some(sc) => sc,
-        None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from(
-            "#2db7f5",
-        ))),
+        None => StrokeColor {
+                colors: vec![String::from("#2db7f5")],
+            },
     };
     let stroke_linecap = match props.stroke_linecap.clone() {
         Some(sl) => sl,
@@ -173,17 +167,17 @@ pub fn circle(props: &ProgressProps) -> Html {
         None,
     );
     let percent_list = percent_to_array(percent);
-    let stroke_color_list = stroke_color_to_array(stroke_color);
-    let mut gradient = None;
-    for color in stroke_color_list.clone() {
-        match color {
-            BaseStrokeColorType::String(_) => (),
-            BaseStrokeColorType::Record(hm) => {
-                gradient = Some(hm);
-                break;
-            }
-        }
-    }
+    let stroke_color_list = stroke_color.colors;
+    let mut gradient: Option<HashMap<u32, String>> = None;
+    // for color in stroke_color_list.clone() {
+    //     match color {
+    //         BaseStrokeColorType::String(_) => (),
+    //         BaseStrokeColorType::Record(hm) => {
+    //             gradient = Some(hm);
+    //             break;
+    //         }
+    //     }
+    // }
     // let paths = use_transition_duration();
     let get_stoke_list = || {
         let mut stack_ptg = 0.0;
@@ -198,12 +192,9 @@ pub fn circle(props: &ProgressProps) -> Html {
           };
           let stroke = match color.clone() {
             None => None,
-            Some(color_type) => match color_type {
-                BaseStrokeColorType::String(_) => None,
-                BaseStrokeColorType::Record(_) => Some(format!("url(#{})", gradient_id)),
-            },
+            Some(color_type) => Some(format!("url(#{})", gradient_id)),
           };
-          let color_handle = color.unwrap_or_else(|| BaseStrokeColorType::String(String::from("#D9D9D9"))).to_string();
+          let color_handle = color.unwrap_or_else(|| String::from("#2db7f5"));
           let circle_style_for_stack = get_circle_style(
             perimeter,
             perimeter_without_gap,
@@ -263,12 +254,9 @@ pub fn circle(props: &ProgressProps) -> Html {
                 let index_as_f64 = index as f64;
                 let color = match index_as_f64 < current {
                     true => stroke_color_list[0].clone(),
-                    false => BaseStrokeColorType::String(trail_color.clone()),
+                    false => trail_color.clone(),
                 };
-                let stroke = match color {
-                    BaseStrokeColorType::String(_) => None,
-                    BaseStrokeColorType::Record(_) => Some(format!("url(#{})", gradient_id)),
-                };
+                let stroke = format!("url(#{})", gradient_id);//for gradient
                 let circle_style_for_stack = get_circle_style(
                     perimeter,
                     perimeter_without_gap,
@@ -309,19 +297,19 @@ pub fn circle(props: &ProgressProps) -> Html {
     let linear_gradient = match gradient {
         None => html! {},
         Some(g) => {
-            let inner_content = g
-                .iter()
-                .map(|(key, value)| (key.clone(), value.clone()))
-                .collect::<Vec<(String, String)>>()
-                //todo
-                // .sort_by(|a, b| strip_percent_to_number(a) - strip_percent_to_number(b))
+            let mut prep_vec = g
+                .into_iter()
+                .map(|(key, value)| (key, value))
+                .collect::<Vec<(u32, String)>>();
+            prep_vec.sort_by(|(key1, _), (key2, _)| key2.cmp(key1));
+            let inner_content = prep_vec
                 .iter()
                 .enumerate()
                 .map(|(index, (key, value))| {
                     html! {
                       <stop
                         key={index}
-                        offset={key.clone()}
+                        offset={key.clone().to_string()}
                         stop_color={value.clone()}
                       />
                     }

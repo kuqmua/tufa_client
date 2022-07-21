@@ -29,7 +29,7 @@ pub struct ProgressProps {
     pub trail_width: Option<f64>,
     pub class_name: Option<String>,
     pub percent: Option<Percent>,
-    pub stroke_color: Option<StrokeColorType>,
+    pub stroke_color: Option<StrokeColor>,
     pub trail_color: Option<String>,
     pub stroke_linecap: Option<StrokeLinecapType>,
     pub prefix_cls: Option<String>,
@@ -39,6 +39,7 @@ pub struct ProgressProps {
     pub transition: Option<String>,
     pub on_click: Option<Callback<MouseEvent>>, //React.MouseEventHandler
     pub steps: Option<Steps>,
+    pub gradient: Option<HashMap<u32, String>>,
 }
 
 impl Default for ProgressProps {
@@ -49,9 +50,9 @@ impl Default for ProgressProps {
             trail_width: Some(1.0),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0.0)),
-            stroke_color: Some(StrokeColorType::BaseStrokeColorType(
-                BaseStrokeColorType::String(String::from("#2db7f5")),
-            )),
+            stroke_color: Some(StrokeColor {
+                colors: vec![String::from("#2db7f5")],
+            }),
             trail_color: Some(String::from("#D9D9D9")),
             stroke_linecap: Some(StrokeLinecapType::Round),
             prefix_cls: Some(String::from("rc-progress")),
@@ -61,6 +62,7 @@ impl Default for ProgressProps {
             transition: None,
             on_click: None, //React.MouseEventHandler
             steps: None,
+            gradient: None,
         }
     }
 }
@@ -73,9 +75,9 @@ impl ProgressProps {
             trail_width: Some(1.0),
             class_name: Some(String::from("")),
             percent: Some(Percent::Number(0.0)),
-            stroke_color: Some(StrokeColorType::BaseStrokeColorType(
-                BaseStrokeColorType::String(String::from("#2db7f5")),
-            )),
+            stroke_color: Some(StrokeColor {
+                colors: vec![String::from("#2db7f5")],
+            }),
             trail_color: Some(String::from("#D9D9D9")),
             stroke_linecap: Some(StrokeLinecapType::Round),
             prefix_cls: Some(String::from("rc-progress")),
@@ -85,6 +87,7 @@ impl ProgressProps {
             transition: None,
             on_click: None, //React.MouseEventHandler
             steps: None,
+            gradient: None,
         }
     }
 }
@@ -108,24 +111,18 @@ impl ProgressProps {
 //   }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
-pub enum BaseStrokeColorType {
-    String(String),
-    Record(HashMap<String, String>),
+pub struct StrokeColor {
+    pub colors: Vec<String>,
 }
 
-impl Display for BaseStrokeColorType {
+impl Display for StrokeColor {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            BaseStrokeColorType::String(s) => write!(f, "{}", s),
-            BaseStrokeColorType::Record(_r) => write!(f, ""), //todo
-        }
+        let mut gradient = String::from("");
+        self.colors.iter().for_each(|c| {
+            gradient.push_str(c);
+        });
+        write!(f, "{}", gradient)
     }
-}
-
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub enum StrokeColorType {
-    BaseStrokeColorType(BaseStrokeColorType),
-    BaseStrokeColorTypeVec(Vec<BaseStrokeColorType>),
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]

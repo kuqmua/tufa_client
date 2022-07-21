@@ -3,9 +3,8 @@ use yew::{function_component, html, Callback, Html};
 // use crate::components::rc::rc_progress::common::use_transition_duration;
 use super::interface::Percent;
 use super::interface::StrokeLinecapType;
-use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
 use crate::components::rc::rc_progress::interface::ProgressProps;
-use crate::components::rc::rc_progress::interface::StrokeColorType;
+use crate::components::rc::rc_progress::interface::StrokeColor;
 
 #[function_component(Line)]
 pub fn line(props: &ProgressProps) -> Html {
@@ -23,9 +22,7 @@ pub fn line(props: &ProgressProps) -> Html {
     };
     let stroke_color = match props.stroke_color.clone() {
         Some(sc) => sc,
-        None => StrokeColorType::BaseStrokeColorType(BaseStrokeColorType::String(String::from(
-            "#2db7f5",
-        ))),
+        None => StrokeColor { colors: vec![String::from("#2db7f5")] },
     };
     let stroke_linecap = match props.stroke_linecap.clone() {
         Some(sl) => sl,
@@ -47,24 +44,7 @@ pub fn line(props: &ProgressProps) -> Html {
         super::interface::Percent::Number(n) => vec![n],
         super::interface::Percent::NumberVec(vec) => vec,
     };
-    let stroke_color_list = match stroke_color {
-        super::interface::StrokeColorType::BaseStrokeColorType(base_stroke_color_type) => {
-            match base_stroke_color_type {
-                super::interface::BaseStrokeColorType::String(s) => vec![s],
-                super::interface::BaseStrokeColorType::Record(_) => vec![], //todo!
-            }
-        }
-        super::interface::StrokeColorType::BaseStrokeColorTypeVec(vec) => {
-            let mut v = vec![];
-            vec.into_iter().for_each(|s| {
-                match s {
-                    super::interface::BaseStrokeColorType::String(string) => v.push(string),
-                    super::interface::BaseStrokeColorType::Record(_) => (), //todo!
-                }
-            });
-            v
-        }
-    };
+    let stroke_color_list = stroke_color.colors;
     // let paths = use_transition_duration();
     let center = stroke_width / 2.0;
     let right = 100.0 - stroke_width / 2.0;

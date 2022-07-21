@@ -51,9 +51,8 @@ use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
 use crate::components::rc::rc_animate::util::motion::get_option_style;
 use crate::components::rc::rc_progress::circle::Circle;
-use crate::components::rc::rc_progress::interface::BaseStrokeColorType;
 use crate::components::rc::rc_progress::interface::Percent;
-use crate::components::rc::rc_progress::interface::StrokeColorType;
+use crate::components::rc::rc_progress::interface::StrokeColor;
 use crate::components::rc::rc_progress::line::Line;
 
 use colorsys::Hsl;
@@ -273,9 +272,9 @@ pub fn home() -> Html {
         percent={Some(Percent::Number(25.0))}
         stroke_width={4.0}
         stroke_color={
-          Some(StrokeColorType::BaseStrokeColorType(
-                BaseStrokeColorType::String(String::from("#D3D3D3")),
-            ))
+          Some(StrokeColor {
+                colors: vec![String::from("#D3D3D3")],
+            })
         }
         trail_color={Some(String::from("#D9D9D9"))}
       />
