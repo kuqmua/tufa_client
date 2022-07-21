@@ -135,6 +135,7 @@ pub fn circle(props: &ProgressProps) -> Html {
         Some(gp) => gp,
         None => GapPositionType::Bottom,
     };
+    let gradient = props.gradient.clone().unwrap_or_default();
     let merged_id = use_id(props.id.clone());
     let gradient_id = format!("{}-gradient", merged_id);
     let radius = VIEW_BOX_SIZE / 2.0 - stroke_width / 2.0;
@@ -168,7 +169,7 @@ pub fn circle(props: &ProgressProps) -> Html {
     );
     let percent_list = percent_to_array(percent);
     let stroke_color_list = stroke_color.colors;
-    let mut gradient: Option<HashMap<u32, String>> = None;
+    
     // for color in stroke_color_list.clone() {
     //     match color {
     //         BaseStrokeColorType::String(_) => (),
@@ -190,10 +191,7 @@ pub fn circle(props: &ProgressProps) -> Html {
             (Some(c), None) => Some(c.clone()),
             (Some(c), Some(_)) => Some(c.clone()),
           };
-          let stroke = match color.clone() {
-            None => None,
-            Some(color_type) => Some(format!("url(#{})", gradient_id)),
-          };
+          let stroke = color.clone().map(|_| format!("url(#{})", gradient_id));
           let color_handle = color.unwrap_or_else(|| String::from("#2db7f5"));
           let circle_style_for_stack = get_circle_style(
             perimeter,
@@ -255,7 +253,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                 let color = match index_as_f64 < current {
                     true => stroke_color_list[0].clone(),
                     false => trail_color.clone(),
-                };
+                };//todo
                 let stroke = format!("url(#{})", gradient_id);//for gradient
                 let circle_style_for_stack = get_circle_style(
                     perimeter,
@@ -265,7 +263,7 @@ pub fn circle(props: &ProgressProps) -> Html {
                     rotate_deg,
                     gap_degree,
                     gap_position.clone(),
-                    trail_color.clone(),
+                    trail_color.clone(),//todo
                     StrokeLinecapType::Butt,
                     stroke_width,
                     Some(step_space),
@@ -294,10 +292,8 @@ pub fn circle(props: &ProgressProps) -> Html {
             .collect::<Vec<Html>>();
         bbn
     };
-    let linear_gradient = match gradient {
-        None => html! {},
-        Some(g) => {
-            let mut prep_vec = g
+    let linear_gradient =  {
+        let mut prep_vec = gradient
                 .into_iter()
                 .map(|(key, value)| (key, value))
                 .collect::<Vec<(u32, String)>>();
@@ -328,7 +324,6 @@ pub fn circle(props: &ProgressProps) -> Html {
                   </linear_gradient>
                 </defs>
             }
-        }
     };
     let stroke_width_common = if trail_width == 0.0 && stroke_width == 0.0 {
         String::from("0")
