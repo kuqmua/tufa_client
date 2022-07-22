@@ -4,6 +4,32 @@ use yew::FocusEvent;
 use yew::MouseEvent;
 use yew::Properties;
 
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub enum InputType {
+    Button,
+    Checkbox,
+    Color,
+    Date,
+    DatetimeLocal,
+    Email,
+    File,
+    Hidden,
+    Image,
+    Month,
+    Number,
+    Password,
+    Radio,
+    Range,
+    Reset,
+    Search,
+    Submit,
+    Tel,
+    Text,
+    Time,
+    Url,
+    Week,
+}
+
 #[derive(Debug, PartialEq, Properties, Clone)]
 pub struct RcCheckBoxProps {
     pub prefix_cls: Option<String>,
@@ -11,7 +37,7 @@ pub struct RcCheckBoxProps {
     pub style: Option<String>, //React.CSSProperties
     pub name: Option<String>,
     pub id: Option<String>,
-    pub type_handle: Option<String>,
+    pub type_handle: Option<InputType>,
     pub title: Option<String>,
     //   pub default_checked?: number | boolean;
     //   pub checked?: number | boolean;
