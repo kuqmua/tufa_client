@@ -1,3 +1,5 @@
+use std::fmt;
+
 use yew::Callback;
 use yew::Event;
 use yew::FocusEvent;
@@ -28,6 +30,35 @@ pub enum InputType {
     Time,
     Url,
     Week,
+}
+
+impl fmt::Display for InputType {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            InputType::Button => write!(f, "button"),
+            InputType::Checkbox => write!(f, "checkbox"),
+            InputType::Color => write!(f, "color"),
+            InputType::Date => write!(f, "date"),
+            InputType::DatetimeLocal => write!(f, "datetime-local"),
+            InputType::Email => write!(f, "email"),
+            InputType::File => write!(f, "file"),
+            InputType::Hidden => write!(f, "hidden"),
+            InputType::Image => write!(f, "image"),
+            InputType::Month => write!(f, "month"),
+            InputType::Number => write!(f, "number"),
+            InputType::Password => write!(f, "password"),
+            InputType::Radio => write!(f, "radio"),
+            InputType::Range => write!(f, "range"),
+            InputType::Reset => write!(f, "reset"),
+            InputType::Search => write!(f, "search"),
+            InputType::Submit => write!(f, "submit"),
+            InputType::Tel => write!(f, "tel"),
+            InputType::Text => write!(f, "text"),
+            InputType::Time => write!(f, "time"),
+            InputType::Url => write!(f, "url"),
+            InputType::Week => write!(f, "week"),
+        }
+    }
 }
 
 #[derive(Debug, PartialEq, Properties, Clone)]
