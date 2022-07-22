@@ -1,5 +1,5 @@
 use std::fmt;
-
+use web_sys::KeyboardEvent;
 use yew::Callback;
 use yew::Event;
 use yew::FocusEvent;
@@ -77,7 +77,10 @@ pub struct RcCheckBoxProps {
     pub on_blur: Option<Callback<FocusEvent>>,
     pub on_change: Option<Callback<Event>>,
     pub on_click: Option<Callback<MouseEvent>>,
-    //   pub tab_index?: string | number;
+    pub on_key_down: Option<Callback<KeyboardEvent>>,
+    pub on_key_press: Option<Callback<KeyboardEvent>>,
+    pub on_key_up: Option<Callback<KeyboardEvent>>,
+    pub tab_index: Option<i32>, //?: string | number;
     pub read_only: Option<bool>,
     pub required: Option<bool>,
     pub auto_focus: Option<bool>,
