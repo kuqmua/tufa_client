@@ -39,8 +39,8 @@ pub struct RcCheckBoxProps {
     pub id: Option<String>,
     pub type_handle: Option<InputType>,
     pub title: Option<String>,
-    //   pub default_checked?: number | boolean;
-    //   pub checked?: number | boolean;
+    pub default_checked: Option<()>, //?: number | boolean;
+    pub checked: Option<()>,         //?: number | boolean;
     pub disabled: Option<bool>,
     pub on_focus: Option<Callback<FocusEvent>>,
     pub on_blur: Option<Callback<FocusEvent>>,

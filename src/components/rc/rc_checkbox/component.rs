@@ -2,12 +2,105 @@
 // import React, { Component } from 'react';
 // import classNames from 'classnames';
 
+use crate::components::rc::rc_checkbox::types::InputType;
 use crate::components::rc::rc_checkbox::types::RcCheckBoxProps;
+use web_sys::MouseEvent;
 use yew::function_component;
 use yew::html;
+use yew::use_state;
 
 #[function_component(RcCheckBox)]
 pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
+    let prefix_cls = match props.prefix_cls.clone() {
+        None => String::from("rc-checkbox"),
+        Some(pc) => pc,
+    };
+    let class_name = match props.class_name.clone() {
+        None => String::from(""),
+        Some(cn) => cn,
+    };
+    let style = match props.style.clone() {
+        None => String::from(""),
+        Some(s) => s,
+    };
+    let type_handle = match props.type_handle.clone() {
+        None => InputType::Checkbox,
+        Some(t) => t,
+    };
+    let title = match props.title.clone() {
+        None => String::from(""),
+        Some(t) => t,
+    };
+    let default_checked = match props.default_checked.clone() {
+        None => false,
+        Some(_) => true,
+    };
+    let checked = match props.checked.clone() {
+        None => default_checked,
+        Some(_) => true,
+    };
+    let checked_state = use_state(|| checked);
+    // let on_focus = match props.on_focus {
+    //     None => ,
+    //     Some() => ,
+    // };
+    // let on_blur = match props.on_blur {
+    //     None => ,
+    //     Some() => ,
+    // };
+    // let on_change = match props.on_change {
+    //     None => ,
+    //     Some() => ,
+    // };
+    // let on_key_down = match props.on_key_down {
+    //     None => ,
+    //     Some() => ,
+    // };
+    // let on_key_press = match props.on_key_press {
+    //     None => ,
+    //     Some() => ,
+    // };
+    // let on_key_up = match props.on_key_up {
+    //     None => ,
+    //     Some() => ,
+    // };
+    // let focus = || {
+    //   this.input.focus();
+    // };
+
+    // let blur = || {
+    //   this.input.blur();
+    // };
+
+    let handle_change = |e: MouseEvent| {
+        let disabled_cloned = props.disabled.clone();
+        let on_change_cloned = props.on_change.clone();
+        if let Some(_) = disabled_cloned {
+            return;
+        }
+        let checked_state_cloned = checked_state.clone();
+        if let None = props.checked.clone() {
+            // checked_state_cloned.set(e.target.checked);
+        }
+        if let Some(on_change_handle) = props.on_change.clone() {
+            //   onChange({
+            //     target: {
+            //       ...this.props,
+            //       checked: e.target.checked,
+            //     },
+            //     stopPropagation() {
+            //       e.stopPropagation();
+            //     },
+            //     preventDefault() {
+            //       e.preventDefault();
+            //     },
+            //     nativeEvent: e.nativeEvent,
+            //   });
+        }
+    };
+    // let save_input = |node| {
+    //     this.input = node;
+    // };
     html! {}
 }
 // class Checkbox extends Component {
