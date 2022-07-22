@@ -4,10 +4,14 @@
 
 use crate::components::rc::rc_checkbox::types::InputType;
 use crate::components::rc::rc_checkbox::types::RcCheckBoxProps;
+use web_sys::Event;
+use web_sys::FocusEvent;
+use web_sys::KeyboardEvent;
 use web_sys::MouseEvent;
 use yew::function_component;
 use yew::html;
 use yew::use_state;
+use yew::Callback;
 
 #[function_component(RcCheckBox)]
 pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
@@ -39,31 +43,55 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => default_checked,
         Some(_) => true,
     };
+    //
+    let name = match props.name.clone() {
+        None => String::from(""),
+        Some(n) => n,
+    };
+    let id = match props.id.clone() {
+        None => String::from(""),
+        Some(i) => i,
+    };
+    let required = props.required.clone().unwrap_or(false);
+    let read_only = match props.read_only.clone() {
+        None => false,
+        Some(r) => r,
+    };
+    let disabled = match props.disabled.clone() {
+        None => false,
+        Some(r) => r,
+    };
+    let tab_index = match props.tab_index.clone() {
+        None => String::from(""),
+        Some(r) => r.to_string(),
+    };
+    //
     let checked_state = use_state(|| checked);
-    // let on_focus = match props.on_focus {
-    //     None => ,
-    //     Some() => ,
-    // };
-    // let on_blur = match props.on_blur {
-    //     None => ,
-    //     Some() => ,
-    // };
-    // let on_change = match props.on_change {
-    //     None => ,
-    //     Some() => ,
-    // };
-    // let on_key_down = match props.on_key_down {
-    //     None => ,
-    //     Some() => ,
-    // };
-    // let on_key_press = match props.on_key_press {
-    //     None => ,
-    //     Some() => ,
-    // };
-    // let on_key_up = match props.on_key_up {
-    //     None => ,
-    //     Some() => ,
-    // };
+    let on_focus = match props.on_focus.clone() {
+        None => Callback::from(|_: FocusEvent| {}),
+        Some(of) => of,
+    };
+    let on_blur = match props.on_blur.clone() {
+        None => Callback::from(|_: FocusEvent| {}),
+        Some(ob) => ob,
+    };
+    let on_change = match props.on_change.clone() {
+        None => Callback::from(|_: Event| {}),
+        Some(oc) => oc,
+    };
+    let on_key_down = match props.on_key_down.clone() {
+        None => Callback::from(|_: KeyboardEvent| {}),
+        Some(okd) => okd,
+    };
+    let on_key_press = match props.on_key_press.clone() {
+        None => Callback::from(|_: KeyboardEvent| {}),
+        Some(okp) => okp,
+    };
+    let on_key_up = match props.on_key_up.clone() {
+        None => Callback::from(|_: KeyboardEvent| {}),
+        Some(oku) => oku,
+    };
+
     // let focus = || {
     //   this.input.focus();
     // };
@@ -101,7 +129,75 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
     // let save_input = |node| {
     //     this.input = node;
     // };
-    html! {}
+
+    //     const {
+    //       prefixCls,
+    //       className,
+    //       style,
+    //       name,
+    //       id,
+    //       type,
+    //       title,
+    //       disabled,
+    //       readOnly,
+    //       tabIndex,
+    //       onClick,
+    //       onFocus,
+    //       onBlur,
+    //       onKeyDown,
+    //       onKeyPress,
+    //       onKeyUp,
+    //       autoFocus,
+    //       value,
+    //       required,
+    //       ...others
+    //     } = this.props;
+
+    //     const globalProps = Object.keys(others).reduce((prev, key) => {
+    //       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
+    //         // eslint-disable-next-line no-param-reassign
+    //         prev[key] = others[key];
+    //       }
+    //       return prev;
+    //     }, {});
+
+    //     const { checked } = this.state;
+    let class_string = format!(
+        "{} {} {}-checked {}-disabled",
+        prefix_cls, class_name, prefix_cls, prefix_cls
+    );
+    //     const classString = classNames(prefixCls, className, {
+    //       [`${prefixCls}-checked`]: checked,
+    //       [`${prefixCls}-disabled`]: disabled,
+    //     });
+    html! {
+      <span class={class_string} style={style}>
+        <input
+          name={name}
+          id={id}
+          type={format!("{}", type_handle)}
+          title={title}
+          required={required}
+          readonly={read_only}
+          disabled={disabled}
+          tabIndex={tab_index}
+          className={format!("{}-input", prefix_cls)}
+          checked={checked}
+        //   onClick={on_click}
+          onfocus={on_focus}
+          onblur={on_blur}
+          onkeyup={on_key_up}
+          onkeydown={on_key_down}
+          onkeypress={on_key_press}
+        //   onchange={handle_change}
+        //   autofocus={auto_focus}//todo
+        //   ref={this.save_input}
+        //   value={value}//todo
+        //   {...globalProps}
+        />
+        <span class={format!("{}-inner", prefix_cls)} />
+      </span>
+    }
 }
 // class Checkbox extends Component {
 //   static defaultProps = {
