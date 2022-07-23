@@ -139,29 +139,6 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
     //     this.input = node;
     // };
 
-    //     const {
-    //       prefixCls,
-    //       className,
-    //       style,
-    //       name,
-    //       id,
-    //       type,
-    //       title,
-    //       disabled,
-    //       readOnly,
-    //       tabIndex,
-    //       onClick,
-    //       onFocus,
-    //       onBlur,
-    //       onKeyDown,
-    //       onKeyPress,
-    //       onKeyUp,
-    //       autoFocus,
-    //       value,
-    //       required,
-    //       ...others
-    //     } = this.props;
-
     //     const globalProps = Object.keys(others).reduce((prev, key) => {
     //       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
     //         // eslint-disable-next-line no-param-reassign
@@ -171,14 +148,15 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
     //     }, {});
 
     //     const { checked } = this.state;
-    let class_string = format!(
-        "{} {} {}-checked {}-disabled",
-        prefix_cls, class_name, prefix_cls, prefix_cls
-    );
-    //     const classString = classNames(prefixCls, className, {
-    //       [`${prefixCls}-checked`]: checked,
-    //       [`${prefixCls}-disabled`]: disabled,
-    //     });
+    let class_string = match (checked, disabled) {
+        (true, true) => format!(
+            "{} {} {}-checked {}-disabled",
+            prefix_cls, class_name, prefix_cls, prefix_cls
+        ),
+        (true, false) => format!("{} {} {}-checked", prefix_cls, class_name, prefix_cls),
+        (false, true) => format!("{} {} {}-disabled", prefix_cls, class_name, prefix_cls),
+        (false, false) => format!("{} {}", prefix_cls, class_name),
+    };
     html! {
       <span class={class_string} style={style}>
         <input
@@ -201,7 +179,7 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
           onchange={handle_change.clone()}
         //   autofocus={auto_focus}//todo
         //   ref={this.save_input}
-        //   value={value.clone}//todo
+          value={value}
         //   {...globalProps}
         />
         <span class={format!("{}-inner", prefix_cls)} />
