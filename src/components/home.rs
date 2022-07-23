@@ -55,6 +55,7 @@ use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::StrokeColor;
 use crate::components::rc::rc_progress::line::Line;
 
+use crate::components::rc::rc_checkbox::component::RcCheckBox;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
@@ -254,6 +255,9 @@ pub fn home() -> Html {
       //   // })}
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
+      <RcCheckBox
+        on_click={Some(Callback::from(|_|{log!("looog");}))}
+      />
       <Badge
         count={Some(2)}
         // overflow_count={Some(123)}

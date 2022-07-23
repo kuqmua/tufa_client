@@ -72,17 +72,17 @@ pub struct RcCheckBoxProps {
     pub title: Option<String>,
     pub default_checked: Option<()>, //?: number | boolean;
     pub checked: Option<()>,         //?: number | boolean;
-    pub disabled: Option<bool>,
+    pub disabled: Option<()>,
     pub on_focus: Option<Callback<FocusEvent>>,
     pub on_blur: Option<Callback<FocusEvent>>,
-    pub on_change: Option<Callback<Event>>,
+    // pub on_change: Option<Callback<Event>>,
     pub on_click: Option<Callback<MouseEvent>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
     pub on_key_press: Option<Callback<KeyboardEvent>>,
     pub on_key_up: Option<Callback<KeyboardEvent>>,
     pub tab_index: Option<i32>, //?: string | number;
-    pub read_only: Option<bool>,
-    pub required: Option<bool>,
-    pub auto_focus: Option<bool>,
+    pub read_only: Option<()>,
+    pub required: Option<()>,
+    pub auto_focus: Option<()>,
     pub value: Option<String>,
 }

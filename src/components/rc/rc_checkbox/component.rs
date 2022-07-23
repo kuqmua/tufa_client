@@ -1,16 +1,13 @@
-// // eslint-disable-next-line import/no-extraneous-dependencies
-// import React, { Component } from 'react';
-// import classNames from 'classnames';
-
 use crate::components::rc::rc_checkbox::types::InputType;
 use crate::components::rc::rc_checkbox::types::RcCheckBoxProps;
-use web_sys::Event;
+// use gloo::console::log;
+// use web_sys::Event;
 use web_sys::FocusEvent;
 use web_sys::KeyboardEvent;
 use web_sys::MouseEvent;
 use yew::function_component;
 use yew::html;
-use yew::use_state;
+// use yew::use_state;
 use yew::Callback;
 
 #[function_component(RcCheckBox)]
@@ -35,15 +32,14 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => String::from(""),
         Some(t) => t,
     };
-    let default_checked = match props.default_checked.clone() {
+    let default_checked = match props.default_checked {
         None => false,
         Some(_) => true,
     };
-    let checked = match props.checked.clone() {
+    let checked = match props.checked {
         None => default_checked,
         Some(_) => true,
     };
-    //
     let name = match props.name.clone() {
         None => String::from(""),
         Some(n) => n,
@@ -52,21 +48,11 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => String::from(""),
         Some(i) => i,
     };
-    let required = props.required.clone().unwrap_or(false);
-    let read_only = match props.read_only.clone() {
-        None => false,
-        Some(r) => r,
-    };
-    let disabled = match props.disabled.clone() {
-        None => false,
-        Some(r) => r,
-    };
-    let tab_index = match props.tab_index.clone() {
-        None => String::from(""),
-        Some(r) => r.to_string(),
-    };
-    //
-    let checked_state = use_state(|| checked);
+    let required = props.required.clone().is_some();
+    let read_only = props.read_only.clone().is_some();
+    let disabled = props.disabled.clone().is_some();
+    let tab_index = props.tab_index.clone().is_some().to_string();
+    // let checked_state = use_state(|| checked);
     let on_focus = match props.on_focus.clone() {
         None => Callback::from(|_: FocusEvent| {}),
         Some(of) => of,
@@ -75,10 +61,10 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => Callback::from(|_: FocusEvent| {}),
         Some(ob) => ob,
     };
-    let on_change = match props.on_change.clone() {
-        None => Callback::from(|_: Event| {}),
-        Some(oc) => oc,
-    };
+    // let on_change = match props.on_change.clone() {
+    //     None => Callback::from(|_: Event| {}),
+    //     Some(oc) => oc,
+    // };
     let on_click = match props.on_click.clone() {
         None => Callback::from(|_: MouseEvent| {}),
         Some(okd) => okd,
@@ -99,46 +85,49 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => String::from(""),
         Some(v) => v,
     };
-
+    let auto_focus = props.auto_focus.clone().is_some();
     // let focus = || {
     //   this.input.focus();
     // };
-
     // let blur = || {
     //   this.input.blur();
     // };
-
-    let checked_state_cloned = checked_state;
-    let disabled_cloned = props.disabled;
-    let on_change_cloned: Option<Callback<Event>> = props.on_change.clone();
-    let checked_cloned = props.checked;
-    let handle_change = move |_e: Event| {
-        if disabled_cloned.is_some() {
-            return;
-        }
-        if checked_cloned.is_none() {
-            // checked_state_cloned.set(e.target.checked);
-        }
-        if let Some(on_change_handle) = on_change_cloned.clone() {
-            //   onChange({
-            //     target: {
-            //       ...this.props,
-            //       checked: e.target.checked,
-            //     },
-            //     stopPropagation() {
-            //       e.stopPropagation();
-            //     },
-            //     preventDefault() {
-            //       e.preventDefault();
-            //     },
-            //     nativeEvent: e.nativeEvent,
-            //   });
-        }
-    };
+    // let checked_state_cloned = checked_state;
+    // let disabled_cloned = props.disabled;
+    // let on_change_cloned: Option<Callback<Event>> = props.on_change.clone();
+    // let checked_cloned = props.checked;
+    // let handle_change = move |e: Event| {
+    //     match e.target() {
+    //         None => (),
+    //         Some(event_target) => {
+    //             log!("checck", event_target);
+    //         }
+    //     };
+    //     if disabled_cloned.is_some() {
+    //         return;
+    //     }
+    //     if checked_cloned.is_none() {
+    //         // checked_state_cloned.set(e.target.checked);
+    //     }
+    //     if let Some(on_change_handle) = on_change_cloned.clone() {
+    //         //   onChange({
+    //         //     target: {
+    //         //       ...this.props,
+    //         //       checked: e.target.checked,
+    //         //     },
+    //         //     stopPropagation() {
+    //         //       e.stopPropagation();
+    //         //     },
+    //         //     preventDefault() {
+    //         //       e.preventDefault();
+    //         //     },
+    //         //     nativeEvent: e.nativeEvent,
+    //         //   });
+    //     }
+    // };
     // let save_input = |node| {
     //     this.input = node;
     // };
-
     //     const globalProps = Object.keys(others).reduce((prev, key) => {
     //       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
     //         // eslint-disable-next-line no-param-reassign
@@ -146,8 +135,6 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
     //       }
     //       return prev;
     //     }, {});
-
-    //     const { checked } = this.state;
     let class_string = match (checked, disabled) {
         (true, true) => format!(
             "{} {} {}-checked {}-disabled",
@@ -176,8 +163,8 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
           onkeyup={on_key_up}
           onkeydown={on_key_down}
           onkeypress={on_key_press}
-          onchange={handle_change.clone()}
-        //   autofocus={auto_focus}//todo
+        //   onchange={handle_change}
+          autofocus={auto_focus}
         //   ref={this.save_input}
           value={value}
         //   {...globalProps}
