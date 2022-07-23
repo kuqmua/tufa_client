@@ -84,5 +84,5 @@ pub struct RcCheckBoxProps {
     pub read_only: Option<bool>,
     pub required: Option<bool>,
     pub auto_focus: Option<bool>,
-    //   pub value?: any;
+    pub value: Option<String>,
 }

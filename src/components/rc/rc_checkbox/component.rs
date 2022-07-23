@@ -79,6 +79,10 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => Callback::from(|_: Event| {}),
         Some(oc) => oc,
     };
+    let on_click = match props.on_click.clone() {
+        None => Callback::from(|_: MouseEvent| {}),
+        Some(okd) => okd,
+    };
     let on_key_down = match props.on_key_down.clone() {
         None => Callback::from(|_: KeyboardEvent| {}),
         Some(okd) => okd,
@@ -91,6 +95,10 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => Callback::from(|_: KeyboardEvent| {}),
         Some(oku) => oku,
     };
+    let value = match props.value.clone() {
+        None => String::from(""),
+        Some(v) => v,
+    };
 
     // let focus = || {
     //   this.input.focus();
@@ -100,17 +108,18 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
     //   this.input.blur();
     // };
 
-    let handle_change = |e: MouseEvent| {
-        let disabled_cloned = props.disabled.clone();
-        let on_change_cloned = props.on_change.clone();
-        if let Some(_) = disabled_cloned {
+    let checked_state_cloned = checked_state;
+    let disabled_cloned = props.disabled;
+    let on_change_cloned: Option<Callback<Event>> = props.on_change.clone();
+    let checked_cloned = props.checked;
+    let handle_change = move |_e: Event| {
+        if disabled_cloned.is_some() {
             return;
         }
-        let checked_state_cloned = checked_state.clone();
-        if let None = props.checked.clone() {
+        if checked_cloned.is_none() {
             // checked_state_cloned.set(e.target.checked);
         }
-        if let Some(on_change_handle) = props.on_change.clone() {
+        if let Some(on_change_handle) = on_change_cloned.clone() {
             //   onChange({
             //     target: {
             //       ...this.props,
@@ -183,16 +192,16 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
           tabIndex={tab_index}
           className={format!("{}-input", prefix_cls)}
           checked={checked}
-        //   onClick={on_click}
+          onclick={on_click}
           onfocus={on_focus}
           onblur={on_blur}
           onkeyup={on_key_up}
           onkeydown={on_key_down}
           onkeypress={on_key_press}
-        //   onchange={handle_change}
+          onchange={handle_change.clone()}
         //   autofocus={auto_focus}//todo
         //   ref={this.save_input}
-        //   value={value}//todo
+        //   value={value.clone}//todo
         //   {...globalProps}
         />
         <span class={format!("{}-inner", prefix_cls)} />
