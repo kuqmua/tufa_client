@@ -32,10 +32,7 @@ pub fn rc_checkbox(props: &RcCheckBoxProps) -> Html {
         None => String::from(""),
         Some(t) => t,
     };
-    let default_checked = match props.default_checked {
-        None => false,
-        Some(_) => true,
-    };
+    let default_checked = props.default_checked.is_some();
     let checked = match props.checked {
         None => default_checked,
         Some(_) => true,
