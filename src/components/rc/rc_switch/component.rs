@@ -2,7 +2,9 @@ use web_sys::KeyboardEvent;
 use web_sys::MouseEvent;
 use yew::function_component;
 use yew::html;
+use yew::use_state;
 use yew::Callback;
+use yew::Children;
 use yew::Html;
 use yew::Properties;
 
@@ -22,8 +24,8 @@ pub struct SwitchProps {
     pub class: Option<String>,
     pub prefix_cls: Option<String>,
     pub disabled: Option<()>,
-    pub checked_children: Option<Html>,   //Children
-    pub unchecked_children: Option<Html>, //Children
+    pub checked_children: Children,   //
+    pub unchecked_children: Children, //Children
     //   pub on_change?: SwitchChangeEventHandler; //todo
     pub on_key_down: Option<Callback<KeyboardEvent>>,
     pub on_click: Option<Callback<MouseEvent>>, //todo
@@ -82,6 +84,10 @@ pub fn switch(props: &SwitchProps) -> Html {
     let checked = props.checked.is_some();
     let default_checked = props.default_checked.is_some();
     // pub loading_icon: Option<Html>, //todo
+    let loading_icon = match props.loading_icon.clone() {
+        None => html! {},
+        Some(li) => li,
+    };
     let style = match props.style.clone() {
         None => String::from(""),
         Some(s) => s,
@@ -90,32 +96,39 @@ pub fn switch(props: &SwitchProps) -> Html {
         None => String::from(""),
         Some(t) => t,
     };
+    let inner_checked_handle = match (checked, default_checked) {
+        (true, true) => checked,
+        (true, false) => checked,
+        (false, true) => default_checked,
+        (false, false) => false,
+    };
+    let inner_checked = use_state(|| inner_checked_handle);
     //     const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
     //       value: checked,
     //       defaultValue: defaultChecked,
     //     });
-    // let trigger_change: |(MouseEvent, bool)|{} = |(event, new_checked)| {
-    // //   let mergedChecked = innerChecked;
-    // //   if (!disabled) {
-    // //     mergedChecked = newChecked;
-    // //     setInnerChecked(mergedChecked);
-    // //     onChange?.(mergedChecked, event);
-    // //   }
-    // };
-    //     function triggerChange(
-    //       newChecked: boolean,
-    //       event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-    //     ) {
-    //       let mergedChecked = innerChecked;
-
-    //       if (!disabled) {
-    //         mergedChecked = newChecked;
-    //         setInnerChecked(mergedChecked);
-    //         onChange?.(mergedChecked, event);
-    //       }
-
-    //       return mergedChecked;
-    //     }
+    let inner_checked_first_cloned = inner_checked.clone();
+    let trigger_change = move |new_checked: bool| {
+        //event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+        let mut merged_checked = *inner_checked_first_cloned;
+        if !disabled {
+            merged_checked = new_checked;
+            inner_checked_first_cloned.clone().set(merged_checked);
+            // onChange?.(mergedChecked, event);
+        }
+        merged_checked
+    };
+    let trigger_change_first_cloned = trigger_change.clone();
+    let on_internal_key_down = move |e: KeyboardEvent| {
+        let code = e.code();
+        //todo
+        if code == *"LEFT" {
+            trigger_change_first_cloned(false);
+        } else if code == *"RIGHT" {
+            trigger_change_first_cloned(true);
+        }
+        //   onKeyDown?.(e);
+    };
 
     //     function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
     //       if (e.which === KeyCode.LEFT) {
@@ -125,6 +138,12 @@ pub fn switch(props: &SwitchProps) -> Html {
     //       }
     //       onKeyDown?.(e);
     //     }
+    let inner_checked_cloned = inner_checked.clone();
+    let trigger_change_second_cloned = trigger_change.clone();
+    let on_internal_click = move |_e: MouseEvent| {
+        let ret = trigger_change_second_cloned(!*inner_checked_cloned); //e
+                                                                        // on_click(ret); //e
+    };
 
     //     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
     //       const ret = triggerChange(!innerChecked, e);
@@ -132,35 +151,36 @@ pub fn switch(props: &SwitchProps) -> Html {
     //       onClick?.(ret, e);
     //     }
 
-    // let switch_class_name = match (checked, disabled) {
-    //     (true, true) => format!(
-    //         "{} {} {}-checked {}-disabled",
-    //         prefix_cls, class_name, prefix_cls, prefix_cls
-    //     ),
-    //     (true, false) => format!("{} {} {}-checked", prefix_cls, class_name, prefix_cls),
-    //     (false, true) => format!("{} {} {}-disabled", prefix_cls, class_name, prefix_cls),
-    //     (false, false) => format!("{} {}", prefix_cls, class_name),
-    // };
-
-    //     const switchClassName = classNames(prefixCls, className, {
-    //       [`${prefixCls}-checked`]: innerChecked,
-    //       [`${prefixCls}-disabled`]: disabled,
-    //     });
+    let switch_class_name = match (*inner_checked, disabled) {
+        (true, true) => format!(
+            "{} {} {}-checked {}-disabled",
+            prefix_cls, class, prefix_cls, prefix_cls
+        ),
+        (true, false) => format!("{} {} {}-checked", prefix_cls, class, prefix_cls),
+        (false, true) => format!("{} {} {}-disabled", prefix_cls, class, prefix_cls),
+        (false, false) => format!("{} {}", prefix_cls, class),
+    };
+    let inner_checked_third = *inner_checked;
     html! {
       <button
         // {...restProps}
         type="button"
         role="switch"
-        // aria-checked={inner_checked}
+        aria-checked={inner_checked_third.to_string()}
         disabled={disabled}
-        // class={switch_class_name}
+        class={switch_class_name}
         // ref={ref}
-        // on-key-down={on_internal_key_down}
-        // onclick={on_internal_click}
+        onkeydown={on_internal_key_down}
+        onclick={on_internal_click}
       >
-        // {loading_icon}
+        {loading_icon}
         <span class={format!("{}-inner", prefix_cls)}>
-        //   {innerChecked ? checkedChildren : unCheckedChildren}
+        if *inner_checked {
+            {props.checked_children.clone()}
+        }
+        else {
+            {props.unchecked_children.clone()}
+        }
         </span>
       </button>
     }
