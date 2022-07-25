@@ -28,7 +28,7 @@ pub struct SwitchProps {
     pub unchecked_children: Children, //Children
     //   pub on_change?: SwitchChangeEventHandler; //todo
     pub on_key_down: Option<Callback<KeyboardEvent>>,
-    pub on_click: Option<Callback<MouseEvent>>, //todo
+    pub on_click: Option<Callback<OnClickInput>>, //todo
     pub tab_index: Option<i32>,
     pub checked: Option<()>,
     pub default_checked: Option<()>,
@@ -55,6 +55,12 @@ pub struct SwitchProps {
 //   title?: string;
 // }
 
+#[derive(Debug, PartialEq, Clone)]
+pub struct OnClickInput {
+    clicked: bool,
+    mouse_event: MouseEvent,
+}
+
 #[function_component(Switch)]
 pub fn switch(props: &SwitchProps) -> Html {
     let class = match props.class.clone() {
@@ -66,15 +72,13 @@ pub fn switch(props: &SwitchProps) -> Html {
         Some(pc) => pc,
     };
     let disabled = props.disabled.clone().is_some();
-    // pub checked_children: Option<Html>,   //Children
-    // pub unchecked_children: Option<Html>, //Children
     // //   pub on_change?: SwitchChangeEventHandler; //todo
     let on_key_down = match props.on_key_down.clone() {
         None => Callback::from(|_: KeyboardEvent| {}),
         Some(okd) => okd,
     };
     let on_click = match props.on_click.clone() {
-        None => Callback::from(|_: MouseEvent| {}),
+        None => Callback::from(|_: OnClickInput| {}),
         Some(okd) => okd,
     };
     let tab_index = match props.tab_index {
@@ -140,9 +144,13 @@ pub fn switch(props: &SwitchProps) -> Html {
     //     }
     let inner_checked_cloned = inner_checked.clone();
     let trigger_change_second_cloned = trigger_change.clone();
-    let on_internal_click = move |_e: MouseEvent| {
-        let ret = trigger_change_second_cloned(!*inner_checked_cloned); //e
-                                                                        // on_click(ret); //e
+    let on_click_cloned = on_click.clone();
+    let on_internal_click = move |e: MouseEvent| {
+        let ret = trigger_change_second_cloned(!*inner_checked_cloned);
+        on_click_cloned.emit(OnClickInput {
+            clicked: ret,
+            mouse_event: e,
+        });
     };
 
     //     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
