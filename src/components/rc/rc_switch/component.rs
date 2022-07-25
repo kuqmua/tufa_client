@@ -8,7 +8,7 @@ use yew::Children;
 use yew::Html;
 use yew::Properties;
 // use yew_stdweb::events::ChangeData;
-use yewdux::prelude::Changed;
+// use yewdux::prelude::Changed;
 
 // import * as React from 'react';
 // import classNames from 'classnames';
@@ -102,52 +102,18 @@ pub fn switch(prop: &SwitchProps) -> Html {
         (false, false) => false,
     });
     let inner_checked_first_cloned = inner_checked.clone();
-    let inner_checked_second_cloned = inner_checked.clone();
-    let trigger_change_first = move |e: (bool, MouseEvent)| {
+    let trigger_change = move |e: (bool, MouseEvent)| {
         //todo KeyBoardevent
-        let hh = inner_checked_first_cloned.clone();
-        let mut merged_checked = *hh.clone();
+        let mut merged_checked = *inner_checked_first_cloned;
         if !disabled {
-            merged_checked = e.0.clone();
-            hh.clone().set(merged_checked.clone());
-            // onChange?.(mergedChecked, event);
-            if let Some(on_change) = props.on_change.clone() {
-                on_change.emit((merged_checked.clone(), e.1.clone()));
+            merged_checked = e.0;
+            inner_checked_first_cloned.set(merged_checked);
+            if let Some(on_change) = props.on_change {
+                on_change.emit((merged_checked, e.1));
             };
         }
-        merged_checked.clone()
+        merged_checked
     };
-    let nnrr = prop.clone();
-    let trigger_change_second = move |e: (bool, MouseEvent)| {
-        //todo KeyBoardevent
-        let gg = inner_checked_second_cloned.clone();
-        let mut merged_checked = *gg.clone();
-        if !disabled {
-            merged_checked = e.0.clone();
-            gg.clone().set(merged_checked.clone());
-            // onChange?.(mergedChecked, event);
-            if let Some(on_change) = nnrr.on_change.clone() {
-                on_change.emit((merged_checked.clone(), e.1.clone()));
-            };
-        }
-        merged_checked.clone()
-    };
-    //     function triggerChange(
-    //       newChecked: boolean,
-    //       event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-    //     ) {
-    //       let mergedChecked = innerChecked;
-
-    //       if (!disabled) {
-    //         mergedChecked = newChecked;
-    //         setInnerChecked(mergedChecked);
-    //         onChange?.(mergedChecked, event);
-    //       }
-
-    //       return mergedChecked;
-    //     }
-    let trigger_change_first_cloned = trigger_change_first.clone();
-    let trigger_change_second_cloned = trigger_change_second.clone();
     let on_internal_key_down = move |e: KeyboardEvent| {
         // let code = e.code();
         // //todo
@@ -168,15 +134,14 @@ pub fn switch(prop: &SwitchProps) -> Html {
     //       onKeyDown?.(e);
     //     }
     let inner_checked_cloned = inner_checked.clone();
-    let trigger_change_cloned = trigger_change_second_cloned.clone();
     let on_internal_click = move |e: MouseEvent| {
         let on_click_cloned = on_click.clone();
         let trigger_change_input = (!*inner_checked_cloned.clone(), e.clone());
-        let trigger_change_second_cloned = trigger_change_cloned.clone();
-        let ret = trigger_change_second_cloned(trigger_change_input.clone());
-        on_click_cloned.emit((ret.clone(), e.clone()));
+        let trigger_change_second_cloned = trigger_change.clone();
+        let ret = trigger_change_second_cloned(trigger_change_input);
+        on_click_cloned.emit((ret, e));
     };
-    let on_internal_click_cloned = on_internal_click.clone();
+    let on_internal_click_cloned = on_internal_click;
 
     //     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
     //       const ret = triggerChange(!innerChecked, e);
@@ -194,17 +159,16 @@ pub fn switch(prop: &SwitchProps) -> Html {
         (false, false) => format!("{} {}", prefix_cls, class),
     };
     let inner_checked_third = *inner_checked;
-    let on_internal_key_down_cloned = on_internal_key_down.clone();
     html! {
       <button
         // {...restProps}
         type="button"
         role="switch"
         aria-checked={inner_checked_third.clone().to_string()}
-        disabled={disabled.clone()}
+        disabled={disabled}
         class={switch_class_name.clone()}
         // ref={ref}
-        onkeydown={on_internal_key_down_cloned.clone()}
+        onkeydown={on_internal_key_down}
         onclick={on_internal_click_cloned}
       >
         {loading_icon.clone()}
