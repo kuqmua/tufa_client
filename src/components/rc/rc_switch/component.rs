@@ -28,7 +28,7 @@ pub struct SwitchProps {
     pub disabled: Option<()>,
     pub checked_children: Children,
     pub unchecked_children: Children,
-    pub on_change: Option<Callback<(bool, MouseEvent)>>,
+    pub on_change: Option<Callback<(bool, MouseOrKeyboardEvent)>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
     pub on_click: Option<Callback<(bool, MouseEvent)>>,
     pub tab_index: Option<i32>,
@@ -56,6 +56,12 @@ pub struct SwitchProps {
 //   style?: React.CSSProperties;
 //   title?: string;
 // }
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum MouseOrKeyboardEvent {
+    MouseEvent(MouseEvent),
+    KeyboardEvent(KeyboardEvent),
+}
 
 #[function_component(Switch)]
 pub fn switch(prop: &SwitchProps) -> Html {
@@ -102,7 +108,7 @@ pub fn switch(prop: &SwitchProps) -> Html {
         (false, false) => false,
     });
     let inner_checked_first_cloned = inner_checked.clone();
-    let trigger_change = move |e: (bool, MouseEvent)| {
+    let trigger_change = move |e: (bool, MouseOrKeyboardEvent)| {
         //todo KeyBoardevent
         let mut merged_checked = *inner_checked_first_cloned;
         if !disabled {
@@ -114,14 +120,16 @@ pub fn switch(prop: &SwitchProps) -> Html {
         }
         merged_checked
     };
+    let trigger_change_cloned = trigger_change.clone();
     let on_internal_key_down = move |e: KeyboardEvent| {
-        // let code = e.code();
+        let trigger_change_cloned_cloned = trigger_change_cloned.clone();
+        let code = e.code();
         // //todo
-        // if code == *"LEFT" {
-        //     trigger_change_first_cloned(false);
-        // } else if code == *"RIGHT" {
-        //     trigger_change_first_cloned(true);
-        // }
+        if code == *"LEFT" {
+            trigger_change_cloned_cloned((false, MouseOrKeyboardEvent::KeyboardEvent(e)));
+        } else if code == *"RIGHT" {
+            trigger_change_cloned_cloned((true, MouseOrKeyboardEvent::KeyboardEvent(e)));
+        }
         // //   onKeyDown?.(e);
     };
 
@@ -134,11 +142,15 @@ pub fn switch(prop: &SwitchProps) -> Html {
     //       onKeyDown?.(e);
     //     }
     let inner_checked_cloned = inner_checked.clone();
+    let trigger_change_second_cloned = trigger_change.clone();
     let on_internal_click = move |e: MouseEvent| {
+        let trigger_change_second_cloned_cloned = trigger_change_second_cloned.clone();
         let on_click_cloned = on_click.clone();
-        let trigger_change_input = (!*inner_checked_cloned.clone(), e.clone());
-        let trigger_change_second_cloned = trigger_change.clone();
-        let ret = trigger_change_second_cloned(trigger_change_input);
+        let trigger_change_input = (
+            !*inner_checked_cloned.clone(),
+            MouseOrKeyboardEvent::MouseEvent(e.clone()),
+        );
+        let ret = trigger_change_second_cloned_cloned(trigger_change_input);
         on_click_cloned.emit((ret, e));
     };
     let on_internal_click_cloned = on_internal_click;
