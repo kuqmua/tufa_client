@@ -7,7 +7,7 @@ use yew::Callback;
 use yew::Children;
 use yew::Html;
 use yew::Properties;
-use yew_stdweb::events::ChangeData;
+// use yew_stdweb::events::ChangeData;
 use yewdux::prelude::Changed;
 
 // import * as React from 'react';
@@ -28,7 +28,7 @@ pub struct SwitchProps {
     pub disabled: Option<()>,
     pub checked_children: Children,
     pub unchecked_children: Children,
-    pub on_change: Option<Callback<ChangeData>>,
+    pub on_change: Option<Callback<(bool, MouseEvent)>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
     pub on_click: Option<Callback<(bool, MouseEvent)>>,
     pub tab_index: Option<i32>,
@@ -58,7 +58,8 @@ pub struct SwitchProps {
 // }
 
 #[function_component(Switch)]
-pub fn switch(props: &SwitchProps) -> Html {
+pub fn switch(prop: &SwitchProps) -> Html {
+    let props = prop.clone();
     let class = match props.class.clone() {
         None => String::from(""),
         Some(cn) => cn,
@@ -68,10 +69,6 @@ pub fn switch(props: &SwitchProps) -> Html {
         Some(pc) => pc,
     };
     let disabled = props.disabled.clone().is_some();
-    // let on_change = props.on_change.clone() {
-    //     None => Callback::from(|_: ChangedData| {}),
-    //     Some(oc) => oc,
-    // };
     let on_key_down = match props.on_key_down.clone() {
         None => Callback::from(|_: KeyboardEvent| {}),
         Some(okd) => okd,
@@ -105,14 +102,35 @@ pub fn switch(props: &SwitchProps) -> Html {
         (false, false) => false,
     });
     let inner_checked_first_cloned = inner_checked.clone();
-    let trigger_change = move |e: (bool, MouseEvent)| {
-        let mut merged_checked = *inner_checked_first_cloned;
+    let inner_checked_second_cloned = inner_checked.clone();
+    let trigger_change_first = move |e: (bool, MouseEvent)| {
+        //todo KeyBoardevent
+        let hh = inner_checked_first_cloned.clone();
+        let mut merged_checked = *hh.clone();
         if !disabled {
-            merged_checked = e.0;
-            inner_checked_first_cloned.clone().set(merged_checked);
+            merged_checked = e.0.clone();
+            hh.clone().set(merged_checked.clone());
             // onChange?.(mergedChecked, event);
+            if let Some(on_change) = props.on_change.clone() {
+                on_change.emit((merged_checked.clone(), e.1.clone()));
+            };
         }
-        merged_checked
+        merged_checked.clone()
+    };
+    let nnrr = prop.clone();
+    let trigger_change_second = move |e: (bool, MouseEvent)| {
+        //todo KeyBoardevent
+        let gg = inner_checked_second_cloned.clone();
+        let mut merged_checked = *gg.clone();
+        if !disabled {
+            merged_checked = e.0.clone();
+            gg.clone().set(merged_checked.clone());
+            // onChange?.(mergedChecked, event);
+            if let Some(on_change) = nnrr.on_change.clone() {
+                on_change.emit((merged_checked.clone(), e.1.clone()));
+            };
+        }
+        merged_checked.clone()
     };
     //     function triggerChange(
     //       newChecked: boolean,
@@ -128,7 +146,8 @@ pub fn switch(props: &SwitchProps) -> Html {
 
     //       return mergedChecked;
     //     }
-    let trigger_change_first_cloned = trigger_change.clone();
+    let trigger_change_first_cloned = trigger_change_first.clone();
+    let trigger_change_second_cloned = trigger_change_second.clone();
     let on_internal_key_down = move |e: KeyboardEvent| {
         // let code = e.code();
         // //todo
@@ -149,13 +168,15 @@ pub fn switch(props: &SwitchProps) -> Html {
     //       onKeyDown?.(e);
     //     }
     let inner_checked_cloned = inner_checked.clone();
-    let trigger_change_second_cloned = trigger_change;
-    let on_click_cloned = on_click;
+    let trigger_change_cloned = trigger_change_second_cloned.clone();
     let on_internal_click = move |e: MouseEvent| {
-        let trigget_change_input = (!*inner_checked_cloned, e.clone());
-        let ret = trigger_change_second_cloned(trigget_change_input);
-        on_click_cloned.emit((ret, e));
+        let on_click_cloned = on_click.clone();
+        let trigger_change_input = (!*inner_checked_cloned.clone(), e.clone());
+        let trigger_change_second_cloned = trigger_change_cloned.clone();
+        let ret = trigger_change_second_cloned(trigger_change_input.clone());
+        on_click_cloned.emit((ret.clone(), e.clone()));
     };
+    let on_internal_click_cloned = on_internal_click.clone();
 
     //     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
     //       const ret = triggerChange(!innerChecked, e);
@@ -173,20 +194,21 @@ pub fn switch(props: &SwitchProps) -> Html {
         (false, false) => format!("{} {}", prefix_cls, class),
     };
     let inner_checked_third = *inner_checked;
+    let on_internal_key_down_cloned = on_internal_key_down.clone();
     html! {
       <button
         // {...restProps}
         type="button"
         role="switch"
-        aria-checked={inner_checked_third.to_string()}
-        disabled={disabled}
-        class={switch_class_name}
+        aria-checked={inner_checked_third.clone().to_string()}
+        disabled={disabled.clone()}
+        class={switch_class_name.clone()}
         // ref={ref}
-        onkeydown={on_internal_key_down}
-        onclick={on_internal_click}
+        onkeydown={on_internal_key_down_cloned.clone()}
+        onclick={on_internal_click_cloned}
       >
-        {loading_icon}
-        <span class={format!("{}-inner", prefix_cls)}>
+        {loading_icon.clone()}
+        <span class={format!("{}-inner", prefix_cls.clone())}>
         if *inner_checked {
             {props.checked_children.clone()}
         }
