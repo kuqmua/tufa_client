@@ -30,7 +30,7 @@ pub struct SwitchProps {
     pub unchecked_children: Children,
     pub on_change: Option<Callback<ChangeData>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
-    pub on_click: Option<Callback<OnClickInput>>,
+    pub on_click: Option<Callback<(bool, MouseEvent)>>,
     pub tab_index: Option<i32>,
     pub checked: Option<()>,
     pub default_checked: Option<()>,
@@ -57,18 +57,6 @@ pub struct SwitchProps {
 //   title?: string;
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct OnClickInput {
-    clicked: bool,
-    mouse_event: MouseEvent,
-}
-
-#[derive(Debug, PartialEq, Eq, Clone)]
-pub struct TriggerChangeInput {
-    new_checked: bool,
-    mouse_event: MouseEvent,
-}
-
 #[function_component(Switch)]
 pub fn switch(props: &SwitchProps) -> Html {
     let class = match props.class.clone() {
@@ -89,7 +77,7 @@ pub fn switch(props: &SwitchProps) -> Html {
         Some(okd) => okd,
     };
     let on_click = match props.on_click.clone() {
-        None => Callback::from(|_: OnClickInput| {}),
+        None => Callback::from(|_: (bool, MouseEvent)| {}),
         Some(okd) => okd,
     };
     let tab_index = match props.tab_index {
@@ -117,10 +105,10 @@ pub fn switch(props: &SwitchProps) -> Html {
         (false, false) => false,
     });
     let inner_checked_first_cloned = inner_checked.clone();
-    let trigger_change = move |e: TriggerChangeInput| {
+    let trigger_change = move |e: (bool, MouseEvent)| {
         let mut merged_checked = *inner_checked_first_cloned;
         if !disabled {
-            merged_checked = e.new_checked;
+            merged_checked = e.0;
             inner_checked_first_cloned.clone().set(merged_checked);
             // onChange?.(mergedChecked, event);
         }
@@ -164,15 +152,9 @@ pub fn switch(props: &SwitchProps) -> Html {
     let trigger_change_second_cloned = trigger_change;
     let on_click_cloned = on_click;
     let on_internal_click = move |e: MouseEvent| {
-        let trigget_change_input = TriggerChangeInput {
-            new_checked: !*inner_checked_cloned,
-            mouse_event: e.clone(),
-        };
+        let trigget_change_input = (!*inner_checked_cloned, e.clone());
         let ret = trigger_change_second_cloned(trigget_change_input);
-        on_click_cloned.emit(OnClickInput {
-            clicked: ret,
-            mouse_event: e,
-        });
+        on_click_cloned.emit((ret, e));
     };
 
     //     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
