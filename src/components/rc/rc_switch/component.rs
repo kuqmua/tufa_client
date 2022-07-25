@@ -7,6 +7,8 @@ use yew::Callback;
 use yew::Children;
 use yew::Html;
 use yew::Properties;
+use yew_stdweb::events::ChangeData;
+use yewdux::prelude::Changed;
 
 // import * as React from 'react';
 // import classNames from 'classnames';
@@ -24,11 +26,11 @@ pub struct SwitchProps {
     pub class: Option<String>,
     pub prefix_cls: Option<String>,
     pub disabled: Option<()>,
-    pub checked_children: Children,   //
-    pub unchecked_children: Children, //Children
-    //   pub on_change?: SwitchChangeEventHandler; //todo
+    pub checked_children: Children,
+    pub unchecked_children: Children,
+    pub on_change: Option<Callback<ChangeData>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
-    pub on_click: Option<Callback<OnClickInput>>, //todo
+    pub on_click: Option<Callback<OnClickInput>>,
     pub tab_index: Option<i32>,
     pub checked: Option<()>,
     pub default_checked: Option<()>,
@@ -55,9 +57,15 @@ pub struct SwitchProps {
 //   title?: string;
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct OnClickInput {
     clicked: bool,
+    mouse_event: MouseEvent,
+}
+
+#[derive(Debug, PartialEq, Eq, Clone)]
+pub struct TriggerChangeInput {
+    new_checked: bool,
     mouse_event: MouseEvent,
 }
 
@@ -72,7 +80,10 @@ pub fn switch(props: &SwitchProps) -> Html {
         Some(pc) => pc,
     };
     let disabled = props.disabled.clone().is_some();
-    // //   pub on_change?: SwitchChangeEventHandler; //todo
+    // let on_change = props.on_change.clone() {
+    //     None => Callback::from(|_: ChangedData| {}),
+    //     Some(oc) => oc,
+    // };
     let on_key_down = match props.on_key_down.clone() {
         None => Callback::from(|_: KeyboardEvent| {}),
         Some(okd) => okd,
@@ -87,7 +98,6 @@ pub fn switch(props: &SwitchProps) -> Html {
     };
     let checked = props.checked.is_some();
     let default_checked = props.default_checked.is_some();
-    // pub loading_icon: Option<Html>, //todo
     let loading_icon = match props.loading_icon.clone() {
         None => html! {},
         Some(li) => li,
@@ -100,38 +110,46 @@ pub fn switch(props: &SwitchProps) -> Html {
         None => String::from(""),
         Some(t) => t,
     };
-    let inner_checked_handle = match (checked, default_checked) {
+    let inner_checked = use_state(|| match (checked, default_checked) {
         (true, true) => checked,
         (true, false) => checked,
         (false, true) => default_checked,
         (false, false) => false,
-    };
-    let inner_checked = use_state(|| inner_checked_handle);
-    //     const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
-    //       value: checked,
-    //       defaultValue: defaultChecked,
-    //     });
+    });
     let inner_checked_first_cloned = inner_checked.clone();
-    let trigger_change = move |new_checked: bool| {
-        //event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+    let trigger_change = move |e: TriggerChangeInput| {
         let mut merged_checked = *inner_checked_first_cloned;
         if !disabled {
-            merged_checked = new_checked;
+            merged_checked = e.new_checked;
             inner_checked_first_cloned.clone().set(merged_checked);
             // onChange?.(mergedChecked, event);
         }
         merged_checked
     };
+    //     function triggerChange(
+    //       newChecked: boolean,
+    //       event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+    //     ) {
+    //       let mergedChecked = innerChecked;
+
+    //       if (!disabled) {
+    //         mergedChecked = newChecked;
+    //         setInnerChecked(mergedChecked);
+    //         onChange?.(mergedChecked, event);
+    //       }
+
+    //       return mergedChecked;
+    //     }
     let trigger_change_first_cloned = trigger_change.clone();
     let on_internal_key_down = move |e: KeyboardEvent| {
-        let code = e.code();
-        //todo
-        if code == *"LEFT" {
-            trigger_change_first_cloned(false);
-        } else if code == *"RIGHT" {
-            trigger_change_first_cloned(true);
-        }
-        //   onKeyDown?.(e);
+        // let code = e.code();
+        // //todo
+        // if code == *"LEFT" {
+        //     trigger_change_first_cloned(false);
+        // } else if code == *"RIGHT" {
+        //     trigger_change_first_cloned(true);
+        // }
+        // //   onKeyDown?.(e);
     };
 
     //     function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
@@ -143,10 +161,14 @@ pub fn switch(props: &SwitchProps) -> Html {
     //       onKeyDown?.(e);
     //     }
     let inner_checked_cloned = inner_checked.clone();
-    let trigger_change_second_cloned = trigger_change.clone();
-    let on_click_cloned = on_click.clone();
+    let trigger_change_second_cloned = trigger_change;
+    let on_click_cloned = on_click;
     let on_internal_click = move |e: MouseEvent| {
-        let ret = trigger_change_second_cloned(!*inner_checked_cloned);
+        let trigget_change_input = TriggerChangeInput {
+            new_checked: !*inner_checked_cloned,
+            mouse_event: e.clone(),
+        };
+        let ret = trigger_change_second_cloned(trigget_change_input);
         on_click_cloned.emit(OnClickInput {
             clicked: ret,
             mouse_event: e,
