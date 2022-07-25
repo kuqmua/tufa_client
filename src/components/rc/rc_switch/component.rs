@@ -75,19 +75,15 @@ pub fn switch(prop: &SwitchProps) -> Html {
         Some(pc) => pc,
     };
     let disabled = props.disabled.clone().is_some();
-    let on_click = match props.on_click.clone() {
-        None => Callback::from(|_: (bool, MouseEvent)| {}),
-        Some(okd) => okd,
-    };
-    let tab_index = match props.tab_index {
-        None => String::from(""),
-        Some(ti) => ti.to_string(),
-    };
     let checked = props.checked.is_some();
     let default_checked = props.default_checked.is_some();
     let loading_icon = match props.loading_icon.clone() {
         None => html! {},
         Some(li) => li,
+    };
+    let tab_index = match props.tab_index {
+        None => String::from(""),
+        Some(ti) => ti.to_string(),
     };
     let style = match props.style.clone() {
         None => String::from(""),
@@ -133,13 +129,14 @@ pub fn switch(prop: &SwitchProps) -> Html {
     let trigger_change_second_cloned = trigger_change;
     let on_internal_click = move |e: MouseEvent| {
         let trigger_change_second_cloned_cloned = trigger_change_second_cloned.clone();
-        let on_click_cloned = on_click.clone();
         let trigger_change_input = (
             !*inner_checked_cloned.clone(),
             MouseOrKeyboardEvent::MouseEvent(e.clone()),
         );
         let ret = trigger_change_second_cloned_cloned(trigger_change_input);
-        on_click_cloned.emit((ret, e));
+        if let Some(on_click) = props.on_click.clone() {
+            on_click.emit((ret, e));
+        }
     };
     let on_internal_click_cloned = on_internal_click;
     let switch_class_name = match (*inner_checked, disabled) {
@@ -154,7 +151,10 @@ pub fn switch(prop: &SwitchProps) -> Html {
     let inner_checked_third = *inner_checked;
     html! {
       <button
-        // {...restProps}
+        tab_index={tab_index}
+        style={style}
+        title={title}
+        // {...restProps} //some dynamic unhandled props
         type="button"
         role="switch"
         aria-checked={inner_checked_third.clone().to_string()}
