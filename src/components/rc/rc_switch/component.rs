@@ -57,7 +57,7 @@ pub struct SwitchProps {
 //   title?: string;
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum MouseOrKeyboardEvent {
     MouseEvent(MouseEvent),
     KeyboardEvent(KeyboardEvent),
@@ -75,10 +75,6 @@ pub fn switch(prop: &SwitchProps) -> Html {
         Some(pc) => pc,
     };
     let disabled = props.disabled.clone().is_some();
-    let on_key_down = match props.on_key_down.clone() {
-        None => Callback::from(|_: KeyboardEvent| {}),
-        Some(okd) => okd,
-    };
     let on_click = match props.on_click.clone() {
         None => Callback::from(|_: (bool, MouseEvent)| {}),
         Some(okd) => okd,
@@ -109,7 +105,6 @@ pub fn switch(prop: &SwitchProps) -> Html {
     });
     let inner_checked_first_cloned = inner_checked.clone();
     let trigger_change = move |e: (bool, MouseOrKeyboardEvent)| {
-        //todo KeyBoardevent
         let mut merged_checked = *inner_checked_first_cloned;
         if !disabled {
             merged_checked = e.0;
@@ -124,25 +119,18 @@ pub fn switch(prop: &SwitchProps) -> Html {
     let on_internal_key_down = move |e: KeyboardEvent| {
         let trigger_change_cloned_cloned = trigger_change_cloned.clone();
         let code = e.code();
-        // //todo
+        // //todo - codes left and right
         if code == *"LEFT" {
-            trigger_change_cloned_cloned((false, MouseOrKeyboardEvent::KeyboardEvent(e)));
+            trigger_change_cloned_cloned((false, MouseOrKeyboardEvent::KeyboardEvent(e.clone())));
         } else if code == *"RIGHT" {
-            trigger_change_cloned_cloned((true, MouseOrKeyboardEvent::KeyboardEvent(e)));
+            trigger_change_cloned_cloned((true, MouseOrKeyboardEvent::KeyboardEvent(e.clone())));
         }
-        // //   onKeyDown?.(e);
+        if let Some(on_key_down) = props.on_key_down.clone() {
+            on_key_down.emit(e);
+        }
     };
-
-    //     function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-    //       if (e.which === KeyCode.LEFT) {
-    //         triggerChange(false, e);
-    //       } else if (e.which === KeyCode.RIGHT) {
-    //         triggerChange(true, e);
-    //       }
-    //       onKeyDown?.(e);
-    //     }
     let inner_checked_cloned = inner_checked.clone();
-    let trigger_change_second_cloned = trigger_change.clone();
+    let trigger_change_second_cloned = trigger_change;
     let on_internal_click = move |e: MouseEvent| {
         let trigger_change_second_cloned_cloned = trigger_change_second_cloned.clone();
         let on_click_cloned = on_click.clone();
@@ -154,13 +142,6 @@ pub fn switch(prop: &SwitchProps) -> Html {
         on_click_cloned.emit((ret, e));
     };
     let on_internal_click_cloned = on_internal_click;
-
-    //     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
-    //       const ret = triggerChange(!innerChecked, e);
-    //       // [Legacy] trigger onClick with value
-    //       onClick?.(ret, e);
-    //     }
-
     let switch_class_name = match (*inner_checked, disabled) {
         (true, true) => format!(
             "{} {} {}-checked {}-disabled",
