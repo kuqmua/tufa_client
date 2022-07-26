@@ -4,30 +4,17 @@ use yew::function_component;
 use yew::html;
 use yew::use_state;
 use yew::Callback;
-use yew::Children;
 use yew::Html;
+use yew::NodeRef;
 use yew::Properties;
-// use yew_stdweb::events::ChangeData;
-// use yewdux::prelude::Changed;
-
-// import * as React from 'react';
-// import classNames from 'classnames';
-// import useMergedState from 'rc-util/lib/hooks/useMergedState';
-// import KeyCode from 'rc-util/lib/KeyCode';
-
-// export type SwitchChangeEventHandler = (
-//   checked: boolean,
-//   event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-// ) => void;
-// export type SwitchClickEventHandler = SwitchChangeEventHandler;
 
 #[derive(Debug, PartialEq, Properties, Clone)]
-pub struct SwitchProps {
+pub struct RcSwitchProps {
     pub class: Option<String>,
     pub prefix_cls: Option<String>,
     pub disabled: Option<()>,
-    pub checked_children: Children,
-    pub unchecked_children: Children,
+    pub checked_children: Option<Html>,   //todo
+    pub unchecked_children: Option<Html>, //todo
     pub on_change: Option<Callback<(bool, MouseOrKeyboardEvent)>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
     pub on_click: Option<Callback<(bool, MouseEvent)>>,
@@ -39,32 +26,14 @@ pub struct SwitchProps {
     pub title: Option<String>,
 }
 
-// interface SwitchProps
-//   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick'> {
-//   className?: string;
-//   prefixCls?: string;
-//   disabled?: boolean;
-//   checkedChildren?: React.ReactNode;
-//   unCheckedChildren?: React.ReactNode;
-//   onChange?: SwitchChangeEventHandler;
-//   onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
-//   onClick?: SwitchClickEventHandler;
-//   tabIndex?: number;
-//   checked?: boolean;
-//   defaultChecked?: boolean;
-//   loadingIcon?: React.ReactNode;
-//   style?: React.CSSProperties;
-//   title?: string;
-// }
-
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum MouseOrKeyboardEvent {
     MouseEvent(MouseEvent),
     KeyboardEvent(KeyboardEvent),
 }
 
-#[function_component(Switch)]
-pub fn switch(prop: &SwitchProps) -> Html {
+#[function_component(RcSwitch)]
+pub fn rc_switch(prop: &RcSwitchProps) -> Html {
     let props = prop.clone();
     let class = match props.class.clone() {
         None => String::from(""),
@@ -75,6 +44,14 @@ pub fn switch(prop: &SwitchProps) -> Html {
         Some(pc) => pc,
     };
     let disabled = props.disabled.clone().is_some();
+    let checked_children = match props.checked_children {
+        None => html! {},
+        Some(cc) => cc,
+    };
+    let unchecked_children = match props.unchecked_children {
+        None => html! {},
+        Some(uc) => uc,
+    };
     let checked = props.checked.is_some();
     let default_checked = props.default_checked.is_some();
     let loading_icon = match props.loading_icon.clone() {
@@ -115,10 +92,11 @@ pub fn switch(prop: &SwitchProps) -> Html {
     let on_internal_key_down = move |e: KeyboardEvent| {
         let trigger_change_cloned_cloned = trigger_change_cloned.clone();
         let code = e.code();
-        // //todo - codes left and right
-        if code == *"LEFT" {
+        if code == *"ArrowLeft" {
+            //todo maybe few same codes
             trigger_change_cloned_cloned((false, MouseOrKeyboardEvent::KeyboardEvent(e.clone())));
-        } else if code == *"RIGHT" {
+        } else if code == *"ArrowRight" {
+            //todo maybe few same codes
             trigger_change_cloned_cloned((true, MouseOrKeyboardEvent::KeyboardEvent(e.clone())));
         }
         if let Some(on_key_down) = props.on_key_down.clone() {
@@ -167,10 +145,10 @@ pub fn switch(prop: &SwitchProps) -> Html {
         {loading_icon.clone()}
         <span class={format!("{}-inner", prefix_cls.clone())}>
         if *inner_checked {
-            {props.checked_children.clone()}
+            {checked_children.clone()}
         }
         else {
-            {props.unchecked_children.clone()}
+            {unchecked_children.clone()}
         }
         </span>
       </button>

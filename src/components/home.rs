@@ -50,12 +50,13 @@ use crate::constants::HEADER_HEIGHT_PX;
 use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
 use crate::components::rc::rc_animate::util::motion::get_option_style;
+use crate::components::rc::rc_checkbox::component::RcCheckBox;
 use crate::components::rc::rc_progress::circle::Circle;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::StrokeColor;
 use crate::components::rc::rc_progress::line::Line;
-
-use crate::components::rc::rc_checkbox::component::RcCheckBox;
+use crate::components::rc::rc_switch::component::RcSwitch;
+use crate::components::rc::rc_switch::component::RcSwitchProps;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
@@ -255,6 +256,9 @@ pub fn home() -> Html {
       //   // })}
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
+      <RcSwitch
+        // title={Some(String::from("title"))}
+      />
       <RcCheckBox
         on_click={Some(Callback::from(|_|{log!("looog");}))}
       />
