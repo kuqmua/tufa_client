@@ -25,6 +25,9 @@ pub struct RcSwitchProps {
     pub style: Option<String>,
     pub title: Option<String>,
     pub reference: NodeRef,
+    //
+    //size: Option<SwitchSize>,
+    //auto_focus: Option<()>,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
