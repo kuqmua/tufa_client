@@ -49,6 +49,7 @@ use crate::constants::HEADER_HEIGHT_PX;
 // use crate::helpers::rotate::Rotate;
 use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
+use crate::components::ant_design::switch::Switch;
 use crate::components::rc::rc_animate::util::motion::get_option_style;
 use crate::components::rc::rc_checkbox::component::RcCheckBox;
 use crate::components::rc::rc_progress::circle::Circle;
@@ -257,6 +258,7 @@ pub fn home() -> Html {
       //   // })}
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
+      <Switch/>
       <RcSwitch
         reference={NodeRef::default()}
         title={Some(String::from("title"))}
