@@ -24,6 +24,7 @@ pub struct RcSwitchProps {
     pub loading_icon: Option<Html>, //todo
     pub style: Option<String>,
     pub title: Option<String>,
+    pub reference: NodeRef,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -138,7 +139,7 @@ pub fn rc_switch(prop: &RcSwitchProps) -> Html {
         aria-checked={inner_checked_third.clone().to_string()}
         disabled={disabled}
         class={switch_class_name.clone()}
-        // ref={ref}
+        ref={props.reference.clone()}
         onkeydown={on_internal_key_down}
         onclick={on_internal_click_cloned}
       >
@@ -154,83 +155,3 @@ pub fn rc_switch(prop: &RcSwitchProps) -> Html {
       </button>
     }
 }
-
-// const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
-//   (
-//     {
-//       prefixCls = 'rc-switch',
-//       className,
-//       checked,
-//       defaultChecked,
-//       disabled,
-//       loadingIcon,
-//       checkedChildren,
-//       unCheckedChildren,
-//       onClick,
-//       onChange,
-//       onKeyDown,
-//       ...restProps
-//     },
-//     ref,
-//   ) => {
-//     const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
-//       value: checked,
-//       defaultValue: defaultChecked,
-//     });
-
-//     function triggerChange(
-//       newChecked: boolean,
-//       event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
-//     ) {
-//       let mergedChecked = innerChecked;
-
-//       if (!disabled) {
-//         mergedChecked = newChecked;
-//         setInnerChecked(mergedChecked);
-//         onChange?.(mergedChecked, event);
-//       }
-
-//       return mergedChecked;
-//     }
-
-//     function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-//       if (e.which === KeyCode.LEFT) {
-//         triggerChange(false, e);
-//       } else if (e.which === KeyCode.RIGHT) {
-//         triggerChange(true, e);
-//       }
-//       onKeyDown?.(e);
-//     }
-
-//     function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
-//       const ret = triggerChange(!innerChecked, e);
-//       // [Legacy] trigger onClick with value
-//       onClick?.(ret, e);
-//     }
-
-//     const switchClassName = classNames(prefixCls, className, {
-//       [`${prefixCls}-checked`]: innerChecked,
-//       [`${prefixCls}-disabled`]: disabled,
-//     });
-
-//     return (
-//       <button
-//         {...restProps}
-//         type="button"
-//         role="switch"
-//         aria-checked={innerChecked}
-//         disabled={disabled}
-//         className={switchClassName}
-//         ref={ref}
-//         onKeyDown={onInternalKeyDown}
-//         onClick={onInternalClick}
-//       >
-//         {loadingIcon}
-//         <span className={`${prefixCls}-inner`}>
-//           {innerChecked ? checkedChildren : unCheckedChildren}
-//         </span>
-//       </button>
-//     );
-//   },
-// );
-// Switch.displayName = 'Switch';

@@ -60,6 +60,7 @@ use crate::components::rc::rc_switch::component::RcSwitchProps;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
+use yew::NodeRef;
 use yew::{function_component, html, use_state, Callback};
 
 #[derive(Debug, PartialEq)]
@@ -257,7 +258,8 @@ pub fn home() -> Html {
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
       <RcSwitch
-        // title={Some(String::from("title"))}
+        reference={NodeRef::default()}
+        title={Some(String::from("title"))}
       />
       <RcCheckBox
         on_click={Some(Callback::from(|_|{log!("looog");}))}
