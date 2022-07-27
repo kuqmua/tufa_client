@@ -270,6 +270,7 @@ pub fn home() -> Html {
       />
       <CustomCheckBox
         on_click={Some(Callback::from(|_|{log!("looog");}))}
+        reference={NodeRef::default()}
       />
       <Badge
         count={Some(2)}

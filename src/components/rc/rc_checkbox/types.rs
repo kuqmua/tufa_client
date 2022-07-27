@@ -1,9 +1,11 @@
 use std::fmt;
+// use yew_stdweb::ChangeData;
 use web_sys::KeyboardEvent;
 use yew::Callback;
 use yew::Event;
 use yew::FocusEvent;
 use yew::MouseEvent;
+use yew::NodeRef;
 use yew::Properties;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -101,7 +103,7 @@ pub struct CustomCheckBoxProps {
     pub disabled: Option<()>,
     pub on_focus: Option<Callback<FocusEvent>>,
     pub on_blur: Option<Callback<FocusEvent>>,
-    // pub on_change: Option<Callback<Event>>,
+    pub on_change: Option<Callback<()>>, //Event//ChangeData
     pub on_click: Option<Callback<MouseEvent>>,
     pub on_key_down: Option<Callback<KeyboardEvent>>,
     pub on_key_press: Option<Callback<KeyboardEvent>>,
@@ -111,4 +113,5 @@ pub struct CustomCheckBoxProps {
     pub required: Option<()>,
     pub auto_focus: Option<()>,
     pub value: Option<String>,
+    pub reference: NodeRef,
 }
