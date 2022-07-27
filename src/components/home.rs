@@ -56,15 +56,16 @@ use crate::components::rc::rc_progress::circle::Circle;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::StrokeColor;
 use crate::components::rc::rc_progress::line::Line;
-use crate::components::rc::rc_switch::component::RcSwitch;
-use crate::components::rc::rc_switch::component::RcSwitchProps;
+// use crate::components::rc::rc_switch::component::RcSwitch;
+// use crate::components::rc::rc_switch::component::RcSwitchProps;
+use crate::components::ant_design::switch::custom_component::CustomSwitch;
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
 use yew::NodeRef;
 use yew::{function_component, html, use_state, Callback};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum ExpanderStatus {
     Closed,
     Share,
@@ -258,8 +259,8 @@ pub fn home() -> Html {
       //   // })}
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
-      <Switch/>
-      <RcSwitch
+      // <Switch/>
+      <CustomSwitch
         reference={NodeRef::default()}
         title={Some(String::from("title"))}
       />
@@ -280,44 +281,44 @@ pub fn home() -> Html {
         // </a>
       </Badge>
       // <BackTop></BackTop>
-      <Circle
-        percent={Some(Percent::Number(25.0))}
-        stroke_width={4.0}
-        stroke_color={
-          Some(StrokeColor {
-                colors: vec![String::from("#D3D3D3")],
-            })
-        }
-        trail_color={Some(String::from("#D9D9D9"))}
-      />
+      // <Circle
+      //   percent={Some(Percent::Number(25.0))}
+      //   stroke_width={4.0}
+      //   stroke_color={
+      //     Some(StrokeColor {
+      //           colors: vec![String::from("#D3D3D3")],
+      //       })
+      //   }
+      //   trail_color={Some(String::from("#D9D9D9"))}
+      // />
 
-      <svg
-        class="rc-progress-circle"
-        viewBox="0 0 100 100"
-      >
-        <circle
-          class="rc-progress-circle-trail"
-          r="48"
-          cx="50"
-          cy="50"
-          stroke="#D9D9D9"
-          stroke-linecap="round"
-          stroke-width="1"
-          style="stroke: rgb(217, 217, 217); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 0; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity 0.3s ease 0s; fill-opacity: 0;"
-        >
-        </circle>
-        <circle
-          class="rc-progress-circle-path"
-          r="48"
-          cx="50"
-          cy="50"
-          stroke-linecap="round"
-          stroke-width="4"
-          opacity="1"
-          style="stroke: rgb(211, 211, 211); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 228.195; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity ease 0s; fill-opacity: 0;"
-        >
-        </circle>
-      </svg>
+      // <svg
+      //   class="rc-progress-circle"
+      //   viewBox="0 0 100 100"
+      // >
+      //   <circle
+      //     class="rc-progress-circle-trail"
+      //     r="48"
+      //     cx="50"
+      //     cy="50"
+      //     stroke="#D9D9D9"
+      //     stroke-linecap="round"
+      //     stroke-width="1"
+      //     style="stroke: rgb(217, 217, 217); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 0; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity 0.3s ease 0s; fill-opacity: 0;"
+      //   >
+      //   </circle>
+      //   <circle
+      //     class="rc-progress-circle-path"
+      //     r="48"
+      //     cx="50"
+      //     cy="50"
+      //     stroke-linecap="round"
+      //     stroke-width="4"
+      //     opacity="1"
+      //     style="stroke: rgb(211, 211, 211); stroke-dasharray: 301.593px, 301.593; stroke-dashoffset: 228.195; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset 0.3s ease 0s, stroke-dasharray 0.3s ease 0s, stroke 0.3s ease 0s, stroke-width 0.06s ease 0.3s, opacity ease 0s; fill-opacity: 0;"
+      //   >
+      //   </circle>
+      // </svg>
 
 
         //       <Line
