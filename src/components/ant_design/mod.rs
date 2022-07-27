@@ -42,3 +42,11 @@ pub mod transfer;
 pub mod tree;
 pub mod tree_select;
 pub mod upload;
+
+pub mod data_display;
+pub mod data_entry;
+pub mod feedback;
+pub mod general;
+pub mod layout;
+pub mod navigation;
+pub mod other;
