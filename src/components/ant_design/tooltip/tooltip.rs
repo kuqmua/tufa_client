@@ -1,7 +1,7 @@
-use crate::components::ant_design::button::Button;
+use crate::components::ant_design::general::button::Button;
 use crate::components::ant_design::helpers::offset::Offset;
 use crate::components::ant_design::tooltip::placements::get_placements;
-use crate::components::ant_design::tooltip::placements::AdjustOverflow;
+// use crate::components::ant_design::tooltip::placements::AdjustOverflow;
 use crate::components::ant_design::tooltip::placements::AdjustOverflowOrBool;
 use crate::components::ant_design::tooltip::placements::PlacementsConfig;
 use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
@@ -220,7 +220,7 @@ pub fn split_object(element: ElementType, omitted_keys_array: Vec<&str>) -> Spli
 // };
 // const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
-use crate::components::ant_design::button::ButtonProps;
+use crate::components::ant_design::general::button::ButtonProps;
 
 use super::placements::PointsOffset;
 
@@ -435,15 +435,15 @@ pub enum GetPlacementsTooltipValue {
 #[function_component(Tooltip)]
 pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     // class Tooltip extends React.Component<TooltipProps, any> {
-    let default_placement = TooltipPlacement::Top;
-    let default_transition_name = "zoom-big-fast";
-    let default_mouseEnterDelay = 0.1;
-    let default_mouseLeaveDelay = 0.1;
-    let default_arrowPointAtCenter = false;
-    let default_autoAdjustOverflow = true;
+    // let default_placement = TooltipPlacement::Top;
+    // let default_transition_name = "zoom-big-fast";
+    // let default_mouseEnterDelay = 0.1;
+    // let default_mouseLeaveDelay = 0.1;
+    // let default_arrowPointAtCenter = false;
+    // let default_autoAdjustOverflow = true;
 
     let visible_state = use_state(|| false);
-    let visible_state_cloned_first = visible_state.clone();
+    let visible_state_cloned_first = visible_state;
     //todo props.defaultVisible
     match props.tooltip_props.clone() {
         TooltipProps::WithTitle(with_title) => match with_title.visible {
@@ -480,7 +480,7 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
         TooltipProps::WithTitle(props) => props.on_visible_change.clone(),
         TooltipProps::WithOverlay(props) => props.on_visible_change.clone(),
     };
-    let on_visible_change = |visible: bool| {
+    let _on_visible_change = |visible: bool| {
         if let None = visible_prop {
             // this.setState({ visible: this.isNoTitle() ? false : visible });
         }
@@ -550,7 +550,7 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
     //       this.tooltip = node;
     //     };
 
-    let on_popup_align = |dom_node: Html, align: PointsOffset| {
+    let _on_popup_align = |_dom_node: Html, align: PointsOffset| {
         //, align: any
         let placements = get_placements_tooltip();
         let points_placements_hashmap = match placements {
@@ -558,12 +558,12 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
             GetPlacementsTooltipValue::GetPlacements(hs) => hs,
         };
         let mut placement: Option<PointsOffset> = None;
-        for (key, value) in points_placements_hashmap {
+        for (_key, value) in points_placements_hashmap {
             if align.points[0] == value.points[0] && align.points[1] == value.points[1] {
                 placement = Some(value);
             }
         }
-        if let None = placement {
+        if placement.is_none() {
             return;
         }
         //   const placement = Object.keys(placements).filter(
@@ -576,8 +576,8 @@ pub fn tooltip(props: &TooltipPropsStruct) -> Html {
         //   }
         //   // 根据当前坐标设置动画点
         //   const rect = domNode.getBoundingClientRect();
-        let transform_origin_top = "50%";
-        let transform_origin_left = "50%";
+        // let transform_origin_top = "50%";
+        // let transform_origin_left = "50%";
         //   const transformOrigin = {
         //     top: '50%',
         //     left: '50%',

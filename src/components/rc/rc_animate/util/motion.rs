@@ -115,7 +115,7 @@ pub fn get_option_style() -> Option<bool> {
                 Some(document) => match document.create_element("div") {
                     //something to test creation dom method, no actual need in created element
                     Err(_) => None,
-                    Ok(element) => {
+                    Ok(_element) => {
                         let style_sheet = document.style_sheets();
                         log!(style_sheet);
                         None

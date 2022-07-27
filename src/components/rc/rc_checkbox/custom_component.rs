@@ -81,9 +81,9 @@ pub fn custom_checkbox(props: &CustomCheckBoxProps) -> Html {
         Some(v) => v,
     };
     let auto_focus = props.auto_focus.clone().is_some();
-    let disabled_cloned = props.disabled.clone();
+    let _disabled_cloned = props.disabled.clone();
     let checked_state_cloned = checked_state.clone();
-    let handle_change = move |e: Event| {
+    let handle_change = move |_e: Event| {
         checked_state_cloned.set(!*checked_state_cloned);
     };
     let class_string = match (*checked_state, disabled) {

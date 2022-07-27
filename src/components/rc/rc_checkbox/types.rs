@@ -2,7 +2,7 @@ use std::fmt;
 // use yew_stdweb::ChangeData;
 use web_sys::KeyboardEvent;
 use yew::Callback;
-use yew::Event;
+// use yew::Event;
 use yew::FocusEvent;
 use yew::MouseEvent;
 use yew::NodeRef;

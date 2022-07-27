@@ -1,4 +1,4 @@
-use crate::components::ant_design::icon::Icon;
+use crate::components::ant_design::general::icon::Icon;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;

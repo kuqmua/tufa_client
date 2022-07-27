@@ -1,4 +1,4 @@
-use crate::components::ant_design::avatar::Avatar;
+// use crate::components::ant_design::avatar::Avatar;
 // use crate::components::ant_design::avatar::AvatarContent;
 // use crate::components::ant_design::avatar::AvatarImage;
 // use crate::components::ant_design::button::LoadingProp;
@@ -13,11 +13,11 @@ use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 // use crate::components::ant_design::alert::AlertType;
 use crate::components::ant_design::badge::BadgeStatus;
-use crate::components::ant_design::button::Button;
-use crate::components::ant_design::button::ButtonType;
-use crate::components::ant_design::button::Size;
+use crate::components::ant_design::general::button::Button;
+use crate::components::ant_design::general::button::ButtonType;
+use crate::components::ant_design::general::button::Size;
 // use crate::components::ant_design::helpers::offset::Offset;
-use crate::components::ant_design::icon::Icon;
+use crate::components::ant_design::general::icon::Icon;
 // use crate::components::ant_design::paragraph::Paragraph;
 // use crate::components::ant_design::svg::down::Down;
 // use crate::components::ant_design::svg::helpers::svg_type::List;
@@ -51,7 +51,7 @@ use crate::constants::HEADER_HEIGHT_PX;
 // use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
 use crate::components::rc::rc_animate::util::motion::get_option_style;
-use crate::components::rc::rc_checkbox::component::RcCheckBox;
+// use crate::components::rc::rc_checkbox::component::RcCheckBox;
 use crate::components::rc::rc_checkbox::custom_component::CustomCheckBox;
 // use crate::components::rc::rc_progress::circle::Circle;
 // use crate::components::rc::rc_progress::interface::Percent;
@@ -181,7 +181,7 @@ pub fn home() -> Html {
       />
     };
     // let rotate = Rotate::new(60).unwrap();
-    let g = html! {
+    let _g = html! {
       <Icon
         svg_type={
           SvgType::Up(

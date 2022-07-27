@@ -1,10 +1,8 @@
 use super::interface::{StrokeColor, StrokeLinecapType};
-// use crate::components::rc::rc_progress::common::use_transition_duration;
 use crate::components::rc::rc_progress::hooks::use_id::use_id;
 use crate::components::rc::rc_progress::interface::GapPositionType;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::ProgressProps;
-use std::collections::HashMap;
 use std::fmt;
 use yew::Callback;
 use yew::Html;
@@ -250,7 +248,7 @@ pub fn circle(props: &ProgressProps) -> Html {
             .enumerate()
             .map(|(index, _element)| {
                 let index_as_f64 = index as f64;
-                let color = match index_as_f64 < current {
+                let _color = match index_as_f64 < current {
                     true => stroke_color_list[0].clone(),
                     false => trail_color.clone(),
                 };//todo

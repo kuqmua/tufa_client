@@ -11,10 +11,10 @@
 // import scrollTo from '../_util/scrollTo';
 // import { throttleByAnimationFrame } from '../_util/throttleByAnimationFrame';
 
-use colorsys::Hsl;
-use gloo::console::error;
-use tufa_common::helpers::numeric::Numeric;
-use yew::{function_component, html, use_state, Callback, Children, Html, MouseEvent, Properties};
+// use colorsys::Hsl;
+// use gloo::console::error;
+// use tufa_common::helpers::numeric::Numeric;
+use yew::{function_component, html, Properties};
 // export interface BackTopProps {
 //   visibilityHeight?: number;
 //   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -45,7 +45,7 @@ pub struct SetVisible {
 }
 
 #[function_component(BackTop)]
-pub fn back_top(props: &BackTopProps) -> Html {
+pub fn back_top(_props: &BackTopProps) -> Html {
     // let visibility_height =  props.visibility_height.unwrap_or(400);
 
     // let visible = use_state(|| false);

@@ -1,5 +1,5 @@
 use web_sys::MouseEvent;
-use yew::{function_component, html, use_state, Callback, Children, Html, Properties};
+use yew::{function_component, html, use_state, Callback, Properties};
 
 // /* eslint react/prop-types: 0 */
 // import React from 'react';
@@ -45,28 +45,28 @@ pub struct AnimateState {
 
 #[function_component(Animate)]
 pub fn animate(props: &AnimateProps) -> Html {
-    let is_animate = true;
-    let animation = (); // {},
-    let component: &str = "span";
-    let component_props = (); // {},
-    let transition_enter = true;
-    let transition_leave = true;
-    let transition_appear = false;
-    let on_end: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
-    let on_enter: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
-    let on_leave: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
-    let on_appear: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
-                                                                       //   componentDidMount() {
-    let currently_animating_keys = (); //{};
-    let keys_to_enter: Vec<String> = vec![];
-    let keys_to_leave: Vec<String> = vec![];
+    let _is_animate = true;
+    let _animation = (); // {},
+    let _component: &str = "span";
+    let _component_props = (); // {},
+    let _transition_enter = true;
+    let _transition_leave = true;
+    let _transition_appear = false;
+    let _on_end: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+    let _on_enter: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+    let _on_leave: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+    let _on_appear: Callback<MouseEvent> = Callback::from(move |_| {}); //noop,
+                                                                        //   componentDidMount() {
+                                                                        // let _currently_animating_keys = (); //{};
+    let _keys_to_enter: Vec<String> = vec![];
+    let _keys_to_leave: Vec<String> = vec![];
     let state = use_state(|| AnimateState {
         children: Vec::new(),
     }); //children: toArrayChildren(getChildrenFromProps(props)),
-    let children_refs = {};
-    let show_prop = props.show_prop.clone();
-    let state_cloned = state.clone();
-    let children = state_cloned.children.clone();
+    let _children_refs = {};
+    let show_prop = props.show_prop;
+    let state_cloned = state;
+    let _children = state_cloned.children.clone();
     if show_prop {
         //   children = children.filter((child) => {
         //     return !!child.props[showProp];
@@ -79,24 +79,24 @@ pub fn animate(props: &AnimateProps) -> Html {
     // });
     // }
     //   componentWillReceiveProps(nextProps) {
-    let next_props = props.clone();
-    let next_children = Vec::<()>::new(); //toArrayChildren(getChildrenFromProps(nextProps));
-                                          //     const props = this.props;
-                                          //     // exclusive needs immediate response
-                                          //     if (props.exclusive) {
-                                          //       Object.keys(this.currentlyAnimatingKeys).forEach((key) => {
-                                          //         this.stop(key);
-                                          //       });
-                                          //     }
-                                          //     const showProp = props.showProp;
-                                          //     const currentlyAnimatingKeys = this.currentlyAnimatingKeys;
-                                          //     // last props children if exclusive
-                                          //     const currentChildren = props.exclusive ?
-                                          //       toArrayChildren(getChildrenFromProps(props)) :
-                                          //       this.state.children;
-                                          //     // in case destroy in showProp mode
-                                          //     let newChildren = [];
-                                          // }
+    let _next_props = props.clone();
+    let _next_children = Vec::<()>::new(); //toArrayChildren(getChildrenFromProps(nextProps));
+                                           //     const props = this.props;
+                                           //     // exclusive needs immediate response
+                                           //     if (props.exclusive) {
+                                           //       Object.keys(this.currentlyAnimatingKeys).forEach((key) => {
+                                           //         this.stop(key);
+                                           //       });
+                                           //     }
+                                           //     const showProp = props.showProp;
+                                           //     const currentlyAnimatingKeys = this.currentlyAnimatingKeys;
+                                           //     // last props children if exclusive
+                                           //     const currentChildren = props.exclusive ?
+                                           //       toArrayChildren(getChildrenFromProps(props)) :
+                                           //       this.state.children;
+                                           //     // in case destroy in showProp mode
+                                           //     let newChildren = [];
+                                           // }
     html! {
            //     this.nextProps = nextProps;
     //     const nextChildren = toArrayChildren(getChildrenFromProps(nextProps));

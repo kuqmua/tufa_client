@@ -1,12 +1,12 @@
-use super::interface::GapPositionType;
-use crate::components::rc::rc_progress::interface::Percent;
-use crate::components::rc::rc_progress::interface::ProgressProps;
-use crate::components::rc::rc_progress::interface::StrokeColor;
-use crate::components::rc::rc_progress::interface::StrokeLinecapType;
+// use super::interface::GapPositionType;
+// use crate::components::rc::rc_progress::interface::Percent;
+// use crate::components::rc::rc_progress::interface::ProgressProps;
+// use crate::components::rc::rc_progress::interface::StrokeColor;
+// use crate::components::rc::rc_progress::interface::StrokeLinecapType;
 use js_sys::Date;
-use lazy_static::lazy_static;
+// use lazy_static::lazy_static;
 use yew::functional::use_effect;
-use yew::{function_component, html, use_state, Callback, Html};
+use yew::{html, Html};
 // import { useRef, useEffect } from 'react';
 // import type { ProgressProps } from './interface';
 
@@ -30,9 +30,9 @@ pub fn use_transition_duration() -> Vec<Html> {
     //   const prevTimeStamp = useRef(null);
 
     use_effect(|| {
-        let now = Date::now();
+        let _now = Date::now();
         // const now = Date.now();
-        let updated = false;
+        let _updated = false;
 
         // pathsRef.current.forEach((path) => {
         //   if (!path) {
