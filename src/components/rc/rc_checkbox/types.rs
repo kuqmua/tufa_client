@@ -86,3 +86,29 @@ pub struct RcCheckBoxProps {
     pub auto_focus: Option<()>,
     pub value: Option<String>,
 }
+
+#[derive(Debug, PartialEq, Properties, Clone)]
+pub struct CustomCheckBoxProps {
+    pub prefix_cls: Option<String>,
+    pub class_name: Option<String>,
+    pub style: Option<String>, //React.CSSProperties
+    pub name: Option<String>,
+    pub id: Option<String>,
+    pub type_handle: Option<InputType>,
+    pub title: Option<String>,
+    pub default_checked: Option<()>, //?: number | boolean;
+    pub checked: Option<()>,         //?: number | boolean;
+    pub disabled: Option<()>,
+    pub on_focus: Option<Callback<FocusEvent>>,
+    pub on_blur: Option<Callback<FocusEvent>>,
+    // pub on_change: Option<Callback<Event>>,
+    pub on_click: Option<Callback<MouseEvent>>,
+    pub on_key_down: Option<Callback<KeyboardEvent>>,
+    pub on_key_press: Option<Callback<KeyboardEvent>>,
+    pub on_key_up: Option<Callback<KeyboardEvent>>,
+    pub tab_index: Option<i32>, //?: string | number;
+    pub read_only: Option<()>,
+    pub required: Option<()>,
+    pub auto_focus: Option<()>,
+    pub value: Option<String>,
+}

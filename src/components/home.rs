@@ -13,9 +13,10 @@ use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::alert::Alert;
 use crate::components::ant_design::alert::AlertType;
 use crate::components::ant_design::badge::BadgeStatus;
+use crate::components::ant_design::button::Button;
+use crate::components::ant_design::button::ButtonType;
+use crate::components::ant_design::button::Size;
 use crate::components::ant_design::helpers::offset::Offset;
-// use crate::components::ant_design::button::Button;
-// use crate::components::ant_design::button::ButtonType;
 use crate::components::ant_design::icon::Icon;
 // use crate::components::ant_design::paragraph::Paragraph;
 // use crate::components::ant_design::svg::down::Down;
@@ -51,6 +52,7 @@ use crate::components::ant_design::back_top::BackTop;
 use crate::components::ant_design::badge::Badge;
 use crate::components::rc::rc_animate::util::motion::get_option_style;
 use crate::components::rc::rc_checkbox::component::RcCheckBox;
+use crate::components::rc::rc_checkbox::custom_component::CustomCheckBox;
 use crate::components::rc::rc_progress::circle::Circle;
 use crate::components::rc::rc_progress::interface::Percent;
 use crate::components::rc::rc_progress::interface::StrokeColor;
@@ -207,17 +209,17 @@ pub fn home() -> Html {
           padding: 10px;
         "
       >
-      //  <Button
-      //   //  placeholder={String::from("Button")}
-      //   //  disabled={Some(())}
-      //    button_type={ButtonType::Primary}
-      //   //  shape={Shape::Circle}
-      //   icon={Some(icon_inner_html.clone())}
-      //   size={Size::Large}
-      //   // ghost={Some(())}
-      //   // block={Some(())}
-      //   // loading={LoadingProp::Bool(true)}
-      //  />
+       <Button
+         placeholder={String::from("Button")}
+        //  disabled={Some(())}
+         button_type={ButtonType::Primary}
+        //  shape={Shape::Circle}
+        icon={Some(icon_inner_html.clone())}
+        size={Size::Large}
+        // ghost={Some(())}
+        // block={Some(())}
+        // loading={LoadingProp::Bool(true)}
+       />
       //  <Button
       //  //  placeholder={String::from("Button")}
       //  //  disabled={Some(())}
@@ -264,6 +266,9 @@ pub fn home() -> Html {
         title={Some(String::from("title"))}
       />
       <RcCheckBox
+        on_click={Some(Callback::from(|_|{log!("looog");}))}
+      />
+      <CustomCheckBox
         on_click={Some(Callback::from(|_|{log!("looog");}))}
       />
       <Badge
