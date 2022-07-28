@@ -1,9 +1,9 @@
+use crate::components::ant_design::data_display::tooltip::placements::get_placements;
 use crate::components::ant_design::general::button::Button;
 use crate::components::ant_design::helpers::offset::Offset;
-use crate::components::ant_design::tooltip::placements::get_placements;
 // use crate::components::ant_design::tooltip::placements::AdjustOverflow;
-use crate::components::ant_design::tooltip::placements::AdjustOverflowOrBool;
-use crate::components::ant_design::tooltip::placements::PlacementsConfig;
+use crate::components::ant_design::data_display::tooltip::placements::AdjustOverflowOrBool;
+use crate::components::ant_design::data_display::tooltip::placements::PlacementsConfig;
 use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
 use std::collections::HashMap;
 use yew::use_state;
