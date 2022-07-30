@@ -9,8 +9,7 @@ use yew::Properties;
 #[derive(Debug, PartialEq, Properties, Clone)]
 pub struct TransBtnProps {
     pub class_names: Vec<String>,
-    pub customize_icon: Option<Html>,
-    //   pub customize_icon_props: Option<any>,
+    pub customize_icon: Option<Html>,                //todo types
     pub on_mouse_down: Option<Callback<MouseEvent>>, //React.MouseEventHandler<HTMLSpanElement>
     pub on_click: Option<Callback<MouseEvent>>,      //React.MouseEventHandler<HTMLSpanElement>
     pub children: Children,
