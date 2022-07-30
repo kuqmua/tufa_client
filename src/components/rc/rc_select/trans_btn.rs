@@ -6,28 +6,15 @@ use yew::Children;
 use yew::Html;
 use yew::Properties;
 
-// import * as React from 'react';
-// import classNames from 'classnames';
-// import type { RenderNode } from './BaseSelect';
-
 #[derive(Debug, PartialEq, Properties, Clone)]
 pub struct TransBtnProps {
-    pub class_name: String,
+    pub class_names: Vec<String>,
     pub customize_icon: Option<Html>,
     //   pub customize_icon_props: Option<any>,
     pub on_mouse_down: Option<Callback<MouseEvent>>, //React.MouseEventHandler<HTMLSpanElement>
     pub on_click: Option<Callback<MouseEvent>>,      //React.MouseEventHandler<HTMLSpanElement>
     pub children: Children,
 }
-
-// export interface TransBtnProps {
-//   className: string;
-//   customizeIcon: RenderNode;
-//   customizeIconProps?: any;
-//   onMouseDown?: React.MouseEventHandler<HTMLSpanElement>;
-//   onClick?: React.MouseEventHandler<HTMLSpanElement>;
-//   children?: React.ReactNode;
-// }
 
 #[function_component(TransBtn)]
 pub fn trans_btn(props: &TransBtnProps) -> Html {
@@ -46,18 +33,34 @@ pub fn trans_btn(props: &TransBtnProps) -> Html {
     };
     let content = match props.customize_icon.clone() {
         None => {
-            // let b = classNames(className.split(/\s+/).map((cls) => `${cls}-icon`));
+            let icon_classes = props
+                .class_names
+                .clone()
+                .iter()
+                .map(|cls| format!("{}-icon", cls))
+                .fold(String::from(""), |mut acc, elem| {
+                    acc.push_str(&elem);
+                    acc
+                });
             html! {
-              <span class={String::from("")}>
+              <span class={icon_classes}>
                 {props.children.clone()}
               </span>
             }
         }
         Some(ci) => ci,
     };
+    let span_class = props
+        .class_names
+        .clone()
+        .iter()
+        .fold(String::from(""), |mut acc, elem| {
+            acc.push_str(elem);
+            acc
+        });
     html! {
       <span
-        class={props.class_name.clone()}
+        class={span_class}
         onmousedown={on_mouse_down.clone()}
         style={"user-select: none; -webkit-user-select: none".to_string()}
         unselectable="on"
@@ -68,49 +71,3 @@ pub fn trans_btn(props: &TransBtnProps) -> Html {
       </span>
     }
 }
-
-// const TransBtn: React.FC<TransBtnProps> = ({
-//   className,
-//   customizeIcon,
-//   customizeIconProps,
-//   onMouseDown,
-//   onClick,
-//   children,
-// }) => {
-//   let icon: React.ReactNode;
-
-//   if (typeof customizeIcon === 'function') {
-//     icon = customizeIcon(customizeIconProps);
-//   } else {
-//     icon = customizeIcon;
-//   }
-
-//   return (
-//     <span
-//       className={className}
-//       onMouseDown={(event) => {
-//         event.preventDefault();
-//         if (onMouseDown) {
-//           onMouseDown(event);
-//         }
-//       }}
-//       style={{
-//         userSelect: 'none',
-//         WebkitUserSelect: 'none',
-//       }}
-//       unselectable="on"
-//       onClick={onClick}
-//       aria-hidden
-//     >
-//       {icon !== undefined ? (
-//         icon
-//       ) : (
-//         <span className={classNames(className.split(/\s+/).map((cls) => `${cls}-icon`))}>
-//           {children}
-//         </span>
-//       )}
-//     </span>
-//   );
-// };
-
-// export default TransBtn;
