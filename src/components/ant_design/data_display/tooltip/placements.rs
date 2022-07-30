@@ -2,17 +2,24 @@
 
 use std::collections::HashMap;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct AutoAdjustOverflowHandle {
     pub adjust_x: u8,
     pub adjust_y: u8,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct AutoAdjustOverflowEnabled {
     adjust_x: u8,
     adjust_y: u8,
 }
+
+impl Default for AutoAdjustOverflowEnabled {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AutoAdjustOverflowEnabled {
     pub fn new() -> Self {
         AutoAdjustOverflowEnabled {
@@ -27,7 +34,7 @@ impl AutoAdjustOverflowEnabled {
 //   adjustY: 1,
 // };
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct AutoAdjustOverflowDisabled {
     adjust_x: u8,
     adjust_y: u8,
