@@ -14,6 +14,7 @@ use yew::Callback;
 use yew::Children;
 use yew::Event;
 use yew::Html;
+use yew::NodeRef;
 use yew::Properties;
 
 // import * as React from 'react';
@@ -106,7 +107,7 @@ pub struct Overflow {
     pub adjust_y: u8,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct AlignType {
     /**
      * move point of source node to align with point of target node.
@@ -168,16 +169,43 @@ pub struct SelectTriggerProps {
     pub on_popup_mouse_enter: Callback<()>,
 }
 
-// #[function_component(CustomCheckBox)]
-// pub fn custom_checkbox(props: &CustomCheckBoxProps) -> Html {
-//     // let prefix_cls = match props.prefix_cls.clone() {
-//     //     None => String::from("ant-checkbox"),
-//     //     Some(pc) => pc,
-//     // };
-//     // html! {
+#[derive(Debug, Properties, PartialEq, Clone)]
+pub struct RefTriggerPropsAndSelectTriggerProps {
+    pub get_popup_element: Callback<Html>, //() => HTMLDivElement
+    //
+    pub prefix_cls: String,
+    pub children: Children,
+    pub disabled: Option<()>,
+    pub visible: Option<()>,
+    pub popup_element: Html, //React.ReactElement
+    pub animation: Option<String>,
+    pub transition_name: Option<String>,
+    pub container_width: i32,
+    //   pub placement?: Option<Placement>,
+    pub dropdown_style: String, //React.CSSProperties,
+    pub dropdown_class_name: String,
+    pub direction: String,
+    pub dropdown_match_select_width: Option<DropdownMatchSelectWidth>,
+    pub dropdown_render: Option<Callback<Html>>, //(menu: React.ReactElement) => React.ReactElement
+    pub get_popup_container: Option<Callback<()>>, //RenderDOMFunc
+    pub dropdown_align: AlignType,
+    pub empty: Option<()>,
+    pub get_trigger_dom_node: Callback<()>, //() => HTMLElement
+    pub on_popup_visible_change: Option<Callback<bool>>, //(visible: boolean) => void
+    pub on_popup_mouse_enter: Callback<()>,
+    //
+    pub reference: NodeRef,
+}
 
-//     // }
-// }
+#[function_component(SelectTrigger)]
+pub fn select_trigger(props: &RefTriggerPropsAndSelectTriggerProps) -> Html {
+    // let prefix_cls = match props.prefix_cls.clone() {
+    //     None => String::from("ant-checkbox"),
+    //     Some(pc) => pc,
+    // };
+    let dropdown_prefix_cls = format!("{}-dropdown", props.prefix_cls);
+    html! {}
+}
 
 // const SelectTrigger: React.RefForwardingComponent<RefTriggerProps, SelectTriggerProps> = (
 //   props,
