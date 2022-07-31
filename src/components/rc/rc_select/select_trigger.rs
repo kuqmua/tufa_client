@@ -4,6 +4,7 @@ use crate::components::ant_design::data_display::tooltip::placements::AutoAdjust
 use crate::components::ant_design::data_display::tooltip::placements::PointsOffset;
 use crate::components::ant_design::data_display::tooltip::placements::PointsValue;
 use crate::components::ant_design::data_display::tooltip::placements::PositionType;
+use crate::components::ant_design::navigation::dropdown;
 use web_sys::FocusEvent;
 use web_sys::KeyboardEvent;
 use web_sys::MouseEvent;
@@ -186,7 +187,7 @@ pub struct RefTriggerPropsAndSelectTriggerProps {
     pub dropdown_class_name: String,
     pub direction: String,
     pub dropdown_match_select_width: Option<DropdownMatchSelectWidth>,
-    pub dropdown_render: Option<Callback<Html>>, //(menu: React.ReactElement) => React.ReactElement
+    // pub dropdown_render: Option<Callback<Html>>, //(menu: React.ReactElement) => React.ReactElement //no need
     pub get_popup_container: Option<Callback<()>>, //RenderDOMFunc
     pub dropdown_align: AlignType,
     pub empty: Option<()>,
@@ -204,6 +205,43 @@ pub fn select_trigger(props: &RefTriggerPropsAndSelectTriggerProps) -> Html {
     //     Some(pc) => pc,
     // };
     let dropdown_prefix_cls = format!("{}-dropdown", props.prefix_cls);
+    let mut popup_node = props.popup_element.clone();
+    // if let Some(dropdown_render) = props.dropdown_render.clone() {
+    //     popup_node = dropdown_render(props.popup_element.clone());
+    // }
+
+    //   const builtInPlacements = React.useMemo(
+    //     () => getBuiltInPlacements(dropdownMatchSelectWidth),
+    //     [dropdownMatchSelectWidth],
+    //   );
+
+    //   // ===================== Motion ======================
+    let merged_transition_name = match props.animation.clone() {
+        Some(a) => format!("{}-{}", dropdown_prefix_cls, a),
+        None => match props.transition_name.clone() {
+            Some(tn) => tn,
+            None => String::from(""),
+        },
+    };
+    //   const mergedTransitionName = animation ? `${dropdownPrefixCls}-${animation}` : transitionName;
+
+    //   // ======================= Ref =======================
+    //   const popupRef = React.useRef<HTMLDivElement>(null);
+
+    //   React.useImperativeHandle(ref, () => ({
+    //     getPopupElement: () => popupRef.current,
+    //   }));
+
+    //   const popupStyle: React.CSSProperties = {
+    //     minWidth: containerWidth,
+    //     ...dropdownStyle,
+    //   };
+
+    //   if (typeof dropdownMatchSelectWidth === 'number') {
+    //     popupStyle.width = dropdownMatchSelectWidth;
+    //   } else if (dropdownMatchSelectWidth) {
+    //     popupStyle.width = containerWidth;
+    //   }
     html! {}
 }
 
