@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-
 use crate::components::ant_design::data_display::tooltip::placements::AutoAdjustOverflowHandle;
 use crate::components::ant_design::data_display::tooltip::placements::PointsOffset;
 use crate::components::ant_design::data_display::tooltip::placements::PointsValue;
@@ -222,6 +221,13 @@ pub fn select_trigger(props: &RefTriggerPropsAndSelectTriggerProps) -> Html {
             Some(tn) => tn,
             None => String::from(""),
         },
+    };
+    let merged_transition_name = match props.animation.clone() {
+        None => match props.transition_name.clone() {
+            Some(tn) => tn,
+            None => String::from(""),
+        },
+        Some(a) => format!("{}-{}", dropdown_prefix_cls, a),
     };
     //   const mergedTransitionName = animation ? `${dropdownPrefixCls}-${animation}` : transitionName;
 
