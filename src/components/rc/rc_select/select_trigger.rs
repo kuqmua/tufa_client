@@ -237,7 +237,7 @@ pub fn select_trigger(props: &RefTriggerPropsAndSelectTriggerProps) -> Html {
     //   React.useImperativeHandle(ref, () => ({
     //     getPopupElement: () => popupRef.current,
     //   }));
-
+    let popup_style = format!("min-width: {}; {}", props.container_width.clone(), props.dropdown_style.clone());
     //   const popupStyle: React.CSSProperties = {
     //     minWidth: containerWidth,
     //     ...dropdownStyle,
