@@ -237,12 +237,23 @@ pub fn select_trigger(props: &RefTriggerPropsAndSelectTriggerProps) -> Html {
     //   React.useImperativeHandle(ref, () => ({
     //     getPopupElement: () => popupRef.current,
     //   }));
-    let popup_style = format!("min-width: {}; {}", props.container_width.clone(), props.dropdown_style.clone());
+    let mut popup_style = format!("min-width: {}; {}", props.container_width.clone(), props.dropdown_style.clone());
     //   const popupStyle: React.CSSProperties = {
     //     minWidth: containerWidth,
     //     ...dropdownStyle,
     //   };
-
+   match props.dropdown_match_select_width {
+       None =>  ()
+       Some(dmsw) => match dmsw {
+           Number(u) => {
+             popup_style = format!("width: {}; {}", u, popup_style);
+           },
+           Boolean(b) => {
+             popup_style = format!("width: {}; {}", props.container_width.clone(), popup_style);
+           },   
+       }
+    }
+    
     //   if (typeof dropdownMatchSelectWidth === 'number') {
     //     popupStyle.width = dropdownMatchSelectWidth;
     //   } else if (dropdownMatchSelectWidth) {
