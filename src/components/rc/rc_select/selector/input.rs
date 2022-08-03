@@ -25,11 +25,11 @@ pub enum InputRef {
 
 // type InputRef = HTMLInputElement | HTMLTextAreaElement;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, Properties, PartialEq, Clone)]
 pub struct InputProps {
     pub prefix_cls: String,
     pub id: String,
-    pub input_element: Html,
+    pub input_element: Option<Html>, //not actually an option in react
     pub disabled: Option<()>,
     pub auto_focus: Option<()>,
     pub auto_complete: String,
@@ -81,6 +81,15 @@ pub struct InputProps {
 //     HTMLInputElement | HTMLTextAreaElement | HTMLElement
 //   >;
 // }
+
+#[function_component(Input)]
+pub fn input(props: &InputProps) -> Html {
+    let input_node = match props.input_element.clone() {
+        None => html! {<input />},
+        Some(ie) => ie,
+    };
+    html! {}
+}
 
 // const Input: React.RefForwardingComponent<InputRef, InputProps> = (
 //   {
