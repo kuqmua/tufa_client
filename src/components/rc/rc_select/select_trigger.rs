@@ -1,9 +1,9 @@
-use std::collections::HashMap;
 use crate::components::ant_design::data_display::tooltip::placements::AutoAdjustOverflowHandle;
 use crate::components::ant_design::data_display::tooltip::placements::PointsOffset;
 use crate::components::ant_design::data_display::tooltip::placements::PointsValue;
 use crate::components::ant_design::data_display::tooltip::placements::PositionType;
 use crate::components::ant_design::navigation::dropdown;
+use std::collections::HashMap;
 use web_sys::FocusEvent;
 use web_sys::KeyboardEvent;
 use web_sys::MouseEvent;
@@ -237,29 +237,59 @@ pub fn select_trigger(props: &RefTriggerPropsAndSelectTriggerProps) -> Html {
     //   React.useImperativeHandle(ref, () => ({
     //     getPopupElement: () => popupRef.current,
     //   }));
-    let mut popup_style = format!("min-width: {}; {}", props.container_width.clone(), props.dropdown_style.clone());
+    let mut popup_style = format!(
+        "min-width: {}; {}",
+        props.container_width.clone(),
+        props.dropdown_style.clone()
+    );
     //   const popupStyle: React.CSSProperties = {
     //     minWidth: containerWidth,
     //     ...dropdownStyle,
     //   };
-   match props.dropdown_match_select_width {
-       None =>  ()
-       Some(dmsw) => match dmsw {
-           Number(u) => {
-             popup_style = format!("width: {}; {}", u, popup_style);
-           },
-           Boolean(b) => {
-             popup_style = format!("width: {}; {}", props.container_width.clone(), popup_style);
-           },   
-       }
+    match props.dropdown_match_select_width.clone() {
+        None => (),
+        Some(dmsw) => match dmsw {
+            DropdownMatchSelectWidth::Number(u) => {
+                popup_style = format!("width: {}; {}", u, popup_style);
+            }
+            DropdownMatchSelectWidth::Boolean(_) => {
+                popup_style = format!("width: {}; {}", props.container_width.clone(), popup_style);
+            }
+        },
     }
-    
+
     //   if (typeof dropdownMatchSelectWidth === 'number') {
     //     popupStyle.width = dropdownMatchSelectWidth;
     //   } else if (dropdownMatchSelectWidth) {
     //     popupStyle.width = containerWidth;
     //   }
-    html! {}
+    html! {
+            //     <Trigger
+    //       {...restProps}
+    //       showAction={onPopupVisibleChange ? ['click'] : []}
+    //       hideAction={onPopupVisibleChange ? ['click'] : []}
+    //       popupPlacement={placement || (direction === 'rtl' ? 'bottomRight' : 'bottomLeft')}
+    //       builtinPlacements={builtInPlacements}
+    //       prefixCls={dropdownPrefixCls}
+    //       popupTransitionName={mergedTransitionName}
+    //       popup={
+    //         <div ref={popupRef} onMouseEnter={onPopupMouseEnter}>
+    //           {popupNode}
+    //         </div>
+    //       }
+    //       popupAlign={dropdownAlign}
+    //       popupVisible={visible}
+    //       getPopupContainer={getPopupContainer}
+    //       popupClassName={classNames(dropdownClassName, {
+    //         [`${dropdownPrefixCls}-empty`]: empty,
+    //       })}
+    //       popupStyle={popupStyle}
+    //       getTriggerDOMNode={getTriggerDOMNode}
+    //       onPopupVisibleChange={onPopupVisibleChange}
+    //     >
+    //       {children}
+    //     </Trigger>
+        }
 }
 
 // const SelectTrigger: React.RefForwardingComponent<RefTriggerProps, SelectTriggerProps> = (
