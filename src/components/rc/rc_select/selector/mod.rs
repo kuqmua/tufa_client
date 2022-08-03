@@ -85,11 +85,65 @@ pub struct InnerSelectorProps {
 //   onInputCompositionEnd: React.CompositionEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 // }
 
+#[derive(Debug, Properties, PartialEq, Clone)]
+pub struct RefSelectorProps {
+    pub focus: Callback<()>,
+    pub blur: Callback<()>,
+    // pub scroll_to?: ScrollTo;
+}
+
 // export interface RefSelectorProps {
 //   focus: () => void;
 //   blur: () => void;
 //   scrollTo?: ScrollTo;
 // }
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum MaxTagCount {
+    Number(i32),
+    Responsive,
+}
+
+#[derive(Debug, Properties, PartialEq, Clone)]
+pub struct SelectorProps {
+    pub id: String,
+    pub prefix_cls: String,
+    pub show_search: Option<()>,
+    pub open: Option<()>,
+    /** Display in the Selector value, it's not same as `value` prop */
+    // pub values: DisplayValueType[],
+    // pub mode: Mode,
+    pub search_value: String,
+    pub active_value: String,
+    pub input_element: Html,
+    pub max_length: Option<i32>,
+
+    pub auto_focus: Option<()>,
+    pub active_descendant_id: Option<String>,
+    pub tab_index: Option<i32>,
+    pub disabled: Option<()>,
+    pub placeholder: Option<Html>,
+    pub remove_icon: Option<Html>,
+
+    pub max_tag_count: Option<MaxTagCount>,
+    pub max_tag_text_length: Option<i32>,
+    pub max_tag_placeholder: Option<Html>,
+    pub tag_render: Option<Callback<Html>>,
+
+    /** Check if `tokenSeparators` contains `\n` or `\r\n` */
+    pub token_with_enter: Option<()>,
+
+    // Motion
+    pub choice_transition_name: Option<String>,
+
+    pub on_toggle_open: Option<Callback<()>>,
+    /** `onSearch` returns go next step boolean to check if need do toggle open */
+    pub on_search: Callback<bool>,
+    pub on_search_submit: Option<Callback<()>>,
+    pub on_remove: Callback<()>,
+    pub on_input_key_down: Option<Callback<KeyboardEvent>>,
+    pub dom_ref: NodeRef,
+}
 
 // export interface SelectorProps {
 //   id: string;
