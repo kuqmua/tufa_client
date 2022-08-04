@@ -9,6 +9,7 @@ use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 // use super::ant_design::avatar::AvatarShape;
 // use super::ant_design::avatar::AvatarSize;
 // use super::ant_design::avatar::AvatarSizeType;
+use super::ant_design::data_entry::select::Select;
 use super::ant_design::svg::helpers::svg_type::SvgType;
 use crate::components::ant_design::feedback::alert::Alert;
 // use crate::components::ant_design::alert::AlertType;
@@ -250,6 +251,7 @@ pub fn home() -> Html {
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
       // <Switch/>
+      <Select/>
       <CustomSwitch
         reference={NodeRef::default()}
         title={Some(String::from("title"))}
