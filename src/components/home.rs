@@ -253,6 +253,7 @@ pub fn home() -> Html {
       // <Switch/>
       <Select
         values={vec![String::from("alice"), String::from("bob")]}
+        default_value={String::from("bob")}
       />
       <CustomSwitch
         reference={NodeRef::default()}
