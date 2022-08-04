@@ -251,7 +251,9 @@ pub fn home() -> Html {
       //   // content={AvatarContent::Icon(SvgType::User)}
       // />
       // <Switch/>
-      <Select/>
+      <Select
+        values={vec![String::from("alice"), String::from("bob")]}
+      />
       <CustomSwitch
         reference={NodeRef::default()}
         title={Some(String::from("title"))}
