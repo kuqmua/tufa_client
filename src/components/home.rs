@@ -64,6 +64,7 @@ use crate::components::ant_design::data_entry::switch::custom_component::CustomS
 use colorsys::Hsl;
 use gloo::console::log;
 use web_sys::MouseEvent;
+use yew::html::onselect::Event;
 use yew::NodeRef;
 use yew::{function_component, html, use_state, Callback};
 
@@ -198,6 +199,10 @@ pub fn home() -> Html {
         }
       />
     };
+    let select_callback = Callback::from(|value: (Event, String)| {
+        log!("eeee", value.0.type_());
+        log!("kkkkkkekw", value.1);
+    });
     let inner_html_left = html! {
       <div
         style="
@@ -254,6 +259,7 @@ pub fn home() -> Html {
       <Select
         values={vec![String::from("alice"), String::from("bob")]}
         default_value={String::from("bob")}
+        set_choosen_value={select_callback}
       />
       <CustomSwitch
         reference={NodeRef::default()}
