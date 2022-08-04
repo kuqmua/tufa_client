@@ -200,7 +200,7 @@ pub fn home() -> Html {
       />
     };
     let select_callback = Callback::from(|value: (Event, String)| {
-        log!("eeee", value.0.type_());
+        log!("eeee", value.0.target());
         log!("kkkkkkekw", value.1);
     });
     let inner_html_left = html! {
