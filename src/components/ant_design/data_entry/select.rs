@@ -1,5 +1,7 @@
+use web_sys::MouseEvent;
 use yew::function_component;
 use yew::html;
+use yew::use_state;
 use yew::Callback;
 use yew::Children;
 use yew::Html;
@@ -7,7 +9,7 @@ use yew::Properties;
 
 #[derive(Debug, PartialEq, Properties, Clone)]
 pub struct SelectProps {
-    // pub class_names: Vec<String>,
+    pub values: Vec<String>,
     // pub customize_icon: Option<Html>,                //todo types
     // pub on_mouse_down: Option<Callback<MouseEvent>>, //React.MouseEventHandler<HTMLSpanElement>
     // pub on_click: Option<Callback<MouseEvent>>,      //React.MouseEventHandler<HTMLSpanElement>
@@ -20,8 +22,23 @@ pub fn select(props: &SelectProps) -> Html {
     //     None => Callback::from(|_: MouseEvent| {}),
     //     Some(okd) => okd,
     // };
+    let is_open = use_state(|| false);
+    let on_click = {
+        let is_open_cloned = is_open.clone();
+        Callback::<MouseEvent>::from(move |e: MouseEvent| {
+            e.prevent_default();
+            is_open_cloned.set(!*is_open_cloned);
+        })
+    };
+    let wrapper_class = match *is_open.clone() {
+        true => String::from("ant-select antd-select-open ant-select-focused ant-select-enabled"),
+        false => String::from("ant-select ant-select-enabled"),
+    };
     html! {
-        <div class="ant-select ant-select-enabled" style="width: 120px;">
+        <div
+          class={wrapper_class} style="width: 120px;"
+          onclick={on_click}
+        >
           <div
             class="ant-select-selection ant-select-selection--single"
             role="combobox"
