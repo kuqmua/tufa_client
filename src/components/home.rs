@@ -199,7 +199,7 @@ pub fn home() -> Html {
         }
       />
     };
-    let select_callback = Callback::from(|value: (Event, String)| {
+    let select_callback = Callback::from(|value: (MouseEvent, Option<String>)| {
         log!("eeee", value.0.target());
         log!("kkkkkkekw", value.1);
     });
@@ -259,6 +259,7 @@ pub fn home() -> Html {
       <Select
         values={vec![String::from("alice"), String::from("bob")]}
         default_value={String::from("bob")}
+        id={String::from("09760707")}
         set_choosen_value={select_callback}
       />
       <CustomSwitch
