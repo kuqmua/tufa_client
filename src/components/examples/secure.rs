@@ -1,9 +1,8 @@
 use crate::components::examples::text_input::TextInput;
 use crate::routes::routes::Routes;
 use gloo::console::log;
-use impl_display::ImplDisplayDerive;
+use impl_display::ImplDisplay;
 use lazy_static::__Deref;
-use std::fmt;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
 use web_sys::FocusEvent;
@@ -29,7 +28,7 @@ pub struct SecureState {
 
 const STYLE_FILE: &str = include_str!("example.css");
 
-#[derive(Debug, PartialEq, ImplDisplayDerive)]
+#[derive(Debug, PartialEq, ImplDisplay)]
 pub enum Color {
     Normal,
     Ok,

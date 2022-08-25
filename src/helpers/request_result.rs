@@ -1,7 +1,6 @@
-use impl_display::ImplDisplayDerive;
-use std::fmt;
+use impl_display::ImplDisplay;
 
-#[derive(Debug, ImplDisplayDerive, Clone, PartialEq)]
+#[derive(Debug, ImplDisplay, Clone, PartialEq, Eq)]
 pub enum RequestResult {
     NotExecuted,
     Pending,
