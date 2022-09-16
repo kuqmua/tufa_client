@@ -98,10 +98,6 @@ pub fn get_vendor_prefixes(dom_support: bool, win: HashMap<String, String>) -> P
 //   return prefixes;
 // }
 
-lazy_static! {
-    pub static ref VENDOR_PREFIXES: Prefixes = get_vendor_prefixes(can_use_dom(), HashMap::new());//todo //window()
-}
-
 // const vendorPrefixes = getVendorPrefixes(canUseDOM, typeof window !== 'undefined' ? window : {});
 
 use gloo::console::log;
@@ -126,9 +122,6 @@ pub fn get_option_style() -> Option<bool> {
     } else {
         None
     }
-}
-lazy_static! {
-    pub static ref STYLE: Option<bool> = get_option_style();
 }
 
 // let style = {};

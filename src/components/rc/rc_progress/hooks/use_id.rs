@@ -1,20 +1,15 @@
-use crate::components::rc::rc_animate::util::motion::can_use_dom;
+use crate::{
+    components::rc::rc_animate::util::motion::can_use_dom,
+    lazy_static::{is_browser_client::IS_BROWSER_CLIENT, uuid::UUID},
+};
 use lazy_static::lazy_static;
 use std::sync::Mutex;
 
 // import * as React from 'react';
 // import canUseDom from 'rc-util/lib/Dom/canUseDom';
 
-lazy_static! {
-    pub static ref UUID: Mutex<i32> = Mutex::new(0);
-}
-
 // pub const UUID: i32 = 0;
 // let uuid = 0;
-
-lazy_static! {
-    pub static ref IS_BROWSER_CLIENT: bool = can_use_dom();
-}
 
 // /** Is client side and not jsdom */
 // export const isBrowserClient = process.env.NODE_ENV !== 'test' && canUseDom();
