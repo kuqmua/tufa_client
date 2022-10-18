@@ -45,3 +45,4 @@ let s: Option<i32> = match document.query_selector("select_id")) {
     },
 }
 ```
+* [yew events](https://yew.rs/docs/0.18.0/concepts/html/events)
