@@ -19,10 +19,8 @@ web_console::log_1(&msg.into()); </br>
 instead of gloo console log </br>
 * maybe should try https://github.com/material-components/material-components-web
 * maybe write this first before ant design https://github.com/orgs/react-component/repositories?q=&type=public&language=typescript&sort=
-* problem 
+* (yew)Did not understand how to cast type Element to HtmlSelectElement(in web_sys crate HtmlSelectElement has selected_index method, Element does not)(feature was activated in cargo toml).
 ```
-Im trying to implement select component in yew. Did not understand how to cast type Element to HtmlSelectElement(in web_sys crate HtmlSelectElement has selected_index method, Element does not)(feature was activated in cargo toml).
-
 <select id="select_id">
         <option value="1">11</option>
         <option value="2">22</option>
