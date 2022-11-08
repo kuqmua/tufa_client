@@ -1,6 +1,4 @@
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use std::sync::Mutex;
 
-lazy_static! {
-    pub static ref UUID: Mutex<i32> = Mutex::new(0);
-}
+pub static UUID: Lazy<Mutex<i32>> = Lazy::new(|| Mutex::new(0));

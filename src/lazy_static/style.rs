@@ -1,6 +1,4 @@
 use crate::components::rc::rc_animate::util::motion::get_option_style;
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 
-lazy_static! {
-    pub static ref STYLE: Option<bool> = get_option_style();
-}
+pub static STYLE: Lazy<Option<bool>> = Lazy::new(get_option_style);
