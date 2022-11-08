@@ -4,7 +4,6 @@
 // use crate::components::rc::rc_progress::interface::StrokeColor;
 // use crate::components::rc::rc_progress::interface::StrokeLinecapType;
 use js_sys::Date;
-// use lazy_static::lazy_static;
 use yew::functional::use_effect;
 use yew::{html, Html};
 // import { useRef, useEffect } from 'react';

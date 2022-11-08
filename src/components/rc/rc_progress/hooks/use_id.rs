@@ -1,8 +1,7 @@
 use crate::{
     components::rc::rc_animate::util::motion::can_use_dom,
-    lazy_static::{is_browser_client::IS_BROWSER_CLIENT, uuid::UUID},
+    once_cell_globals::{is_browser_client::IS_BROWSER_CLIENT, uuid::UUID},
 };
-use lazy_static::lazy_static;
 use std::sync::Mutex;
 
 // import * as React from 'react';

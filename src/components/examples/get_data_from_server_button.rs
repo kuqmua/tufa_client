@@ -1,8 +1,8 @@
 use crate::store::YewduxStore;
 use gloo::console::log;
-use lazy_static::__Deref;
 use reqwasm::http::Request;
 use serde_json::from_str;
+use std::ops::Deref;
 use tufa_common::json_example::JsonExample;
 use yew::prelude::*;
 use yewdux::prelude::{Dispatcher, PersistentStore};

@@ -2,7 +2,7 @@ use crate::components::examples::text_input::TextInput;
 use crate::routes::routes::Routes;
 use gloo::console::log;
 use impl_display::ImplDisplay;
-use lazy_static::__Deref;
+use std::ops::Deref;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
 use web_sys::FocusEvent;

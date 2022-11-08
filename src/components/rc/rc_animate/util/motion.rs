@@ -1,6 +1,5 @@
 use convert_case::Case;
 use convert_case::Casing;
-use lazy_static::lazy_static;
 use std::collections::HashMap;
 use web_sys::window;
 // use web_sys::Window;

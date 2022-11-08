@@ -4,7 +4,7 @@ use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
 use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
-use crate::lazy_static::white_hsl::WHITE_HSL;
+use crate::once_cell_globals::white_hsl::WHITE_HSL;
 use web_sys::MouseEvent;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Html, Properties};
