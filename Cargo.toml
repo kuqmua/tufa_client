@@ -19,7 +19,7 @@ gloo = "0.7.0" # wasm-logger = "0.2.0" (al;ternative to gloo)
 impl_display = {path = "../proc_macros/impl_display"} 
 js-sys = "0.3.58" 
 stylist = {version = "0.10.0", features = ["yew"]} 
-tufa_common = {path = "../tufa_common"}# local dev test without commits version            
+tufa_common = {path = "../tufa_common"}# local dev test without commits version             
 wasm-bindgen = "0.2.79" 
 wasm-bindgen-futures = "0.4" 
 web-sys = {version = "0.3.58", features = ["HtmlInputElement", "Window", "Document", "Element", "StyleSheetList", "HtmlSelectElement"]} 
@@ -31,4 +31,5 @@ yewdux-functional = "0.1.0"
 #prod
 # svg_component = {path = "https://github.com/kuqmua/svg_component"}
 #dev
+compile_time_git_info = {path = "../proc_macros/compile_time_git_info"}
 svg_component = {path = "../proc_macros/svg_component"}
