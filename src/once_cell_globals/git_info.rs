@@ -1,6 +1,2 @@
-use crate::constants::PROJECT_NAME;
-use once_cell::sync::Lazy;
-use tufa_common::common::git::git_info::GitInformation;
-
-pub static GIT_INFO: Lazy<GitInformation> =
-    Lazy::new(|| GitInformation::get_git_commit_info("../", PROJECT_NAME));
+#[compile_time_git_info::generate_const_git_information(tufa_client, tufa_common)]
+fn this_function_will_be_removed_and_instead_pub_const_git_info_will_be_generated_on_compile_time();
