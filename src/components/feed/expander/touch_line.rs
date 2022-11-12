@@ -1,4 +1,4 @@
-use crate::constants::ACTIVE_COLOR;
+use crate::global_variables::hardcode::ACTIVE_COLOR;
 use yew::{function_component, html};
 
 #[function_component(TouchLine)]

@@ -1,6 +1,6 @@
 use crate::components::feed::post::Post;
-use crate::constants::FEED_WIDTH_PX;
-use crate::constants::INTERFACE_LINES_COLOR;
+use crate::global_variables::hardcode::FEED_WIDTH_PX;
+use crate::global_variables::hardcode::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 

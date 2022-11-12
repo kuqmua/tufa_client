@@ -1,4 +1,4 @@
-use crate::constants::DEFAULT_PADDING_PX;
+use crate::global_variables::hardcode::DEFAULT_PADDING_PX;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
 

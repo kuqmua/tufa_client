@@ -1,4 +1,4 @@
-use crate::constants::BACKGROUND_COLOR;
+use crate::global_variables::hardcode::BACKGROUND_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Html, Properties};
 

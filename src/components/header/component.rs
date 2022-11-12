@@ -1,8 +1,8 @@
 use crate::components::header::buttons::menu_button::MenuButton;
 use crate::components::header::buttons::person_outline_button::PersonOutlineButton;
-use crate::constants::HEADER_BORDER_BOTTOM_PX;
-use crate::constants::HEADER_HEIGHT_PX;
-use crate::constants::INTERFACE_LINES_COLOR;
+use crate::global_variables::hardcode::HEADER_BORDER_BOTTOM_PX;
+use crate::global_variables::hardcode::HEADER_HEIGHT_PX;
+use crate::global_variables::hardcode::INTERFACE_LINES_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 

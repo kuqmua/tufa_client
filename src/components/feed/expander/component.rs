@@ -1,6 +1,6 @@
 use crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState;
-use crate::constants::BACKGROUND_COLOR;
-use crate::constants::FEED_WIDTH_PX;
+use crate::global_variables::hardcode::BACKGROUND_COLOR;
+use crate::global_variables::hardcode::FEED_WIDTH_PX;
 use web_sys::MouseEvent;
 use yew::Callback;
 use yew::{function_component, html, Html, Properties};

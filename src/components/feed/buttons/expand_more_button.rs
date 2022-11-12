@@ -1,6 +1,6 @@
 use crate::components::feed::buttons::button_wrapper::ButtonWrapper;
 use crate::components::material::svg::expand_more::ExpandMore;
-use crate::constants::FEED_ICONS_COLOR;
+use crate::global_variables::hardcode::FEED_ICONS_COLOR;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback, Properties};
 

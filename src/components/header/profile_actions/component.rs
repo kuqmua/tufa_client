@@ -1,8 +1,8 @@
 use crate::components::header::profile_actions::buttons::logout_button::LogoutButton;
 use crate::components::header::profile_actions::buttons::settings_button::SettingsButton;
-use crate::constants::BACKGROUND_COLOR;
-use crate::constants::DEFAULT_PADDING_PX;
-use crate::constants::INTERFACE_LINES_COLOR;
+use crate::global_variables::hardcode::BACKGROUND_COLOR;
+use crate::global_variables::hardcode::DEFAULT_PADDING_PX;
+use crate::global_variables::hardcode::INTERFACE_LINES_COLOR;
 use crate::routes::routes::Routes;
 use web_sys::MouseEvent;
 use yew::{function_component, html, Callback};

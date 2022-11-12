@@ -1,7 +1,7 @@
 use crate::components::feed::buttons::button_wrapper::ButtonWrapper;
 use crate::components::material::svg::favorite::Favorite;
 use crate::components::material::svg::favorite_border::FavoriteBorder;
-use crate::constants::FEED_ICONS_COLOR;
+use crate::global_variables::hardcode::FEED_ICONS_COLOR;
 use yew::{function_component, html, use_state, Callback};
 
 #[function_component(FavoriteButton)]
