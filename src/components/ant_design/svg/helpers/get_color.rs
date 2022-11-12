@@ -1,5 +1,5 @@
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-use crate::once_cell_globals::white_hsl::WHITE_HSL;
+use crate::global_variables::runtime::white_hsl::WHITE_HSL;
 
 pub fn get_color(option_color: Option<FillWith>) -> FillWith {
     match option_color {

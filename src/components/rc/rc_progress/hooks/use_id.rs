@@ -1,6 +1,6 @@
 use crate::{
     components::rc::rc_animate::util::motion::can_use_dom,
-    once_cell_globals::{is_browser_client::IS_BROWSER_CLIENT, uuid::UUID},
+    global_variables::runtime::{is_browser_client::IS_BROWSER_CLIENT, uuid::UUID},
 };
 use std::sync::Mutex;
 
