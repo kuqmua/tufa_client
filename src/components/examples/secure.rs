@@ -1,7 +1,6 @@
 use crate::components::examples::text_input::TextInput;
 use crate::routes::routes::Routes;
 use gloo::console::log;
-use impl_display::ImplDisplay;
 use std::ops::Deref;
 use stylist::yew::styled_component;
 use stylist::{style, Style};
@@ -28,11 +27,17 @@ pub struct SecureState {
 
 const STYLE_FILE: &str = include_str!("example.css");
 
-#[derive(Debug, PartialEq, ImplDisplay)]
+#[derive(Debug, PartialEq)]
 pub enum Color {
     Normal,
     Ok,
     Error,
+}
+
+impl std::fmt::Display for Color {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, Default)]
