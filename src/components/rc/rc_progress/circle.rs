@@ -48,7 +48,6 @@ impl fmt::Display for CircleStyle {
     }
 }
 
-#[allow(clippy::too_many_arguments)]
 pub fn get_circle_style(
     perimeter: f64,
     perimeter_without_gap: f64,

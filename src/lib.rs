@@ -1,3 +1,4 @@
+#![allow(clippy::too_many_arguments)]
 pub mod components;
 pub mod entry;
 pub mod global_variables;
