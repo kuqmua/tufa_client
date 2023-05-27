@@ -286,7 +286,7 @@
 
 //   const domProps = omit(restProps, ['value', 'disabled']);
 
-//   if (options && options.length > 0) {
+//   if (options && options.length.is_positive()) {
 //     children = getOptions().map(option => (
 //       <Checkbox
 //         prefixCls={prefixCls}

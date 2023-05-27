@@ -137,7 +137,7 @@ pub fn circle(props: &ProgressProps) -> Html {
     let gradient_id = format!("{}-gradient", merged_id);
     let radius = VIEW_BOX_SIZE / 2.0 - stroke_width / 2.0;
     let perimeter = std::f64::consts::PI * 2.0 * radius;
-    let rotate_deg = match gap_degree > 0.0 {
+    let rotate_deg = match gap_degree > 0.0 {//todo .is_positive() ?
         true => 90.0 + gap_degree / 2.0,
         false => -90.0,
     };

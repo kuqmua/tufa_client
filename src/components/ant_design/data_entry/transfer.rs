@@ -645,8 +645,8 @@
 //             const mergedPagination = !children && pagination;
 
 //             const { leftDataSource, rightDataSource } = this.separateDataSource();
-//             const leftActive = targetSelectedKeys.length > 0;
-//             const rightActive = sourceSelectedKeys.length > 0;
+//             const leftActive = targetSelectedKeys.length.is_positive();
+//             const rightActive = sourceSelectedKeys.length.is_positive();
 
 //             const cls = classNames(
 //               prefixCls,
@@ -1050,7 +1050,7 @@
 //     const unit = totalCount > 1 ? itemsUnit : itemUnit;
 //     return (
 //       <>
-//         {(selectedCount > 0 ? `${selectedCount}/` : '') + totalCount} {unit}
+//         {(selectedCount.is_positive() ? `${selectedCount}/` : '') + totalCount} {unit}
 //       </>
 //     );
 //   };

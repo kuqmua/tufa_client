@@ -92,7 +92,7 @@
 //   };
 
 //   const prefixCls = getPrefixCls('list', customizePrefixCls);
-//   const actionsContent = actions && actions.length > 0 && (
+//   const actionsContent = actions && actions.length.is_positive() && (
 //     <ul className={`${prefixCls}-item-action`} key="actions">
 //       {actions.map((action: ReactNode, i: number) => (
 //         // eslint-disable-next-line react/no-array-index-key
@@ -393,7 +393,7 @@
 //   }, [grid?.column, currentBreakpoint]);
 
 //   let childrenContent = isLoading && <div style={{ minHeight: 53 }} />;
-//   if (splitDataSource.length > 0) {
+//   if (splitDataSource.length.is_positive()) {
 //     const items = splitDataSource.map((item: T, index: number) => renderInnerItem(item, index));
 //     const childrenList = React.Children.map(items, (child: React.ReactNode, index: number) => (
 //       <div key={listItemsKeys[index]} style={colStyle}>

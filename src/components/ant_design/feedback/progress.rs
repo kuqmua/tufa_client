@@ -348,7 +348,7 @@
 
 //   function getProgressStatus() {
 //     const { status } = props;
-//     if (ProgressStatuses.indexOf(status!) < 0 && getPercentNumber() >= 100) {
+//     if (ProgressStatuses.indexOf(status!).is_negative() && getPercentNumber() >= 100) {
 //       return 'success';
 //     }
 //     return status || 'normal';
@@ -460,7 +460,7 @@
 // import warning from '../_util/warning';
 
 // export function validProgress(progress: number | undefined) {
-//   if (!progress || progress < 0) {
+//   if (!progress || progress.is_negative()) {
 //     return 0;
 //   }
 //   if (progress > 100) {
