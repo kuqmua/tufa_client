@@ -3,7 +3,6 @@ use crate::components::ant_design::general::icon::Icon;
 use crate::components::ant_design::svg::helpers::fill_with::FillWith;
 use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
 use crate::components::ant_design::svg::helpers::svg_type::SvgType;
-use crate::global_variables::runtime::white_hsl::WHITE_HSL;
 use crate::helpers::pseudo_css_wrapper::PseudoCssWrapper;
 use web_sys::MouseEvent;
 use yew::virtual_dom::AttrValue;
@@ -133,7 +132,7 @@ pub fn button(props: &ButtonProps) -> Html {
                     SvgProps{
                       height: None,
                       width: None,
-                      fill: Some(FillWith::Hsl(WHITE_HSL.clone())),
+                      fill: Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 100.0, Some(1.0)))),
                       spin: None,
                       rotate: None,
                       theme: None,

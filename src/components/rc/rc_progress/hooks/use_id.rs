@@ -1,8 +1,11 @@
 use crate::{
     components::rc::rc_animate::util::motion::can_use_dom,
-    global_variables::runtime::{is_browser_client::IS_BROWSER_CLIENT, uuid::UUID},
+    global_variables::runtime::is_browser_client::IS_BROWSER_CLIENT,
 };
 use std::sync::Mutex;
+
+//todo - std::sync::OnceLock or RwLock Arc
+pub static UUID = std::sync::Mutex::new(0);
 
 // import * as React from 'react';
 // import canUseDom from 'rc-util/lib/Dom/canUseDom';
@@ -30,7 +33,7 @@ impl UUIDStruct {
 
 pub fn get_uuid() -> UUIDStruct {
     let ret_id: UUIDStruct;
-    if *IS_BROWSER_CLIENT {
+    if crate::components::rc::rc_animate::util::motion::can_use_dom() {
         ret_id = UUIDStruct::Number(*UUID.lock().unwrap());
         *UUID.lock().unwrap() += 1;
     } else {
