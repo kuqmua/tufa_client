@@ -29,6 +29,7 @@ yewdux-functional = "0.1.0"
 #prod
 # svg_component = {path = "https://github.com/kuqmua/svg_component"}
 #dev
+check_specific_dependency_version_usage = {path = "../proc_macros/check_specific_dependency_version_usage"}
 compile_time_git_info = {path = "../proc_macros/compile_time_git_info"}
 user_port_try_from_u16 = {path = "../proc_macros/user_port_try_from_u16"}
 svg_component = {path = "../proc_macros/svg_component"}
