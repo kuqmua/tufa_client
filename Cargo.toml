@@ -16,7 +16,7 @@ convert_case = {version = "=0.5.0"}
 gloo = {version = "=0.7.0"} # wasm-logger = "0.2.0" (al;ternative to gloo)
 js-sys = {version = "=0.3.58"} 
 stylist = {version = "=0.10.0", features = ["yew"]} 
-wasm-bindgen = {version = "0.2.79"} 
+wasm-bindgen = {version = "=0.2.86"} 
 wasm-bindgen-futures = {version = "=0.4"} 
 web-sys = {version = "=0.3.58", features = ["HtmlInputElement", "Window", "Document", "Element", "StyleSheetList", "HtmlSelectElement"]} 
 yew = {version = "=0.19"} 
