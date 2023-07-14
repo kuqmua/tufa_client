@@ -1,5 +1,3 @@
-use convert_case::Case;
-use convert_case::Casing;
 use std::collections::HashMap;
 use web_sys::window;
 // use web_sys::Window;
@@ -23,8 +21,8 @@ pub fn can_use_dom() -> bool {
 pub fn make_prefix_map(style_prop: &str, event_name: &str) -> HashMap<String, String> {
     let mut prefixes = HashMap::<String, String>::new();
     prefixes.insert(
-        style_prop.to_case(Case::Lower),
-        event_name.to_case(Case::Lower),
+        convert_case::Casing::to_case(style_prop, convert_case::Case::Lower),
+        convert_case::Casing::to_case(event_name, convert_case::Case::Lower),
     );
     prefixes.insert(
         format!("Webkit{}", style_prop),
