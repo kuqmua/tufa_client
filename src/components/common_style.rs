@@ -1,8 +1,6 @@
-use yew::{function_component, html};
-
-#[function_component(CommonStyle)]
-pub fn common_style() -> Html {
-    html! {
+#[yew::function_component(CommonStyle)]
+pub fn common_style() -> yew::html::Html {
+    yew::html! {
       <style>
         // body {
         //     background: linear-gradient(270deg, #4ad2af, #ff0000);

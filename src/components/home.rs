@@ -1,73 +1,3 @@
-// use crate::components::ant_design::avatar::Avatar;
-// use crate::components::ant_design::avatar::AvatarContent;
-// use crate::components::ant_design::avatar::AvatarImage;
-// use crate::components::ant_design::button::LoadingProp;
-// use crate::components::ant_design::button::Shape;
-// use crate::components::ant_design::button::Size;
-use crate::components::ant_design::svg::helpers::fill_with::FillWith;
-// use crate::components::alert::Alert;
-// use super::ant_design::avatar::AvatarShape;
-// use super::ant_design::avatar::AvatarSize;
-// use super::ant_design::avatar::AvatarSizeType;
-use super::ant_design::data_entry::select::Select;
-use super::ant_design::svg::helpers::svg_type::SvgType;
-use crate::components::ant_design::feedback::alert::Alert;
-// use crate::components::ant_design::alert::AlertType;
-use crate::components::ant_design::data_display::badge::BadgeStatus;
-use crate::components::ant_design::general::button::Button;
-use crate::components::ant_design::general::button::ButtonType;
-use crate::components::ant_design::general::button::Size;
-// use crate::components::ant_design::helpers::offset::Offset;
-use crate::components::ant_design::general::icon::Icon;
-// use crate::components::ant_design::paragraph::Paragraph;
-// use crate::components::ant_design::svg::down::Down;
-// use crate::components::ant_design::svg::helpers::svg_type::List;
-use crate::components::ant_design::svg::helpers::svg_props::SvgProps;
-use crate::components::ant_design::svg::helpers::theme::Theme;
-// use crate::components::ant_design::svg::up::Up;
-use crate::components::drawer::component::Drawer;
-use crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState;
-use crate::components::drawer::position::DrawerPosition;
-use crate::components::feed::expander::component::Expander;
-use crate::components::feed::expander::expand_more_content::ExpandMoreContent;
-use crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState;
-use crate::components::feed::expander::share_content::ShareContent;
-use crate::components::feed::posts_list::PostsList;
-use crate::components::header::component::Header;
-// use crate::components::material::pure_material_button_contained::PureMaterialButtonContained;
-// use crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined;
-// use crate::components::material::pure_material_button_text::PureMaterialButtonText;
-// use crate::components::material::pure_material_checkbox::PureMaterialCheckbox;
-// use crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular;
-// use crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear;
-// use crate::components::material::pure_material_radio::PureMaterialRadio;
-// use crate::components::material::pure_material_slider::PureMaterialSlider;
-// use crate::components::material::pure_material_switch::PureMaterialSwitch;
-// use crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled;
-// use crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined;
-// use crate::components::material::pure_material_textfield_standard::PureMaterialTextfieldStandard;
-use crate::global_variables::hardcode::HEADER_BORDER_BOTTOM_PX;
-use crate::global_variables::hardcode::HEADER_HEIGHT_PX;
-// use crate::helpers::rotate::Rotate;
-// use crate::components::ant_design::back_top::BackTop;
-use crate::components::ant_design::data_display::badge::Badge;
-use crate::components::rc::rc_animate::util::motion::get_option_style;
-// use crate::components::rc::rc_checkbox::component::RcCheckBox;
-use crate::components::rc::rc_checkbox::custom_component::CustomCheckBox;
-// use crate::components::rc::rc_progress::circle::Circle;
-// use crate::components::rc::rc_progress::interface::Percent;
-// use crate::components::rc::rc_progress::interface::StrokeColor;
-// use crate::components::rc::rc_progress::line::Line;
-// use crate::components::rc::rc_switch::component::RcSwitch;
-// use crate::components::rc::rc_switch::component::RcSwitchProps;
-use crate::components::ant_design::data_entry::switch::custom_component::CustomSwitch;
-use colorsys::Hsl;
-use gloo::console::log;
-use web_sys::MouseEvent;
-use yew::html::onselect::Event;
-use yew::NodeRef;
-use yew::{function_component, html, use_state, Callback};
-
 #[derive(Debug, PartialEq, Eq)]
 pub enum ExpanderStatus {
     Closed,
@@ -85,65 +15,70 @@ impl ExpanderStatus {
     }
 }
 
-#[function_component(Home)]
+#[yew::function_component(Home)]
 pub fn home() -> Html {
-    let padding_summary = HEADER_HEIGHT_PX + HEADER_BORDER_BOTTOM_PX;
+    let padding_summary = crate::global_variables::hardcode::HEADER_HEIGHT_PX
+        + crate::global_variables::hardcode::HEADER_BORDER_BOTTOM_PX;
     let style_handle = format!(
         "
         padding-top: {}px;
       ",
         padding_summary
     );
-    let expander_status = use_state(|| ExpanderStatus::Closed);
+    let expander_status = yew::use_state(|| ExpanderStatus::Closed);
     let expander_status_clone_for_logic = expander_status.clone();
-    let drawer_style_left = use_state(|| DrawerChangingStyleState::Initial);
+    let drawer_style_left = yew::use_state(|| {
+        crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial
+    });
     let drawer_style_left_cloned_on_open = drawer_style_left.clone();
     let expander_status_clone_drawer_on_open_left = expander_status.clone();
-    let on_open_left = Callback::from(move |_| {
+    let on_open_left = yew::Callback::from(move |_| {
         expander_status_clone_drawer_on_open_left.set(ExpanderStatus::Closed);
-        drawer_style_left_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
+        drawer_style_left_cloned_on_open.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::OpenedBeforeTimeout);
         let drawer_style_left_cloned_first_another = drawer_style_left_cloned_on_open.clone();
         gloo::timers::callback::Timeout::new(50, move || {
             drawer_style_left_cloned_first_another
-                .set(DrawerChangingStyleState::OpenedAfterTimeout);
+                .set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::OpenedAfterTimeout);
         })
         .forget();
     });
     let drawer_style_left_cloned_on_close = drawer_style_left.clone();
     let expander_status_clone_drawer_on_close_left = expander_status.clone();
-    let on_close_left = Callback::from(move |_| {
+    let on_close_left = yew::Callback::from(move |_| {
         expander_status_clone_drawer_on_close_left.set(ExpanderStatus::Closed);
-        drawer_style_left_cloned_on_close.set(DrawerChangingStyleState::ClosedBeforeTimeout);
+        drawer_style_left_cloned_on_close.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::ClosedBeforeTimeout);
         let drawer_style_left_cloned_second_another = drawer_style_left_cloned_on_close.clone();
         gloo::timers::callback::Timeout::new(350, move || {
-            drawer_style_left_cloned_second_another.set(DrawerChangingStyleState::Initial);
+            drawer_style_left_cloned_second_another.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
         })
         .forget();
     });
     let drawer_style_left_enum_handle = &*drawer_style_left;
     ////
-    let drawer_style_right = use_state(|| DrawerChangingStyleState::Initial);
+    let drawer_style_right = yew::use_state(|| {
+        crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial
+    });
     let drawer_style_right_cloned_on_open = drawer_style_right.clone();
     let expander_status_clone_drawer_on_open_right = expander_status.clone();
-    let on_open_right = Callback::from(move |_| {
-        let _f = get_option_style();
+    let on_open_right = yew::Callback::from(move |_| {
+        let _f = crate::components::rc::rc_animate::util::motion::get_option_style();
         expander_status_clone_drawer_on_open_right.set(ExpanderStatus::Closed);
-        drawer_style_right_cloned_on_open.set(DrawerChangingStyleState::OpenedBeforeTimeout);
+        drawer_style_right_cloned_on_open.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::OpenedBeforeTimeout);
         let drawer_style_right_cloned_first_another = drawer_style_right_cloned_on_open.clone();
         gloo::timers::callback::Timeout::new(50, move || {
             drawer_style_right_cloned_first_another
-                .set(DrawerChangingStyleState::OpenedAfterTimeout);
+                .set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::OpenedAfterTimeout);
         })
         .forget();
     });
     let drawer_style_right_cloned_on_close = drawer_style_right.clone();
     let expander_status_clone_drawer_on_close_right = expander_status.clone();
-    let on_close_right = Callback::from(move |_| {
+    let on_close_right = yew::Callback::from(move |_| {
         expander_status_clone_drawer_on_close_right.set(ExpanderStatus::Closed);
-        drawer_style_right_cloned_on_close.set(DrawerChangingStyleState::ClosedBeforeTimeout);
+        drawer_style_right_cloned_on_close.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::ClosedBeforeTimeout);
         let drawer_style_right_cloned_second_another = drawer_style_right_cloned_on_close.clone();
         gloo::timers::callback::Timeout::new(350, move || {
-            drawer_style_right_cloned_second_another.set(DrawerChangingStyleState::Initial);
+            drawer_style_right_cloned_second_another.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
         })
         .forget();
     });
@@ -151,26 +86,28 @@ pub fn home() -> Html {
     let expander_status_cloned_share = expander_status.clone();
     let expander_status_cloned_expand_more = expander_status.clone();
     let expander_status_cloned_close = expander_status;
-    let share_inner_html = html! {<ShareContent/>};
-    let expand_more_inner_html = html! {<ExpandMoreContent/>};
-    // <PureMaterialButtonOutlined/>
-    // <PureMaterialProgressCircular/>
-    // <PureMaterialProgressLinear/>
-    // <PureMaterialTextfieldFilled/>
-    // <PureMaterialTextfieldOutlined/>
-    // <PureMaterialRadio/>
-    // <PureMaterialButtonContained/>
-    // <PureMaterialButtonText/>
-    // <PureMaterialSwitch/>
-    // <PureMaterialCheckbox/>
-    // <PureMaterialTextfieldStandard/>
-    // <PureMaterialSlider/>
+    let share_inner_html =
+        yew::html! {<crate::components::feed::expander::share_content::ShareContent/>};
+    let expand_more_inner_html =
+        yew::html! {<crate::components::feed::expander::expand_more_content::ExpandMoreContent/>};
+    // <crate::components::material::pure_material_button_outlined::PureMaterialButtonOutlined/>
+    // <crate::components::material::pure_material_progress_circular::PureMaterialProgressCircular/>
+    // <crate::components::material::pure_material_progress_linear::PureMaterialProgressLinear/>
+    // <crate::components::material::pure_material_textfield_filled::PureMaterialTextfieldFilled/>
+    // <crate::components::material::pure_material_textfield_outlined::PureMaterialTextfieldOutlined/>
+    // <crate::components::material::pure_material_radio::PureMaterialRadio/>
+    // <crate::components::material::pure_material_button_contained::PureMaterialButtonContained/>
+    // <crate::components::material::pure_material_button_text::PureMaterialButtonText/>
+    // <crate::components::material::pure_material_switch::PureMaterialSwitch/>
+    // <crate::components::material::pure_material_checkbox::PureMaterialCheckbox/>
+    // <crate::components::material::pure_material_textfield_standard::PureMaterialTextfieldStandard/>
+    // <crate::components::material::pure_material_slider::PureMaterialSlider/>
     // let svg_type = ;
-    let icon_inner_html = html! {
-      <Icon
+    let icon_inner_html = yew::html! {
+      <crate::components::ant_design::general::icon::Icon
         svg_type={
-          SvgType::Loading(
-            SvgProps{
+          super::ant_design::svg::helpers::svg_type::SvgType::Loading(
+            crate::components::ant_design::svg::helpers::svg_props::SvgProps{
               height: None,
               width: None,
               fill: None,
@@ -182,28 +119,28 @@ pub fn home() -> Html {
         }
       />
     };
-    // let rotate = Rotate::new(60).unwrap();
-    let _g = html! {
-      <Icon
+    // let rotate = crate::helpers::rotate::Rotate::new(60).unwrap();
+    let _g = yew::html! {
+      <crate::components::ant_design::general::icon::Icon
         svg_type={
-          SvgType::Up(
-            SvgProps{
+          super::ant_design::svg::helpers::svg_type::SvgType::Up(
+            crate::components::ant_design::svg::helpers::svg_props::SvgProps{
               height: None,
               width: None,
-              fill: Some(FillWith::Hsl(Hsl::new(0.0, 100.0, 50.0, Some(1.0)))),
+              fill: Some(crate::components::ant_design::svg::helpers::fill_with::FillWith::Hsl(colorsys::Hsl::new(0.0, 100.0, 50.0, Some(1.0)))),
               spin: Some(()),
               rotate: None,
-              theme: Some(Theme::TwoTone),
+              theme: Some(crate::components::ant_design::svg::helpers::theme::Theme::TwoTone),
             }
           )
         }
       />
     };
-    let select_callback = Callback::from(|value: (MouseEvent, Option<String>)| {
-        log!("eeee", value.0.target());
-        log!("kkkkkkekw", value.1);
+    let select_callback = yew::Callback::from(|value: (web_sys::MouseEvent, Option<String>)| {
+        gloo::console::log!("eeee", value.0.target());
+        gloo::console::log!("kkkkkkekw", value.1);
     });
-    let inner_html_left = html! {
+    let inner_html_left = yew::html! {
       <div
         style="
           display: flex;
@@ -215,80 +152,80 @@ pub fn home() -> Html {
           padding: 10px;
         "
       >
-       <Button
+       <crate::components::ant_design::general::button::Button
          placeholder={String::from("Button")}
         //  disabled={Some(())}
-         button_type={ButtonType::Primary}
-        //  shape={Shape::Circle}
+         button_type={crate::components::ant_design::general::button::ButtonType::Primary}
+        //  shape={crate::components::ant_design::button::Shape::Circle}
         icon={Some(icon_inner_html.clone())}
-        size={Size::Large}
+        size={crate::components::ant_design::button::Size::Large}
         // ghost={Some(())}
         // block={Some(())}
-        // loading={LoadingProp::Bool(true)}
+        // loading={crate::components::ant_design::button::LoadingProp::Bool(true)}
        />
-      // <Paragraph/>
-      // <List>
-      //   <Down/>
-      //   <Up/>
-      // </List>
+      // <crate::components::ant_design::paragraph::Paragraph/>
+      // <crate::components::ant_design::svg::helpers::svg_type::List>
+      //   <crate::components::ant_design::svg::down::Down/>
+      //   <crate::components::ant_design::svg::up::Up/>
+      // </crate::components::ant_design::svg::helpers::svg_type::List>
 
-      // <Alert
+      // <crate::components::ant_design::feedback::alert::Alert
       //   message={String::from("Error")}
       //   description={String::from("This is an error message about copywriting.")}
-      //   type_handle={AlertType::Success}
+      //   type_handle={crate::components::ant_design::alert::AlertType::Success}
       //   closable={Some(())}
       //   close_text={String::from("close text")}
       //   show_icon={Some(())}
-      //   on_close={Callback::from(|_|{
-      //     log!("onclose");
+      //   on_close={yew::Callback::from(|_|{
+      //     gloo::console::log!("onclose");
       //   })}
       // />
-      // <Avatar
-      //   size={AvatarSize::Type(AvatarSizeType::Large)}
-      //   shape={AvatarShape::Square}
-      //   // content={AvatarContent::Image(AvatarImage{
+      // <crate::components::ant_design::avatar::Avatar
+      //   size={super::ant_design::avatar::AvatarSize::Type(super::ant_design::avatar::AvatarSizeType::Large)}
+      //   shape={super::ant_design::avatar::AvatarShape::Square}
+      //   // content={crate::components::ant_design::avatar::AvatarContent::Image(crate::components::ant_design::avatar::AvatarImage{
       //   //   src: String::from("https://avatars.mds.yandex.net/i?id=0baad4e75b583fcb7ce171f1ce863011-5284759-images-thumbs&n=13&exp=1"),
       //   //   alt: String::from("avatar"),
-      //   //   on_error: Some(Callback::from(|_: yew::Event| {
-      //   //     log!("on_error");
+      //   //   on_error: Some(yew::Callback::from(|_: yew::Event| {
+      //   //     gloo::console::log!("on_error");
       //   //   }))
       //   // })}
-      //   // content={AvatarContent::Icon(SvgType::User)}
+      //   // content={crate::components::ant_design::avatar::AvatarContent::Icon(super::ant_design::svg::helpers::svg_type::SvgType::User)}
       // />
       // <Switch/>
-      <Select
+      <super::ant_design::data_entry::select::Select
         values={vec![String::from("alice"), String::from("bob")]}
         default_value={String::from("bob")}
         id={String::from("09760707")}
         set_choosen_value={select_callback}
       />
-      <CustomSwitch
-        reference={NodeRef::default()}
+      <crate::components::ant_design::data_entry::switch::custom_component::CustomSwitch
+        reference={yew::NodeRef::default()}
         title={Some(String::from("title"))}
       />
-      <CustomCheckBox
-        on_click={Some(Callback::from(|_|{log!("looog");}))}
-        reference={NodeRef::default()}
+      <crate::components::rc::rc_checkbox::custom_component::CustomCheckBox
+        on_click={Some(yew::Callback::from(|_|{gloo::console::log!("looog");}))}
+        reference={yew::NodeRef::default()}
       />
-      <Badge
+      <crate::components::ant_design::data_display::badge::Badge
         count={Some(2)}
         // overflow_count={Some(123)}
-        // color={Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
-        dot={Some(Some(BadgeStatus::Success(Some(String::from("kekw")))))}
-        // offset={Some(Offset{x:20, y:-20})}
+        // color={colorsys::Hsl::new(0.0, 100.0, 66.0, Some(1.0))}
+        dot={Some(Some(crate::components::ant_design::data_display::badge::BadgeStatus::Success(Some(String::from("kekw")))))}
+        // offset={Some(crate::components::ant_design::helpers::offset::Offset{x:20, y:-20})}
         // show_zero={Some(())}
-        // status={Some(BadgeStatus::Success)}
+        // status={Some(crate::components::ant_design::data_display::badge::BadgeStatus::Success)}
         // title={Some(String::from("tittle"))}
       >
         // <a href="" class="head-example">
         // </a>
-      </Badge>
-      // <BackTop></BackTop>
-      // <Circle
-      //   percent={Some(Percent::Number(25.0))}
+      </crate::components::ant_design::data_display::badge::Badge>
+      // <crate::components::ant_design::back_top::BackTop></crate::components::ant_design::back_top::BackTop>
+      // <crate::components::rc::rc_progress::circle::Circle
+      //   percent={Some(crate::components::rc::rc_progress::interface::Percent::Number(25.0))}
       //   stroke_width={4.0}
       //   stroke_color={
-      //     Some(StrokeColor {
+      //     Some(crate::components::rc::rc_progress::interface::StrokeColor {
       //           colors: vec![String::from("#D3D3D3")],
       //       })
       //   }
@@ -324,8 +261,8 @@ pub fn home() -> Html {
       // </svg>
 
 
-        //       <Line
-        // percent={Some(Percent::Number(10.0))}
+        //       <crate::components::rc::rc_progress::line::Line
+        // percent={Some(crate::components::rc::rc_progress::interface::Percent::Number(10.0))}
         // stroke_width={4.0}
         // stroke_color={
         //   Some(StrokeColorType::BaseStrokeColorType(
@@ -336,22 +273,24 @@ pub fn home() -> Html {
       </div>
 
     };
-    let inner_html_right = html! {};
-    let expander_style = use_state(|| ExpanderChangingStyleState::Initial);
+    let inner_html_right = yew::html! {};
+    let expander_style = yew::use_state(|| {
+        crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::Initial
+    });
     let expander_style_clone_open_expand_more = expander_style.clone();
     let drawer_style_right_expand_more = drawer_style_right.clone();
     let drawer_style_left_expand_more = drawer_style_left.clone();
-    let expander_on_open_expand_more = Callback::from(move |_| {
-        drawer_style_right_expand_more.set(DrawerChangingStyleState::Initial);
-        drawer_style_left_expand_more.set(DrawerChangingStyleState::Initial);
+    let expander_on_open_expand_more = yew::Callback::from(move |_| {
+        drawer_style_right_expand_more.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
+        drawer_style_left_expand_more.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
         if let ExpanderStatus::Closed = *expander_status_cloned_expand_more {
             expander_status_cloned_expand_more.set(ExpanderStatus::ExpandMore);
             expander_style_clone_open_expand_more
-                .set(ExpanderChangingStyleState::OpenedBeforeTimeout);
+                .set(crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::OpenedBeforeTimeout);
             let expander_style_clone_open_another = expander_style_clone_open_expand_more.clone();
             gloo::timers::callback::Timeout::new(50, move || {
                 expander_style_clone_open_another
-                    .set(ExpanderChangingStyleState::OpenedAfterTimeout);
+                    .set(crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::OpenedAfterTimeout);
             })
             .forget();
         }
@@ -359,57 +298,61 @@ pub fn home() -> Html {
     let expander_style_clone_open_share = expander_style.clone();
     let drawer_style_right_share = drawer_style_right.clone();
     let drawer_style_left_share = drawer_style_left.clone();
-    let expander_on_open_share: Callback<MouseEvent> = Callback::from(move |_| {
-        drawer_style_right_share.set(DrawerChangingStyleState::Initial);
-        drawer_style_left_share.set(DrawerChangingStyleState::Initial);
-        if let ExpanderStatus::Closed = *expander_status_cloned_share {
-            expander_status_cloned_share.set(ExpanderStatus::Share);
-            expander_style_clone_open_share.set(ExpanderChangingStyleState::OpenedBeforeTimeout);
-            let expander_style_clone_open_another = expander_style_clone_open_share.clone();
-            gloo::timers::callback::Timeout::new(50, move || {
+    let expander_on_open_share: yew::Callback<web_sys::MouseEvent> = yew::Callback::from(
+        move |_| {
+            drawer_style_right_share.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
+            drawer_style_left_share.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
+            if let ExpanderStatus::Closed = *expander_status_cloned_share {
+                expander_status_cloned_share.set(ExpanderStatus::Share);
+                expander_style_clone_open_share.set(crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::OpenedBeforeTimeout);
+                let expander_style_clone_open_another = expander_style_clone_open_share.clone();
+                gloo::timers::callback::Timeout::new(50, move || {
                 expander_style_clone_open_another
-                    .set(ExpanderChangingStyleState::OpenedAfterTimeout);
+                    .set(crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::OpenedAfterTimeout);
             })
             .forget();
-        }
-    });
+            }
+        },
+    );
     let expander_style_clone_close = expander_style.clone();
     let drawer_style_right_expander_on_close = drawer_style_right.clone();
     let drawer_style_left_expander_on_close = drawer_style_left.clone();
-    let expander_on_close = Callback::from(move |_| {
-        drawer_style_right_expander_on_close.set(DrawerChangingStyleState::Initial);
-        drawer_style_left_expander_on_close.set(DrawerChangingStyleState::Initial);
-        expander_style_clone_close.set(ExpanderChangingStyleState::ClosedBeforeTimeout);
+    let expander_on_close = yew::Callback::from(move |_| {
+        drawer_style_right_expander_on_close.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
+        drawer_style_left_expander_on_close.set(crate::components::drawer::drawer_changing_style_state::DrawerChangingStyleState::Initial);
+        expander_style_clone_close.set(crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::ClosedBeforeTimeout);
         let expander_style_clone_close_another = expander_style_clone_close.clone();
         let expander_status_cloned_close_another = expander_status_cloned_close.clone();
         gloo::timers::callback::Timeout::new(350, move || {
-            expander_style_clone_close_another.set(ExpanderChangingStyleState::Initial);
+            expander_style_clone_close_another.set(crate::components::feed::expander::expander_changing_style_state::ExpanderChangingStyleState::Initial);
             expander_status_cloned_close_another.set(ExpanderStatus::Closed);
         })
         .forget();
     });
     let expander_style_clone_close_handle = &*expander_style;
     let expander_inner_html = match *expander_status_clone_for_logic {
-        ExpanderStatus::Closed => html! {<Alert/>},
+        ExpanderStatus::Closed => {
+            yew::html! {<crate::components::ant_design::feedback::alert::Alert/>}
+        }
         ExpanderStatus::Share => share_inner_html,
         ExpanderStatus::ExpandMore => expand_more_inner_html,
     };
-    html! {
+    yew::html! {
       <>
-        <Header
+        <crate::components::header::component::Header
           left_drawer_callback={on_open_left}
           right_drawer_callback={on_open_right}
         />
-        <Drawer
+        <crate::components::drawer::component::Drawer
           callback={on_close_left}
           style_state={drawer_style_left_enum_handle.clone()}
-          drawer_position={DrawerPosition::Left}
+          drawer_position={crate::components::drawer::position::DrawerPosition::Left}
           inner_html={inner_html_left}
         />
-        <Drawer
+        <crate::components::drawer::component::Drawer
           callback={on_close_right}
           style_state={drawer_style_right_enum_handle.clone()}
-          drawer_position={DrawerPosition::Right}
+          drawer_position={crate::components::drawer::position::DrawerPosition::Right}
           inner_html={inner_html_right}
         />
         <div
@@ -425,11 +368,11 @@ pub fn home() -> Html {
           <div
             style={style_handle}
           >
-            <PostsList
+            <crate::components::feed::posts_list::PostsList
               share_callback={expander_on_open_share.clone()}//expander_status_to_share
               expand_more_callback={expander_on_open_expand_more.clone()}//expander_status_to_expand_more
             />
-            <Expander
+            <crate::components::feed::expander::component::Expander
               callback={expander_on_close}
               style_state={expander_style_clone_close_handle.clone()}
               inner_html={expander_inner_html}

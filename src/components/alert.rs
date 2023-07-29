@@ -1,8 +1,6 @@
-use yew::{function_component, html};
-
-#[function_component(Alert)]
-pub fn alert() -> Html {
-    html! {
+#[yew::function_component(Alert)]
+pub fn alert() -> yew::html::Html {
+    yew::html! {
       <div
         style="
           width: 100%;
