@@ -8,7 +8,7 @@ use yew::prelude::*;
 use yewdux::prelude::{Dispatcher, PersistentStore};
 use yewdux_functional::use_store;
 
-#[derive(Default, Clone, Debug)]
+#[derive(Default, Clone)]
 pub struct GetDataFromServerButtonState {
     username: String,
 }

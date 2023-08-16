@@ -6,7 +6,7 @@ use yew::Children;
 use yew::Html;
 use yew::Properties;
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct TransBtnProps {
     pub class_names: Vec<String>,
     pub customize_icon: Option<Html>,                //todo types

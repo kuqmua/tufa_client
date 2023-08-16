@@ -10,13 +10,13 @@ pub const STATUS_REMOVED: &str = "removed";
 // export const STATUS_REMOVE = 'remove';
 // export const STATUS_REMOVED = 'removed';
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum ObjectOrString {
     Object(Object),
     String(String),
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct Object {
     pub key: String,
 }

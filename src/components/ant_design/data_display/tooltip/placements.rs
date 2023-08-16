@@ -2,13 +2,13 @@
 
 use std::collections::HashMap;
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct AutoAdjustOverflowHandle {
     pub adjust_x: u8,
     pub adjust_y: u8,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct AutoAdjustOverflowEnabled {
     adjust_x: u8,
     adjust_y: u8,
@@ -34,7 +34,7 @@ impl AutoAdjustOverflowEnabled {
 //   adjustY: 1,
 // };
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct AutoAdjustOverflowDisabled {
     adjust_x: u8,
     adjust_y: u8,
@@ -57,7 +57,7 @@ static TARGET_OFFSET: &'static [i32; 2] = &[0, 0];
 
 // const targetOffset = [0, 0];
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum ZeroOrOne {
     Zero,
     One,
@@ -72,7 +72,7 @@ impl ZeroOrOne {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct AdjustOverflow {
     adjust_x: Option<ZeroOrOne>,
     adjust_y: Option<ZeroOrOne>,
@@ -83,13 +83,13 @@ pub struct AdjustOverflow {
 //   adjustY?: 0 | 1;
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum AdjustOverflowOrBool {
     AdjustOverflow(AdjustOverflow),
     Boolean(bool),
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct PlacementsConfig {
     pub arrow_width: Option<i32>,
     pub horizontal_arrow_shift: Option<i32>,
@@ -154,7 +154,7 @@ pub fn get_overflow_options(
 //   };
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct PointsOffset {
     pub points: [PointsValue; 2],
     pub offset: [i32; 2],
@@ -163,7 +163,7 @@ pub struct PointsOffset {
     pub ignore_shake: Option<bool>,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum PointsValue {
     Cr,
     Cl,
@@ -190,7 +190,7 @@ impl PointsValue {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum PositionType {
     Left,
     Right,

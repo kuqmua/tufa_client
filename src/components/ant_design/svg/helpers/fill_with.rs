@@ -1,7 +1,7 @@
 use colorsys::Hsl;
 use yew::virtual_dom::AttrValue;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum FillWith {
     Hsl(Hsl),
     CurrentColor,

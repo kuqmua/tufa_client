@@ -8,7 +8,7 @@ use yew::Properties;
 // import * as React from 'react';
 // import type { BaseSelectProps } from '../BaseSelect';
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct BaseSelectContextProps {
     pub trigger_open: Option<()>,
     pub multiple: Option<()>,

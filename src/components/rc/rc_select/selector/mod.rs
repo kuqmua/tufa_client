@@ -34,7 +34,7 @@ use yew::Properties;
 // import type { CustomTagProps, DisplayValueType, Mode, RenderNode } from '../BaseSelect';
 // import { isValidateOpenKey } from '../utils/keyUtil';
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct InnerSelectorProps {
     pub prefix_cls: String,
     pub id: String,
@@ -85,7 +85,7 @@ pub struct InnerSelectorProps {
 //   onInputCompositionEnd: React.CompositionEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 // }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct RefSelectorProps {
     pub focus: Callback<()>,
     pub blur: Callback<()>,
@@ -98,13 +98,13 @@ pub struct RefSelectorProps {
 //   scrollTo?: ScrollTo;
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum MaxTagCount {
     Number(i32),
     Responsive,
 }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct SelectorProps {
     pub id: String,
     pub prefix_cls: String,
@@ -191,7 +191,7 @@ pub struct SelectorProps {
 //   domRef: React.Ref<HTMLDivElement>;
 // }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct SelectorPropsWithRefSelectorProps {
     pub id: String,
     pub prefix_cls: String,

@@ -5,7 +5,7 @@ use yew::html;
 use yew::virtual_dom::AttrValue;
 use yew::Html;
 
-#[derive(Debug, PartialEq, Clone, SvgComponent)]
+#[derive(PartialEq, Clone, SvgComponent)]
 pub enum SvgType {
     CheckCircle(SvgProps),
     CloseCircle(SvgProps),

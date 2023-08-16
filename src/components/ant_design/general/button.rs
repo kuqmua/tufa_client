@@ -8,7 +8,7 @@ use web_sys::MouseEvent;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, Callback, Html, Properties};
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum ButtonType {
     Primary,
     Ghost,
@@ -17,25 +17,25 @@ pub enum ButtonType {
     Link,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum LoadingProp {
     Bool(bool),
     Delay { delay: u32 },
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum Shape {
     Circle,
     Round,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum Size {
     Small,
     Large,
 }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct ButtonProps {
     pub disabled: Option<()>, //or maybe explicit bool?
     pub ghost: Option<()>,

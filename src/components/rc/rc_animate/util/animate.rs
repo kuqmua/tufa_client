@@ -1,11 +1,11 @@
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct Animation {
     pub appear: bool,
     pub enter: bool,
     pub leave: bool,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct AnimateProps {
     pub transition_name: bool,
     pub transition_appear: bool,

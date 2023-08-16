@@ -1,8 +1,6 @@
-use std::collections::HashMap;
-
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct PseudoCssWrapper {
-    pub style: HashMap<String, String>,
+    pub style: std::collections::HashMap<String, String>,
 }
 
 impl PseudoCssWrapper {

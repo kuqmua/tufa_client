@@ -10,7 +10,7 @@ use yew::Html;
 use yew::Properties;
 use yew::UseStateHandle;
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct SelectProps {
     pub values: Vec<String>,
     pub default_value: String,

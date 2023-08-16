@@ -18,7 +18,7 @@ use yew::{function_component, html, Callback, Children, Html, Properties};
 
 // export { AdjustOverflow, PlacementsConfig };
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum TooltipPlacement {
     Top,
     Left,
@@ -48,13 +48,13 @@ pub enum TooltipPlacement {
 //   | 'rightTop'
 //   | 'rightBottom';
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct Overflow {
     pub adjust_x: bool,
     pub adjust_y: bool,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct TooltipAlignConfig {
     pub points: Option<(String, String)>,
     pub offset: Option<Offset>,
@@ -77,7 +77,7 @@ pub struct TooltipAlignConfig {
 //   useCssTransform?: boolean;
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct AbstractTooltipProps {
     //not full
     pub style: Option<String>, // React.CSSProperties;
@@ -108,13 +108,13 @@ pub struct AbstractTooltipProps {
 pub type RenderFunction = fn() -> Html;
 // export type RenderFunction = () => React.ReactNode;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum AbstractTooltipPropsContent {
     ReactNode(Html),
     RenderFunction(RenderFunction),
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct TooltipPropsWithOverlay {
     //not full
     pub style: Option<String>, // React.CSSProperties;
@@ -139,7 +139,7 @@ pub struct TooltipPropsWithOverlay {
 //   overlay: React.ReactNode | RenderFunction;
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct TooltipPropsWithTitle {
     //not full
     pub style: Option<String>, // React.CSSProperties;
@@ -164,7 +164,7 @@ pub struct TooltipPropsWithTitle {
 //   overlay?: React.ReactNode | RenderFunction;
 // }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum TooltipProps {
     WithTitle(TooltipPropsWithTitle),
     WithOverlay(TooltipPropsWithOverlay),
@@ -172,7 +172,7 @@ pub enum TooltipProps {
 
 // export declare type TooltipProps = TooltipPropsWithTitle | TooltipPropsWithOverlay;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct SplittedObject {
     pub picked: PseudoCssWrapper,
     pub omitted: PseudoCssWrapper,
@@ -224,7 +224,7 @@ use crate::components::ant_design::general::button::ButtonProps;
 
 use super::placements::PointsOffset;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum ElementType {
     Button(ButtonProps),
     // Switch(SwitchProps),
@@ -421,12 +421,12 @@ pub fn get_disabled_compatible_children(element_type: ElementType, prefix_cls: S
 //   return element;
 // }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct TooltipPropsStruct {
     pub tooltip_props: TooltipProps,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum GetPlacementsTooltipValue {
     BuiltinPlacements(HashMap<String, PointsOffset>), //todo here some object
     GetPlacements(HashMap<String, PointsOffset>),

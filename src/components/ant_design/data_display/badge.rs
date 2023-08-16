@@ -4,7 +4,7 @@ use gloo::console::error;
 use tufa_common::common::numeric::Numeric;
 use yew::{function_component, html, Children, Html, Properties};
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum BadgeStatus {
     Success(Option<String>),
     Processing(Option<String>),

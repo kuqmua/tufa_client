@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(PartialEq)]
 pub enum DrawerPosition {
     Left,
     Right,
@@ -21,7 +21,6 @@ impl DrawerPosition {
     }
 }
 
-#[derive(Debug)]
 pub struct DrawerPositionStyle {
     pub translate_sign: String, //maybe change later
     pub left_value: String,

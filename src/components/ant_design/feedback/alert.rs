@@ -8,7 +8,7 @@ use web_sys::MouseEvent;
 use yew::virtual_dom::AttrValue;
 use yew::{function_component, html, use_state, Callback, Properties};
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum AlertType {
     Success,
     Info,
@@ -41,7 +41,7 @@ pub struct AlertProps {
     pub on_close: Option<Callback<()>>,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum AlertChangingStyleState {
     Opened,
     Closing,
@@ -81,7 +81,7 @@ impl AlertChangingStyleState {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(PartialEq)]
 pub struct AlertChangingStyle {
     pub should_render: bool,
     pub height: AttrValue,

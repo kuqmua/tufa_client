@@ -17,7 +17,7 @@ use yew::Properties;
 // import { composeRef } from 'rc-util/lib/ref';
 // import { warning } from 'rc-util/lib/warning';
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum InputRef {
     HTMLInputElement(Html),
     HTMLTextAreaElement(Html),
@@ -25,7 +25,7 @@ pub enum InputRef {
 
 // type InputRef = HTMLInputElement | HTMLTextAreaElement;
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct InputProps {
     pub prefix_cls: String,
     pub id: String,

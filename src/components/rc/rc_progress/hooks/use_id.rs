@@ -16,7 +16,7 @@ pub static UUID = std::sync::Mutex::new(0);
 // /** Is client side and not jsdom */
 // export const isBrowserClient = process.env.NODE_ENV !== 'test' && canUseDom();
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum UUIDStruct {
     Number(i32),
     String(String),

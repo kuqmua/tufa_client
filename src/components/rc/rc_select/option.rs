@@ -4,7 +4,7 @@ use yew::Children;
 // import type * as React from 'react';
 // import type { DefaultOptionType } from './Select';
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct OptionProps {
     //todo
     pub children: Children,
@@ -17,7 +17,7 @@ pub struct OptionProps {
 //   [prop: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct OptionFc {
     //todo
     pub is_select_option: bool,

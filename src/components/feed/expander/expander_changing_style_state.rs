@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(PartialEq)]
 pub enum ExpanderChangingStyleState {
     Initial,
     OpenedBeforeTimeout,
@@ -54,7 +54,7 @@ impl ExpanderChangingStyleState {
     }
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct ExpanderChangingStyle {
     pub display: String,
     pub transform: String,

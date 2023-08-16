@@ -8,7 +8,7 @@ use yew::MouseEvent;
 use yew::NodeRef;
 use yew::Properties;
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum InputType {
     Button,
     Checkbox,
@@ -63,7 +63,7 @@ impl fmt::Display for InputType {
     }
 }
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct RcCheckBoxProps {
     pub prefix_cls: Option<String>,
     pub class_name: Option<String>,
@@ -89,7 +89,7 @@ pub struct RcCheckBoxProps {
     pub value: Option<String>,
 }
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct CustomCheckBoxProps {
     pub prefix_cls: Option<String>,
     pub class_name: Option<String>,

@@ -8,7 +8,7 @@ use yew::Html;
 use yew::NodeRef;
 use yew::Properties;
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct CustomSwitchProps {
     pub class: Option<String>,
     pub disabled: Option<()>,
@@ -26,7 +26,7 @@ pub struct CustomSwitchProps {
     pub reference: NodeRef,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum MouseOrKeyboardEvent {
     MouseEvent(MouseEvent),
     KeyboardEvent(KeyboardEvent),

@@ -20,14 +20,14 @@ pub struct SecureProps {
     pub onsubmit: Callback<SecureProps>,
 }
 
-#[derive(Default, Clone, Debug)]
+#[derive(Default, Clone)]
 pub struct SecureState {
     username: String,
 }
 
 const STYLE_FILE: &str = include_str!("example.css");
 
-#[derive(Debug, PartialEq)]
+#[derive(PartialEq)]
 pub enum Color {
     Normal,
     Ok,
@@ -40,7 +40,7 @@ impl std::fmt::Display for Color {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Default)]
+#[derive(Clone, PartialEq, Default)]
 pub struct ContextProviderStruct {
     pub data: String,
 }

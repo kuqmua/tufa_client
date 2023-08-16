@@ -27,7 +27,7 @@ pub fn close(props: &SvgProps) -> Html {
 // use yew::prelude::*;
 // use yewdux::prelude::*;
 
-// #[derive(Debug, PartialEq)]
+// #[derive(PartialEq)]
 // pub struct Close;
 
 // impl Component for Close {

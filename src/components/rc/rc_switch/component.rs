@@ -8,7 +8,7 @@ use yew::Html;
 use yew::NodeRef;
 use yew::Properties;
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct RcSwitchProps {
     pub class: Option<String>,
     pub prefix_cls: Option<String>,
@@ -30,7 +30,7 @@ pub struct RcSwitchProps {
     //auto_focus: Option<()>,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum MouseOrKeyboardEvent {
     MouseEvent(MouseEvent),
     KeyboardEvent(KeyboardEvent),

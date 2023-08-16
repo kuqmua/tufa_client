@@ -5,24 +5,24 @@ use std::{
 use web_sys::MouseEvent;
 use yew::{Callback, Properties};
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum Percent {
     Number(f64),
     NumberVec(Vec<f64>),
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct CountSpace {
     pub count: f64,
     pub space: f64,
 }
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum Steps {
     Number(f64),
     CountSpace(CountSpace),
 }
 
-#[derive(Debug, PartialEq, Properties, Clone)]
+#[derive(PartialEq, Properties, Clone)]
 pub struct ProgressProps {
     pub id: Option<String>,
     pub stroke_width: Option<f64>,
@@ -110,7 +110,7 @@ impl ProgressProps {
 //     steps?: number | { count: number; space: number };
 //   }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct StrokeColor {
     pub colors: Vec<String>,
 }
@@ -125,7 +125,7 @@ impl Display for StrokeColor {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum GapPositionType {
     Top,
     Right,
@@ -144,7 +144,7 @@ impl GapPositionType {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum StrokeLinecapType {
     Round,
     Butt,

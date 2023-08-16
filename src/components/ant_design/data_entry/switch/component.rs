@@ -23,7 +23,7 @@
 // // import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 // // import warning from '../_util/warning';
 
-// #[derive(Debug, PartialEq, Eq, Clone)]
+// #[derive(PartialEq, Eq, Clone)]
 // pub enum SwitchSize {
 //     Small,
 //     Default,
@@ -37,7 +37,7 @@
 // // export type SwitchChangeEventHandler = (checked: boolean, event: MouseEvent) => void;
 // // export type SwitchClickEventHandler = SwitchChangeEventHandler;
 
-// #[derive(Debug, PartialEq, Properties, Clone)]
+// #[derive(PartialEq, Properties, Clone)]
 // pub struct SwitchProps {
 //     pub prefix_cls: Option<String>,
 //     pub size: Option<SwitchSize>,

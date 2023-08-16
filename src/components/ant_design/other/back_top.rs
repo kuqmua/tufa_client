@@ -39,7 +39,7 @@ pub struct BackTopProps {
     // pub visible: Option<()>, // Only for test. Don't use it.
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct SetVisible {
     pub value: bool,
 }

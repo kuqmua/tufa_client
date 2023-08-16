@@ -32,7 +32,7 @@ use yew::Properties;
 // // export interface OptionListProps<OptionsType extends object[]> {
 // export type OptionListProps = Record<string, never>;
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct RefOptionListProps {
     pub on_key_down: Callback<KeyboardEvent>,
     pub on_key_up: Callback<KeyboardEvent>,
@@ -45,7 +45,7 @@ pub struct RefOptionListProps {
 //   scrollTo?: (args: number | ScrollConfig) => void;
 // }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum TitleType {
     String(String),
     Number(i32),

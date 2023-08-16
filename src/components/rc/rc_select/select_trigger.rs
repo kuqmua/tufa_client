@@ -23,7 +23,7 @@ use yew::Properties;
 // import classNames from 'classnames';
 // import type { Placement, RenderDOMFunc } from './BaseSelect';
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub enum DropdownMatchSelectWidth {
     //todo zero or one?
     Number(u8),
@@ -96,18 +96,18 @@ pub fn get_built_in_placements(
     ])
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct RefTriggerProps {
     pub get_popup_element: Callback<Html>, //() => HTMLDivElement
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct Overflow {
     pub adjust_x: u8,
     pub adjust_y: u8,
 }
 
-#[derive(Debug, PartialEq, Eq, Clone)]
+#[derive(PartialEq, Eq, Clone)]
 pub struct AlignType {
     /**
      * move point of source node to align with point of target node.
@@ -145,7 +145,7 @@ pub struct AlignType {
     pub ignore_shake: Option<bool>,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(PartialEq, Clone)]
 pub struct SelectTriggerProps {
     pub prefix_cls: String,
     pub children: Children,
@@ -169,7 +169,7 @@ pub struct SelectTriggerProps {
     pub on_popup_mouse_enter: Callback<()>,
 }
 
-#[derive(Debug, Properties, PartialEq, Clone)]
+#[derive(Properties, PartialEq, Clone)]
 pub struct RefTriggerPropsAndSelectTriggerProps {
     pub get_popup_element: Callback<Html>, //() => HTMLDivElement
     //

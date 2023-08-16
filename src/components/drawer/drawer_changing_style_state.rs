@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(PartialEq)]
 pub enum DrawerChangingStyleState {
     Initial,
     OpenedBeforeTimeout,
@@ -54,7 +54,7 @@ impl DrawerChangingStyleState {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(PartialEq)]
 pub struct DrawerChangingStyle {
     pub display: String,
     pub transform: String,
