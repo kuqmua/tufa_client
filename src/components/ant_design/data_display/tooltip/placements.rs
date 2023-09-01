@@ -21,6 +21,7 @@ impl Default for AutoAdjustOverflowEnabled {
 }
 
 impl AutoAdjustOverflowEnabled {
+    #[must_use]
     pub fn new() -> Self {
         AutoAdjustOverflowEnabled {
             adjust_x: 1,
@@ -40,6 +41,7 @@ pub struct AutoAdjustOverflowDisabled {
     adjust_y: u8,
 }
 impl AutoAdjustOverflowDisabled {
+    #[must_use]
     pub fn new() -> Self {
         AutoAdjustOverflowDisabled {
             adjust_x: 0,
