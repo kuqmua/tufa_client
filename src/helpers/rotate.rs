@@ -4,7 +4,7 @@ pub struct Rotate {
 }
 
 impl Rotate {
-    #[must_use]
+    #[must_use] //todo impl try_from instead
     pub fn new(possible_degrees: u16) -> Result<Self, u16> {
         if possible_degrees > 360 {
             return Err(possible_degrees);
