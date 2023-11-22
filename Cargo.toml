@@ -32,3 +32,6 @@ tufa_common = {path = "../tufa_common"}# local dev test without commits version
 compile_time_git_info = {path = "../proc_macros/compile_time_git_info"}
 user_port_try_from_u16 = {path = "../proc_macros/user_port_try_from_u16"}
 svg_component = {path = "../proc_macros/svg_component"}
+
+[lints]
+workspace = true
