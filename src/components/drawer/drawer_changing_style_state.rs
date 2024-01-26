@@ -24,31 +24,31 @@ impl Clone for DrawerChangingStyleState {
 }
 
 impl DrawerChangingStyleState {
-    pub fn get_value(&self, translate_sign: String) -> DrawerChangingStyle {
+    pub fn get_value(&self, translate_sign: std::string::String) -> DrawerChangingStyle {
         match *self {
             DrawerChangingStyleState::Initial => DrawerChangingStyle {
-                display: String::from("none"),
+                display: std::string::String::from("none"),
                 transform: format!("translate3d({}100%, 0, 0)", translate_sign),
                 webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
-                opacity: String::from(""),
+                opacity: std::string::String::from(""),
             },
             DrawerChangingStyleState::OpenedBeforeTimeout => DrawerChangingStyle {
-                display: String::from("block"),
+                display: std::string::String::from("block"),
                 transform: format!("translate3d({}100%, 0, 0)", translate_sign),
                 webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
-                opacity: String::from(""),
+                opacity: std::string::String::from(""),
             },
             DrawerChangingStyleState::OpenedAfterTimeout => DrawerChangingStyle {
-                display: String::from("block"),
-                transform: String::from("translate3d(0, 0, 0)"),
-                webkit_transform: String::from("translate3d(0, 0, 0)"),
-                opacity: String::from("0.5"),
+                display: std::string::String::from("block"),
+                transform: std::string::String::from("translate3d(0, 0, 0)"),
+                webkit_transform: std::string::String::from("translate3d(0, 0, 0)"),
+                opacity: std::string::String::from("0.5"),
             },
             DrawerChangingStyleState::ClosedBeforeTimeout => DrawerChangingStyle {
-                display: String::from("block"),
+                display: std::string::String::from("block"),
                 transform: format!("translate3d({}100%, 0, 0)", translate_sign),
                 webkit_transform: format!("translate3d({}100%, 0, 0)", translate_sign),
-                opacity: String::from(""),
+                opacity: std::string::String::from(""),
             },
         }
     }
@@ -56,8 +56,8 @@ impl DrawerChangingStyleState {
 
 #[derive(PartialEq)]
 pub struct DrawerChangingStyle {
-    pub display: String,
-    pub transform: String,
-    pub webkit_transform: String,
-    pub opacity: String,
+    pub display: std::string::String,
+    pub transform: std::string::String,
+    pub webkit_transform: std::string::String,
+    pub opacity: std::string::String,
 }

@@ -2,9 +2,9 @@ use yew::{function_component, html, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct ExpandMoreProps {
-    pub height: String,
-    pub width: String,
-    pub fill: String,
+    pub height: std::string::String,
+    pub width: std::string::String,
+    pub fill: std::string::String,
 }
 
 #[function_component(ExpandMore)]

@@ -13,11 +13,11 @@ use yew::UseStateHandle;
 #[derive(PartialEq, Properties, Clone)]
 pub struct SelectProps {
     pub values: Vec<String>,
-    pub default_value: String,
+    pub default_value: std::string::String,
     pub style: Option<String>,
     pub additional_classes: Option<String>,
     pub set_choosen_value: Callback<(MouseEvent, Option<String>)>,
-    pub id: String,
+    pub id: std::string::String,
 }
 
 #[function_component(Select)]
@@ -88,11 +88,11 @@ pub fn select(props: &SelectProps) -> Html {
         })
         .collect::<Html>();
     let style = match props.style.clone() {
-        None => String::from(""),
+        None => std::string::String::from(""),
         Some(s) => s,
     };
     let classes = match props.additional_classes.clone() {
-        None => String::from("form-select"),
+        None => std::string::String::from("form-select"),
         Some(ac) => format!("form-select {}", ac),
     };
     html! {

@@ -5,7 +5,7 @@ use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct TextInputProps {
-    pub name: String,
+    pub name: std::string::String,
     pub handle_onchange: Callback<String>,
 }
 

@@ -13,16 +13,16 @@ pub const STATUS_REMOVED: &str = "removed";
 #[derive(PartialEq, Eq, Clone)]
 pub enum ObjectOrString {
     Object(Object),
-    String(String),
+    std::string::String(String),
 }
 
 #[derive(PartialEq, Eq, Clone)]
 pub struct Object {
-    pub key: String,
+    pub key: std::string::String,
 }
 
-pub fn wrap_key_to_object(key: ObjectOrString) -> HashMap<String, String> {
-    let mut key_obj: HashMap<String, String> = HashMap::new();
+pub fn wrap_key_to_object(key: ObjectOrString) -> HashMap<String, std::string::String> {
+    let mut key_obj: HashMap<String, std::string::String> = HashMap::new();
     match key {
         ObjectOrString::Object(hs) => {
             key_obj.insert(String::from("key"), hs.key);
@@ -43,11 +43,11 @@ pub fn wrap_key_to_object(key: ObjectOrString) -> HashMap<String, String> {
 //   }
 //   return {
 //     ...keyObj,
-//     key: String(keyObj.key),
+//     key: std::string::String(keyObj.key),
 //   };
 // }
 
-pub fn parse_keys(keys: Vec<ObjectOrString>) -> Vec<HashMap<String, String>> {
+pub fn parse_keys(keys: Vec<ObjectOrString>) -> Vec<HashMap<String, std::string::String>> {
     let mut vec = Vec::new();
     for key in keys {
         vec.push(wrap_key_to_object(key));
